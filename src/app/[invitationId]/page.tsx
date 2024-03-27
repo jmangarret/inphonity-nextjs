@@ -19,8 +19,8 @@ export default function Home({ params }: { params: { invitationId: string } }) {
         <HeroSection />
         <BenefitsSection />
         <PortabilitySection />
-        <OfferSection />
         <CoverageSection />
+        <OfferSection />
         <InvitationSection
           invitationId={params.invitationId}
         />
