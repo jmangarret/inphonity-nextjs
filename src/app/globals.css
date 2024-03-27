@@ -699,28 +699,6 @@ select.input {
 
 body{
   background: url('/img/bg-landing-full.png') transparent 50% / cover no-repeat;
-  width: 1440px;
+  width: auto;
   height: 6646px;
-}
-
-.text1{
-  color: #FFF;
-  /* font-family: Aeonik; */
-  font-size: 90px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
-.text2{
-  color: #FFF;
-  /* font-family: Aeonik; */
-  font-size: 50px;
-  font-style: normal;
-  font-weight: 250;
-  line-height: normal;
-}
-
-.text-green{
-  color: #27E1C1;
 }

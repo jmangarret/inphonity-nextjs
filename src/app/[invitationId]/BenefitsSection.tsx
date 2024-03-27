@@ -13,7 +13,7 @@ export default function BenefitsSection() {
         <div className="col-span-6">
           <h2 className="font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl mb-5 text-center">
             Puedes tener
-            <span className="text-green"> más de lo que te imaginas</span>
+            <span className="text-highlight"> más de lo que te imaginas</span>
           </h2>
         </div>
         <div className="col-span-2">

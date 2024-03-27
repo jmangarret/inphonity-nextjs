@@ -25,13 +25,13 @@ const Benefit: React.FC<BenefitProps> = ({title, description, image}) => {
 
       {title && (
         <h3
-          className="font-medium text-2xl lg:text-4xl xl:text-5xl mt-2 text-center text-green"
+          className="font-medium text-2xl lg:text-4xl mt-2 text-center text-highlight"
         >
           {title}
         </h3>
       )}
       <p
-        className="text-center lg:text-xl xl:text-2xl mt-2"
+        className="text-center lg:text-xl mt-2"
       >
         {description}
       </p>

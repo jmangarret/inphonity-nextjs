@@ -79,7 +79,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
               )
             )}
           </h1>
-          <p className="font-medium	text-2xl sm:text-3xl lg:text-4xl xl:text-5xl">
+          <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl my-10">
             {isLoading || isFetching ? (
               <span
                 className="font-medium text-2xl sm:text-3xl lg:text-5xl xl:text-8xl bg-gray-300 animate-pulse h-5 sm:h-6 md:h-7 ld:h-8 xl:h-9 mb-3 w-3/4 inline-block"
@@ -90,7 +90,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
                 <p>Te está invitando <br /> a ser parte de su</p>
               </>
             )}
-          </p>
+          </div>
           <picture>
             {/* <source width="150" media="(max-width: 600px)" srcSet="/img/circulo-inphonity-300x142.webp"/>
             <source width="300" media="(min-width: 600px) and (max-width: 1200px)"
