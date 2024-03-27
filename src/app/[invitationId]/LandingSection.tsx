@@ -87,16 +87,16 @@ const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
               ></span>
             ) : (
               <>
-                Te está invitando a ser parte de su
+                <p>Te está invitando <br /> a ser parte de su</p>
               </>
             )}
           </p>
           <picture>
-            <source width="150" media="(max-width: 600px)" srcSet="/img/circulo-inphonity-300x142.webp"/>
+            {/* <source width="150" media="(max-width: 600px)" srcSet="/img/circulo-inphonity-300x142.webp"/>
             <source width="300" media="(min-width: 600px) and (max-width: 1200px)"
                     srcSet="/img/circulo-inphonity-600x283.webp"/>
-            <source width="600" media="(min-width: 1200px)" srcSet="/img/circulo-inphonity-900x425.webp"/>
-            <img width="600" src="/img/circulo-inphonity-600x283.webp" alt="Círculo Inphonity"/>
+            <source width="600" media="(min-width: 1200px)" srcSet="/img/circulo-inphonity-900x425.webp"/> */}
+            <img src="/img/circulo.svg" alt="Círculo Inphonity"/>
           </picture>
         </div>
         <div className="bg-luces3"></div>
@@ -106,10 +106,10 @@ const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
         >
           <div className="flex justify-end">
             <picture>
-              <source width="300" media="(max-width: 600px)" srcSet="/img/bienvenido-a-inphonity-600x483.webp"/>
-              <source width="600" media="(min-width: 600px) and (max-width: 1200px)"srcSet="/img/bienvenido-a-inphonity-1200x966.webp"/>
-              <source width="800" media="(min-width: 1200px)" srcSet="/img/bienvenido-a-inphonity-1800x1450.webp"/>
-              <img width="800" src="/img/bienvenido.png" alt="Bienvenido a Inphonity"/>
+              <source width="300" media="(max-width: 600px)" srcSet="/img/bienvenido600px.png"/>
+              <source width="600" media="(min-width: 600px) and (max-width: 1200px)"srcSet="/img/bienvenido1200px.png"/>
+              <source width="800" media="(min-width: 1200px)" srcSet="/img/bienvenido1800px.png"/>
+              <img src="/img/bienvenido600px.png" alt="Bienvenido a Inphonity"/>
             </picture>
           </div>
         </div>
