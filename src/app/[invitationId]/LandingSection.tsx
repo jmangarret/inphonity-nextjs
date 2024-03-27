@@ -115,13 +115,13 @@ const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
         </div>
       </div>
       <div className="sm:flex">
-        <div className="w-full pl-3 sm:pl-5 md:pl-10 lg:pl-14 sm:mt-10 md:mt-16 lg:mt-24 mx-10">
-          <h2 className="w-3/5 font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-4 sm:mb-4 lg:mb-4">
+        <div className="pl-3 md:pl-5 lg:pl-10 sm:mt-10 md:mt-16 lg:mt-24 mx-5 xl:mx-24">
+          <h2 className="w-3/5 font-medium text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-4 sm:mb-4 lg:mb-4">
             ¿Qué es <span className="text-highlight">Círculo inphonity?</span>
           </h2>
-          <p className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl">
-          Al hacerte cliente de inphonity no solo te conectas con el mundo, ¡también te recompensamos por ello! ¿Cómo lo hacemos? 
-          Te damos un bono único por cada amigo que se une a tu Círculo inphonity y eso no es todo, recibes del 1 al 5% de cashback mensual, 
+          <p className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl text-justify">
+          Al hacerte cliente de inphonity no solo te conectas con el mundo, <span className="font-medium ">¡también te recompensamos por ello!</span> ¿Cómo lo hacemos? 
+          Te damos un bono único por cada amigo que se une a tu Círculo inphonity y eso no es todo, recibes del <span className="font-medium text-highlight"> 1 al 5% de cashback mensual</span>, 
           cada vez que los miembros de tu Círculo pagan su plan. Esto no termina aqui…
           </p>
         </div>
