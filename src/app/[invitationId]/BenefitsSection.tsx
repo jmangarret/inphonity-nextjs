@@ -4,19 +4,19 @@ import Benefit from "@/components/Benefit";
 export default function BenefitsSection() {
   return (
     <section className="container mx-auto mb-10 md:mb-16 lg:mb-20 xl:mb-24">
-      <div className="grid grid-cols-10 md:mb-10 lg:mb-15 xl:mb-20">
-        <div className="col-span-2">
+      <div className="grid grid-cols-10 md:mb-5 lg:mb-10 xl:mb-15">
+        <div className="col-span-1">
           {/* <PlusDecoration
             className="my-3 lg:my-4 w-3 sm:w-6 md:w-8 lg:w-10 xl:w-12 mx-auto"
           /> */}
         </div>
-        <div className="col-span-6">
-          <h2 className="font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl mb-5 text-center">
+        <div className="col-span-8">
+          <h2 className="font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-center">
             Puedes tener
             <span className="text-highlight"> más de lo que te imaginas</span>
           </h2>
         </div>
-        <div className="col-span-2">
+        <div className="col-span-1">
           {/* <PlusDecoration
             className="relative my-6 md:my-9 lg:my-12 left-1/3 w-6 sm:w-8 md:w-10 lg:w-12 xl:w-14"
           /> */}
