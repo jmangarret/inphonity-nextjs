@@ -11,7 +11,7 @@ export default function BenefitsSection() {
           /> */}
         </div>
         <div className="col-span-8">
-          <h2 className="font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-center">
+          <h2 className="font-medium text-2xl lg:text-3xl xl:text-5xl text-center">
             Puedes tener
             <span className="text-highlight"> más de lo que te imaginas</span>
           </h2>
