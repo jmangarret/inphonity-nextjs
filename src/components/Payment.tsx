@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
 
-type BenefitProps = {
+type PaymentProps = {
   title?: string;
   description: string;
   image: string;
 }
 
-const Benefit: React.FC<BenefitProps> = ({title, description, image}) => {
+const Payment: React.FC<PaymentProps> = ({title, description, image}) => {
   return (
     <div className="flex flex-col items-center">
       <div
@@ -39,4 +39,4 @@ const Benefit: React.FC<BenefitProps> = ({title, description, image}) => {
   );
 }
 
-export default Benefit;
+export default Payment;

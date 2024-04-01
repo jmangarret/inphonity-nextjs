@@ -3,21 +3,21 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <footer className="bg-white text-xs lg:text-sm font-medium">
-      <div className="bg-black text-xs md:text-base py-3 md:py-6 text-center lg:text-left">
+      <div className="text-xs md:text-base py-3 md:py-6 text-center lg:text-left" style={{background: '#298A9A'}}>
         <div
           className={`md:w-3/4 mx-auto grid grid-cols-8 gap-4`}
         >
           <div className="col-span-12 sm:col-span-4 lg:col-span-2 p-4">
             <Image
               src="/logo.svg"
-              width={100}
+              width={250}
               height={100}
               alt="Logo"
               className="mx-auto"
             />
           </div>
           <div className="col-span-12 sm:col-span-4 lg:col-span-2 p-4">
-            <p>
+            <p className="footer-up-text">
               <Image
                 src="/img/direccion-icon.svg"
                 alt="Dirección"
@@ -26,24 +26,11 @@ export default function Footer() {
                 className="inline-block mr-2"
                 style={{verticalAlign: "middle"}}
               />
-              Ejercito Nacional Mexicano 904 Piso 12 | CDMX
-            </p>
-            <p>
-              <a href="mailto:hola@inphonity.com">
-                <Image
-                  src="/img/email-icon.svg"
-                  alt="Email"
-                  width={15}
-                  height={15}
-                  className="inline-block mr-2"
-                  style={{verticalAlign: "middle"}}
-                />
-                hola@inphonity.com
-              </a>
+              Ejercito Nacional Mexicano 904 Piso 12 CDMX
             </p>
           </div>
           <div className="col-span-12 sm:col-span-4 lg:col-span-2 p-4">
-            <a href="tel:5592400295">
+            <a href="tel:5592400295" className="footer-up-text">
               <Image
                 src="/img/telefono-icon.svg"
                 alt="Teléfono"
@@ -56,14 +43,27 @@ export default function Footer() {
             </a>
           </div>
           <div className="col-span-12 sm:col-span-4 lg:col-span-2 p-4">
-            <div className="button-container mb-6">
+            <p className="footer-up-text">
+              <a href="mailto:hola@inphonity.com">
+                <Image
+                  src="/img/email-icon.svg"
+                  alt="Email"
+                  width={15}
+                  height={15}
+                  className="inline-block mr-2"
+                  style={{verticalAlign: "middle"}}
+                />
+                hola@inphonity.com
+              </a>
+            </p>
+            {/* <div className="button-container mb-6">
               <a
                 href="mailto:hola@inphonity.com"
                 className={`button font-medium w-full block text-center`}
               >
                 Contáctanos
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
