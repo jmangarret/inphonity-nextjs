@@ -20,6 +20,9 @@ const config: Config = {
         highlight: '#00DDBA',
         highlight2: '#FFAE39',
       },
+      gridTemplateColumns: {
+        '3': 'repeat(3, minmax(0, 1fr))',
+      },
     },
   },
   plugins: [],

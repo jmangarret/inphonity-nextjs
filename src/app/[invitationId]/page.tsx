@@ -7,6 +7,7 @@ import PortabilitySection from "@/app/[invitationId]/PortabilitySection";
 import OfferSection from "@/app/[invitationId]/OfferSection";
 import CoverageSection from "@/app/[invitationId]/CoverageSection";
 import InvitationSection from "@/app/[invitationId]/InvitationSection";
+import PaymentsSection from "@/app/[invitationId]/PaymentsMethod";
 
 export default function Home({ params }: { params: { invitationId: string } }) {
   return (
@@ -21,6 +22,7 @@ export default function Home({ params }: { params: { invitationId: string } }) {
         <PortabilitySection />
         <CoverageSection />
         <OfferSection />
+        <PaymentsSection />
         <InvitationSection
           invitationId={params.invitationId}
         />
