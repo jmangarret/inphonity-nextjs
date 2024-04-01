@@ -10,28 +10,24 @@ export default function CoverageSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="p-4">
             <Coverage
-              key={1}
               description={["Servicio respaldado por ", <p className='text-highlight'>Altán redes</p>]}
               image="/img/altan-redes-icon.svg"
             />
           </div>
           <div className="p-4">
             <Coverage
-              key={2}
               description={["Cobertura ", <span className='text-highlight'>Nacional</span>]}
               image="/img/mexico-icon.svg"
             />
           </div>
           <div className="p-4">
             <Coverage
-              key={3}
               description={["Navega, llama y textea en ",<span className='text-highlight'>EE.UU.</span>," y ",<span className='text-highlight'>Canadá</span>]}
               image="/img/avion-icon.svg"
             />
           </div>
           <div className="p-4">
             <Coverage
-              key={4}
               description={["Tecnología y velocidad ",<p className='text-highlight'>4.5 G LTE</p>]}
               image="/img/radar-icon.svg"
             />
