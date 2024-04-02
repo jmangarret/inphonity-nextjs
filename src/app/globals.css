@@ -11,10 +11,24 @@
     @apply grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .lg\:col-span-3{
-    grid-column: span 3 / span 3;
+    @apply grid-column: span 3 / span 3;
+  }
+  .lg\:px-16{
+    @apply padding-left: 4rem;
+    @apply padding-right: 4rem;
+  }
+  .xl\:my-4{
+    @apply margin-top: 1rem;
+    @apply margin-bottom: 1rem;
+  }
+  .xl\:my-2{
+    @apply margin-top: 0.5rem;
+    @apply margin-bottom: 0.5rem;
   }
 }
-
+.text-negro{
+  color: #000 !important;
+}
 .buttom-border-bottom-fix{
   border-bottom: 2px solid !important;
 }
