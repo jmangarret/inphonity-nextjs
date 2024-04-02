@@ -8,6 +8,8 @@ export enum SlideBackground {
   TRANSPARENT = 'bg-promo-transparent',
   BLUE = 'bg-promo-blue',
   GREEN = 'bg-promo-green',
+  ORANGE = 'bg-promo-orange',
+  CUSTOM = 'bg-plan1'
 }
 
 type SlideProps = {
@@ -17,8 +19,8 @@ type SlideProps = {
   background?: SlideBackground;
   mobileData: string;
   sharedData: boolean;
-  minutes: number;
-  sms: number;
+  minutes: number|string;
+  sms: number|string;
   referralIncome: number;
   cashback: number;
   price: number;
@@ -28,25 +30,15 @@ type SlideProps = {
   hasMessenger?: boolean;
   hasTiktok?: boolean;
   hasX?: boolean;
-}
-
-const namePosition = (mobileData: string) => {
-  if (mobileData.length > 4) {
-    return '-20%';
-  }
-
-  if (mobileData.length > 3) {
-    return '-17%';
-  }
-
-  return '-15%';
+  hasTelegram?: boolean;
+  hasSnapchat?: boolean;
 }
 
 const formatNumber = (number: number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData, sharedData, minutes, sms, referralIncome, cashback, price, hasWhatsapp, hasInstagram, hasFacebook, hasMessenger, hasTiktok, hasX}) => {
+const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData, sharedData, minutes, sms, referralIncome, cashback, price, hasWhatsapp, hasInstagram, hasFacebook, hasMessenger, hasTiktok, hasX, hasTelegram, hasSnapchat}) => {
   const dispatch = useAppDispatch();
   const plan = useAppSelector((state) => state.plan);
 
@@ -63,36 +55,13 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
 
   return (
     <div
-      className={`p-3 sm:p-4 md:p-5 w-full grid grid-cols-10 gap-3 border border-white rounded-lg ${background || SlideBackground.TRANSPARENT}`}
+      className={`mx-3 p-3 sm:p-4 md:p-5 grid grid-cols-10 border border-white rounded-lg ${background || SlideBackground.TRANSPARENT}`}
     >
-      {hasPromo && (
-        <div
-          className="absolute p-2 rounded-full text-center font-medium flex items-center justify-center promo"
-        >
-          <p>
-            PROMO POR PORTABILIDAD
-            <br/>
-            <span className="text-base">+15<sup>GB</sup></span>
-          </p>
-        </div>
-      )}
-      <div className="col-span-10 relative text-center mb-3 md:mb-4">
-        <span
-          className="text-1xl text-highlight2 font-medium relative"
-          style={{
-            left: namePosition(mobileData),
-            bottom: '-12%'
-        }}
-        >
+      <div className="col-span-10 relative text-center mb-3 md:mb-4 ">
+        <h3 className="text-5xl font-medium mb-3">
           {name}
-        </span>
-        <PlusDecoration
-          className="absolute w-5"
-          style={{right: '2rem', top: '1rem'}}
-        />
-        <h3
-          className="text-5xl font-medium mb-3"
-        >
+        </h3>
+        <h3 className="text-5xl font-medium mb-3">
           {mobileData}
         </h3>
         <p className="font-medium text-sm">
@@ -125,13 +94,8 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
           )}
         </p>
       </div>
-      <div
-        className="col-span-5 text-center border border-white rounded-lg bg-black bg-opacity-50 p-3"
-      >
-        <p
-          className="text-xs mx-auto"
-          style={{height: "2rem"}}
-        >
+      <div className="col-span-5 text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1">
+        <p className="text-xs mx-auto" style={{height: "2rem"}}>
           <Image
             src="/img/phone-circle-icon.svg"
             alt="Teléfono"
@@ -143,17 +107,12 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
           {' '}
           MINUTOS
         </p>
-        <p className="font-medium text-xl">
-          {formatNumber(minutes)}
+        <p className="font-medium text-2xl">
+          {minutes}
         </p>
       </div>
-      <div
-        className="col-span-5 text-center border border-white rounded-lg bg-black bg-opacity-50 p-3"
-      >
-        <p
-          className="text-xs mx-auto"
-          style={{height: "2rem"}}
-        >
+      <div className="col-span-5 text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1">
+        <p className="text-xs mx-auto" style={{height: "2rem"}}>
           <Image
             src="/img/message-icon.svg"
             alt="Mensaje"
@@ -165,52 +124,23 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
           {' '}
           SMS
         </p>
-        <p className="font-medium text-xl">
-          {formatNumber(sms)}
+        <p className="font-medium text-2xl">
+          {sms}
         </p>
       </div>
-      <div
-        className="col-span-5 text-center border border-white rounded-lg bg-black bg-opacity-50 p-3"
-      >
-        <p
-          className="text-xs mx-auto"
-          style={{height: "2.5rem"}}
-        >
+      <div className="col-span-5 text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1">
+        <p className="text-xs mx-auto" style={{height: "2.5rem"}}>
           INGRESO POR REFERIDO
-          {' '}
-          <Image
-            src="/img/question-mark-icon.svg"
-            alt="Ingreso por referido"
-            width={10}
-            height={10}
-            className="inline w-2 lg:w-3 cursor-pointer"
-            style={{verticalAlign: "top"}}
-          />
         </p>
-        <p className="font-medium text-xl">
+        <p className="font-medium text-4xl">
           {formatNumber(referralIncome)}%
         </p>
       </div>
-      <div
-        className="col-span-5 text-center border border-white rounded-lg bg-black p-3"
-        style={{backgroundColor: "#F79F1A"}}
-      >
-        <p
-          className="text-xs mx-auto"
-          style={{height: "2.5rem"}}
-        >
+      <div className="col-span-5 text-center border border-white rounded-lg bg-black p-3 m-2" style={{backgroundColor: "#F79F1A"}}>
+        <p className="text-xs mx-auto"style={{height: "2.5rem"}}>
           CASHBACK
-          {' '}
-          <Image
-            src="/img/question-mark-icon.svg"
-            alt="Ingreso por referido"
-            width={10}
-            height={10}
-            className="inline w-2 lg:w-3 cursor-pointer"
-            style={{verticalAlign: "top"}}
-          />
         </p>
-        <p className="font-medium text-xl">
+        <p className="font-medium text-4xl">
           {formatNumber(cashback)}%
         </p>
       </div>
@@ -220,7 +150,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
         <p className="text-xs lg:text-base">
           PRECIO
         </p>
-        <p className="font-medium text-2xl">
+        <p className="font-medium text-4xl">
           ${formatNumber(price)}
         </p>
       </div>
@@ -231,46 +161,64 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
           REDES SOCIALES INCLUIDAS
         </p>
         <div className="flex justify-center items-center mb-5">
-          {hasWhatsapp && (
+          {hasFacebook && (
             <Image
-              src="/img/whatsapp-icon.svg"
-              alt="WhatsApp"
-              width={15}
-              height={15}
+              src="/img/rs_face.svg"
+              alt="Facebook"
+              width={30}
+              height={30}
               className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
             />
           )}
-          {hasInstagram && (
+          {hasWhatsapp && (
             <Image
-              src="/img/instagram-icon.svg"
+              src="/img/rs_what.svg"
+              alt="WhatsApp"
+              width={30}
+              height={30}
+              className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
+            />
+          )}
+          {hasMessenger && (
+            <Image
+              src="/img/rs_mes.svg"
+              alt="Messenger"
+              width={30}
+              height={30}
+              className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
+            />
+          )}
+           {hasInstagram && (
+            <Image
+              src="/img/rs_instagram.svg"
               alt="Instagram"
               width={30}
               height={30}
               className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
             />
           )}
-          {hasFacebook && (
+          {hasTiktok && (
             <Image
-              src="/img/facebook-icon.svg"
-              alt="Facebook"
+              src="/img/rs_tik.svg"
+              alt="TikTok"
               width={30}
               height={30}
-              className="mr-3 sm:mr-4 md:mr-5 inline-block w-3"
-            />
-          )}
-          {hasMessenger && (
-            <Image
-              src="/img/messenger-icon.svg"
-              alt="Messenger"
-              width={20}
-              height={20}
               className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
             />
           )}
-          {hasTiktok && (
+          {hasSnapchat && (
             <Image
-              src="/img/tiktok-icon.svg"
-              alt="TikTok"
+              src="/img/rs_snap.svg"
+              alt="Snapchat"
+              width={30}
+              height={30}
+              className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
+            />
+          )}
+          {hasTelegram && (
+            <Image
+              src="/img/rs_tel.svg"
+              alt="Telegram"
               width={30}
               height={30}
               className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
@@ -278,7 +226,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
           )}
           {hasX && (
             <Image
-              src="/img/x-icon.svg"
+              src="/img/rs_x.svg"
               alt="TikTok"
               width={30}
               height={30}
@@ -287,15 +235,15 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
           )}
         </div>
         {plan.id === id ? (
-          <p className={`font-medium text-highlight uppercase`}>
-            Plan seleccionado
-          </p>
+          <button className="multi-border-white text-white bg-promo-orange">
+            PLAN SELECCIONADO
+          </button>
         ) : (
           <button
-            className="multi-border text-black hover:text-gray-900 font-medium"
+            className="multi-border text-white bg-opacity-50"
             onClick={handleButtonClick}
           >
-            Quiero este plan
+            QUIERO ESTE PLAN
           </button>
         )}
       </div>

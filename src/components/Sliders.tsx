@@ -11,93 +11,67 @@ const Sliders = () => {
   const plans = [
     {
       id: 1,
-      name: 'Go',
+      name: 'Elite',
       hasPromo: true,
-      background: SlideBackground.BLUE,
-      mobileData: '5GB',
-      sharedData: false,
-      minutes: 1500,
-      sms: 500,
-      referralIncome: 20,
-      cashback: 3,
-      price: 399,
+      background: SlideBackground.CUSTOM,
+      mobileData: '100GB',
+      sharedData: true,
+      minutes: 'Ilimitados',
+      sms: 'Ilimitados',
+      referralIncome: 10,
+      cashback: 5,
+      price: 999,
       hasWhatsapp: true,
       hasFacebook: true,
       hasMessenger: true,
+      hasTelegram: true,
+      hasSnapchat: true,
+      hasInstagram: true,
       hasX: true,
+      hasTiktok: true,
     },
     {
       id: 2,
       name: 'Ultra',
-      background: SlideBackground.GREEN,
+      hasPromo: true,
+      background: SlideBackground.BLUE,
       mobileData: '40GB',
-      sharedData: true,
-      minutes: 1500,
-      sms: 1000,
-      referralIncome: 20,
-      cashback: 6,
-      price: 999,
+      sharedData: false,
+      minutes: 'Ilimitados',
+      sms: 'Ilimitados',
+      referralIncome: 10,
+      cashback: 4,
+      price: 699,
       hasWhatsapp: true,
       hasInstagram: true,
       hasFacebook: true,
       hasMessenger: true,
       hasTiktok: true,
       hasX: true,
+      hasTelegram: true,
+      hasSnapchat: true,
     },
     {
       id: 3,
-      name: 'Elite',
-      background: SlideBackground.BLUE, // Cambiado a un color disponible en el enum
-      mobileData: '100GB',
+      name: 'Pro',
+      hasPromo: true,
+      background: SlideBackground.ORANGE, // Cambiado a un color disponible en el enum
+      mobileData: '15GB',
       sharedData: true,
-      minutes: 10000,
-      sms: 10000,
-      referralIncome: 20,
-      cashback: 10,
-      price: 1599,
+      minutes: 'Ilimitados',
+      sms: 'Ilimitados',
+      referralIncome: 10,
+      cashback: 3,
+      price: 499,
       hasWhatsapp: true,
       hasInstagram: true,
       hasFacebook: true,
       hasMessenger: true,
       hasTiktok: true,
       hasX: true,
-    },
-    {
-      id: 9,
-      name: 'Plan 4',
-      background: SlideBackground.GREEN, // Cambiado a un color disponible en el enum
-      mobileData: '6GB',
-      sharedData: false,
-      minutes: 1500,
-      sms: 500,
-      referralIncome: 20,
-      cashback: 12,
-      price: 40, // Revisar este precio para ajustarlo correctamente
-      hasWhatsapp: true,
-      hasInstagram: true, // Asumido basado en el patrón
-      hasFacebook: true,
-      hasMessenger: true,
-      hasTiktok: true, // Asumido basado en el patrón
-      hasX: true,
-    },
-    {
-      id: 10,
-      name: 'Plan 5',
-      background: SlideBackground.BLUE, // Cambiado a un color disponible en el enum
-      mobileData: '10GB',
-      sharedData: false,
-      minutes: 500,
-      sms: 250,
-      referralIncome: 20,
-      cashback: 15,
-      price: 50, // Revisar este precio para ajustarlo correctamente
-      hasWhatsapp: true,
-      hasInstagram: true, // Asumido basado en el patrón
-      hasFacebook: true,
-      hasMessenger: true,
-      hasTiktok: true, // Asumido basado en el patrón
-      hasX: true,
-    },
+      hasTelegram: true,
+      hasSnapchat: true,
+    }
   ];
 
   useEffect(() => {
@@ -119,10 +93,12 @@ const Sliders = () => {
   return (
     <div className="slider-container">
       <swiper-container
+        spaceBetween={50}
+        slidesPerView={3}
         ref={swiperElRef}
         slides-per-view="auto"
         pagination="true"
-        effect="coverflow"
+        effect=""
         grab-cursor="true"
         centered-slides="true"
         speed="600"

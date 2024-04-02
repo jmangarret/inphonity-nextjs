@@ -8,7 +8,7 @@ export interface Plan {
 }
 
 const initialState: Plan = {
-  id: 3,
+  id: 2,
   isPaid: false,
   supportEsim: false,
 };
@@ -31,7 +31,7 @@ const planSlice = createSlice({
     builder.addMatcher(invitationsApi.endpoints.getInvitationById.matchFulfilled, (state, action: PayloadAction<Invitation>) => {
       const invitation = action.payload;
 
-      state.id = action.payload.pre_registration?.product_id || 3;
+      state.id = action.payload.pre_registration?.product_id || 2;
 
       if (invitation.pre_registration?.payment_status === 'paid') {
         state.isPaid = true;

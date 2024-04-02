@@ -355,12 +355,15 @@ swiper-container::part(bullet) {
 .multi-border {
   padding: 6px 35px;
   border-radius: 50px;
-  border: 2px solid transparent;
-  background:
-    linear-gradient(white, white) padding-box,
-    linear-gradient(to bottom, #FEC75B, #F2472F, #00DDBA) border-box;
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  border: 1px solid;
+  border-color: #86301A;
+}
+
+.multi-border-white {
+  padding: 6px 35px;
+  border-radius: 50px;
+  border: 1px solid;
+  border-color: #FFF;
 }
 
 .multi-border:active {
@@ -389,10 +392,13 @@ swiper-container::part(bullet) {
   }
 }
 .bg-promo-blue {
-  background: linear-gradient(270deg, #006672 -70%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(206deg, #000 26.38%, #01808E 92.03%);
 }
 .bg-promo-green {
   background: linear-gradient(270deg, #00DDBA -70%, rgba(0, 0, 0, 0) 100%);
+}
+.bg-promo-orange {
+  background: linear-gradient(116deg, #FA8F22 4.64%, #E04C37 79.15%);
 }
 @keyframes doodle-animation-left {
   0% {
@@ -734,4 +740,19 @@ body{
   background: url('/img/bg-landing-full.png') transparent 50% / cover no-repeat;
   width: auto;
   height: 6646px;
+}
+
+.bg-plan1{
+  background: url('/img/bg-plan.png') transparent 50% / cover no-repeat;
+  width: auto;
+  height: auto;
+}
+
+
+.icon-instagram{
+  width: 33.153px;
+  height: 33.153px;
+  flex-shrink: 0;
+  background: url('/img/Rectangle.png') lightgray 0px 0px / 100% 100% no-repeat;
+  border-radius: 50%;
 }
