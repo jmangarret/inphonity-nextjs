@@ -38,7 +38,7 @@ const HeroVideo = () => {
   }, [windowSize.width]);
 
   return (
-    <div className="hero-video w-4/5 mx-auto">
+    <div className="hero-video w-4/5 sm:w-4/5 md:w-3/4 mx-auto">
       {videoSrc !== null && (
         <video
           controls

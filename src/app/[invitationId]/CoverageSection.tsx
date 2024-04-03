@@ -2,7 +2,7 @@ import Coverage from "@/components/Coverage";
 
 export default function CoverageSection() {
   return (
-    <section className="py-10 md:py-16 lg:py-20 xl:py-24 p-3 sm:p-6 md:p-8 lg:p-10 xl:p-12">
+    <section className="container mx-auto py-10 md:py-16 lg:py-20 xl:py-24 p-3 sm:p-6 md:p-8 lg:p-10 xl:p-12">
       <div className="container mx-auto">
         <h2 className="font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-center">
           Nuestra <span className="text-highlight">cobertura</span> con la red de redes
