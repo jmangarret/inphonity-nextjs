@@ -25,6 +25,13 @@
     @apply margin-top: 0.5rem;
     @apply margin-bottom: 0.5rem;
   }
+  .md\:justify-end{
+    @apply justify-content: flex-end;
+  }
+}
+.mx-auto{
+  margin-left: auto;
+  margin-right: auto;
 }
 .text-negro{
   color: #000 !important;
@@ -353,9 +360,46 @@ swiper-container::part(bullet) {
 }
 
 .multi-border {
-  padding: 6px 35px;
-  border-radius: 50px;
-  border: 1px solid #86301A;
+  position: relative;
+  padding: 12px 35px;
+  font-size: 1rem;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.10);
+  transition: all 0.15s ease-in-out;
+  box-sizing: border-box;
+  border-radius: 50px; 
+  border-color: rgba(0, 0, 0, 0);
+  border-width: 1px;
+}
+.multi-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50px; 
+  padding: 1px; 
+  background:linear-gradient(45deg,#FDB827,#86301A); 
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude; 
+}
+.multi-border:hover,
+.multi-border:active {
+  color: #fff;
+  background: linear-gradient(45deg, #FDB827, #86301A);
+  border-color: #fff;
+  border-width: 1px;
+}
+
+.white-grad {
+  background: 
+    linear-gradient(#ccc 0 0) padding-box, /*this is your grey background*/
+    linear-gradient(to right, #9c20aa, #fb3570) border-box;
+  color: #313149;
+  border: 5px solid transparent;
+  border-radius: 15px;
+  display: inline-block;
+  margin: 75px 0;
 }
 
 .multi-border-white {

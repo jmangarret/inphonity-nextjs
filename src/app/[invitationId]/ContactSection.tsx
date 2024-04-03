@@ -1,21 +1,23 @@
 export default function ContactSection() {
     return (
-        <section className="w-1/2 mx-auto my-10">
-            <div className="flex flex-row  mb-52">
-                <div className="flex flex-col">
-                    <h2 className="font-medium text-2xl sm:text-3xl lg:text-5xl text-center">
+        <section className="container mx-auto p-3 sm:p-6 md:p-8 lg:p-10 xl:p-12">
+            <div className="mx-auto grid grid-cols-12 gap-3 flex items-center mb-20">
+                <div className="col-span-12 md:col-span-2"></div>
+                <div className="col-span-12 sm:col-span-4 lg:col-span-4 text-left">
+                    <h2 className="font-medium text-2xl sm:text-3xl lg:text-5xl text-left mb-5">
                         ¿Tienes Dudas?
                     </h2>
-                    <span className="text-highlight text-2xl my-5">¡Contáctanos!</span>
+                    <span className="text-highlight text-2xl">¡Contáctanos!</span>
                 </div>
-                <div className="w-1/3 mx-5 flex flex-col">
-                    <button className="btn-width multi-border text-white bg-opacity-50">
+                <div className="col-span-12 sm:col-span-4 lg:col-span-4 text-center">
+                    <button className="btn-width multi-border font-medium">
                         CHATEA EN LÍNEA
                     </button>
-                    <button className="btn-width multi-border text-white bg-opacity-50 my-5">
+                    <button className="btn-width multi-border font-medium my-5">
                         LLAMA A UN ASESOR
                     </button>
                 </div>
+                <div className="col-span-12 md:col-span-2"></div>
             </div>
         </section>
     );

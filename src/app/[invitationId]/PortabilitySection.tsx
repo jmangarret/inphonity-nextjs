@@ -3,7 +3,7 @@ import SimCard from "@/components/SimCard";
 
 export default function PortabilitySection() {
   return (
-    <section className="mb-10 md:mb-16 lg:mb-20 xl:mb-24">
+    <section className="mx-auto mb-10 md:mb-16 lg:mb-20 xl:mb-24">
       <div className="grid grid-cols-10">
         <div className="col-span-10 text-center p-3 sm:p-4 md:p-5 lg:p-6 xl:p-7">
           <h2 className="font-medium text-2xl sm:text-3xl lg:text-6xl xl:text-6xl mb-3 lg:mb-5 mt-6 lg:mt-8 xl:mt-10">
@@ -16,7 +16,7 @@ export default function PortabilitySection() {
             podrás realizar la <span className="text-highlight">portabilidad</span> de tu número
           </p>
         </div>
-        <div className="col-span-10 sm:col-span-4">
+        <div className="col-span-10 sm:col-span-4 flex items-center">
           <SimCard />
         </div>
         <div className="col-span-10 sm:col-span-6">
