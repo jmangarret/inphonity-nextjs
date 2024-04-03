@@ -39,9 +39,9 @@ export const request = {
               updated_at: "laudantium-quis-voluptas-qui-porro",
               referral_id: 8784984296914944,
               user: {
-                first_name:"Jonathan",
-                last_name: "Mangarret",
-                mother_last_name: "Pabon",
+                first_name:"Juan",
+                last_name: "Garcia",
+                mother_last_name: "",
               }
           },
     },

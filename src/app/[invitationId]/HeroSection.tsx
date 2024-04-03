@@ -22,11 +22,9 @@ export default function HeroSection() {
           </p>
         </div>
       </div>
-      <div className="col-span-12 md:col-span-4 mb-20 sm:mb-20 md:mb-20 lg:mb-20">
-        <div className="button-container w-4/5 lg:w-72 mx-auto mb-6">
-          <button
-            className={`multi-border font-medium block w-full`}
-            >
+      <div className="col-span-12 md:col-span-4 mb-10 sm:mb-20 md:mb-30 lg:mb-40">
+        <div className="button-container text-center lg:w-72 mx-auto mb-30">
+          <button className={`btn-width multi-border font-medium block`}>
             CONOCE MÁS
           </button>
         </div>
