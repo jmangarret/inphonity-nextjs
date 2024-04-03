@@ -37,7 +37,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
   }, [data, isFetching, isLoading, router]);
 
   return (
-    <section className="my-10 bg-section-1">
+    <section className="container mx-auto my-10 bg-section-1">
       {/* <PlusDecoration 
         isGreen={true}
         style={{left: "90%"}}
@@ -48,7 +48,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
         className="sm:flex"
       >
         <div
-          className="sm:w-1/2 pl-3 sm:pl-5 md:pl-10 lg:pl-14 xl:pl-32 sm:mt-10 md:mt-16 lg:mt-24 xl:mt-32"
+          className="sm:w-1/2 px-4 sm:mt-10 md:mt-16 lg:mt-24 xl:mt-32"
         >
           <h1
             className={`font-medium text-3xl sm:text-4xl lg:text-5xl xl:text-6xl`}
@@ -102,20 +102,20 @@ const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
         <div className="bg-luces3"></div>
 
         <div
-          className="sm:w-1/2 pl-5 text-right"
+          className="sm:w-1/2 py-5 text-right"
         >
-          <div className="flex justify-end">
+          <div className="flex justify-center md:justify-end">
             <picture>
-              <source width="300" media="(max-width: 600px)" srcSet="/img/bienvenido600px.png"/>
-              <source width="600" media="(min-width: 600px) and (max-width: 1200px)"srcSet="/img/bienvenido1200px.png"/>
-              <source width="800" media="(min-width: 1200px)" srcSet="/img/bienvenido1800px.png"/>
+              <source width="300" media="(max-width: 600px)" srcSet="/img/img_header_600px.webp"/>
+              <source width="600" media="(min-width: 600px) and (max-width: 1200px)"srcSet="/img/img_header_1200px.webp"/>
+              <source width="800" media="(min-width: 1200px)" srcSet="/img/img_header_1800px.webp"/>
               <img src="/img/bienvenido600px.png" alt="Bienvenido a Inphonity"/>
             </picture>
           </div>
         </div>
       </div>
       <div className="sm:flex">
-        <div className="pl-3 md:pl-5 lg:pl-10 sm:mt-10 md:mt-16 lg:mt-24 mx-5 xl:mx-24">
+        <div className="px-4 my-20 sm:my-20 md:my-20 lg:my-20">
           <h2 className="w-3/5 font-medium text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-4 sm:mb-4 lg:mb-4">
             ¿Qué es <span className="text-highlight">Círculo inphonity?</span>
           </h2>

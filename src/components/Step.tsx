@@ -10,7 +10,7 @@ type StepProps = {
 const Step: React.FC<StepProps> = ({step, children, style, className}) => {
   return (
     <div
-      className={`p-3 md:p-4 lg:p-5 xl:p-6 ml-3 md:ml-6 lg:ml-9 xl:ml-12 flex items-center rounded-tl-full rounded-bl-full font-medium mb-3 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-7 ${className || ''}`}
+      className={`p-3 md:p-4 lg:p-5 xl:p-9 ml-3 md:ml-6 lg:ml-9 xl:ml-12 flex items-center rounded-tl-full rounded-bl-full font-medium my-3 sm:my-4 md:my-5 lg:mb-12 xl:mb-12 ${className || ''}`}
       style={style || {}}
     >
       <div

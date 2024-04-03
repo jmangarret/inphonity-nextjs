@@ -4,7 +4,7 @@ import HeroVideo from "@/components/HeroVideo";
 
 export default function HeroSection() {
   return (
-    <section className="mx-auto text-center my-20 md:mb-16 lg:mb-20 xl:mb-24">
+    <section className="container mx-auto text-center my-20 md:mb-16 lg:mb-20 xl:mb-24">
       <h2 className="mx-auto font-medium text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl mb-5">
       Consume inteligente con <span className="text-highlight">cashback</span>
       </h2>
@@ -25,8 +25,7 @@ export default function HeroSection() {
       <div className="col-span-12 md:col-span-4 mb-20 sm:mb-20 md:mb-20 lg:mb-20">
         <div className="button-container w-4/5 lg:w-72 mx-auto mb-6">
           <button
-            className={`button buttom-border-bottom-fix font-medium block w-full border-2`}
-            style={{background: 'rgba(0, 0, 0, 0)', color: 'white'}}
+            className={`multi-border font-medium block w-full`}
             >
             CONOCE MÁS
           </button>
