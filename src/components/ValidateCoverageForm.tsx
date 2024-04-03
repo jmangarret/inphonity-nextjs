@@ -200,14 +200,14 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
             <input
               type="text"
               className="input bg-white rounded-full outline-amber-500 transition duration-300 text-black font-light w-full"
-              placeholder="Código Postal"
+              placeholder="Introduce tu Código Postal"
               onChange={(e) => setPostalCode(e.target.value)}
               value={postalCode}
             />
           </div>
           <div className="button-container">
             <button
-              className="button font-medium block w-full"
+              className="multi-border font-medium block w-full"
               onClick={handleSubmit}
             >
               Revisar

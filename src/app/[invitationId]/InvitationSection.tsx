@@ -94,41 +94,37 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({invitationId}) => 
             >
               Tiempo restante
             </h2>
-            {isLoadingInvitation || isFetchingInvitation ? (
+            {/* TODO: descomentar {isLoadingInvitation || isFetchingInvitation ? (
               <div
                 className="font-medium text-2xl sm:text-3xl lg:text-5xl xl:text-8xl bg-gray-300 animate-pulse h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10 mb-3 w-3/4 inline-block"
                 style={{verticalAlign: "middle"}}
               ></div>
             ) : (
-              invitationData && (
+              invitationData && ( */}
                 <Countdown
-                  expiresAt={invitationData.expires_at}
+                  expiresAt={'2024-04-05 00:00:00'}
                 />
-              )
-            )}
+              {/* )
+            )} */}
           </div>
           {/* accept invitation */}
           <div className="col-span-12 md:col-span-2"></div>
           <div className="col-span-12 md:col-span-4">
           <div className="button-container w-4/5 lg:w-72 mx-auto">
-              <button
-                className="button buttom-border-bottom-fix font-medium block w-full border-2"
-                style={{background: 'rgba(0, 0, 0, 0)', color: 'white'}}
+            <button className="btn-width multi-border text-white bg-opacity-50 my-5"
                 onClick={handleReject}
                 disabled={isRejectingInvitation}
               >
-                Declinar
+                DECLINAR
               </button>
             </div>
           </div>
           <div className="col-span-12 md:col-span-4">
           <div className="button-container w-4/5 lg:w-72 mx-auto mb-6">
-              <button
-                className={`button buttom-border-bottom-fix font-medium block w-full border-2`}
-                style={{background: 'rgba(0, 0, 0, 0)', color: 'white'}}
+              <button className="btn-width multi-border text-white bg-opacity-50 my-5"
                 onClick={handleAccept}
               >
-                Aceptar invitación
+                ACEPTAR INVITACIÓN
               </button>
             </div>
           </div>

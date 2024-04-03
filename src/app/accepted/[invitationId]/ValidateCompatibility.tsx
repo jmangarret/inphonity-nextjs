@@ -45,15 +45,18 @@ export default function ValidateCompatibility() {
 
   return (
     <>
-      <section className="relative py-9 md:py-14 xl:py-16 bg-horizontal-gradient">
+      <section className="relative py-9 md:py-14 xl:py-16">
         <div className="grid grid-cols-10 gap-3">
           <div className="col-span-10 md:col-span-5 lg:col-span-6">
             <header className="text-center md:text-left relative">
               <div className="md:ml-10 lg:ml-14 xl:ml-20 relative">
-                <h2 className="font-medium text-6xl lg:text-7xl xl:text-9xl">
-                  Valida
+                <h2 className="font-medium text-4xl lg:text-6xl xl:text-7xl mb-5">
+                ¡Gracias por unirte al 
+                <span className="text-highlight"> Círculo inphonity!</span>
                 </h2>
-                <p className="text-3xl lg:text-4xl xl:text-6xl font-medium">compatibilidad:</p>
+                <p className="text-2xl lg:text-3xl xl:text-4xl">
+                A continuación, valida la compatibilidad con tu celular siguiendo estos pasos
+                </p>
                 <PlusDecoration
                   className="w-7 md:w-8 lg:w-12 xl:w-17 absolute"
                   style={{
@@ -63,12 +66,12 @@ export default function ValidateCompatibility() {
                 />
               </div>
               <picture>
-                <source width="600" media="(max-width: 600px)" srcSet="/img/validate-compatibility-600x575.webp"/>
+                <source width="600" media="(max-width: 600px)" srcSet="/img/validate-compatibility-600x575.png"/>
                 <source width="1200" media="(min-width: 600px) and (max-width: 1200px)"
-                        srcSet="/img/validate-compatibility-1200x1150.webp"/>
+                        srcSet="/img/validate-compatibility-600x575.png"/>
                 <source width="1800" media="(min-width: 1200px)"
-                        srcSet="/img/validate-compatibility-1800x1725.webp"/>
-                <img width="1200" src="/img/validate-compatibility-1200x1150.webp" alt="Valida compatibilidad"/>
+                        srcSet="/img/validate-compatibility-600x575.png"/>
+                <img width="1200" src="/img/validate-compatibility-600x575.png" alt="Valida compatibilidad"/>
               </picture>
               <PlusDecoration
                 className="w-10 md:w-11 lg:w-15 xl:w-20 absolute"
@@ -90,8 +93,9 @@ export default function ValidateCompatibility() {
             <div className={'lg:p-6 xl:p-9'}>
               <ValidateStep
                 step={1}
-                title={'OBTÉN TU IMEI'}
+                title={'Obtén tu IMEI'}
                 className={'mb-6 md:mb-8 lg:mb-10 xl:mb-12'}
+                borderClass={'border-col-1'}
               >
                 <p className={'font-light mb-4 text-base md:text-xl xl:text-2xl'}>
                   Conoce si tu teléfono es compatible con <strong className={'font-medium'}>inphonity.</strong> Marca *#06# y recibe tu IMEI
@@ -109,8 +113,9 @@ export default function ValidateCompatibility() {
               </ValidateStep>
               <ValidateStep
                 step={2}
-                title={'VALIDA COBERTURA'}
+                title={'Valida nuestra cobertura'}
                 className={'mb-6 md:mb-8 lg:mb-10 xl:mb-12'}
+                borderClass={'border-col-2'}
               >
                 <p className={'font-light mb-4 text-base md:text-xl xl:text-2xl'}>
                   Ingresa tu <strong className={'font-medium'}>código postal</strong> y revisa la <strong className={'font-medium'}>cobertura</strong>
@@ -120,8 +125,9 @@ export default function ValidateCompatibility() {
               </ValidateStep>
               <ValidateStep
                 step={3}
-                title={'TENER TU EQUIPO LIBERADO'}
+                title={'Ten tu equipo liberado'}
                 className={'mb-6 md:mb-8 lg:mb-10 xl:mb-12'}
+                borderClass={'border-col-3'}
               >
                 <p className={'font-light mb-4 text-base md:text-xl xl:text-2xl'}>
                   Para poder adquirir un plan de inphonity,
@@ -139,8 +145,9 @@ export default function ValidateCompatibility() {
               </ValidateStep>
               <ValidateStep
                 step={4}
-                title={'LISTO'}
+                title={'Sé parte de inphonity'}
                 className={'mb-6 md:mb-8 lg:mb-10 xl:mb-12'}
+                borderClass={'border-col-4'}
               >
                 <p className={'font-light mb-4 text-base md:text-xl xl:text-2xl'}>
                   Ya eres parte de inphonity, el siguiente paso es seleccionar tu plan

@@ -180,32 +180,21 @@ export default function PersonalDataForm() {
   }
 
   return (
-    <div
-      className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-3 md:mb-6 lg:mb-9 xl:mb-12'}
-    >
+    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-3 md:mb-6 lg:mb-9 xl:mb-12'}>
       {/* header */}
-      <header
-        className={'mb-4 md:mb-8 lg:mb-12 xl:mb-16 lg:ml-12'}
-      >
-        <h3
-          className={'font-medium text-3xl sm:text-5xl mb-1 sm:mb-3'}
-          style={{color: '#F79F1A'}}
-        >
-          Llena los siguientes datos:
+      <header className={'mb-2'}>
+        <h3 className={'font-medium text-3xl sm:text-5xl mb-1 sm:mb-3 text-white text-center'}>
+          Llena los <span className="text-highlight"> siguientes datos</span>
         </h3>
-        <p className={'text-base'}>
-          <strong className={'font-medium'}>Importante:</strong> Ten a la mano tu Credencial de Elector y Comprobante de
+        <p className={'text-base text-white text-center'}>
+          <strong className={'font-medium text-highlight'}>Importante:</strong> Ten a la mano tu Credencial de Elector y Comprobante de
           Domicilio
         </p>
       </header>
 
       {/* form */}
-      <div
-        className={'lg:container mx-auto w-full'}
-      >
-        <div
-          className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 bg-white w-full mx-auto mt-4 md:mt-8 lg:mt-12 xl:mt-16 p-6 md:p-8 lg:p-10 xl:p-12'}
-        >
+      <div className={'lg:container mx-auto w-full'}>
+        <div className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 text-white w-full mx-auto p-6 md:p-8 lg:p-10 xl:p-12'}>
           {/* nationality */}
           <div
             className={'col-span-12'}
