@@ -355,8 +355,7 @@ swiper-container::part(bullet) {
 .multi-border {
   padding: 6px 35px;
   border-radius: 50px;
-  border: 1px solid;
-  border-color: #86301A;
+  border: 1px solid #86301A;
 }
 
 .multi-border-white {
@@ -369,7 +368,7 @@ swiper-container::part(bullet) {
 .multi-border:active {
   background:
     linear-gradient(#e8e5e5, #e8e5e5) padding-box,
-    linear-gradient(to bottom, #FEC75B, #F2472F, #00DDBA) border-box;
+    linear-gradient(to bottom, #FEC75B, #f25c2f, #00DDBA) border-box;
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
@@ -755,4 +754,27 @@ body{
   flex-shrink: 0;
   background: url('/img/Rectangle.png') lightgray 0px 0px / 100% 100% no-repeat;
   border-radius: 50%;
+}
+
+.btn-width{
+  width: 295px;
+}
+
+.border-col-1{
+  background: linear-gradient(90deg, gray 0%, #000 100%);
+  border: 2px solid #27E1C1;
+}
+.border-col-2{
+  background: linear-gradient(90deg, gray 0%, #000 100%);
+  border: 2px solid #FDB827;
+}
+
+.border-col-3{
+  background: linear-gradient(90deg, gray 0%, #000 100%);
+  border: 2px solid #298A9A;
+}
+
+.border-col-4{
+  background: linear-gradient(90deg, gray 0%, #000 100%);
+  border: 2px solid #EB522D;
 }

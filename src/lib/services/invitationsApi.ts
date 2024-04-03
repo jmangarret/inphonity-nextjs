@@ -158,9 +158,6 @@ export type Invitation = {
   pre_registration: PreRegistration | null;
 };
 
-console.log(process.env.NEXT_PUBLIC_API_URL);
-
-
 export const invitationsApi = createApi({
   reducerPath: 'invitationApi',
   baseQuery: fetchBaseQuery({
