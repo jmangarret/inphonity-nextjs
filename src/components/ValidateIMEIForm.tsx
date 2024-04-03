@@ -266,14 +266,14 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({className, style}) =
             <input
               type="text"
               className="input bg-white rounded-full outline-amber-500 transition duration-300 text-black font-light w-full"
-              placeholder="IMEI"
+              placeholder="Introduce tu IMEI"
               onChange={(e) => setImei(e.target.value)}
               value={imei}
             />
           </div>
           <div className="button-container">
             <button
-              className="button font-medium block w-full disabled:opacity-50"
+              className="multi-border font-medium block w-full disabled:opacity-50"
               onClick={handleSubmit}
               disabled={isLoading || isFetching}
             >

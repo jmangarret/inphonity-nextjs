@@ -16,7 +16,6 @@ export default function RegisterForms({invitationId}: { invitationId: string }) 
   return (
     <section
       className={'py-4 sm:py-5 md:py-6 lg:py-7 xl:py-8'}
-      style={{backgroundColor: '#f5f6fa'}}
     >
       <div className={'mx-auto max-w-screen-xl grid grid-cols-12'}>
         {/* personal data */}

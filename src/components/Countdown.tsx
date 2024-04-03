@@ -37,25 +37,25 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ expiresAt }) => {
   }, [expiresAt]);
 
   return (
-    <div className="width-full lg:w-3/4 mx-auto">
+    <div className="w-1/3 mx-auto">
       <div className="grid grid-cols-5 gap-2 text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-center">
         <div className="col-span-1">
           <span className="block font-medium">{timeLeft.hours}</span>
-          <span className="text-xs md:text-sm lg:text-base xl:text-lg">HORAS</span>
+          <span className="text-xs md:text-sm lg:text-base xl:text-lg">Horas</span>
         </div>
         <div className="col-span-1">
           <span>:</span>
         </div>
         <div className="col-span-1">
           <span className="block font-medium">{timeLeft.minutes}</span>
-          <span className="text-xs md:text-sm lg:text-base xl:text-lg">MINUTOS</span>
+          <span className="text-xs md:text-sm lg:text-base xl:text-lg">Minutos</span>
         </div>
         <div className="col-span-1">
           <span>:</span>
         </div>
         <div className="col-span-1">
           <span className="block font-medium">{timeLeft.seconds}</span>
-          <span className="text-xs md:text-sm lg:text-base xl:text-lg">SEGUNDOS</span>
+          <span className="text-xs md:text-sm lg:text-base xl:text-lg">Segundos</span>
         </div>
       </div>
     </div>

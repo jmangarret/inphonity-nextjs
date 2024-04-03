@@ -8,6 +8,7 @@ import OfferSection from "@/app/[invitationId]/OfferSection";
 import CoverageSection from "@/app/[invitationId]/CoverageSection";
 import InvitationSection from "@/app/[invitationId]/InvitationSection";
 import PaymentsSection from "@/app/[invitationId]/PaymentsMethod";
+import ContactSection from "./ContactSection";
 
 export default function Home({ params }: { params: { invitationId: string } }) {
   return (
@@ -26,7 +27,7 @@ export default function Home({ params }: { params: { invitationId: string } }) {
         <InvitationSection
           invitationId={params.invitationId}
         />
-        {/*<ContactSection />*/}
+        <ContactSection />
       </main>
       <Footer />
     </>
