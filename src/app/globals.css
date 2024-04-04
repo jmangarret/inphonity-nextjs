@@ -797,7 +797,6 @@ body{
   height: auto;
 }
 
-
 .icon-instagram{
   width: 33.153px;
   height: 33.153px;
@@ -827,4 +826,17 @@ body{
 .border-col-4{
   background: linear-gradient(90deg, gray 0%, #000 100%);
   border: 2px solid #EB522D;
+}
+
+.card-plan{
+  width: 9rem;
+  height: 6.25rem;
+}
+
+.bg-card-2{
+  background-color: #F79F1A;
+}
+
+.card-height{
+  height: "2.5rem"
 }
