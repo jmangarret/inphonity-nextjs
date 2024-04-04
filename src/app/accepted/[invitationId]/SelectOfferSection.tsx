@@ -17,9 +17,9 @@ export default function SelectOfferSection() {
           <h2
             className="mx-auto text-center font-medium mb-5 sm:mb-10 lg:mb-20"
           >
-            <span className={'text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl'}>Es momento de</span>
-            <br/>
-            <span className={'text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl'}>elegir tu <span className="text-highlight">plan</span></span>
+            <span className={'text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl'}>
+              Conoce <span className="text-highlight">nuestros planes</span>
+            </span>
           </h2>
         </div>
         <div className="col-span-2">

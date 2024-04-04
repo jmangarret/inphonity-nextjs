@@ -195,6 +195,28 @@ export default function PersonalDataForm() {
       {/* form */}
       <div className={'lg:container mx-auto w-full'}>
         <div className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 text-white w-full mx-auto p-6 md:p-8 lg:p-10 xl:p-12'}>
+          
+          <div
+            className={'col-span-12'}
+          >
+            <input
+              type="text"
+              className={`input input-border-gray ${personalData.nameError ? 'input-error' : ''}`}
+              placeholder="Nombre Completo*"
+              value={personalData.name}
+              name={'name'}
+              onChange={handleInputChange}
+              ref={el => inputRefs.current.name = el}
+            />
+            {/* error */}
+            {personalData.nameError && (
+              <p
+                className={'text-red-500 text-xs mt-1 mx-3'}
+              >
+                {personalData.nameError}
+              </p>
+            )}
+          </div>
           {/* nationality */}
           <div
             className={'col-span-12'}
@@ -216,29 +238,9 @@ export default function PersonalDataForm() {
             </select>
           </div>
           {/* name */}
-          <div
-            className={'col-span-12 lg:col-span-4'}
-          >
-            <input
-              type="text"
-              className={`input input-border-gray ${personalData.nameError ? 'input-error' : ''}`}
-              placeholder="Nombre*"
-              value={personalData.name}
-              name={'name'}
-              onChange={handleInputChange}
-              ref={el => inputRefs.current.name = el}
-            />
-            {/* error */}
-            {personalData.nameError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
-              >
-                {personalData.nameError}
-              </p>
-            )}
-          </div>
+
           {/* last name */}
-          <div
+          {/* <div
             className={'col-span-12 lg:col-span-4'}
           >
             <input
@@ -251,16 +253,16 @@ export default function PersonalDataForm() {
               ref={el => inputRefs.current.lastName = el}
             />
             {/* error */}
-            {personalData.lastNameError && (
+            {/* {personalData.lastNameError && (
               <p
                 className={'text-red-500 text-xs mt-1 mx-3'}
               >
                 {personalData.lastNameError}
               </p>
-            )}
-          </div>
+            )} 
+            </div> */}
           {/* second last name */}
-          <div
+          {/* <div
             className={'col-span-12 lg:col-span-4'}
           >
             <input
@@ -273,58 +275,53 @@ export default function PersonalDataForm() {
               ref={el => inputRefs.current.secondLastName = el}
             />
             {/* error */}
-            {personalData.secondLastNameError && (
+            {/* {personalData.secondLastNameError && (
               <p
                 className={'text-red-500 text-xs mt-1 mx-3'}
               >
                 {personalData.secondLastNameError}
               </p>
-            )}
-          </div>
-          {/* phone */}
-          <div
-            className={'col-span-12 sm:col-span-6'}
+            )} 
+            </div> */}
+
+           {/* date of birth */}
+           <div
+            className={'col-span-12'}
           >
-            <input
-              type="text"
-              className={`input input-border-gray ${personalData.phoneError ? 'input-error' : ''}`}
-              placeholder="Teléfono*"
-              value={personalData.phone}
-              name={'phone'}
-              onChange={handleInputChange}
-              ref={el => inputRefs.current.phone = el}
-            />
-            {/* error */}
-            {personalData.phoneError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
+            <div
+              className={'flex justify-between items-center mb-2'}
+            >
+              {/* <label
+                htmlFor={`dateOfBirth`}
+                className={'flex-grow'}
+                style={{width: '200px'}}
               >
-                {personalData.phoneError}
-              </p>
-            )}
+                Fecha de nacimiento*
+              </label> */}
+              <div className={`w-full`}>
+                <input
+                  id={'dateOfBirth'}
+                  type="date"
+                  className={`input input-border-gray ${personalData.dateOfBirthError ? 'input-error' : ''}`}
+                  placeholder="Fecha de nacimiento*"
+                  value={personalData.dateOfBirth}
+                  name={'dateOfBirth'}
+                  onChange={handleInputChange}
+                  ref={el => inputRefs.current.dateOfBirth = el}
+                />
+                {/* error */}
+                {personalData.dateOfBirthError && (
+                  <p
+                    className={'text-red-500 text-xs mt-1 mx-3'}
+                  >
+                    {personalData.dateOfBirthError}
+                  </p>
+                )}
+              </div>
+            </div>
           </div>
-          {/* email */}
-          <div
-            className={'col-span-12 sm:col-span-6'}
-          >
-            <input
-              type="email"
-              className={`input input-border-gray ${personalData.emailError ? 'input-error' : ''}`}
-              placeholder="Correo electrónico*"
-              value={personalData.email}
-              name={'email'}
-              onChange={handleInputChange}
-              ref={el => inputRefs.current.email = el}
-            />
-            {/* error */}
-            {personalData.emailError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
-              >
-                {personalData.emailError}
-              </p>
-            )}
-          </div>
+
+
           {/* curp */}
           <div
             className={'col-span-12'}
@@ -347,6 +344,7 @@ export default function PersonalDataForm() {
               </p>
             )}
           </div>
+          
           {/* gender */}
           <div
             className={'col-span-12'}
@@ -379,6 +377,53 @@ export default function PersonalDataForm() {
               </p>
             )}
           </div>
+
+          {/* phone */}
+          <div
+            className={'col-span-12'}
+          >
+            <input
+              type="text"
+              className={`input input-border-gray ${personalData.phoneError ? 'input-error' : ''}`}
+              placeholder="Teléfono*"
+              value={personalData.phone}
+              name={'phone'}
+              onChange={handleInputChange}
+              ref={el => inputRefs.current.phone = el}
+            />
+            {/* error */}
+            {personalData.phoneError && (
+              <p
+                className={'text-red-500 text-xs mt-1 mx-3'}
+              >
+                {personalData.phoneError}
+              </p>
+            )}
+          </div>
+          
+          {/* email */}
+            <div
+            className={'col-span-12'}
+          >
+            <input
+              type="email"
+              className={`input input-border-gray ${personalData.emailError ? 'input-error' : ''}`}
+              placeholder="Correo electrónico*"
+              value={personalData.email}
+              name={'email'}
+              onChange={handleInputChange}
+              ref={el => inputRefs.current.email = el}
+            />
+            {/* error */}
+            {personalData.emailError && (
+              <p
+                className={'text-red-500 text-xs mt-1 mx-3'}
+              >
+                {personalData.emailError}
+              </p>
+            )}
+          </div>
+
           {/* occupation */}
           <div
             className={'col-span-12'}
@@ -420,6 +465,16 @@ export default function PersonalDataForm() {
               </option>
             </select>
           </div>
+
+          <div className="col-span-12 ">
+            <div className="mb-5">
+              <input type="radio" className="radio" /> INE
+            </div>
+            <div>
+              <input type="radio" className="radio" /> Pasaporte
+            </div>
+          </div>
+
           {/* oficial identification image (front) */}
           <div
             className={'col-span-12 lg:col-span-6'}
@@ -440,7 +495,7 @@ export default function PersonalDataForm() {
                   style={{verticalAlign: 'middle'}}
                 />
                 <Image
-                  src={'/img/grey-question-mark-icon.svg'}
+                  src={'/img/question-mark-icon.svg'}
                   alt={'¿Qué es esto?'}
                   width={20}
                   height={20}
@@ -467,7 +522,7 @@ export default function PersonalDataForm() {
               </p>
             )}
             {/* preview */}
-            <div
+            {/* <div
               className={'flex justify-center mt-2 md:mt-3'}
             >
               {personalData.idFrontPicture && (
@@ -478,7 +533,7 @@ export default function PersonalDataForm() {
                   height={200}
                 />
               )}
-            </div>
+            </div> */}
           </div>
           {/* oficial identification image (back) */}
           <div
@@ -500,7 +555,7 @@ export default function PersonalDataForm() {
                   style={{verticalAlign: 'middle'}}
                 />
                 <Image
-                  src={'/img/grey-question-mark-icon.svg'}
+                  src={'/img/question-mark-icon.svg'}
                   alt={'¿Qué es esto?'}
                   width={20}
                   height={20}
@@ -527,7 +582,7 @@ export default function PersonalDataForm() {
               </p>
             )}
             {/* preview */}
-            <div
+            {/* <div
               className={'flex justify-center mt-2 md:mt-3'}
             >
               {personalData.idBackPicture && (
@@ -538,13 +593,9 @@ export default function PersonalDataForm() {
                   height={200}
                 />
               )}
-            </div>
+            </div> */}
           </div>
-          <div
-            className={'col-span-12'}
-          >
-            <hr className={'my-2'}/>
-          </div>
+         
           {/* proof of address */}
           <div
             className={'col-span-12 md:col-span-6'}
@@ -565,7 +616,7 @@ export default function PersonalDataForm() {
                   style={{verticalAlign: 'middle'}}
                 />
                 <Image
-                  src={'/img/grey-question-mark-icon.svg'}
+                  src={'/img/question-mark-icon.svg'}
                   alt={'¿Qué es esto?'}
                   width={20}
                   height={20}
@@ -596,7 +647,7 @@ export default function PersonalDataForm() {
                   style={{verticalAlign: 'middle'}}
                 />
                 <Image
-                  src={'/img/grey-question-mark-icon.svg'}
+                  src={'/img/question-mark-icon.svg'}
                   alt={'¿Qué es esto?'}
                   width={20}
                   height={20}
@@ -607,71 +658,28 @@ export default function PersonalDataForm() {
               </div>
             </label>
           </div>
-
-          {/* date of birth */}
-          <div
-            className={'col-span-12'}
-          >
-            <div
-              className={'flex justify-between items-center mb-2'}
-            >
-              <label
-                htmlFor={`dateOfBirth`}
-                className={'flex-grow'}
-                style={{width: '200px'}}
-              >
-                Fecha de nacimiento*
-              </label>
-              <div className={`w-full`}>
-                <input
-                  id={'dateOfBirth'}
-                  type="date"
-                  className={`input input-border-gray ${personalData.dateOfBirthError ? 'input-error' : ''}`}
-                  placeholder="Fecha de nacimiento*"
-                  value={personalData.dateOfBirth}
-                  name={'dateOfBirth'}
-                  onChange={handleInputChange}
-                  ref={el => inputRefs.current.dateOfBirth = el}
-                />
-                {/* error */}
-                {personalData.dateOfBirthError && (
-                  <p
-                    className={'text-red-500 text-xs mt-1 mx-3'}
-                  >
-                    {personalData.dateOfBirthError}
-                  </p>
-                )}
-              </div>
-            </div>
+         
+          <div className={'col-span-12'}>
+            <p className={`text-base font-medium`}>
+              Campos Obligatorios*
+            </p>
           </div>
 
           {/* next */}
-          <div
-            className={'col-span-12 flex items-center'}
-          >
-            <p
-              className={`text-base text-gray-500 font-medium`}
-            >
-              Campos Obligatorios*
-            </p>
-
-            {!personalData.showShippingForm && (
-              <div
-                className={`ml-auto`}
-                style={{width: '150px'}}
-              >
-                <div className="button-container">
-                  <button
-                    className="button button-orange font-medium block w-full disabled:opacity-50"
-                    onClick={handleNextForm}
-                    disabled={!isValidForm}
-                  >
-                    Siguiente
-                  </button>
-                </div>
+          {/* TODO: NEGAR CONDITION showShippingForm*/}
+          {personalData.showShippingForm && (
+            <div className={`col-span-12`}>
+              <div className="button-container flex justify-center">
+                <button
+                  className="multi-border font-medium block disabled:opacity-50"
+                  onClick={handleNextForm}
+                  disabled={!isValidForm}
+                >
+                  Siguiente
+                </button>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

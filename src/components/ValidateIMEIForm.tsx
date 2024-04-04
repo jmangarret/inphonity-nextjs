@@ -262,7 +262,7 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({className, style}) =
         <div
           className="flex items-center py-2 gap-3"
         >
-          <div>
+          <div className="basis-3/4">
             <input
               type="text"
               className="input bg-white rounded-full outline-amber-500 transition duration-300 text-black font-light w-full"

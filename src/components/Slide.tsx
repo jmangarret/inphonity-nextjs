@@ -55,8 +55,17 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
 
   return (
     <div
-      className={`mx-3 p-3 sm:p-4 md:p-5 grid grid-cols-10 border border-white rounded-lg ${background || SlideBackground.TRANSPARENT}`}
+      className={`mx-3 p-3 sm:p-4 md:p-9 grid grid-cols-10 border border-white rounded-lg ${background || SlideBackground.TRANSPARENT}`}
     >
+      {hasPromo && (
+        <div className="absolute p-10 rounded-full text-center font-medium flex items-center justify-center promo">
+          <p>
+            <span className="text-black">PROMO POR PORTABILIDAD</span>
+            <br/>
+            <span className="text-[1.5rem] font-medium">+15<sup>GB</sup></span>
+          </p>
+        </div>
+      )}
       <div className="col-span-10 relative text-center mb-3 md:mb-4 ">
         <h3 className="text-5xl font-medium mb-3">
           {name}
@@ -94,59 +103,63 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
           )}
         </p>
       </div>
-      <div className="col-span-5 text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1">
-        <p className="text-xs mx-auto" style={{height: "2rem"}}>
-          <Image
-            src="/img/phone-circle-icon.svg"
-            alt="Teléfono"
-            width={20}
-            height={20}
-            className="inline w-4"
-            style={{verticalAlign: "middle"}}
-          />
-          {' '}
-          MINUTOS
-        </p>
-        <p className="font-medium text-2xl">
-          {minutes}
-        </p>
+      <div className="col-span-10 flex justify-between">
+        <div className="card-plan text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1">
+          <p className="text-xs mx-auto mb-2.5">
+            <Image
+              src="/img/phone-circle-icon.svg"
+              alt="Teléfono"
+              width={20}
+              height={20}
+              className="inline w-4"
+              style={{verticalAlign: "middle"}}
+            />
+            {' '}
+            MINUTOS
+          </p>
+          <p className="font-medium text-2xl">
+            {minutes}
+          </p>
+        </div>
+        <div className="card-plan text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1">
+          <p className="text-xs mx-auto mb-2.5">
+            <Image
+              src="/img/message-icon.svg"
+              alt="Mensaje"
+              width={20}
+              height={20}
+              className="inline w-4"
+              style={{verticalAlign: "middle"}}
+            />
+            {' '}
+            SMS
+          </p>
+          <p className="font-medium text-2xl">
+            {sms}
+          </p>
+        </div>
       </div>
-      <div className="col-span-5 text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1">
-        <p className="text-xs mx-auto" style={{height: "2rem"}}>
-          <Image
-            src="/img/message-icon.svg"
-            alt="Mensaje"
-            width={20}
-            height={20}
-            className="inline w-4"
-            style={{verticalAlign: "middle"}}
-          />
-          {' '}
-          SMS
-        </p>
-        <p className="font-medium text-2xl">
-          {sms}
-        </p>
+
+      <div className="col-span-10 flex justify-between">
+        <div className="card-plan text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1 flex flex-col">
+          <p className="text-xs mx-auto">
+            INGRESO POR REFERIDO
+          </p>
+          <p className="font-medium text-4xl">
+            {formatNumber(referralIncome)}%
+          </p>
+        </div>
+        <div className="card-plan text-center border border-white rounded-lg bg-card-2 p-3 m-1 flex flex-col">
+          <p className="text-xs mx-auto mb-2.5">
+            CASHBACK
+          </p>
+          <p className="font-medium text-4xl">
+            {formatNumber(cashback)}%
+          </p>
+        </div>
       </div>
-      <div className="col-span-5 text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1">
-        <p className="text-xs mx-auto" style={{height: "2.5rem"}}>
-          INGRESO POR REFERIDO
-        </p>
-        <p className="font-medium text-4xl">
-          {formatNumber(referralIncome)}%
-        </p>
-      </div>
-      <div className="col-span-5 text-center border border-white rounded-lg bg-black p-3 m-2" style={{backgroundColor: "#F79F1A"}}>
-        <p className="text-xs mx-auto"style={{height: "2.5rem"}}>
-          CASHBACK
-        </p>
-        <p className="font-medium text-4xl">
-          {formatNumber(cashback)}%
-        </p>
-      </div>
-      <div
-        className="col-span-10 text-center border border-white rounded-lg bg-black bg-opacity-50 p-3"
-      >
+
+      <div className="col-span-10 text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1">
         <p className="text-xs lg:text-base">
           PRECIO
         </p>

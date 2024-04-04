@@ -118,7 +118,7 @@ export default function ValidateCompatibility() {
                 borderClass={'border-col-2'}
               >
                 <p className={'font-light mb-4 text-base md:text-xl xl:text-2xl'}>
-                  Ingresa tu <strong className={'font-medium'}>código postal</strong> y revisa la <strong className={'font-medium'}>cobertura</strong>
+                  Ingresa tu <strong className={'font-medium'}>código postal</strong> y revisa la <strong className={'font-medium'}>cobertura </strong>
                   en tu zona
                 </p>
                 <ValidateCoverageForm />

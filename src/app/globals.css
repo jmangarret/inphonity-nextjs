@@ -417,21 +417,22 @@ swiper-container::part(bullet) {
   mask-composite: exclude;
 }
 .promo {
-  background-color: #F9A215;
+  background: url('/img/circle-promo.svg') transparent 50% / cover no-repeat;
   width: 80px;
   height: 80px;
   font-size: 0.6rem;
   top: -20px;
-  right: -7px;
+  right: 7px;
   z-index: 1992;
+  box-shadow: -1px 6px 6px 0px #00000040;
 }
 @media screen and (min-width: 640px) {
   .promo {
     width: 100px;
     height: 100px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     top: -40px;
-    right: -40px;
+    right: 20px;
   }
 }
 .bg-promo-blue {
@@ -791,6 +792,11 @@ body{
   height: auto;
 }
 
+.bg-luces{
+  background: url('/img/bg-luces.png') #000 50% / cover no-repeat;
+  width: auto;
+  height: auto;
+}
 
 .icon-instagram{
   width: 33.153px;
@@ -821,4 +827,21 @@ body{
 .border-col-4{
   background: linear-gradient(90deg, gray 0%, #000 100%);
   border: 2px solid #EB522D;
+}
+
+.card-plan{
+  width: 9rem;
+  height: 6.25rem;
+}
+
+.bg-card-2{
+  background-color: #F79F1A;
+}
+
+.card-height{
+  height: "2.5rem"
+}
+
+.help-green{
+  color: #27E1C1;
 }
