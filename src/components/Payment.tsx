@@ -5,9 +5,10 @@ type PaymentProps = {
   title?: string;
   description: string;
   image: string;
+  action?: React.ReactNode;
 }
 
-const Payment: React.FC<PaymentProps> = ({title, description, image}) => {
+const Payment: React.FC<PaymentProps> = ({title, description, image, action}) => {
   return (
     <div className="flex flex-col items-center">
       <div
@@ -34,6 +35,7 @@ const Payment: React.FC<PaymentProps> = ({title, description, image}) => {
         className="text-center lg:text-xl mt-2"
       >
         {description}
+        {action}
       </p>
     </div>
   );

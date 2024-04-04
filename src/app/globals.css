@@ -791,6 +791,12 @@ body{
   height: auto;
 }
 
+.bg-luces{
+  background: url('/img/bg-luces.png') #000 50% / cover no-repeat;
+  width: auto;
+  height: auto;
+}
+
 
 .icon-instagram{
   width: 33.153px;

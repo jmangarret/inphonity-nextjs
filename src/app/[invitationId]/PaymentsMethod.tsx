@@ -1,7 +1,39 @@
+"use client";
+
+import React from "react";
 import Payment from "@/components/Payment";
+import { ModalContext } from "@/contexts/ModalContext";
+import Image from "next/image";
+import { Span } from "next/dist/trace";
 // import PlusDecoration from "@/components/PlusDecoration";
 
 export default function PaymentsSection() {
+  const ctxModal = React.useContext(ModalContext);
+
+  const HeaderTiendasAfiliadas = () =>{
+    return (
+      <div className="font-medium text-center">
+        Tiendas <span className="text-highlight">Afiliadas</span>
+      </div>
+    )
+  }
+  const ContenTiendasAfiliadas = () => {
+    return (
+      <div className="bg-black bg-luces">
+        <Image
+          src="/img/tiendas-afiliadas.png"
+          alt="Tiendas Afiliadas"
+          width={354}
+          height={1570}
+        />
+      </div>
+    )
+  }
+
+  const handleInfo = ()=>{
+    ctxModal.openModal(<ContenTiendasAfiliadas />,<HeaderTiendasAfiliadas />);
+  }
+
   return (
     <section className="container mx-auto mb-10 md:mb-16 lg:mb-20 xl:mb-24">
       <div className="grid grid-cols-10 md:mb-5 lg:mb-10 xl:mb-15">
@@ -37,8 +69,17 @@ export default function PaymentsSection() {
         >
           <Payment
             title="Pago con efectivo"
-            description="Conoce nuestros establecimientos afiliados en donde puedes pagar tu plan en efectivo"
+            description="Conoce nuestros establecimientos afiliados en donde puedes pagar tu plan en efectivo "
             image="/img/efectivo-icon.svg"
+            action={<button onClick={handleInfo}> 
+              <Image
+                src="/img/info-ico.svg"
+                alt="info check"
+                width={20}
+                height={20}
+                className="inline"
+              />
+            </button>}
           />
         </div>
         <div

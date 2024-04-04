@@ -10,11 +10,11 @@ type ModalProviderProps = {
 const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState<ReactNode>(null);
-  const [header, setHeader] = useState('');
+  const [header, setHeader] = useState<ReactNode>('');
   const [fullScreen, setFullScreen] = useState<boolean>(false);
   const [resolveFn, setResolveFn] = useState<(() => void) | null>(null);
 
-  const openModal = (content: ReactNode, header?: string, fullScreen?: boolean): Promise<void> => {
+  const openModal = (content: ReactNode, header?: string|ReactNode, fullScreen?: boolean): Promise<void> => {
     return new Promise((resolve) => {
       setContent(content);
       setHeader(header || '');

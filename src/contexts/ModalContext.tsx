@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 
 interface ModalContextProps {
-  openModal: (content: ReactNode, header?: string, fullScreen?: boolean) => Promise<void>;
+  openModal: (content: ReactNode, header?: string | ReactNode, fullScreen?: boolean) => Promise<void>;
   closeModal?: () => void;
 }
 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, ReactNode, CSSProperties } from 'react';
 import Image from "next/image";
 
 interface ModalProps {
-  header?: string;
+  header?: string|ReactNode;
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
@@ -41,9 +41,9 @@ const Modal: React.FC<ModalProps> = ({header, children, className, style, fullSc
         className="modal-content relative"
       >
         <div
-          className={`modal-header flex justify-between items-center bg-black text-white p-2 md:p-3 ${!fullScreen ? 'rounded-t-md' : ''}`}
+          className={`w-full modal-header flex justify-between items-center bg-black text-white p-2 md:p-3 ${!fullScreen ? 'rounded-t-md' : ''}`}
         >
-          <h2>{header}</h2>
+          <h2 className='w-full'>{header}</h2>
           <button onClick={onClose} className="focus:outline-none">
             <Image
               src={`/img/close-modal-icon.svg`}
@@ -54,7 +54,7 @@ const Modal: React.FC<ModalProps> = ({header, children, className, style, fullSc
           </button>
         </div>
         <div
-          className="modal-content bg-white rounded-b-md"
+          className="max-h-[90vh] overflow-auto modal-content bg-white rounded-b-md"
         >
           {children}
         </div>
