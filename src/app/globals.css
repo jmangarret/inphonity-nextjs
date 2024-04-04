@@ -841,3 +841,7 @@ body{
 .card-height{
   height: "2.5rem"
 }
+
+.help-green{
+  color: #27E1C1;
+}
