@@ -12,7 +12,7 @@ const Sliders = () => {
     {
       id: 1,
       name: 'Ready',
-      hasPromo: true,
+      hasPromo: false,
       background: SlideBackground.CUSTOM,
       mobileData: '3GB',
       sharedData: true,
@@ -54,7 +54,7 @@ const Sliders = () => {
     {
       id: 3,
       name: 'Pro',
-      hasPromo: true,
+      hasPromo: false,
       background: SlideBackground.ORANGE, // Cambiado a un color disponible en el enum
       mobileData: '15GB',
       sharedData: true,
@@ -75,7 +75,7 @@ const Sliders = () => {
     {
       id: 4,
       name: 'Ultra',
-      hasPromo: true,
+      hasPromo: false,
       background: SlideBackground.BLUE,
       mobileData: '40GB',
       sharedData: false,
@@ -96,7 +96,7 @@ const Sliders = () => {
     {
       id: 5,
       name: 'Elite',
-      hasPromo: true,
+      hasPromo: false,
       background: SlideBackground.CUSTOM,
       mobileData: '100GB',
       sharedData: true,

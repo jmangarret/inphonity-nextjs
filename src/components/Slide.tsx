@@ -57,6 +57,15 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
     <div
       className={`mx-3 p-3 sm:p-4 md:p-9 grid grid-cols-10 border border-white rounded-lg ${background || SlideBackground.TRANSPARENT}`}
     >
+      {hasPromo && (
+        <div className="absolute p-10 rounded-full text-center font-medium flex items-center justify-center promo">
+          <p>
+            <span className="text-black">PROMO POR PORTABILIDAD</span>
+            <br/>
+            <span className="text-[1.5rem] font-medium">+15<sup>GB</sup></span>
+          </p>
+        </div>
+      )}
       <div className="col-span-10 relative text-center mb-3 md:mb-4 ">
         <h3 className="text-5xl font-medium mb-3">
           {name}
