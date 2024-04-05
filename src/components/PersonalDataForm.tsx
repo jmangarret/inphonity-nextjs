@@ -23,8 +23,6 @@ export default function PersonalDataForm() {
   const personalData = useAppSelector((state) => state.personalData);
   const fieldsOrder: (keyof typeof personalData)[] = useMemo(() => [
     'name',
-    'lastName',
-    'secondLastName',
     'phone',
     'email',
     'curp',
@@ -50,12 +48,6 @@ export default function PersonalDataForm() {
     switch (name) {
       case 'name':
         dispatch(setName(value));
-        break;
-      case 'lastName':
-        dispatch(setLastName(value));
-        break;
-      case 'secondLastName':
-        dispatch(setSecondLastName(value));
         break;
       case 'phone':
         dispatch(setPhone(value));
@@ -239,58 +231,9 @@ export default function PersonalDataForm() {
           </div>
           {/* name */}
 
-          {/* last name */}
-          {/* <div
-            className={'col-span-12 lg:col-span-4'}
-          >
-            <input
-              type="text"
-              className={`input input-border-gray ${personalData.lastNameError ? 'input-error' : ''}`}
-              placeholder="Apellido paterno*"
-              value={personalData.lastName}
-              name={'lastName'}
-              onChange={handleInputChange}
-              ref={el => inputRefs.current.lastName = el}
-            />
-            {/* error */}
-            {/* {personalData.lastNameError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
-              >
-                {personalData.lastNameError}
-              </p>
-            )} 
-            </div> */}
-          {/* second last name */}
-          {/* <div
-            className={'col-span-12 lg:col-span-4'}
-          >
-            <input
-              type="text"
-              className={`input input-border-gray ${personalData.secondLastNameError ? 'input-error' : ''}`}
-              placeholder="Apellido materno*"
-              value={personalData.secondLastName}
-              name={'secondLastName'}
-              onChange={handleInputChange}
-              ref={el => inputRefs.current.secondLastName = el}
-            />
-            {/* error */}
-            {/* {personalData.secondLastNameError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
-              >
-                {personalData.secondLastNameError}
-              </p>
-            )} 
-            </div> */}
-
            {/* date of birth */}
-           <div
-            className={'col-span-12'}
-          >
-            <div
-              className={'flex justify-between items-center mb-2'}
-            >
+           <div className={'col-span-12'}>
+            <div className={'flex justify-between items-center mb-2'}>
               {/* <label
                 htmlFor={`dateOfBirth`}
                 className={'flex-grow'}
@@ -660,22 +603,21 @@ export default function PersonalDataForm() {
           </div>
          
           <div className={'col-span-12'}>
-            <p className={`text-base font-medium`}>
+            <p className={`text-base text-white font-medium`}>
               Campos Obligatorios*
             </p>
           </div>
 
           {/* next */}
-          {/* TODO: NEGAR CONDITION showShippingForm*/}
-          {personalData.showShippingForm && (
+          {!personalData.showShippingForm && (
             <div className={`col-span-12`}>
               <div className="button-container flex justify-center">
                 <button
-                  className="multi-border font-medium block disabled:opacity-50"
+                  className="btn-xl multi-border font-medium text-white disabled:opacity-50"
                   onClick={handleNextForm}
                   disabled={!isValidForm}
                 >
-                  Siguiente
+                  SIGUIENTE
                 </button>
               </div>
             </div>

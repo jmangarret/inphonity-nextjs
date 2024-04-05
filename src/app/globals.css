@@ -494,6 +494,8 @@ swiper-container::part(bullet) {
   border-radius: 50px;
   border-color: rgba(0, 0, 0, 0);
   border-width: 1px;
+}
+.btn-xl{
   width: 18.5rem;
   height: 3.125rem;
 }

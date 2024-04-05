@@ -55,8 +55,8 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
           >
             {isLoading || isFetching ? (
               <div
-                className="font-medium text-2xl sm:text-3xl lg:text-5xl xl:text-8xl bg-gray-300 animate-pulse h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10 mb-3 w-3/4 inline-block"
-                style={{ verticalAlign: "middle" }}
+                className="font-medium text-6xl sm:text-7xl lg:text-8xl xl:text-9xl bg-gray-300 animate-pulse h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10 mb-3 w-3/4 inline-block"
+                style={{verticalAlign: "middle"}}
               ></div>
             ) : (
               data && (
