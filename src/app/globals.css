@@ -359,6 +359,15 @@ swiper-container::part(bullet) {
   }
 }
 
+.multi-border-white {
+  padding: 12px 35px;
+  border-radius: 50px;
+  border: 1px solid;
+  border-color: #FFF;
+  width: 18.5rem;
+  height: 3.125rem;
+  font-size: 1rem;
+}
 .multi-border {
   position: relative;
   padding: 12px 35px;
@@ -369,6 +378,8 @@ swiper-container::part(bullet) {
   border-radius: 50px; 
   border-color: rgba(0, 0, 0, 0);
   border-width: 1px;
+  width: 18.5rem;
+  height: 3.125rem;
 }
 .multi-border::before {
   content: "";
@@ -400,13 +411,6 @@ swiper-container::part(bullet) {
   border-radius: 15px;
   display: inline-block;
   margin: 75px 0;
-}
-
-.multi-border-white {
-  padding: 6px 35px;
-  border-radius: 50px;
-  border: 1px solid;
-  border-color: #FFF;
 }
 
 .multi-border:active {
@@ -836,10 +840,6 @@ body{
 
 .bg-card-2{
   background-color: #F79F1A;
-}
-
-.card-height{
-  height: "2.5rem"
 }
 
 .help-green{

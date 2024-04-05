@@ -55,10 +55,10 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
 
   return (
     <div
-      className={`mx-3 p-3 sm:p-4 md:p-9 grid grid-cols-10 border border-white rounded-lg ${background || SlideBackground.TRANSPARENT}`}
+      className={`mx-3 p-3 sm:p-4 md:p-9 grid grid-cols-10 border border-white rounded-[1.25rem] ${background || SlideBackground.TRANSPARENT}`}
     >
       {hasPromo && (
-        <div className="absolute p-10 rounded-full text-center font-medium flex items-center justify-center promo">
+        <div className="absolute p-10 rounded-[1.25rem]-full text-center font-medium flex items-center justify-center promo">
           <p>
             <span className="text-black">PROMO POR PORTABILIDAD</span>
             <br/>
@@ -67,10 +67,10 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
         </div>
       )}
       <div className="col-span-10 relative text-center mb-3 md:mb-4 ">
-        <h3 className="text-5xl font-medium mb-3">
+        <h3 className="text-4xl font-medium mb-3">
           {name}
         </h3>
-        <h3 className="text-5xl font-medium mb-3">
+        <h3 className="text-6xl font-medium mb-3">
           {mobileData}
         </h3>
         <p className="font-medium text-sm">
@@ -104,7 +104,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
         </p>
       </div>
       <div className="col-span-10 flex justify-between">
-        <div className="card-plan text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1">
+        <div className="card-plan text-center border border-white rounded-[1.25rem] bg-black bg-opacity-50 p-3 m-1">
           <p className="text-xs mx-auto mb-2.5">
             <Image
               src="/img/phone-circle-icon.svg"
@@ -121,7 +121,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
             {minutes}
           </p>
         </div>
-        <div className="card-plan text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1">
+        <div className="card-plan text-center border border-white rounded-[1.25rem] bg-black bg-opacity-50 p-3 m-1">
           <p className="text-xs mx-auto mb-2.5">
             <Image
               src="/img/message-icon.svg"
@@ -141,7 +141,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
       </div>
 
       <div className="col-span-10 flex justify-between">
-        <div className="card-plan text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1 flex flex-col">
+        <div className="card-plan text-center border border-white rounded-[1.25rem] bg-black bg-opacity-50 p-3 m-1 flex flex-col">
           <p className="text-xs mx-auto">
             INGRESO POR REFERIDO
           </p>
@@ -149,7 +149,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
             {formatNumber(referralIncome)}%
           </p>
         </div>
-        <div className="card-plan text-center border border-white rounded-lg bg-card-2 p-3 m-1 flex flex-col">
+        <div className="card-plan text-center border border-white rounded-[1.25rem] bg-card-2 p-3 m-1 flex flex-col">
           <p className="text-xs mx-auto mb-2.5">
             CASHBACK
           </p>
@@ -159,7 +159,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
         </div>
       </div>
 
-      <div className="col-span-10 text-center border border-white rounded-lg bg-black bg-opacity-50 p-3 m-1">
+      <div className="col-span-10 text-center border border-white rounded-[1.25rem] bg-black bg-opacity-50 p-3 m-1">
         <p className="text-xs lg:text-base">
           PRECIO
         </p>
