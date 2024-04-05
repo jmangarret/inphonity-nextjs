@@ -149,7 +149,7 @@ export default function ShippingForm() {
   }
 
   return (
-    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-3 md:mb-6 lg:mb-9 xl:mb-12'}>
+    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-6'}>
       {/* header */}
       <header>
         <h3 className={'font-medium text-white text-center text-3xl sm:text-5xl mb-1 sm:mb-3'}>
@@ -394,43 +394,40 @@ export default function ShippingForm() {
               )}
             </div>
 
-            <div
-              className={'col-span-12'}
-            >
+            <div className={'col-span-12 flex justify-between'}>
               <div className="flex items-center text-white mb-2 ml-2">
                 <input
                   type="checkbox"
                   id={'myAddressAreEqual'}
-                  className="form-checkbox black h-5 w-5 text-green-500"
+                  className="form-checkbox green-check h-5 w-5 text-green-500"
                   name={'myAddressAreEqual'}
                   onChange={handleMyAddressAreEqualChange}
                 />
                 <label htmlFor={'myAddressAreEqual'}>
-                  <span className={`ml-2 inline-block font-medium text-white`}>Mi dirección de envío y facturación son iguales</span>
+                  <span className={`ml-2 inline-block text-base text-white`}>Mi dirección de envío y facturación son iguales</span>
                 </label>
+              </div>
+              <div>
+                <span className={`text-base text-white font-medium`}>
+                  Campos Obligatorios*
+                </span>
               </div>
             </div>
 
             {/* next */}
-            <div className={'col-span-12'}>
-              <p className={`text-base text-white font-medium`}>
-                Campos Obligatorios*
-              </p>
-
-              {!shipping.showTaxDataForm && (
-                <div className={`col-span-12`}>
-                  <div className="button-container flex justify-center">
-                    <button
-                      className="btn-xl multi-border font-medium text-white disabled:opacity-50"
-                      onClick={handleNextForm}
-                      disabled={!isValidForm}
-                    >
-                      SIGUIENTE
-                    </button>
-                  </div>
+            {!shipping.showTaxDataForm && (
+              <div className={`col-span-12`}>
+                <div className="button-container flex justify-center">
+                  <button
+                    className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                    onClick={handleNextForm}
+                    disabled={!isValidForm}
+                  >
+                    SIGUIENTE
+                  </button>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
     </div>

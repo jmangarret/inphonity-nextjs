@@ -1018,3 +1018,9 @@ body {
 .help-green {
   color: #27E1C1;
 }
+
+.green-check{
+  border-radius: 0px !important;
+  border: #27E1C1 solid 2px !important;
+  background-color: black !important;
+}
