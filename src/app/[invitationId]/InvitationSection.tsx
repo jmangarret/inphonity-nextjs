@@ -52,12 +52,8 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
   };
 
   return (
-    <section
-      className="container mx-auto p-3 sm:p-6 md:p-8 lg:p-10 xl:p-12"
-    >
-      <div
-        className="container mx-auto"
-      >
+    <section className="container mx-auto p-3 sm:p-6 md:p-8">
+      <div className="container mx-auto">
         <div className="grid grid-cols-12 gap-3 text-center">
           {/* plus decoration */}
           {/* <div className="hidden md:block md:col-span-1 relative">
@@ -67,10 +63,8 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
             />
           </div> */}
           <div className={`col-span-12 md:col-span-12`}>
-            <h2
-              className="text-2xl sm:text-3xl lg:text-5xl mb-8 sm:mb-12 md:mb-16 lg:mb-20 text-center mt-6 lg:mt-8 xl:mt-10"
-            >
-              Haz realidad todo lo que <span className="font-medium text-highlight">siempre imaginaste</span>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl mb-8 sm:mb-12 md:mb-16 lg:mb-20 text-center mt-6 lg:mt-8 xl:mt-10">
+              Haz realidad todo lo que <div className="font-medium text-highlight">siempre imaginaste</div>
             </h2>
           </div>
           {/* plus decoration */}
