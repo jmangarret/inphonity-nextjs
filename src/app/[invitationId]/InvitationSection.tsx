@@ -106,7 +106,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
           <div className="col-span-12 sm:col-span-0 md:col-span-0 lg:col-span-2"></div>
           <div className="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4">
             <div className="button-container w-4/5 lg:w-72 mx-auto">
-              <button className="multi-border font-medium block w-full"
+              <button className="btn-xl multi-border font-medium block w-full"
                 onClick={handleReject}
                 disabled={isRejectingInvitation}
               >
@@ -116,7 +116,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
           </div>
           <div className="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4">
             <div className="button-container w-4/5 lg:w-72 mx-auto mb-6">
-              <button className="multi-border font-medium block w-full"
+              <button className="btn-xl multi-border font-medium block w-full"
                 onClick={handleAccept}
               >
                 ACEPTAR INVITACIÓN
