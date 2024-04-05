@@ -7,10 +7,8 @@ import {
   setStreet,
   setExteriorNumber,
   setInteriorNumber,
-  setEmail,
   setNeighborhood,
   setZipCode,
-  setTaxZipCode,
   setState,
   setMunicipality,
   setShowAccountDataForm,
@@ -19,6 +17,7 @@ import Image from "next/image";
 
 export default function TaxDataForm() {
   const dispatch = useAppDispatch();
+  const [myAddressAreEqual, setMyAddressAreEqual] = React.useState(false);
   const [dontHaveTaxData, setDontHaveTaxData] = React.useState(false);
   const taxData = useAppSelector((state) => state.taxData);
   const fieldsOrder: (keyof typeof taxData)[] = useMemo(() => [
@@ -26,10 +25,8 @@ export default function TaxDataForm() {
     "name",
     "street",
     "exteriorNumber",
-    "email",
     "neighborhood",
     "zipCode",
-    "taxZipCode",
     "state",
     "municipality",
   ], []);
@@ -54,10 +51,8 @@ export default function TaxDataForm() {
     taxData.streetError,
     taxData.exteriorNumberError,
     taxData.interiorNumberError,
-    taxData.emailError,
     taxData.neighborhoodError,
     taxData.zipCodeError,
-    taxData.taxZipCodeError,
     taxData.stateError,
     taxData.municipalityError,
   ]);
@@ -81,17 +76,11 @@ export default function TaxDataForm() {
       case "interiorNumber":
         dispatch(setInteriorNumber(value));
         break;
-      case "email":
-        dispatch(setEmail(value));
-        break;
       case "neighborhood":
         dispatch(setNeighborhood(value));
         break;
       case "zipCode":
         dispatch(setZipCode(value));
-        break;
-      case "taxZipCode":
-        dispatch(setTaxZipCode(value));
         break;
       case "state":
         dispatch(setState(value));
@@ -101,7 +90,18 @@ export default function TaxDataForm() {
         break;
     }
   }
+  const handleMyAddressAreEqualChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMyAddressAreEqual(e.target.checked);
 
+    // fill tax data form with shipping data
+    if (e.target.checked) {
+      //updateTaxAddressData();
+
+      return;
+    }
+
+    //emptyTaxAddressData();
+  }
   const handleNextForm = () => {
     dispatch(setShowAccountDataForm(true));
   }
@@ -111,68 +111,28 @@ export default function TaxDataForm() {
       className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-3 md:mb-6 lg:mb-9 xl:mb-12'}
     >
       {/* header */}
-      <header
-        className={'mb-4 md:mb-8 lg:mb-12 xl:mb-16 '}
-      >
-        <h3
-          className={'font-medium text-3xl sm:text-5xl mb-3 sm:mb-6 lg:ml-12'}
-          style={{color: '#F79F1A'}}
-        >
-          <Image
-            src={`/img/orange-isotipo.svg`}
-            alt={`inphonity isotipo`}
-            width={40}
-            height={40}
-            className={`inline-block mr-2 w-7 h-7 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14`}
-            style={{verticalAlign: 'middle'}}
-          />
-          Llena tus datos fiscales
+      <header>
+        <h3 className={'font-medium text-white text-center text-3xl sm:text-5xl mb-3 sm:mb-6 lg:ml-12'}>
+          Llena tus datos <span className="text-highlight">fiscales</span>
         </h3>
-
-        <div className="flex items-center text-white mb-2 lg:ml-12">
-          <input
-            type="checkbox"
-            id={'dontHaveTaxData'}
-            className="form-checkbox black h-5 w-5 text-green-500"
-            name={'dontHaveTaxData'}
-            onChange={() => setDontHaveTaxData(!dontHaveTaxData)}
-          />
-          <label htmlFor={`dontHaveTaxData`}>
-            <span className={`ml-2 inline-block font-medium text-black`}>No tengo mi información fiscal a la mano o actualizada</span>
-          </label>
-        </div>
       </header>
 
       {/* form */}
-      <div
-        className={'lg:container mx-auto w-full'}
-      >
-        <div
-          className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 bg-white w-full mx-auto mt-4 md:mt-8 lg:mt-12 xl:mt-16 p-6 md:p-8 lg:p-10 xl:p-12'}
-        >
-          {/* rfc */}
-          <div
-            className={'col-span-12'}
-          >
+      <div className={'lg:container mx-auto w-full'}>
+        <div className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 w-full mx-auto p-6 md:p-8 lg:p-10 xl:p-12'}>
+          <div className="col-span-12 flex items-center text-white mb-2">
             <input
-              type="text"
-              className={`input input-border-gray ${taxData.rfcError ? 'input-error' : ''}`}
-              placeholder={`RFC*`}
-              value={taxData.rfc}
-              name={'rfc'}
-              onChange={handleInputChange}
-              ref={el => inputRefs.current.rfc = el}
+              type="checkbox"
+              id={'dontHaveTaxData'}
+              className="form-checkbox green-check h-5 w-5 text-green-500"
+              name={'dontHaveTaxData'}
+              onChange={() => setDontHaveTaxData(!dontHaveTaxData)}
             />
-            {/* error */}
-            {taxData.rfcError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
-              >
-                {taxData.rfcError}
-              </p>
-            )}
+            <label htmlFor={`dontHaveTaxData`}>
+              <span className={`ml-2 inline-block text-white`}>No tengo mi información fiscal a la mano o actualizada</span>
+            </label>
           </div>
-
+         
           {/* name */}
           <div
             className={'col-span-12'}
@@ -195,6 +155,28 @@ export default function TaxDataForm() {
               </p>
             )}
           </div>
+
+           {/* rfc */}
+           <div className={'col-span-12'}>
+            <input
+              type="text"
+              className={`input input-border-gray ${taxData.rfcError ? 'input-error' : ''}`}
+              placeholder={`RFC*`}
+              value={taxData.rfc}
+              name={'rfc'}
+              onChange={handleInputChange}
+              ref={el => inputRefs.current.rfc = el}
+            />
+            {/* error */}
+            {taxData.rfcError && (
+              <p
+                className={'text-red-500 text-xs mt-1 mx-3'}
+              >
+                {taxData.rfcError}
+              </p>
+            )}
+          </div>
+
 
           {/* street */}
           <div
@@ -265,54 +247,8 @@ export default function TaxDataForm() {
             )}
           </div>
 
-          {/* email */}
-          <div
-            className={'col-span-12 md:col-span-6'}
-          >
-            <input
-              type="text"
-              className={`input input-border-gray ${taxData.emailError ? 'input-error' : ''}`}
-              placeholder={`Correo Electrónico*`}
-              value={taxData.email}
-              name={`email`}
-              onChange={handleInputChange}
-              ref={el => inputRefs.current.email = el}
-            />
-            {/* error */}
-            {taxData.emailError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
-              >
-                {taxData.emailError}
-              </p>
-            )}
-          </div>
-
-          {/* neighborhood */}
-          <div
-            className={'col-span-12 md:col-span-6'}
-          >
-            <input
-              type="text"
-              className={`input input-border-gray ${taxData.neighborhoodError ? 'input-error' : ''}`}
-              placeholder={`Colonia*`}
-              value={taxData.neighborhood}
-              name={`neighborhood`}
-              onChange={handleInputChange}
-              ref={el => inputRefs.current.neighborhood = el}
-            />
-            {/* error */}
-            {taxData.neighborhoodError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
-              >
-                {taxData.neighborhoodError}
-              </p>
-            )}
-          </div>
-
-          {/* zip code */}
-          <div
+           {/* zip code */}
+           <div
             className={'col-span-6'}
           >
             <input
@@ -334,33 +270,29 @@ export default function TaxDataForm() {
             )}
           </div>
 
-          {/* tax zip code */}
-          <div
-            className={'col-span-6'}
-          >
+          {/* neighborhood */}
+          <div className={'col-span-6'}>
             <input
               type="text"
-              className={`input input-border-gray ${taxData.taxZipCodeError ? 'input-error' : ''}`}
-              placeholder={`Código Postal Fiscal*`}
-              value={taxData.taxZipCode}
-              name={`taxZipCode`}
+              className={`input input-border-gray ${taxData.neighborhoodError ? 'input-error' : ''}`}
+              placeholder={`Colonia*`}
+              value={taxData.neighborhood}
+              name={`neighborhood`}
               onChange={handleInputChange}
-              ref={el => inputRefs.current.taxZipCode = el}
+              ref={el => inputRefs.current.neighborhood = el}
             />
             {/* error */}
-            {taxData.taxZipCodeError && (
+            {taxData.neighborhoodError && (
               <p
                 className={'text-red-500 text-xs mt-1 mx-3'}
               >
-                {taxData.taxZipCodeError}
+                {taxData.neighborhoodError}
               </p>
             )}
           </div>
 
           {/* state */}
-          <div
-            className={'col-span-12'}
-          >
+          <div className={'col-span-6'}>
             <input
               type="text"
               className={`input input-border-gray ${taxData.stateError ? 'input-error' : ''}`}
@@ -382,7 +314,7 @@ export default function TaxDataForm() {
 
           {/* municipality */}
           <div
-            className={'col-span-12'}
+            className={'col-span-6'}
           >
             <input
               type="text"
@@ -403,33 +335,40 @@ export default function TaxDataForm() {
             )}
           </div>
 
-          {/* next */}
-          <div
-            className={'col-span-12 flex items-center'}
-          >
-            <p
-              className={`text-base text-gray-500 font-medium`}
-            >
-              Campos Obligatorios*
-            </p>
-
-            {!taxData.showAccountDataForm && (
-              <div
-                className={`ml-auto`}
-                style={{width: '150px'}}
-              >
-                <div className="button-container">
-                  <button
-                    className="button button-orange font-medium block w-full disabled:opacity-50"
-                    onClick={handleNextForm}
-                    disabled={!isValidForm && !dontHaveTaxData}
-                  >
-                    Siguiente
-                  </button>
-                </div>
+          <div className={'col-span-12 flex justify-between'}>
+              <div className="flex items-center text-white mb-2 ml-2">
+                <input
+                  type="checkbox"
+                  id={'myAddressAreEqual'}
+                  className="form-checkbox green-check h-5 w-5 text-green-500"
+                  name={'myAddressAreEqual'}
+                  onChange={handleMyAddressAreEqualChange}
+                />
+                <label htmlFor={'myAddressAreEqual'}>
+                  <span className={`ml-2 inline-block text-white`}>Mi dirección de envío y facturación son iguales</span>
+                </label>
               </div>
-            )}
+              <div>
+                <span className={`text-base text-white font-medium`}>
+                  Campos Obligatorios*
+                </span>
+              </div>
           </div>
+
+          {/* next */}
+          {!taxData.showAccountDataForm && (
+            <div className={`col-span-12`}>
+              <div className="button-container flex justify-center">
+                <button
+                  className="btn-xl multi-border text-white font-medium block disabled:opacity-50"
+                  onClick={handleNextForm}
+                  disabled={!isValidForm && !dontHaveTaxData}
+                >
+                  Siguiente
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

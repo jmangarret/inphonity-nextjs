@@ -6,11 +6,18 @@ import React from "react";
 export default function Canceled() {
   return (
     <div>
-      <Header />
-      <main className={`text-center bg-orange-gradient`}>
-        <div
-          className={`p-9 md:p-24 lg:w-3/4 mx-auto`}
-        >
+      <main className={`text-center bg-black bg_mensaje_rechazada`}>
+        <div className={`p-9 lg:w-3/4 mx-auto`}>
+          <Image
+            src="/logo.svg"
+            alt="Logotipo de Inphonity"
+            width={156.13}
+            height={27.01}
+            priority
+            className={`mx-auto`}
+          />
+        </div>
+        <div className={`p-9 md:p-24 lg:w-3/4 mx-auto`}>
           <h1
             className={`text-4xl md:text-6xl font-bold mb-8 md:mb-12 font-medium`}
           >
@@ -26,20 +33,24 @@ export default function Canceled() {
           />
 
           <p
-            className={`text-center text-2xl md:text-3xl mb-6 md:mb-10 lg:mb-14 font-light`}
+            className={`text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl text-center mb-6 md:mb-10 lg:mb-14 font-light`}
           >
             ¡Si estás listo para <span className={`font-medium`}>unirte a inphonity</span>!, pide <span className={`font-medium`}>una</span>
-            <br/>
-            <span className={`font-medium`}>nueva invitación</span> a la persona que te contactó
-            <br/>
-            y empieza a tener <span className={`font-medium`}>más de lo que te imaginas.</span>
-            <br/>
-            <br/>
-            <span className={`font-medium`}>1/8</span>
+            <span className={`font-medium`}>nueva invitación</span> a la persona <br />
+            que te contactó y empieza a tener <span className={`font-medium`}>más de lo que te imaginas.</span>
+            <br />
+            <br />
           </p>
+          <div className="col-span-12 md:col-span-4">
+            <div className="button-container text-center lg:w-72 mx-auto flex justify-center">
+              <a className={`btn-width multi-border font-medium block pointer`} href={`https://inphonity.com/`}>
+                REGRESAR AL SITIO
+              </a>
+            </div>
+          </div>
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

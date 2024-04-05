@@ -77,21 +77,23 @@ export default function RegisterForms({invitationId}: { invitationId: string }) 
                 style={{top: '36%'}}
               />
             </div>
-            <div className="col-span-12 md:col-span-10 text-black font-medium">
+            <div className="col-span-12 md:col-span-10 mb-20">
               {/* notice */}
-              <div className="bg-black text-white rounded-3xl p-5 m-3 text-center mb-10">
-                <h3 className={`text-highlight text-3xl md:text-6xl mb-6`}>
+              <div className="text-white m-3 text-center font-medium">
+                <h3 className={`text-highlight text-3xl`}>
                   Aviso importante
                 </h3>
-                <p className={`text-base mb-3`}>
+              </div>
+              <div className="lg:container bg-white p-8 text-black rounded-md mx-auto w-[90%] lg:w-[80%]">
+                <p className={`text-base leading-none`}>
+                  <span className="font-medium">Importante: </span>
                   Es necesario que tengas RFC con homoclave para que podamos realizar los pagos de tu cashback. Si aún
-                  no lo
-                  tienes, cuentas con 90 días naturales para tramitarlo, de lo contrario no podrás seguir recibiendo el
+                  no lo tienes, cuentas con 90 días naturales para tramitarlo, de lo contrario no podrás seguir recibiendo el
                   beneficio de cashback.
                 </p>
-                <p className={`text-base`}>
+                <p className={`text-base leading-none`}>
                   También es necesario que cuentes con tu Constancia de Situación Fiscal actualizada y que se encuentre
-                  dentro del régimen de Asimilados al Salario
+                  dentro del régimen de Asimilados al Salario.
                 </p>
               </div>
             </div>

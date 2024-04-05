@@ -52,8 +52,7 @@ const HeroVideo = ({ newVideoUrl }: { newVideoUrl: string | null }) => {
         <div className="w-full">
           <video controls={true} poster="/img/hero-video-poster.webp" >
             <source src="https://inphonity-assets.s3.us-east-2.amazonaws.com/hero-video-720p.mp4" type="video/mp4" />
-
-            </video>
+          </video>
         </div>
       )}
     </div>

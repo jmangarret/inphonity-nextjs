@@ -32,9 +32,9 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
       openModal(
         <div>
           <p
-            className={`text-center text-lg p-4 md:p-5`}
+            className={`text-center text-xl lg:text-3xl p-4 md:p-5 text-white`}
           >
-            Entendemos que en este momento no estés listo para unirte a inphonity.
+            Entendemos que en este momento <br /> <b>no estés listo para unirte a inphonity.</b>
             <br />
             <br />
             ¡Hasta pronto!
@@ -52,12 +52,8 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
   };
 
   return (
-    <section
-      className="container mx-auto p-3 sm:p-6 md:p-8 lg:p-10 xl:p-12"
-    >
-      <div
-        className="container mx-auto"
-      >
+    <section className="container mx-auto p-3 sm:p-6 md:p-8">
+      <div className="container mx-auto">
         <div className="grid grid-cols-12 gap-3 text-center">
           {/* plus decoration */}
           {/* <div className="hidden md:block md:col-span-1 relative">
@@ -67,10 +63,8 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
             />
           </div> */}
           <div className={`col-span-12 md:col-span-12`}>
-            <h2
-              className="text-2xl sm:text-3xl lg:text-5xl mb-8 sm:mb-12 md:mb-16 lg:mb-20 text-center mt-6 lg:mt-8 xl:mt-10"
-            >
-              Haz realidad todo lo que <span className="font-medium text-highlight">siempre imaginaste</span>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl mb-8 sm:mb-12 md:mb-16 lg:mb-20 text-center mt-6 lg:mt-8 xl:mt-10">
+              Haz realidad todo lo que <div className="font-medium text-highlight">siempre imaginaste</div>
             </h2>
           </div>
           {/* plus decoration */}
@@ -112,7 +106,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
           <div className="col-span-12 sm:col-span-0 md:col-span-0 lg:col-span-2"></div>
           <div className="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4">
             <div className="button-container w-4/5 lg:w-72 mx-auto">
-              <button className="multi-border font-medium block w-full"
+              <button className="btn-xl multi-border font-medium block w-full"
                 onClick={handleReject}
                 disabled={isRejectingInvitation}
               >
@@ -122,7 +116,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
           </div>
           <div className="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4">
             <div className="button-container w-4/5 lg:w-72 mx-auto mb-6">
-              <button className="multi-border font-medium block w-full"
+              <button className="btn-xl multi-border font-medium block w-full"
                 onClick={handleAccept}
               >
                 ACEPTAR INVITACIÓN

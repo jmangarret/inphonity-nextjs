@@ -34,7 +34,7 @@ export default function PaymentsSection() {
   }
 
   return (
-    <section className="container mx-auto mb-10 md:mb-16 lg:mb-20 xl:mb-24">
+    <section className="container mx-auto mb-10">
       <div className="grid grid-cols-10 md:mb-5 lg:mb-10 xl:mb-15">
         <div className="col-span-1">
           {/* <PlusDecoration

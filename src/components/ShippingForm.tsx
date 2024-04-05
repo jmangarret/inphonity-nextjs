@@ -149,88 +149,59 @@ export default function ShippingForm() {
   }
 
   return (
-    <div
-      className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-3 md:mb-6 lg:mb-9 xl:mb-12'}
-    >
+    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-6'}>
       {/* header */}
-      <header
-        className={'mb-4 md:mb-8 lg:mb-12 xl:mb-16 lg:ml-12'}
-      >
-        <h3
-          className={'font-medium text-3xl sm:text-5xl mb-1 sm:mb-3'}
-          style={{color: '#F79F1A'}}
-        >
-          <Image
-            src={`/img/orange-isotipo.svg`}
-            alt={`inphonity isotipo`}
-            width={40}
-            height={40}
-            className={`inline-block mr-2 w-7 h-7 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14`}
-            style={{verticalAlign: 'middle'}}
-          />
-          Elige tu tipo de SIM
+      <header>
+        <h3 className={'font-medium text-white text-center text-3xl sm:text-5xl mb-1 sm:mb-3'}>
+          Elige tu tipo de <span className="text-highlight">SIM</span>
         </h3>
+        <p className={`font-medium text-white text-center font-base mb-4`}>
+          Si tu dispositivo es compatible con tarjeta SIM y eSIM, elige la que prefieras
+        </p>
+        {/* {shipping.isEsim && !plan.supportEsim && ( */}
+          <p className={'text-highlight text-base text-center mt-1'}>
+            * El dispositivo validado no es compatible con eSIM. ¿Estas seguro que deseas continuar con esta opción?
+          </p>
+        {/* )} */}
       </header>
 
         {/* form */}
-        <div
-          className={'lg:container mx-auto w-full'}
-        >
-          <div
-            className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 bg-white w-full mx-auto mt-4 md:mt-8 lg:mt-12 xl:mt-16 p-6 md:p-8 lg:p-10 xl:p-12'}
-          >
+        <div className={'lg:container mx-auto w-full'}>
+          <div className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 w-full mx-auto p-6 md:p-8 lg:p-10 xl:p-12'}>
             {/* is esim */}
-            <div
-              className={'col-span-12'}
-            >
-              <p className={`font-medium font-base mb-4`}>
-                Si tu dispositivo es compatible con tarjeta SIM y eSIM, elige la que prefieras
-              </p>
-
-              <label>
-                <span
-                  className={`font-medium mr-2 inline-block`}
-                  style={{width: '95px'}}
-                >
-                  Tarjeta SIM
-                </span>
-                <input
-                  className={`${shipping.isEsimError ? 'input-error' : ''}`}
-                  style={{accentColor: '#EF7911'}}
-                  type="radio"
-                  name={'isEsim'}
-                  value={'false'}
-                  onChange={handleInputChange}
-                  checked={!shipping.isEsim}
-                />
-              </label>
-              <br/>
-              <label>
-                <span
-                  className={`font-medium mr-2 inline-block`}
-                  style={{width: '95px'}}
-                >
-                  Tarjeta eSIM
-                </span>
-                <input
-                  className={`${shipping.isEsimError ? 'input-error' : ''}`}
-                  style={{accentColor: '#EF7911'}}
-                  type="radio"
-                  name={'isEsim'}
-                  value={'true'}
-                  onChange={handleInputChange}
-                  checked={shipping.isEsim}
-                />
-              </label>
-
-              {shipping.isEsim && !plan.supportEsim && (
-                <p
-                  className={'text-red-500 text-base mt-1'}
-                >
-                  El dispositivo validado no es compatible con eSIM. ¿Estas seguro que deseas continuar con esta opción?
-                </p>
-              )}
-
+            <div className={'col-span-12'}>
+              <div className="mb-5">
+                <label>
+                  <span className={`font-medium mr-2 inline-block text-white`}>
+                    Tarjeta SIM
+                  </span>
+                  <input
+                    className={`${shipping.isEsimError ? 'input-error' : ''}`}
+                    style={{accentColor: '#EF7911'}}
+                    type="radio"
+                    name={'isEsim'}
+                    value={'false'}
+                    onChange={handleInputChange}
+                    checked={!shipping.isEsim}
+                  />
+                </label>
+              </div>
+              <div>
+                <label>
+                  <span className={`font-medium mr-2 inline-block text-white`}>
+                    Tarjeta eSIM
+                  </span>
+                  <input
+                    className={`${shipping.isEsimError ? 'input-error' : ''}`}
+                    style={{accentColor: '#EF7911'}}
+                    type="radio"
+                    name={'isEsim'}
+                    value={'true'}
+                    onChange={handleInputChange}
+                    checked={shipping.isEsim}
+                  />
+                </label>
+              </div>
               {/* error */}
               {shipping.isEsimError && (
                 <p
@@ -241,10 +212,8 @@ export default function ShippingForm() {
               )}
             </div>
 
-            <div
-              className={`col-span-12`}
-            >
-              <p className={`font-medium font-base mb-4`}>
+            <div className={`col-span-12`}>
+              <p className={`font-medium text-white font-base mb-4`}>
                 Dirección a la que llegará tu SIM de inphonity
               </p>
             </div>
@@ -425,50 +394,40 @@ export default function ShippingForm() {
               )}
             </div>
 
-            <div
-              className={'col-span-12'}
-            >
+            <div className={'col-span-12 flex justify-between'}>
               <div className="flex items-center text-white mb-2 ml-2">
                 <input
                   type="checkbox"
                   id={'myAddressAreEqual'}
-                  className="form-checkbox black h-5 w-5 text-green-500"
+                  className="form-checkbox green-check h-5 w-5 text-green-500"
                   name={'myAddressAreEqual'}
                   onChange={handleMyAddressAreEqualChange}
                 />
                 <label htmlFor={'myAddressAreEqual'}>
-                  <span className={`ml-2 inline-block font-medium text-black`}>Mi dirección de envío y facturación son iguales</span>
+                  <span className={`ml-2 inline-block text-base text-white`}>Mi dirección de envío y facturación son iguales</span>
                 </label>
+              </div>
+              <div>
+                <span className={`text-base text-white font-medium`}>
+                  Campos Obligatorios*
+                </span>
               </div>
             </div>
 
             {/* next */}
-            <div
-              className={'col-span-12 flex items-center'}
-            >
-              <p
-                className={`text-base text-gray-500 font-medium`}
-              >
-                Campos Obligatorios*
-              </p>
-
-              {!shipping.showTaxDataForm && (
-                <div
-                  className={`ml-auto`}
-                  style={{width: '150px'}}
-                >
-                  <div className="button-container">
-                    <button
-                      className="button button-orange font-medium block w-full disabled:opacity-50"
-                      onClick={handleNextForm}
-                      disabled={!isValidForm}
-                    >
-                      Siguiente
-                    </button>
-                  </div>
+            {!shipping.showTaxDataForm && (
+              <div className={`col-span-12`}>
+                <div className="button-container flex justify-center">
+                  <button
+                    className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                    onClick={handleNextForm}
+                    disabled={!isValidForm}
+                  >
+                    SIGUIENTE
+                  </button>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
     </div>
