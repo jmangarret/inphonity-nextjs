@@ -4,7 +4,6 @@ import React from "react";
 import Payment from "@/components/Payment";
 import { ModalContext } from "@/contexts/ModalContext";
 import Image from "next/image";
-import { Span } from "next/dist/trace";
 // import PlusDecoration from "@/components/PlusDecoration";
 
 export default function PaymentsSection() {
