@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Header() {
   return (
     <header className="">
-      <nav className="container mx-auto p-4 flex justify-between items-center">
+      <nav className="container mx-auto px-4 py-9 flex justify-between items-center">
         <div>
           <Image
             src="/logo.svg"

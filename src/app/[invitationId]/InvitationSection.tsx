@@ -32,9 +32,9 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
       openModal(
         <div>
           <p
-            className={`text-center text-lg p-4 md:p-5`}
+            className={`text-center text-xl lg:text-3xl p-4 md:p-5 text-white`}
           >
-            Entendemos que en este momento no estés listo para unirte a inphonity.
+            Entendemos que en este momento <br /> <b>no estés listo para unirte a inphonity.</b>
             <br />
             <br />
             ¡Hasta pronto!
@@ -70,7 +70,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
             <h2
               className="text-2xl sm:text-3xl lg:text-5xl mb-8 sm:mb-12 md:mb-16 lg:mb-20 text-center mt-6 lg:mt-8 xl:mt-10"
             >
-              Haz realidad todo lo que <span className="font-medium text-highlight">siempre imaginaste</span>
+              Haz realidad todo lo que <br /><span className="font-medium text-highlight">siempre imaginaste</span>
             </h2>
           </div>
           {/* plus decoration */}

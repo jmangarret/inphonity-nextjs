@@ -1,18 +1,18 @@
 "use client";
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import PlusDecoration from "@/components/PlusDecoration";
-import {useGetInvitationByIdQuery} from "@/lib/services/invitationsApi";
-import {request} from "@/mocks/request-data";
+import { useGetInvitationByIdQuery } from "@/lib/services/invitationsApi";
+import { request } from "@/mocks/request-data";
 
 type LandingSectionProps = {
   invitationId: string;
 };
 
 
-const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
-  const {isLoading, isFetching, data, error} = request;//useGetInvitationByIdQuery(invitationId);
+const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
+  const { isLoading, isFetching, data, error } = request;//useGetInvitationByIdQuery(invitationId);
   const router = useRouter();
 
   useEffect(() => {
@@ -51,12 +51,12 @@ const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
           className="sm:w-1/2 px-4 sm:mt-10 md:mt-16 lg:mt-24 xl:mt-32"
         >
           <h1
-            className={`font-medium text-3xl sm:text-4xl lg:text-5xl xl:text-6xl`}
+            className={`font-medium text-6xl sm:text-4xl lg:text-5xl xl:text-6xl`}
           >
             {isLoading || isFetching ? (
               <div
                 className="font-medium text-2xl sm:text-3xl lg:text-5xl xl:text-8xl bg-gray-300 animate-pulse h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10 mb-3 w-3/4 inline-block"
-                style={{verticalAlign: "middle"}}
+                style={{ verticalAlign: "middle" }}
               ></div>
             ) : (
               data && (
@@ -83,7 +83,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
             {isLoading || isFetching ? (
               <span
                 className="font-medium text-2xl sm:text-3xl lg:text-5xl xl:text-8xl bg-gray-300 animate-pulse h-5 sm:h-6 md:h-7 ld:h-8 xl:h-9 mb-3 w-3/4 inline-block"
-                style={{verticalAlign: "middle"}}
+                style={{ verticalAlign: "middle" }}
               ></span>
             ) : (
               <>
@@ -96,7 +96,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
             <source width="300" media="(min-width: 600px) and (max-width: 1200px)"
                     srcSet="/img/circulo-inphonity-600x283.webp"/>
             <source width="600" media="(min-width: 1200px)" srcSet="/img/circulo-inphonity-900x425.webp"/> */}
-            <img src="/img/circulo.svg" alt="Círculo Inphonity"/>
+            <img src="/img/circulo.svg" alt="Círculo Inphonity" />
           </picture>
         </div>
         <div className="bg-luces3"></div>
@@ -106,10 +106,10 @@ const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
         >
           <div className="flex justify-center md:justify-end">
             <picture>
-              <source width="300" media="(max-width: 600px)" srcSet="/img/img_header_600px.webp"/>
-              <source width="600" media="(min-width: 600px) and (max-width: 1200px)"srcSet="/img/img_header_1200px.webp"/>
-              <source width="800" media="(min-width: 1200px)" srcSet="/img/img_header_1800px.webp"/>
-              <img src="/img/bienvenido600px.png" alt="Bienvenido a Inphonity"/>
+              <source width="300" media="(max-width: 600px)" srcSet="/img/img_header_600px.webp" />
+              <source width="600" media="(min-width: 600px) and (max-width: 1200px)" srcSet="/img/img_header_1200px.webp" />
+              <source width="800" media="(min-width: 1200px)" srcSet="/img/img_header_1800px.webp" />
+              <img src="/img/bienvenido600px.png" alt="Bienvenido a Inphonity" />
             </picture>
           </div>
         </div>
@@ -120,9 +120,9 @@ const LandingSection: React.FC<LandingSectionProps> = ({invitationId}) => {
             ¿Qué es <span className="text-highlight">Círculo inphonity?</span>
           </h2>
           <p className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl text-justify">
-          Al hacerte cliente de inphonity no solo te conectas con el mundo, <span className="font-medium ">¡también te recompensamos por ello!</span> ¿Cómo lo hacemos? 
-          Te damos un bono único por cada amigo que se une a tu Círculo inphonity y eso no es todo, recibes del <span className="font-medium text-highlight"> 1 al 5% de cashback mensual</span>, 
-          cada vez que los miembros de tu Círculo pagan su plan. Esto no termina aqui…
+            Al hacerte cliente de inphonity no solo te conectas con el mundo, <span className="font-medium ">¡también te recompensamos por ello!</span> ¿Cómo lo hacemos?
+            Te damos un bono único por cada amigo que se une a tu Círculo inphonity y eso no es todo, recibes del <span className="font-medium text-highlight"> 1 al 5% de cashback mensual</span>,
+            cada vez que los miembros de tu Círculo pagan su plan. Esto no termina aqui…
           </p>
         </div>
       </div>

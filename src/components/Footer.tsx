@@ -3,14 +3,14 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <footer className="bg-white text-xs lg:text-sm font-medium">
-      <div className="text-xs md:text-base py-3 md:py-6 text-center lg:text-left" style={{background: '#298A9A'}}>
+      <div className="text-xs md:text-base py-3 md:py-6 text-center lg:text-left" style={{ background: '#298A9A' }}>
         <div
           className={`container mx-auto grid grid-cols-8 gap-4 flex items-center`}
         >
           <div className="col-span-12 sm:col-span-4 lg:col-span-2 text-center flex flex-col items-center">
             <Image
               src="/logo.svg"
-              width={250}
+              width={180}
               height={100}
               alt="Logo"
               className="mx-auto"
@@ -24,7 +24,7 @@ export default function Footer() {
                 width={15}
                 height={15}
                 className="inline-block mr-2"
-                style={{verticalAlign: "middle"}}
+                style={{ verticalAlign: "middle" }}
               />
               Ejercito Nacional Mexicano 904 Piso 12 CDMX
             </p>
@@ -34,10 +34,10 @@ export default function Footer() {
               <Image
                 src="/img/telefono-icon.svg"
                 alt="Teléfono"
-                width={20}
-                height={20}
+                width={12}
+                height={12}
                 className="inline-block mr-2"
-                style={{verticalAlign: "middle"}}
+                style={{ verticalAlign: "middle" }}
               />
               55 9240 0295
             </a>
@@ -51,7 +51,7 @@ export default function Footer() {
                   width={15}
                   height={15}
                   className="inline-block mr-2"
-                  style={{verticalAlign: "middle"}}
+                  style={{ verticalAlign: "middle" }}
                 />
                 hola@inphonity.com
               </a>

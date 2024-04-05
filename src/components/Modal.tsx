@@ -2,7 +2,7 @@ import React, { useEffect, useRef, ReactNode, CSSProperties } from 'react';
 import Image from "next/image";
 
 interface ModalProps {
-  header?: string|ReactNode;
+  header?: string | ReactNode;
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
@@ -10,7 +10,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({header, children, className, style, fullScreen, onClose }) => {
+const Modal: React.FC<ModalProps> = ({ header, children, className, style, fullScreen, onClose }) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -48,13 +48,13 @@ const Modal: React.FC<ModalProps> = ({header, children, className, style, fullSc
             <Image
               src={`/img/close-modal-icon.svg`}
               alt={`Cerrar ventana emergente`}
-              width={24}
+              width={50}
               height={24}
             />
           </button>
         </div>
         <div
-          className="max-h-[90vh] overflow-auto modal-content bg-white rounded-b-md"
+          className="overflow-auto modal-content bg-black rounded-b-md grid flex flex-col items-center"
         >
           {children}
         </div>

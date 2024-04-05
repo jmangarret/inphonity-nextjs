@@ -37,6 +37,15 @@
   .md\:ml-20 {
     @apply margin-left: 5.5rem;
   }
+
+  .md\:px-24 {
+    @apply padding-left: 6rem;
+    @apply padding-right: 6rem;
+  }
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .responsive-iframe {
@@ -54,9 +63,35 @@
   border: 0;
 }
 
+.modal-content {
+  background-image: url("/img/bg_modal_rechazo.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 80vh;
+  width: 100vh;
+}
+
+.bg_mensaje_aceptada {
+  background-image: url("/img/bg_mensaje_invitacion_aceptada.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg_mensaje_rechazada {
+  background-image: url("/img/bg_mensaje_rechazada.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 @media (max-width: 640px) {
   .center-text-contact {
     text-align: center;
+  }
+}
+
+@media (max-width: 992px) {
+  .modal-content {
+    width: 100%;
   }
 }
 
@@ -448,6 +483,7 @@ swiper-container::part(bullet) {
   height: 3.125rem;
   font-size: 1rem;
 }
+
 .multi-border {
   position: relative;
   padding: 12px 35px;
@@ -921,7 +957,7 @@ select.input {
 body {
   background: url('/img/bg-landing-full.png') transparent 50% / cover no-repeat;
   width: auto;
-  height: 6646px;
+  height: auto;
 }
 
 .bg-plan1 {
@@ -977,6 +1013,6 @@ body {
   background-color: #F79F1A;
 }
 
-.help-green{
+.help-green {
   color: #27E1C1;
 }
