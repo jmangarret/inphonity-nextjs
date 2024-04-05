@@ -13,12 +13,13 @@ type InvitationSectionProps = {
 const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) => {
   const router = useRouter();
   const { openModal } = React.useContext(ModalContext);
-  const {
-    isLoading: isLoadingInvitation,
-    isFetching: isFetchingInvitation,
-    data: invitationData,
-    error: invitationError
-  } = useGetInvitationByIdQuery(invitationId);
+  // TODO:
+  // const {
+  //   isLoading: isLoadingInvitation,
+  //   isFetching: isFetchingInvitation,
+  //   data: invitationData,
+  //   error: invitationError
+  // } = useGetInvitationByIdQuery(invitationId);
   const [rejectInvitation, {
     isLoading: isRejectingInvitation,
     error: rejectError

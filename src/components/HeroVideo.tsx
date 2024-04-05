@@ -1,4 +1,5 @@
 "use client";
+import { backgroundImage } from "html2canvas/dist/types/css/property-descriptors/background-image";
 import { useEffect, useState } from "react";
 
 const video360p = "https://inphonity-assets.s3.us-east-2.amazonaws.com/hero-video-360p.mp4";
@@ -48,14 +49,12 @@ const HeroVideo = ({ newVideoUrl }: { newVideoUrl: string | null }) => {
           ></iframe>
         </div>
       ) : (
-        <video
-          controls
-          preload="none"
-          poster="/img/hero-video-poster.webp"
-          className="w-full"
-        >
-          <source src={videoSrc || ''} type="video/mp4" />
-        </video>
+        <div className="w-full">
+          <video controls={true} poster="/img/hero-video-poster.webp" >
+            <source src="https://inphonity-assets.s3.us-east-2.amazonaws.com/hero-video-720p.mp4" type="video/mp4" />
+
+            </video>
+        </div>
       )}
     </div>
   );
