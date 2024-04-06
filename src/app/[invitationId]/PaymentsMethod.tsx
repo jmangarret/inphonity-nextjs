@@ -18,7 +18,7 @@ export default function PaymentsSection() {
   }
   const ContenTiendasAfiliadas = () => {
     return (
-      <div className="bg-black bg-luces">
+      <div className="bg-black bg-luces flex justify-center">
         <Image
           src="/img/tiendas-afiliadas.png"
           alt="Tiendas Afiliadas"
