@@ -5,10 +5,8 @@ import Image from "next/image";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks";
 import {useInitialPaymentMutation, useRegisterMutation, ApiValidationError} from "@/lib/services/registersApi";
 import {
-  setLastNameError,
   setNameError,
   setPhoneError,
-  setSecondLastNameError,
   setEmailError,
   setCurpError,
   setDateOfBirthError,
@@ -155,8 +153,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
       await register({
         invitation_id: invitationId,
         first_name: personalData.name,
-        last_name: personalData.lastName,
-        mother_last_name: personalData.secondLastName,
+        last_name: "",
+        mother_last_name: "",
         contact_phone_number: personalData.phone,
         curp: personalData.curp,
         gender: personalData.gender,
@@ -640,12 +638,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
         if (key === "first_name") {
           dispatch(setNameError(value[0]));
         }
-        if (key === "last_name") {
-          dispatch(setLastNameError(value[0]));
-        }
-        if (key === "mother_last_name") {
-          dispatch(setSecondLastNameError(value[0]));
-        }
+        // if (key === "last_name") {
+        //   dispatch(setLastNameError(value[0]));
+        // }
+        // if (key === "mother_last_name") {
+        //   dispatch(setSecondLastNameError(value[0]));
+        // }
         if (key === "contact_phone_number") {
           dispatch(setPhoneError(value[0]));
         }

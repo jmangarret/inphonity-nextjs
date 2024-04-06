@@ -132,7 +132,7 @@ export default function ShippingForm() {
     dispatch(setTaxState(shipping.state));
     dispatch(setTaxMunicipality(shipping.city));
     dispatch(setTaxEmail(personalData.email));
-    dispatch(setTaxName(`${personalData.name} ${personalData.lastName} ${personalData.secondLastName}`));
+    dispatch(setTaxName(`${personalData.name}`));
   }
 
   const emptyTaxAddressData = () => {
