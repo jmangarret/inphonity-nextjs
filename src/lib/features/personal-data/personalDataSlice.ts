@@ -13,6 +13,8 @@ export interface PersonalData {
   curpError: string;
   gender: string;
   genderError: string;
+  docType: string,
+  idPassportPicture: string,
   idFrontPicture: string;
   idFrontPictureError: string;
   idBackPicture: string;
@@ -39,6 +41,8 @@ const initialState: PersonalData = {
   curpError: "",
   gender: "",
   genderError: "",
+  docType: "",
+  idPassportPicture: "",
   idFrontPicture: "",
   idFrontPictureError: "",
   idBackPicture: "",
@@ -69,6 +73,8 @@ const personalDataSlice = createSlice({
       state.curpError = "";
       state.gender = "";
       state.genderError = "";
+      state.docType = "";
+      state.idPassportPicture = "";
       state.idFrontPicture = "";
       state.idFrontPictureError = "";
       state.idBackPicture = "";
@@ -119,6 +125,12 @@ const personalDataSlice = createSlice({
     },
     setCurpError: (state, action: PayloadAction<string>) => {
       state.curpError = action.payload;
+    },
+    setDocType: (state, action: PayloadAction<string>) => {
+      state.docType = action.payload;
+    },
+    setIdPassportPicture: (state, action: PayloadAction<string>) => {
+      state.idPassportPicture = action.payload;
     },
     setGender: (state, action: PayloadAction<string>) => {
       state.gender = action.payload;
@@ -210,6 +222,8 @@ export const {
   setEmailError,
   setCurp,
   setCurpError,
+  setDocType,
+  setIdPassportPicture,
   setGender,
   setGenderError,
   setIdFrontPicture,

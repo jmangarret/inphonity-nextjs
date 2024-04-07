@@ -4,6 +4,8 @@ import Image from "next/image";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks";
 import { differenceInYears } from 'date-fns';
 import {
+  setDocType,
+  setIdPassportPicture,
   setCurp, setCurpError,
   setDateOfBirth, setDateOfBirthError,
   setDayDateOfBirth, setDayDateOfBirthError,
@@ -94,6 +96,9 @@ export default function PersonalDataForm() {
       case 'curp':
         dispatch(setCurp(value));
         break;
+      case 'docType':
+        dispatch(setDocType(value));
+        break;
       case 'gender':
         dispatch(setGender(value));
         break;
@@ -122,8 +127,12 @@ export default function PersonalDataForm() {
         const data = e.target?.result;
         if (name === 'idFrontPicture') {
           dispatch(setIdFrontPicture(data as string));
-        } else {
+        } 
+        if (name === 'idBackPicture') {
           dispatch(setIdBackPicture(data as string));
+        }
+        if (name === 'idPassportPicture') {
+          dispatch(setIdPassportPicture(data as string));
         }
       }
 
@@ -460,24 +469,25 @@ export default function PersonalDataForm() {
 
           <div className="col-span-12 ">
             <div className="mb-5">
-              <input type="radio" className="radio" /> INE
+              <label>
+                <input name="docType" type="radio" className="radio" value={'INE'} onChange={handleInputChange}/> 
+                <span> INE</span>  
+              </label>
             </div>
             <div>
-              <input type="radio" className="radio" /> Pasaporte
+              <label>
+                <input name="docType" type="radio" className="radio" value={'Passport'} onChange={handleInputChange}/> 
+                <span> Pasaporte</span> 
+              </label>
             </div>
           </div>
 
           {/* oficial identification image (front) */}
-          <div
-            className={'col-span-12 lg:col-span-6'}
-          >
-            <label
-              className={`flex input input-border-gray ${personalData.idFrontPictureError ? 'input-error' : ''}`}
-            >
+          {personalData.docType == 'INE' && (
+          <div className={'col-span-12 lg:col-span-6'}>
+            <label className={`flex input input-border-gray ${personalData.idFrontPictureError ? 'input-error' : ''}`}>
               <span className={'overflow-hidden truncate'}>Identificación Oficial Frente*</span>
-              <div
-                className={'ml-auto flex'}
-              >
+              <div className={'ml-auto flex'}>
                 <Image
                   src={'/img/upload-icon.svg'}
                   alt={'Subir archivo'}
@@ -514,7 +524,7 @@ export default function PersonalDataForm() {
               </p>
             )}
             {/* preview */}
-            {/* <div
+            <div
               className={'flex justify-center mt-2 md:mt-3'}
             >
               {personalData.idFrontPicture && (
@@ -525,19 +535,16 @@ export default function PersonalDataForm() {
                   height={200}
                 />
               )}
-            </div> */}
+            </div>
           </div>
+          )}
+
           {/* oficial identification image (back) */}
-          <div
-            className={'col-span-12 lg:col-span-6'}
-          >
-            <label
-              className={`flex input input-border-gray ${personalData.idBackPictureError ? 'input-error' : ''}`}
-            >
+          {personalData.docType == 'INE' && (
+          <div className={'col-span-12 lg:col-span-6'}>
+            <label className={`flex input input-border-gray ${personalData.idBackPictureError ? 'input-error' : ''}`}>
               <span className={'overflow-hidden truncate'}>Identificación Oficial Vuelta*</span>
-              <div
-                className={'ml-auto flex'}
-              >
+              <div className={'ml-auto flex'}>
                 <Image
                   src={'/img/upload-icon.svg'}
                   alt={'Subir archivo'}
@@ -574,7 +581,7 @@ export default function PersonalDataForm() {
               </p>
             )}
             {/* preview */}
-            {/* <div
+            <div
               className={'flex justify-center mt-2 md:mt-3'}
             >
               {personalData.idBackPicture && (
@@ -585,20 +592,67 @@ export default function PersonalDataForm() {
                   height={200}
                 />
               )}
-            </div> */}
+            </div>
           </div>
+          )}
+
+          {/* passport */}
+          {personalData.docType == 'Passport' && (
+          <>
+          <div className={'col-span-6 lg:col-span-6'}>
+            <label className={`flex input input-border-gray ${personalData.idBackPictureError ? 'input-error' : ''}`}>
+              <span className={'overflow-hidden truncate'}>Pasaporte*</span>
+              <div className={'ml-auto flex'}>
+                <Image
+                  src={'/img/upload-icon.svg'}
+                  alt={'Subir archivo'}
+                  width={20}
+                  height={20}
+                  className={'inline-block w-5'}
+                  style={{verticalAlign: 'middle'}}
+                />
+                <Image
+                  src={'/img/question-mark-icon.svg'}
+                  alt={'¿Qué es esto?'}
+                  width={20}
+                  height={20}
+                  className={'inline-block w-5 ml-2'}
+                  style={{verticalAlign: 'middle'}}
+                  onClick={showModalWithIdentificationInfo}
+                />
+              </div>
+              <input
+                type="file"
+                accept={'image/*'}
+                className={'hidden'}
+                name={'idPassportPicture'}
+                onChange={handleFileChange}
+                ref={el => inputRefs.current.idPassportPicture = el}
+              />
+            </label>
+            {/* preview */}
+            <div className={'flex justify-center mt-2 md:mt-3'}>
+              {personalData.idPassportPicture && (
+                <img
+                  src={personalData.idPassportPicture}
+                  alt={'Pasaporte'}
+                  width={200}
+                  height={200}
+                />
+              )}
+            </div>
+          </div>
+          <div className={'col-span-6 lg:col-span-6'}>
+            {/* relleno */}
+          </div>
+          </>
+          )}
          
           {/* proof of address */}
-          <div
-            className={'col-span-12 md:col-span-6'}
-          >
-            <label
-              className={'flex input input-border-gray'}
-            >
+          <div className={'col-span-12 md:col-span-6'}>
+            <label className={'flex input input-border-gray'}>
               <span className={'overflow-hidden truncate'}>Comprobante de domicilio*</span>
-              <div
-                className={'ml-auto flex'}
-              >
+              <div className={'ml-auto flex'}>
                 <Image
                   src={'/img/upload-icon.svg'}
                   alt={'Subir archivo'}
@@ -620,16 +674,10 @@ export default function PersonalDataForm() {
             </label>
           </div>
           {/* proof of tax status */}
-          <div
-            className={'col-span-12 md:col-span-6'}
-          >
-            <label
-              className={'flex input input-border-gray'}
-            >
+          <div className={'col-span-12 md:col-span-6'}>
+            <label className={'flex input input-border-gray'}>
               <span className={'overflow-hidden truncate'}>Constancia de situación fiscal*</span>
-              <div
-                className={'ml-auto flex'}
-              >
+              <div className={'ml-auto flex'}>
                 <Image
                   src={'/img/upload-icon.svg'}
                   alt={'Subir archivo'}
