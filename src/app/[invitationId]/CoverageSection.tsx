@@ -22,13 +22,13 @@ export default function CoverageSection() {
           </div>
           <div className="p-4">
             <Coverage
-              description={["Navega, llama y textea en ",<span className='text-highlight'>EE.UU.</span>," y ",<span className='text-highlight'>Canadá</span>]}
+              description={["Navega, llama y textea en ", <span className='text-highlight'>EE.UU.</span>, " y ", <span className='text-highlight'>Canadá</span>]}
               image="/img/avion-icon.svg"
             />
           </div>
           <div className="p-4">
             <Coverage
-              description={["Tecnología y velocidad ",<p className='text-highlight'>4.5 G LTE</p>]}
+              description={["Tecnología y velocidad ", <p className='text-highlight'>4.5 G LTE</p>]}
               image="/img/radar-icon.svg"
             />
           </div>

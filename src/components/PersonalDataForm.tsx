@@ -1,7 +1,7 @@
 "use client";
-import React, {useEffect, useMemo, useRef} from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { differenceInYears } from 'date-fns';
 import {
   setDocType,
@@ -19,7 +19,7 @@ import {
   setPhone, setPhoneError,
   setShowShippingForm
 } from "@/lib/features/personal-data/personalDataSlice";
-import {ModalContext} from "@/contexts/ModalContext";
+import { ModalContext } from "@/contexts/ModalContext";
 
 const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, '0'));
 const months = [
@@ -40,7 +40,7 @@ const currentYear = new Date().getFullYear();
 const years = Array.from({ length: 101 }, (_, i) => currentYear - i);
 
 export default function PersonalDataForm() {
-  const {openModal} = React.useContext(ModalContext);
+  const { openModal } = React.useContext(ModalContext);
   const dispatch = useAppDispatch();
   const personalData = useAppSelector((state) => state.personalData);
   const fieldsOrder: (keyof typeof personalData)[] = useMemo(() => [
@@ -80,7 +80,7 @@ export default function PersonalDataForm() {
   },[personalData])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
 
     switch (name) {
       case 'name':
@@ -116,7 +116,7 @@ export default function PersonalDataForm() {
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, files} = e.target;
+    const { name, files } = e.target;
 
     if (files) {
       const file = files[0];
@@ -146,15 +146,17 @@ export default function PersonalDataForm() {
   const showModalWithIdentificationInfo = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div>
+      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
         <p
-          className={`text-center text-lg p-4 md:p-5`}
+          className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
-          Sube una foto por ambos
-          <br/>
-          lados de tu identificación oficial
-          <br/>
-          (INE o Pasaporte).
+          <span className="font-medium">Sube una <span className="text-highlight">foto clara</span> o el <span className="text-highlight">PDF</span> <br />
+            de tu Constancia de Situación<br />
+            Fiscal</span> (CSF) actualizada.
+          <br /><br />
+          Esta debe ser menor a 3 meses,<br />
+          y puedes descargarla desde<br />
+          el portal del SAT
         </p>
       </div>,
     );
@@ -163,27 +165,19 @@ export default function PersonalDataForm() {
   const showModalWithAddressProof = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div>
+      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
         <p
-          className={`text-center text-lg p-4 md:p-5`}
+          className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
-          Sube una foto clara o el PDF
-          <br/>
-          de tu comprobante de
-          <br/>domicilio (de la dirección
-          <br/>
-          donde quieres recibir tu
-          <br/>
-          Kit de Bienvenida).
-          <br/>
-          <br/>
-          Este debe ser menor a 3
-          <br/>
-          meses. Los comprobantes
-          <br/>oficiales son los siguientes:
-          <br/>
-          Gas, luz, teléfono, internet,
-          <br/>
+          <span className="font-medium">Sube una <span className="text-highlight">foto</span> clara o el <span className="text-highlight">PDF</span><br />
+            de tu comprobante de domicilio</span><br />
+          (de la dirección donde quieres recibir<br />
+          tu Kit de Bienvenida).
+          <br /><br />
+          Este debe ser menor a 3 meses.<br />
+          Los comprobantes oficiales<br />
+          son los siguientes:<br />
+          gas, luz, teléfono, internet,<br />
           agua o predial.
         </p>
       </div>,
@@ -193,21 +187,21 @@ export default function PersonalDataForm() {
   const showModalWithTaxStatusProof = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div>
+      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
         <p
-          className={`text-center text-lg p-4 md:p-5`}
+          className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
-          Sube una foto clara o el PDF de
-          <br/>
-          tu Constancia de Situación
-          <br/>
-          Fiscal (CSF) actualizada.
-          <br/>
-          <br/>
+          <span className="font-medium">Sube una <span className="text-highlight">foto clara</span> o el <span className="text-highlight">PDF</span> de
+            <br />
+            tu Constancia de Situación
+            <br />
+            Fiscal</span> (CSF) actualizada.
+          <br />
+          <br />
           Esta debe ser menor a 3 meses,
-          <br/>
+          <br />
           y puedes descargarla desde el
-          <br/>
+          <br />
           portal del SAT
         </p>
       </div>,
@@ -352,7 +346,7 @@ export default function PersonalDataForm() {
               </p>
             )}
           </div>
-          
+
           {/* gender */}
           <div className={'col-span-12'}>
             <select
@@ -404,7 +398,7 @@ export default function PersonalDataForm() {
               </p>
             )}
           </div>
-          
+
           {/* email */}
             <div className={'col-span-12'}>
             <input
@@ -493,15 +487,15 @@ export default function PersonalDataForm() {
                   width={20}
                   height={20}
                   className={'inline-block w-5'}
-                  style={{verticalAlign: 'middle'}}
+                  style={{ verticalAlign: 'middle' }}
                 />
                 <Image
                   src={'/img/question-mark-icon.svg'}
                   alt={'¿Qué es esto?'}
                   width={20}
                   height={20}
-                  className={'inline-block w-5 ml-2'}
-                  style={{verticalAlign: 'middle'}}
+                  className={'inline-block w-5 ml-2 pointer'}
+                  style={{ verticalAlign: 'middle' }}
                   onClick={showModalWithIdentificationInfo}
                 />
               </div>
@@ -550,15 +544,15 @@ export default function PersonalDataForm() {
                   width={20}
                   height={20}
                   className={'inline-block w-5'}
-                  style={{verticalAlign: 'middle'}}
+                  style={{ verticalAlign: 'middle' }}
                 />
                 <Image
                   src={'/img/question-mark-icon.svg'}
                   alt={'¿Qué es esto?'}
                   width={20}
                   height={20}
-                  className={'inline-block w-5 ml-2'}
-                  style={{verticalAlign: 'middle'}}
+                  className={'inline-block w-5 ml-2 pointer'}
+                  style={{ verticalAlign: 'middle' }}
                   onClick={showModalWithIdentificationInfo}
                 />
               </div>
@@ -658,15 +652,15 @@ export default function PersonalDataForm() {
                   width={20}
                   height={20}
                   className={'inline-block w-5'}
-                  style={{verticalAlign: 'middle'}}
+                  style={{ verticalAlign: 'middle' }}
                 />
                 <Image
                   src={'/img/question-mark-icon.svg'}
                   alt={'¿Qué es esto?'}
                   width={20}
                   height={20}
-                  className={'inline-block w-5 ml-2'}
-                  style={{verticalAlign: 'middle'}}
+                  className={'inline-block w-5 ml-2 pointer'}
+                  style={{ verticalAlign: 'middle' }}
                   onClick={showModalWithAddressProof}
                 />
               </div>
@@ -683,21 +677,21 @@ export default function PersonalDataForm() {
                   width={20}
                   height={20}
                   className={'inline-block w-5'}
-                  style={{verticalAlign: 'middle'}}
+                  style={{ verticalAlign: 'middle' }}
                 />
                 <Image
                   src={'/img/question-mark-icon.svg'}
                   alt={'¿Qué es esto?'}
                   width={20}
                   height={20}
-                  className={'inline-block w-5 ml-2'}
-                  style={{verticalAlign: 'middle'}}
+                  className={'inline-block w-5 ml-2 pointer'}
+                  style={{ verticalAlign: 'middle' }}
                   onClick={showModalWithTaxStatusProof}
                 />
               </div>
             </label>
           </div>
-         
+
           <div className={'col-span-12'}>
             <p className={`text-base text-white font-medium`}>
               Campos Obligatorios*

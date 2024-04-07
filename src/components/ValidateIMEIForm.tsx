@@ -1,10 +1,10 @@
 import React from "react";
-import {ModalContext} from "@/contexts/ModalContext";
-import {useLazyValidateImeiQuery, useValidateImeiQuery} from "@/lib/services/validateCompatibilityApi";
+import { ModalContext } from "@/contexts/ModalContext";
+import { useLazyValidateImeiQuery, useValidateImeiQuery } from "@/lib/services/validateCompatibilityApi";
 import PlusDecoration from "@/components/PlusDecoration";
 import Image from "next/image";
-import {setSupportEsim} from "@/lib/features/plan/planSlice";
-import {useAppDispatch} from "@/lib/hooks";
+import { setSupportEsim } from "@/lib/features/plan/planSlice";
+import { useAppDispatch } from "@/lib/hooks";
 
 
 type ValidateIMEIFormProps = {
@@ -41,22 +41,22 @@ function isValidIMEI(imei: string): boolean {
   return sum % 10 === 0;
 }
 
-const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({className, style}) => {
-  const {openModal} = React.useContext(ModalContext);
+const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style }) => {
+  const { openModal } = React.useContext(ModalContext);
   const dispatch = useAppDispatch();
   const [imei, setImei] = React.useState<string>('');
-  const [trigger, {data, isLoading, error, isFetching}] = useLazyValidateImeiQuery();
+  const [trigger, { data, isLoading, error, isFetching }] = useLazyValidateImeiQuery();
 
   const handleSubmit = async () => {
     // Validate IMEI
     if (!isValidIMEI(imei)) {
       openModal(
-        <div>
-          <p
-            className={`text-center text-lg p-4 md:p-5`}
+        <div className="flex flex-col items-center justify-center h-full">
+          <h2
+            className={`text-center text-2xl lg:text-4xl p-4 md:p-5 text-white ajuste_centro`}
           >
             El IMEI ingresado no es válido.
-          </p>
+          </h2>
         </div>,
       );
 
@@ -73,7 +73,7 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({className, style}) =
         dispatch(setSupportEsim(false));
         openModal(
           <div
-            className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-soft-blue`}
+            className={`flex flex-col items-center justify-center h-full bg-black bg-modal-verde text-white`}
           >
             <div className={`grid grid-cols-12`}>
               <div className="hidden md:flex md:col-span-2 justify-center">
@@ -86,23 +86,22 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({className, style}) =
               <div
                 className="col-span-12 md:col-span-8"
               >
-                <h1 className={`text-2xl font-medium mb-12`}>
-                  Tu dispositivo es
-                  <br/>
-                  compatible con nuestra
-                  <br/>
-                  <span className={`text-4xl`}>SIM física</span>
+                <h1 className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white ajuste_centro mb-20`}>
+                  Tu dispositivo <span className="text-highlight">solo es compatible</span> con nuestra
+                  <br />
+                  <br />
+                  <span className={`text-6xl text-center font-medium`}>SIM física</span>
                 </h1>
 
                 <div
-                  className={`flex mb-12 justify-center`}
+                  className={`flex mb-12 justify-center mt-10`}
                 >
                   <div>
                     <Image
-                      src={`/img/sim-card-icon.svg`}
+                      src={`/img/sim-card-icon2.svg`}
                       alt={`SIM física`}
-                      width={150}
-                      height={150}
+                      width={100}
+                      height={100}
                       className={`ml-auto`}
                     />
                   </div>
@@ -124,7 +123,7 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({className, style}) =
         dispatch(setSupportEsim(true));
         openModal(
           <div
-            className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-diagonal-inverted-gradient`}
+            className={`flex flex-col items-center justify-center h-full bg-black bg-modal-verde text-white`}
           >
             <div className={`grid grid-cols-12`}>
               <div className="hidden md:flex md:col-span-2 justify-center">
@@ -137,12 +136,11 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({className, style}) =
               <div
                 className="col-span-12 md:col-span-8"
               >
-                <h1 className={`text-2xl font-medium mb-12`}>
-                  Tu dispositivo es
-                  <br/>
-                  compatible con nuestra
-                  <br/>
-                  <span className={`text-4xl`}>SIM física y eSIM</span>
+                <h1 className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white ajuste_centro mb-20`}>
+                  Tu dispositivo <span className="text-highlight">si es compatible</span> con nuestra
+                  <br />
+                  <br />
+                  <span className={`text-6xl text-center font-medium`}>SIM física y eSIM</span>
                 </h1>
 
                 <div
@@ -152,10 +150,10 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({className, style}) =
                     className={`flex-1`}
                   >
                     <Image
-                      src={`/img/sim-card-icon.svg`}
+                      src={`/img/sim-card-icon2.svg`}
                       alt={`SIM física`}
-                      width={150}
-                      height={150}
+                      width={100}
+                      height={100}
                       className={`ml-auto`}
                     />
                   </div>
@@ -188,7 +186,7 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({className, style}) =
         dispatch(setSupportEsim(false));
         openModal(
           <div
-            className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-orange-gradient`}
+            className={`flex flex-col items-center justify-center h-full`}
           >
             <div className={`grid grid-cols-12`}>
               <div className="hidden md:flex md:col-span-2 justify-center">
@@ -201,18 +199,15 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({className, style}) =
               <div
                 className="col-span-12 md:col-span-8"
               >
-                <h1 className={`text-2xl font-medium mb-12`}>
-                  ¡No te preocupes!
-                  <br/>
-                  Si tu teléfono no es
-                  <br/>
-                  compatible con inphonity,
-                  <br/>
-                  puedes volver más adelante.
+                <h1 className={`text-center text-2xl lg:text-2xl p-4 md:p-5 text-white ajuste_centro`}>
+                  Tu equipo <span className="text-highlight-red text-white">no es compatible</span> con la <br />
+                  red de inphonity, para tener la mejor <br />
+                  experiencia te recomendamos probar <br />
+                  con otro e intentar nuevamente.
                 </h1>
 
                 <div
-                  className={`flex mb-12 justify-center`}
+                  className={`flex mt-10 mb-10 justify-center`}
                 >
                   <div>
                     <Image
@@ -225,10 +220,8 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({className, style}) =
                   </div>
                 </div>
 
-                <h1 className={`text-2xl font-medium mb-12`}>
-                  Estaremos aquí para
-                  <br/>
-                  recibirte. ¡Hasta pronto!
+                <h1 className={`text-center text-2xl lg:text-2xl p-4 md:p-5 text-white`}>
+                  ¡Aquí te esperamos!
                 </h1>
               </div>
               <div
