@@ -705,25 +705,15 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
   }, [registerError, initialPaymentError]);
 
   return (
-    <div className="m-3 md:p-6 lg:p-9 xl:p-12">
+    <div className="m-3 md:p-6 lg:p-9 xl:p-12 bg-black/[.80]">
       {/* header */}
-      <header
-        className={'mb-4 md:mb-8 lg:mb-12 xl:mb-16 lg:ml-12'}
-      >
-        <h3
-          className={'font-medium text-3xl sm:text-5xl mb-1 sm:mb-3'}
-          style={{color: '#F79F1A'}}
-        >
-          <Image
-            src={`/img/orange-isotipo.svg`}
-            alt={`inphonity isotipo`}
-            width={40}
-            height={40}
-            className={`inline-block mr-2 w-7 h-7 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14`}
-            style={{verticalAlign: 'middle'}}
-          />
-          Realiza pago
+      <header className="mb-10 sm:mb-12">
+        <h3 className={'font-medium text-white text-center text-3xl sm:text-5xl mb-3'}>
+          Realizar <span className="text-highlight">pago</span>
         </h3>
+        <p className={'text-base text-white text-center px-16'}>
+          ¿Cómo quieres realizar tu pago?
+        </p>
       </header>
 
       {invitationData && invitationData.pre_registration?.payment_status === 'paid' ? (
@@ -737,39 +727,69 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
         </div>
       ) : (
         <>
-          <div className="flex flex-col sm:flex-row rounded-tl-md rounded-tr-md">
-            <TabItem
-              title={`Pago con tarjeta`}
-              activeTab={activeTab}
-              onClick={() => handleTabClick("Pago con tarjeta")}
-            />
-            <TabItem
-              title={`Pago en efectivo`}
-              activeTab={activeTab}
-              onClick={() => handleTabClick("Pago en efectivo")}
-            />
-            <TabItem
-              title={`Pago con transferencia interbancaria (SPEI)`}
-              activeTab={activeTab}
-              onClick={() => handleTabClick("Pago con transferencia interbancaria (SPEI)")}
-            />
-          </div>
-          <div className="bg-white rounded-bl-md rounded-br-md p-6 md:p-8 lg:p-10 xl:p-12 border-2 border-highlight">
-            {activeTab === "Pago con tarjeta" && (
-              <div
-                className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 bg-white w-full mx-auto'}
-                id={'payment-card'}
-              >
-                <p
-                  className={`col-span-12 text-black text-3xl font-medium`}
-                >
-                  Tarjeta de crédito y débito
-                </p>
-                <div
-                  className={'col-span-12'}
-                >
+          <div className="text-white text-base">
+            <div className="mb-5">
+              <span className="mr-10">
+                <Image
+                    src={'/img/pago-card.png'}
+                    alt={'Pago con tarjeta'}
+                    width={39.33}
+                    height={27.42}
+                    className={'inline-block w-5 font-medium'}
+                    />
+              </span>
+              <span className="mr-10 inline-block align-sub">
+                <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago con tarjeta")}/> 
+              </span>
+              <label>
+                <span> Pago con tarjeta</span>  
+              </label>
+            </div>
+            <div className="mb-5">
+              <span className="mr-10">
                   <Image
-                    src={`/img/card-brands.svg`}
+                      src={'/img/pago-cash.png'}
+                      alt={'Pago con efectivo'}
+                      width={39.33}
+                      height={27.42}
+                      className={'inline-block w-5 font-medium'}
+                      />
+                </span>
+                <span className="mr-10 inline-block align-sub">
+                  <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago en efectivo")}/> 
+                </span>
+                <label>
+                  <span> Pago en efectivo</span> 
+                </label>
+            </div>
+            <div className="mb-5">
+              <span className="mr-10">
+                  <Image
+                      src={'/img/pago-transfer.png'}
+                      alt={'Pago con transferencia'}
+                      width={39.33}
+                      height={27.42}
+                      className={'inline-block w-5 font-medium'}
+                      />
+                </span>
+                <span className="mr-10 inline-block align-sub">
+                  <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago con transferencia interbancaria (SPEI)")}/> 
+                </span>
+                <label>
+                  <span> Pago con transferencia interbancaria SPEI</span> 
+                </label>
+            </div>
+          </div>
+         
+          <div className="text-white">
+            {activeTab === "Pago con tarjeta" && (
+              <div className={'grid grid-cols-12'} id={'payment-card'}>
+                <p className={`col-span-12 text-2xl mb-5`}>
+                  Pago con Tarjeta de crédito y débito
+                </p>
+                <div className={'col-span-12 my-3'}>
+                  <Image
+                    src={`/img/card-brands.png`}
                     alt={`cards`}
                     width={150}
                     height={30}
@@ -777,25 +797,23 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                   />
                 </div>
                 {/* cardholder name */}
-                <div className={'col-span-12'}>
+                <div className={'col-span-12 my-3'}>
                   <input
                     type="text"
                     className={`input input-border-gray ${form.cadHolderNameError ? 'input-error' : ''}`}
-                    placeholder={'Nombre en la tarjeta'}
+                    placeholder={'Nombre del titular'}
                     value={form.cardHolderName}
                     onChange={(e) => setForm({...form, cardHolderName: e.target.value})}
                   />
                   {form.cadHolderNameError && (
-                    <p
-                      className={'text-red-500 text-xs mt-1 mx-3'}
-                    >
+                    <p className={'text-red-500 text-xs mt-1 mx-3'}>
                       {form.cadHolderNameError}
                     </p>
                   )}
                 </div>
 
                 {/* card number */}
-                <div className={'col-span-12'}>
+                <div className={'col-span-12 my-3'}>
                   <input
                     value={form.cardNumber}
                     onChange={(e: { target: { value: any; }; }) => setForm({...form, cardNumber: e.target.value})}
@@ -805,27 +823,20 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                   />
                   {/* error */}
                   {form.cardNumberError && (
-                    <p
-                      className={'text-red-500 text-xs mt-1 mx-3'}
-                    >
+                    <p className={'text-red-500 text-xs mt-1 mx-3'}>
                       {form.cardNumberError}
                     </p>
                   )}
                 </div>
 
-                <div
-                  className={'col-span-12 flex gap-3 items-center'}
-                >
-                  <div
-                  >
+                <div className={'col-span-12 flex gap-3 items-center my-3'}>
+                  <div>
                     <label htmlFor="">
-                      Fecha de expiración
+                      Fecha de vencimiento
                     </label>
                   </div>
                   {/* expiration date month */}
-                  <div
-                    className={'flex-1'}
-                  >
+                  <div className={'flex-1'}>
                     <select
                       className={`input input-border-gray`}
                       value={form.expirationDateMonth}
@@ -881,59 +892,112 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                       </p>
                     )}
                   </div>
+                  {/* cvv */}
+                  <div className={'flex-1'}>
+                    <input
+                      type="text"
+                      className={`input input-border-gray ${form.cvvError ? 'input-error' : ''}`}
+                      placeholder="CVV*"
+                      value={form.cvv}
+                      onChange={(e: { target: { value: any; }; }) => setForm({...form, cvv: e.target.value})}
+                    />
+                    {/* error */}
+                    {form.cvvError && (
+                      <p
+                        className={'text-red-500 text-xs mt-1 mx-3'}
+                      >
+                        {form.cvvError}
+                      </p>
+                    )}
+                  </div>
                 </div>
-
-                {/* cvv */}
-                <div className={'col-span-6'}>
-                  <input
-                    type="text"
-                    className={`input input-border-gray ${form.cvvError ? 'input-error' : ''}`}
-                    placeholder="Ingresa CVV"
-                    value={form.cvv}
-                    onChange={(e: { target: { value: any; }; }) => setForm({...form, cvv: e.target.value})}
-                  />
-                  {/* error */}
-                  {form.cvvError && (
-                    <p
-                      className={'text-red-500 text-xs mt-1 mx-3'}
-                    >
-                      {form.cvvError}
-                    </p>
-                  )}
+                
+                <div className="col-span-12 text-2xl flex flex-col mt-10">
+                  <div className="flex justify-center my-3">
+                    <span className="font-medium">Plan:   </span> &nbsp;&nbsp; $999
+                  </div>
+                  <div className="flex justify-center mb-3">
+                    <span className="font-medium">Envío:   </span> &nbsp;&nbsp; $150
+                  </div>
+                  <div className="w-1/5 my-1 self-center">
+                  <hr />
+                  </div>
+                  <div className="flex justify-center">
+                    <span className="font-medium text-3xl text-highlight">Total a Pagar</span>
+                  </div>
+                  <div className="flex justify-center">
+                    <span className="text-3xl">$1.149</span>
+                  </div>
                 </div>
-
-                <div
-                  className={'col-span-12'}
-                >
-                  <div className="button-container w-2/4 mx-auto">
+                
+                <div className={'col-span-12 my-10'}>
+                  <div className="button-container flex justify-center">
                     <button
-                      className="button button-black font-medium block w-full disabled:opacity-50"
+                      className="btn-md multi-border font-medium text-white disabled:opacity-50"
                       onClick={() => handlePayment('card')}
                       disabled={initialPaymentIsLoading || form.isSubmitting}
                     >
-                      Pagar
+                      PAGAR
                     </button>
                   </div>
                 </div>
               </div>
             )}
+
+
             {activeTab === "Pago en efectivo" && (
               <div>
-                <div className="button-container w-2/4 mx-auto">
-                  <button
-                    className="button button-black font-medium block w-full disabled:opacity-50"
-                    onClick={() => handlePayment('cash')}
-                    disabled={initialPaymentIsLoading || form.isSubmitting}
-                  >
-                    Generar referencia
-                  </button>
+                <p>Pago con efectivo</p>
+                <div className="button-container flex flex-col">
+                  <div className="flex justify-center my-5">
+                    <button
+                      className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                      onClick={() => handlePayment('cash')}
+                      disabled={initialPaymentIsLoading || form.isSubmitting}
+                    >
+                      GUARDAR SOLICITUD
+                    </button>
+                  </div>
+                  <div className="flex justify-center">
+                    <button
+                      className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                      onClick={() => handlePayment('cash')}
+                      disabled={initialPaymentIsLoading || form.isSubmitting}
+                    >
+                      GENERAR REFERENCIA
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
+
+
             {activeTab === "Pago con transferencia interbancaria (SPEI)" && (
-              <p>No disponible por el momento.</p>
+              <div>
+                <p>Pago con transferencia bancaria SPEI</p>
+                <div className="button-container flex flex-col">
+                  <div className="flex justify-center my-5">
+                    <button
+                      className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                      onClick={() => true}
+                      disabled={initialPaymentIsLoading || form.isSubmitting}
+                    >
+                      GUARDAR SOLICITUD
+                    </button>
+                  </div>
+                  <div className="flex justify-center">
+                    <button
+                      className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                      onClick={() => true}
+                      disabled={initialPaymentIsLoading || form.isSubmitting}
+                    >
+                      GENERAR REFERENCIA
+                    </button>
+                  </div>
+                </div>
+              </div>
             )}
-          </div>
+            </div>
         </>
       )}
     </div>
