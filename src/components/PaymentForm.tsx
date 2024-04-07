@@ -39,12 +39,6 @@ type PaymentFormProps = {
   invitationId: string;
 };
 
-interface TabItemProps {
-  title: string;
-  activeTab: string;
-  onClick: () => void;
-}
-
 declare let OpenPay: any;
 
 const formatNumberToMoney = (number: number) => {
@@ -134,6 +128,20 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
     setActiveTab(tab);
   };
 
+  const handleTestModal = (method: string) =>{
+    openModal(
+      <div>
+        <p
+          className={`text-center text-lg p-4 md:p-5 text-white`}
+        >
+          PRUEBA MODAL: Se ha generado tu referencia de pago {method}.
+        </p>
+      </div>,
+    ).then(() => {
+      window.open("", '_blank');
+    });
+  }
+
   const handlePayment = async (method: string) => {
     setForm({
       ...form,
@@ -196,7 +204,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         openModal(
           <div>
             <p
-              className={`text-center text-lg p-4 md:p-5`}
+              className={`text-center text-lg p-4 md:p-5 text-white`}
             >
               {data.message}
             </p>
@@ -463,7 +471,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                           openModal(
                             <div>
                               <p
-                                className={`text-center text-lg p-4 md:p-5`}
+                                className={`text-center text-lg p-4 md:p-5 text-white`}
                               >
                                 Comprobante de pago copiado al portapapeles.
                               </p>
@@ -581,10 +589,11 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
       });
     }
 
-    if (method === 'cash') {
+    if (method === 'cash' || method === 'spei') {
+
       initialPayment({
         invitation_id: parseInt(invitationId),
-        payment_method: 'cash',
+        payment_method: method,
       }).unwrap().then((data: any) => {
 
         setForm({
@@ -597,7 +606,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         openModal(
           <div>
             <p
-              className={`text-center text-lg p-4 md:p-5`}
+              className={`text-center text-lg p-4 md:p-5 text-white`}
             >
               Se ha generado tu referencia de pago.
             </p>
@@ -614,7 +623,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         openModal(
           <div>
             <p
-              className={`text-center text-lg p-4 md:p-5`}
+              className={`text-center text-lg p-4 md:p-5 text-white`}
             >
               Hubo un error al generar tu referencia de pago.
               <br />
@@ -691,7 +700,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
           openModal(
             <div>
               <p
-                className={`text-center text-lg p-4 md:p-5`}
+                className={`text-center text-lg p-4 md:p-5 text-white`}
               >
                 Por favor, selecciona un plan.
               </p>
@@ -950,7 +959,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     <button
                       className="btn-xl multi-border font-medium text-white disabled:opacity-50"
                       onClick={() => handlePayment('cash')}
-                      disabled={initialPaymentIsLoading || form.isSubmitting}
                     >
                       GUARDAR SOLICITUD
                     </button>
@@ -959,7 +967,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     <button
                       className="btn-xl multi-border font-medium text-white disabled:opacity-50"
                       onClick={() => handlePayment('cash')}
-                      disabled={initialPaymentIsLoading || form.isSubmitting}
                     >
                       GENERAR REFERENCIA
                     </button>
@@ -976,8 +983,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   <div className="flex justify-center my-5">
                     <button
                       className="btn-xl multi-border font-medium text-white disabled:opacity-50"
-                      onClick={() => true}
-                      disabled={initialPaymentIsLoading || form.isSubmitting}
+                      onClick={() => handlePayment('spei')}
                     >
                       GUARDAR SOLICITUD
                     </button>
@@ -985,8 +991,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   <div className="flex justify-center">
                     <button
                       className="btn-xl multi-border font-medium text-white disabled:opacity-50"
-                      onClick={() => true}
-                      disabled={initialPaymentIsLoading || form.isSubmitting}
+                      onClick={() => handlePayment('spei')}
                     >
                       GENERAR REFERENCIA
                     </button>
@@ -994,28 +999,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 </div>
               </div>
             )}
-            </div>
+          </div>
         </>
       )}
     </div>
-  );
-};
-
-const TabItem: React.FC<TabItemProps> = ({ title, activeTab, onClick }) => {
-  return (
-    <button
-      className={`px-4 py-2 bg-white ${activeTab === title
-          ? "border-t-2 border-x-2 border-highlight relative"
-          : "text-gray-500"
-        }`}
-      onClick={onClick}
-      style={{
-        borderBottom: '2px solid #FFF',
-        bottom: '-2px'
-      }}
-    >
-      {title}
-    </button>
   );
 };
 
