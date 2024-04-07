@@ -78,7 +78,7 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
   height: 80vh;
-  width: 100vh;
+  max-width: 100vh;
 }
 
 .bg_mensaje_aceptada {
@@ -521,12 +521,14 @@ swiper-container::part(bullet) {
   border-color: rgba(0, 0, 0, 0);
   border-width: 1px;
 }
-
-.btn-xl {
+.btn-md{
+  width: 14.375rem;
+  height: 3.125rem;
+}
+.btn-xl{
   width: 18.5rem;
   height: 3.125rem;
 }
-
 .multi-border::before {
   content: "";
   position: absolute;
@@ -731,12 +733,12 @@ select.input {
 
   input[type=checkbox],
   input[type=radio] {
-    --active: #F4F0EC;
-    --active-inner: #EF7911;
+    --active: #000;
+    --active-inner: #FFF;
     --focus: 2px 0 0 0 var(--active);
     --border: #F4F0EC;
     --border-hover: #EF7911;
-    --background: #F4F0EC;
+    --background: #000;
     --disabled: #F6F8FF;
     --disabled-inner: #E1E6F9;
     -webkit-appearance: none;
@@ -748,7 +750,7 @@ select.input {
     position: relative;
     margin: 0;
     cursor: pointer;
-    border: 1px solid var(--bc, var(--border));
+    border: 1px solid #FFF;
     background: var(--b, var(--background));
     transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
   }
@@ -1050,4 +1052,8 @@ body {
   border-radius: 0px !important;
   border: #27E1C1 solid 2px !important;
   background-color: black !important;
+}
+
+.font-yellow{
+  color: #F7D690;
 }

@@ -5,10 +5,6 @@ import { differenceInYears } from 'date-fns';
 export interface PersonalData {
   name: string;
   nameError: string;
-  lastName: string;
-  lastNameError: string;
-  secondLastName: string;
-  secondLastNameError: string;
   phone: string;
   phoneError: string;
   email: string;
@@ -17,22 +13,26 @@ export interface PersonalData {
   curpError: string;
   gender: string;
   genderError: string;
+  docType: string,
+  idPassportPicture: string,
   idFrontPicture: string;
   idFrontPictureError: string;
   idBackPicture: string;
   idBackPictureError: string;
   dateOfBirth: string;
   dateOfBirthError: string;
+  dayDateOfBirth: string;
+  dayDateOfBirthError: string;
+  monthDateOfBirth: string;
+  monthDateOfBirthError: string;
+  yearDateOfBirth: string;
+  yearDateOfBirthError: string;
   showShippingForm: boolean;
 }
 
 const initialState: PersonalData = {
   name: "",
   nameError: "",
-  lastName: "",
-  lastNameError: "",
-  secondLastName: "",
-  secondLastNameError: "",
   phone: "",
   phoneError: "",
   email: "",
@@ -41,12 +41,20 @@ const initialState: PersonalData = {
   curpError: "",
   gender: "",
   genderError: "",
+  docType: "",
+  idPassportPicture: "",
   idFrontPicture: "",
   idFrontPictureError: "",
   idBackPicture: "",
   idBackPictureError: "",
   dateOfBirth: "",
   dateOfBirthError: "",
+  dayDateOfBirth: "",
+  dayDateOfBirthError: "",
+  monthDateOfBirth: "",
+  monthDateOfBirthError: "",
+  yearDateOfBirth: "",
+  yearDateOfBirthError: "",
   showShippingForm: false,
 }
 
@@ -57,10 +65,6 @@ const personalDataSlice = createSlice({
     resetPersonalData: (state) => {
       state.name = "";
       state.nameError = "";
-      state.lastName = "";
-      state.lastNameError = "";
-      state.secondLastName = "";
-      state.secondLastNameError = "";
       state.phone = "";
       state.phoneError = "";
       state.email = "";
@@ -69,18 +73,24 @@ const personalDataSlice = createSlice({
       state.curpError = "";
       state.gender = "";
       state.genderError = "";
+      state.docType = "";
+      state.idPassportPicture = "";
       state.idFrontPicture = "";
       state.idFrontPictureError = "";
       state.idBackPicture = "";
       state.idBackPictureError = "";
       state.dateOfBirth = "";
       state.dateOfBirthError = "";
+      state.dayDateOfBirth = "";
+      state.dayDateOfBirthError = "";
+      state.monthDateOfBirth = "";
+      state.monthDateOfBirthError = "";
+      state.yearDateOfBirth = "";
+      state.yearDateOfBirthError = "";
       state.showShippingForm = false;
     },
     resetErrors: (state) => {
       state.nameError = "";
-      state.lastNameError = "";
-      state.secondLastNameError = "";
       state.phoneError = "";
       state.emailError = "";
       state.curpError = "";
@@ -88,24 +98,15 @@ const personalDataSlice = createSlice({
       state.idFrontPictureError = "";
       state.idBackPictureError = "";
       state.dateOfBirthError = "";
+      state.dayDateOfBirthError = "";
+      state.monthDateOfBirthError = "";
+      state.yearDateOfBirthError = "";
     },
     setName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
     setNameError: (state, action: PayloadAction<string>) => {
       state.nameError = action.payload;
-    },
-    setLastName: (state, action: PayloadAction<string>) => {
-      state.lastName = action.payload;
-    },
-    setLastNameError: (state, action: PayloadAction<string>) => {
-      state.lastNameError = action.payload;
-    },
-    setSecondLastName: (state, action: PayloadAction<string>) => {
-      state.secondLastName = action.payload;
-    },
-    setSecondLastNameError: (state, action: PayloadAction<string>) => {
-      state.secondLastNameError = action.payload;
     },
     setPhone: (state, action: PayloadAction<string>) => {
       state.phone = action.payload;
@@ -124,6 +125,12 @@ const personalDataSlice = createSlice({
     },
     setCurpError: (state, action: PayloadAction<string>) => {
       state.curpError = action.payload;
+    },
+    setDocType: (state, action: PayloadAction<string>) => {
+      state.docType = action.payload;
+    },
+    setIdPassportPicture: (state, action: PayloadAction<string>) => {
+      state.idPassportPicture = action.payload;
     },
     setGender: (state, action: PayloadAction<string>) => {
       state.gender = action.payload;
@@ -149,6 +156,24 @@ const personalDataSlice = createSlice({
     setDateOfBirthError: (state, action: PayloadAction<string>) => {
       state.dateOfBirthError = action.payload;
     },
+    setDayDateOfBirth: (state, action: PayloadAction<string>) => {
+      state.dayDateOfBirth = action.payload;
+    },
+    setDayDateOfBirthError: (state, action: PayloadAction<string>) => {
+      state.dayDateOfBirthError = action.payload;
+    },
+    setMonthDateOfBirth: (state, action: PayloadAction<string>) => {
+      state.monthDateOfBirth = action.payload;
+    },
+    setMonthDateOfBirthError: (state, action: PayloadAction<string>) => {
+      state.monthDateOfBirthError = action.payload;
+    },
+    setYearDateOfBirth: (state, action: PayloadAction<string>) => {
+      state.yearDateOfBirth = action.payload;
+    },
+    setYearDateOfBirthError: (state, action: PayloadAction<string>) => {
+      state.yearDateOfBirthError = action.payload;
+    },
     setShowShippingForm: (state, action: PayloadAction<boolean>) => {
       state.showShippingForm = action.payload;
     }
@@ -158,8 +183,6 @@ const personalDataSlice = createSlice({
       const invitation = action.payload;
 
       state.name = invitation.pre_registration?.first_name || "";
-      state.lastName = invitation.pre_registration?.last_name || "";
-      state.secondLastName = invitation.pre_registration?.mother_last_name || "";
       state.phone = invitation.pre_registration?.contact_phone_number || "";
       state.email = invitation.pre_registration?.email || "";
       state.curp = invitation.pre_registration?.curp || "";
@@ -193,16 +216,14 @@ export const {
   resetErrors,
   setName,
   setNameError,
-  setLastName,
-  setLastNameError,
-  setSecondLastName,
-  setSecondLastNameError,
   setPhone,
   setPhoneError,
   setEmail,
   setEmailError,
   setCurp,
   setCurpError,
+  setDocType,
+  setIdPassportPicture,
   setGender,
   setGenderError,
   setIdFrontPicture,
@@ -211,6 +232,12 @@ export const {
   setIdBackPictureError,
   setDateOfBirth,
   setDateOfBirthError,
+  setDayDateOfBirth,
+  setDayDateOfBirthError,
+  setMonthDateOfBirth,
+  setMonthDateOfBirthError,
+  setYearDateOfBirth,
+  setYearDateOfBirthError,
   setShowShippingForm
 } = personalDataSlice.actions;
 
