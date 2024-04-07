@@ -3,41 +3,59 @@ import ValidateStep from "@/components/ValidateStep";
 import Image from "next/image";
 import ValidateIMEIForm from "@/components/ValidateIMEIForm";
 import ValidateCoverageForm from "@/components/ValidateCoverageForm";
-import {ModalContext} from "@/contexts/ModalContext";
+import { ModalContext } from "@/contexts/ModalContext";
 import React from "react";
 
 export default function ValidateCompatibility() {
-  const {openModal} = React.useContext(ModalContext);
+  const { openModal } = React.useContext(ModalContext);
+
+  // const showModalWithIMEIInfo = () => {
+  //   openModal(
+  //     <div>
+  //       <p
+  //         className={`text-center text-lg p-4 md:p-5`}
+  //       >
+  //         El <span className={`font-medium`}>IMEI</span> es un código de 15 dígitos
+  //         <br />
+  //         que identifica a tu dispositivo y lo diferencia de cualquier otro.
+  //       </p>
+  //     </div>,
+  //   )
+  // }
+
+  const ctxModal = React.useContext(ModalContext);
+
+  const HeaderMensaje = () => {
+    return (
+      <div className="font-medium text-center">
+        {/* Tiendas <span className="text-highlight">Afiliadas</span> */}
+      </div>
+    )
+  }
+  const CuerpoMensaje = () => {
+    return (
+      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+        <h2 className="text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro">IMEI</h2>
+        <p className="text-center text-2xl lg:text-xl p-4 md:p-5 text-white">
+          Es un código de 15 dígitos que <br /> identifica a tu dispositivo y lo <br /> diferencia de cualquier otro
+        </p>
+      </div>
+    )
+  }
 
   const showModalWithIMEIInfo = () => {
-    openModal(
-      <div>
-        <p
-          className={`text-center text-lg p-4 md:p-5`}
-        >
-          El <span className={`font-medium`}>IMEI</span> es un código de 15 dígitos
-          <br/>
-          que identifica a tu dispositivo y lo diferencia de cualquier otro.
-        </p>
-      </div>,
-    )
+    ctxModal.openModal(<CuerpoMensaje />, <HeaderMensaje />);
   }
 
   const showModalWithLiberateInfo = () => {
     openModal(
-      <div>
+      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
         <p
-          className={`text-center text-lg p-4 md:p-5`}
+          className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
-          Si tienes un plan tarifario o plan
-          <br/>
-          con equipo, es posible que tu
-          <br/>
-          dispositivo <span className={`font-medium`}>no esté liberado</span> (consulta
-          <br/>con tu compañía).
-          <br/>
-          <br/>
-          Si está liberado, sigue al paso 4.
+          Haz <a href="https://www.inphonity.com/Faqs" className="text-highlight">clic aquí</a> para consultar <br />
+          más información sobre los equipos <br />
+          compatibles con nuestra red.
         </p>
       </div>,
     )
@@ -51,11 +69,11 @@ export default function ValidateCompatibility() {
             <header className="text-center md:text-left relative">
               <div className="md:ml-10 lg:ml-14 xl:ml-20 relative">
                 <h2 className="font-medium text-4xl lg:text-6xl xl:text-7xl mb-5">
-                ¡Gracias por unirte al 
-                <span className="text-highlight"> Círculo inphonity!</span>
+                  ¡Ya eres parte de<br />
+                  <span className="text-highlight"> inphonity</span>!
                 </h2>
                 <p className="text-2xl lg:text-3xl xl:text-4xl">
-                A continuación, valida la compatibilidad con tu celular siguiendo estos pasos
+                  ¿Qué sigue? Valida la compatibilidad<br /> de tu celular siguiendo estos pasos
                 </p>
                 <PlusDecoration
                   className="w-7 md:w-8 lg:w-12 xl:w-17 absolute"
@@ -66,12 +84,12 @@ export default function ValidateCompatibility() {
                 />
               </div>
               <picture>
-                <source width="600" media="(max-width: 600px)" srcSet="/img/validate-compatibility-600x575.png"/>
+                <source width="600" media="(max-width: 600px)" srcSet="/img/validate-compatibility-600x575.png" />
                 <source width="1200" media="(min-width: 600px) and (max-width: 1200px)"
-                        srcSet="/img/validate-compatibility-600x575.png"/>
+                  srcSet="/img/validate-compatibility-600x575.png" />
                 <source width="1800" media="(min-width: 1200px)"
-                        srcSet="/img/validate-compatibility-600x575.png"/>
-                <img width="1200" src="/img/validate-compatibility-600x575.png" alt="Valida compatibilidad"/>
+                  srcSet="/img/validate-compatibility-600x575.png" />
+                <img width="1200" src="/img/validate-compatibility-600x575.png" alt="Valida compatibilidad" />
               </picture>
               <PlusDecoration
                 className="w-10 md:w-11 lg:w-15 xl:w-20 absolute"
@@ -105,7 +123,7 @@ export default function ValidateCompatibility() {
                     alt={'¿Qué es IMEI?'}
                     width={25}
                     height={25}
-                    className={'inline w-3'}
+                    className={'inline w-3 pointer'}
                     onClick={showModalWithIMEIInfo}
                   />
                 </p>
@@ -138,7 +156,7 @@ export default function ValidateCompatibility() {
                     alt={'¿Qué es liberar un teléfono?'}
                     width={25}
                     height={25}
-                    className={'inline w-3'}
+                    className={'inline w-3 pointer'}
                     onClick={showModalWithLiberateInfo}
                   />
                 </p>

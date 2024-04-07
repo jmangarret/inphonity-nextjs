@@ -1,18 +1,18 @@
 "use client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import {useGetInvitationByIdQuery} from "@/lib/services/invitationsApi";
-import React, {useEffect} from "react";
-import {ModalContext} from "@/contexts/ModalContext";
-import {useSignatureMutation} from "@/lib/services/registersApi";
-import {useRouter} from "next/navigation";
+import { useGetInvitationByIdQuery } from "@/lib/services/invitationsApi";
+import React, { useEffect } from "react";
+import { ModalContext } from "@/contexts/ModalContext";
+import { useSignatureMutation } from "@/lib/services/registersApi";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-export default function Sign({params}: { params: { invitationId: string } }) {
+export default function Sign({ params }: { params: { invitationId: string } }) {
   const router = useRouter();
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
   const [isTermsAccepted, setIsTermsAccepted] = React.useState(false);
-  const [signature, {isLoading, error}] = useSignatureMutation();
+  const [signature, { isLoading, error }] = useSignatureMutation();
   const [isSigned, setIsSigned] = React.useState(false);
   const [password, setPassword] = React.useState('');
   const [passwordConfirmation, setPasswordConfirmation] = React.useState('');
@@ -59,13 +59,12 @@ export default function Sign({params}: { params: { invitationId: string } }) {
   const handleSign = () => {
     if (!isTermsAccepted) {
       openModal(
-        <div>
+        <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde text-white">
           <p
-            className={`text-center text-lg`}
+            className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
           >
-            Para poder continuar, no
-            <br/>
-            olvides aceptar los Términos y Condiciones.
+            Para poder continuar, <br />
+            <span className="font-medium">no olvides aceptar</span> los Términos y Condiciones.
           </p>
         </div>,
       );
@@ -179,10 +178,10 @@ export default function Sign({params}: { params: { invitationId: string } }) {
 
   return (
     <>
-      <Header/>
+      <Header />
       <main
         className={`text-black w-full`}
-        style={{backgroundColor: '#F4F0EC'}}
+        style={{ backgroundColor: '#F4F0EC' }}
       >
         <div
           className={`container p-3 md:p-6 lg:p-12 py-10 md:py-16 lg:py-20 mx-auto md:w-3/4 lg:w-4/5`}
@@ -191,7 +190,7 @@ export default function Sign({params}: { params: { invitationId: string } }) {
             <>
               <h1
                 className={`text-3xl md:text-5xl font-bold font-medium mb-3 md:mb-5 lg:mb-7`}
-                style={{color: '#F79F1A'}}
+                style={{ color: '#F79F1A' }}
               >
                 Contrato Socio inphonity
               </h1>
@@ -205,7 +204,7 @@ export default function Sign({params}: { params: { invitationId: string } }) {
               <iframe
                 src={`${apiURL}/file/contract.pdf`}
                 className={`w-full`}
-                style={{height: '70vh'}}
+                style={{ height: '70vh' }}
               />
 
               <div
@@ -248,7 +247,7 @@ export default function Sign({params}: { params: { invitationId: string } }) {
               </p>
               <p className={`text-light text-base md:text-lg mb-6 md:mb-10 lg:mb-14 text-center`}>
                 <strong className={`text-medium`}>Importante:</strong>
-                <br/>
+                <br />
                 Tu contraseña debe tener al menos 8 caracteres, ser alfanumérica, incluir una mayúscula y un carácter
                 especial
               </p>
@@ -295,7 +294,7 @@ export default function Sign({params}: { params: { invitationId: string } }) {
           )}
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 }

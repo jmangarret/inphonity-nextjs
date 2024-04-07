@@ -38,7 +38,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ expiresAt }) => {
 
   return (
     <div className="w-1/3 mx-auto">
-      <div className="grid grid-cols-5 gap-2 text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-center">
+      <div className="grid grid-cols-5 gap-2 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center">
         <div className="col-span-1">
           <span className="block font-medium">{timeLeft.hours}</span>
           <span className="text-xs md:text-sm lg:text-base xl:text-lg">Horas</span>

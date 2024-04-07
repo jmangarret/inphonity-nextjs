@@ -1,9 +1,9 @@
 "use client";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks";
-import {useInitialPaymentMutation, useRegisterMutation, ApiValidationError} from "@/lib/services/registersApi";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useInitialPaymentMutation, useRegisterMutation, ApiValidationError } from "@/lib/services/registersApi";
 import {
   setLastNameError,
   setNameError,
@@ -25,16 +25,16 @@ import {
   setZipCodeError,
   resetErrors as shippingResetErrors
 } from "@/lib/features/shipping/shippingSlice";
-import {ModalContext} from "@/contexts/ModalContext";
+import { ModalContext } from "@/contexts/ModalContext";
 import {
   setBankAccountNumberError,
   setBankNameError,
   setInterbankClabeError,
   resetErrors as accountDataResetErrors
 } from "@/lib/features/account-data/accountDataSlice";
-import {resetErrors as taxDateResetErrors} from "@/lib/features/tax-data/taxDataSlice";
-import {PreRegistration, useGetInvitationByIdQuery} from "@/lib/services/invitationsApi";
-import {setIsPaid} from "@/lib/features/plan/planSlice";
+import { resetErrors as taxDateResetErrors } from "@/lib/features/tax-data/taxDataSlice";
+import { PreRegistration, useGetInvitationByIdQuery } from "@/lib/services/invitationsApi";
+import { setIsPaid } from "@/lib/features/plan/planSlice";
 import PlusDecoration from "@/components/PlusDecoration";
 
 type PaymentFormProps = {
@@ -50,7 +50,7 @@ interface TabItemProps {
 declare let OpenPay: any;
 
 const formatNumberToMoney = (number: number) => {
-  return new Intl.NumberFormat('es-MX', {style: 'currency', currency: 'MXN'}).format(number);
+  return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(number);
 }
 
 import jsPDF from 'jspdf';
@@ -96,8 +96,8 @@ async function copyToClipboard(divId: string) {
   }
 }
 
-const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
-  const {openModal, closeModal} = React.useContext(ModalContext);
+const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
+  const { openModal, closeModal } = React.useContext(ModalContext);
   const dispatch = useAppDispatch();
   const accountData = useAppSelector((state) => state.accountData);
   const personalData = useAppSelector((state) => state.personalData);
@@ -112,7 +112,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
     error: invitationError,
     refetch: invitationRefetch
   } = useGetInvitationByIdQuery(invitationId);
-  const [register, {isLoading: registerIsLoading, error: registerError}] = useRegisterMutation();
+  const [register, { isLoading: registerIsLoading, error: registerError }] = useRegisterMutation();
   const [initialPayment, {
     isLoading: initialPaymentIsLoading,
     error: initialPaymentError
@@ -192,7 +192,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
         is_esim: shippingData.isEsim,
       }).unwrap();
     } catch (error) {
-      const {data} = error as ApiValidationError;
+      const { data } = error as ApiValidationError;
 
       if (data.message) {
         openModal(
@@ -272,7 +272,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
           if (response.data.error) {
             openModal(
               <div
-                className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-orange-gradient`}
+                className={`flex flex-col items-center justify-center h-full`}
               >
                 <div className={`grid grid-cols-12`}>
                   <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -283,19 +283,19 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                     {/* PlusDecoration */}
                     <PlusDecoration
                       className="w-9 md:w-12 lg:w-16 xl:w-20 absolute"
-                      style={{bottom: '0'}}
+                      style={{ bottom: '0' }}
                     />
                   </div>
 
                   <div
                     className="col-span-12 md:col-span-8"
                   >
-                    <h1 className={`text-4xl font-medium mb-12`}>
+                    <h1 className={`text-6xl font-medium mb-12 text-center text-white ajuste_centro`}>
                       ¡Ups!
                     </h1>
 
                     <div
-                      className={`flex mb-12 justify-center`}
+                      className={`flex mt-10 mb-10 justify-center`}
                     >
                       <div>
                         <Image
@@ -310,18 +310,16 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
 
                     <h1 className={`text-2xl font-medium mb-12`}>
                       Parece que hubo un pequeño
-                      <br/>
                       problema al procesar tu pago.
-                      <br/>
-                      <br/>
-                      No te preocupes, intenta nuevamente
-                      <br/>
-                      o utiliza otro método de pago.
+                      <br />
+                      <br />
+                      No te preocupes, <span className="text-highlight">intenta nuevamente
+                        o utiliza otro método de pago.</span>
                     </h1>
 
                     <div className="button-container w-3/5 mx-auto">
                       <button
-                        className="button button-black font-medium block w-full disabled:opacity-50"
+                        className="btn-xl multi-border font-medium block w-full"
                         onClick={closeModal}
                       >
                         Reintentar
@@ -349,7 +347,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
           }
 
 
-          const {data}: { data: PreRegistration } = response;
+          const { data }: { data: PreRegistration } = response;
 
           setForm({
             ...form,
@@ -363,7 +361,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
             <div
               className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-black bg-vertical-gradient-black`}
               id={`payment-ticket`}
-              style={{width: '450px', height: '800px'}}
+              style={{ width: '450px', height: '800px' }}
             >
               <div className={`grid grid-cols-12`}>
                 <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -374,7 +372,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                   {/* PlusDecoration */}
                   <PlusDecoration
                     className="w-9 md:w-12 lg:w-16 xl:w-20 absolute"
-                    style={{bottom: '0'}}
+                    style={{ bottom: '0' }}
                   />
                 </div>
                 <div
@@ -389,9 +387,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                   />
                   <h1 className={`text-2xl font-medium mb-12`}>
                     Bienvenido a inphonity
-                    <br/>
-                    <span style={{color: '#00BF63'}}>Tu pago fue exitoso</span>
-                    <br/>
+                    <br />
+                    <span style={{ color: '#00BF63' }}>Tu pago fue exitoso</span>
+                    <br />
                     {formatNumberToMoney(data.product.price)}
                   </h1>
 
@@ -405,14 +403,14 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                         className={`text-sm font-light p-4 text-left`}
                       >
                         Pagado con
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         Fecha de pago
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         Descripción
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         Referencia
                       </p>
                     </div>
@@ -423,14 +421,14 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                         className={`text-sm font-medium p-4 text-right`}
                       >
                         {form.cardNumber.slice(0, 4) + '**** **** ' + form.cardNumber.slice(-4)}
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         {new Date().toLocaleDateString()}
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         {data.product.name}
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         {data.payment_reference}
                       </p>
                     </div>
@@ -441,7 +439,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                   >
                     <p>
                       Tu comprobante de pago ha sido enviado a
-                      <br/>
+                      <br />
                       <span className={`font-medium`}>{personalData.email}</span>
                     </p>
                   </div>
@@ -526,7 +524,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                 {/* PlusDecoration */}
                 <PlusDecoration
                   className="w-9 md:w-12 lg:w-16 xl:w-20 absolute"
-                  style={{bottom: '0'}}
+                  style={{ bottom: '0' }}
                 />
               </div>
 
@@ -553,12 +551,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
 
                 <h1 className={`text-2xl font-medium mb-12`}>
                   Parece que hubo un pequeño
-                  <br/>
+                  <br />
                   problema al procesar tu pago.
-                  <br/>
-                  <br/>
+                  <br />
+                  <br />
                   No te preocupes, intenta nuevamente
-                  <br/>
+                  <br />
                   o utiliza otro método de pago.
                 </h1>
 
@@ -621,7 +619,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
               className={`text-center text-lg p-4 md:p-5`}
             >
               Hubo un error al generar tu referencia de pago.
-              <br/>
+              <br />
               Intenta nuevamente.
             </p>
           </div>,
@@ -632,7 +630,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
 
   useEffect(() => {
     if (registerError && 'data' in registerError) {
-      const {data} = registerError as ApiValidationError;
+      const { data } = registerError as ApiValidationError;
 
       Object.entries(data.errors).forEach((error) => {
         const [key, value] = error;
@@ -714,7 +712,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
       >
         <h3
           className={'font-medium text-3xl sm:text-5xl mb-1 sm:mb-3'}
-          style={{color: '#F79F1A'}}
+          style={{ color: '#F79F1A' }}
         >
           <Image
             src={`/img/orange-isotipo.svg`}
@@ -722,7 +720,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
             width={40}
             height={40}
             className={`inline-block mr-2 w-7 h-7 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14`}
-            style={{verticalAlign: 'middle'}}
+            style={{ verticalAlign: 'middle' }}
           />
           Realiza pago
         </h3>
@@ -785,7 +783,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                     className={`input input-border-gray ${form.cadHolderNameError ? 'input-error' : ''}`}
                     placeholder={'Nombre en la tarjeta'}
                     value={form.cardHolderName}
-                    onChange={(e) => setForm({...form, cardHolderName: e.target.value})}
+                    onChange={(e) => setForm({ ...form, cardHolderName: e.target.value })}
                   />
                   {form.cadHolderNameError && (
                     <p
@@ -800,7 +798,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                 <div className={'col-span-12'}>
                   <input
                     value={form.cardNumber}
-                    onChange={(e: { target: { value: any; }; }) => setForm({...form, cardNumber: e.target.value})}
+                    onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cardNumber: e.target.value })}
                     type="text"
                     className={`input input-border-gray ${form.cardNumberError ? 'input-error' : ''}`}
                     placeholder="Número de tarjeta"
@@ -831,7 +829,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                     <select
                       className={`input input-border-gray`}
                       value={form.expirationDateMonth}
-                      onChange={(e) => setForm({...form, expirationDateMonth: e.target.value})}
+                      onChange={(e) => setForm({ ...form, expirationDateMonth: e.target.value })}
                     >
                       <option value={""}>Mes</option>
                       {Array.from(Array(12).keys()).map((month) => {
@@ -862,7 +860,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                     <select
                       className={`input input-border-gray`}
                       value={form.expirationDateYear}
-                      onChange={(e) => setForm({...form, expirationDateYear: e.target.value})}
+                      onChange={(e) => setForm({ ...form, expirationDateYear: e.target.value })}
                     >
                       <option value={""}>Año</option>
                       {Array.from(Array(10).keys()).map((year) => (
@@ -892,7 +890,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                     className={`input input-border-gray ${form.cvvError ? 'input-error' : ''}`}
                     placeholder="Ingresa CVV"
                     value={form.cvv}
-                    onChange={(e: { target: { value: any; }; }) => setForm({...form, cvv: e.target.value})}
+                    onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cvv: e.target.value })}
                   />
                   {/* error */}
                   {form.cvvError && (
@@ -942,14 +940,13 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
   );
 };
 
-const TabItem: React.FC<TabItemProps> = ({title, activeTab, onClick}) => {
+const TabItem: React.FC<TabItemProps> = ({ title, activeTab, onClick }) => {
   return (
     <button
-      className={`px-4 py-2 bg-white ${
-        activeTab === title
+      className={`px-4 py-2 bg-white ${activeTab === title
           ? "border-t-2 border-x-2 border-highlight relative"
           : "text-gray-500"
-      }`}
+        }`}
       onClick={onClick}
       style={{
         borderBottom: '2px solid #FFF',

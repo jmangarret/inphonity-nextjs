@@ -5,9 +5,9 @@ export default function Footer() {
     <footer className="bg-white text-xs lg:text-sm font-medium">
       <div className="text-xs md:text-base py-3 md:py-6 text-center lg:text-left" style={{ background: '#298A9A' }}>
         <div
-          className={`container mx-auto grid grid-cols-8 gap-4 flex items-center`}
+          className={`container mx-auto grid grid-cols-12 gap-3 flex items-center`}
         >
-          <div className="col-span-12 sm:col-span-4 lg:col-span-2 text-center flex flex-col items-center">
+          <div className="col-span-12 sm:col-span-6 lg:col-span-3 md:col-span-6 text-center flex flex-col items-center">
             <Image
               src="/logo.svg"
               width={180}
@@ -16,7 +16,7 @@ export default function Footer() {
               className="mx-auto"
             />
           </div>
-          <div className="col-span-12 sm:col-span-4 lg:col-span-2 text-center flex flex-col items-center">
+          <div className="col-span-12 sm:col-span-6 lg:col-span-4 md:col-span-6 text-center flex flex-col items-center">
             <p className="footer-up-text">
               <Image
                 src="/img/direccion-icon.svg"
@@ -29,7 +29,7 @@ export default function Footer() {
               Ejercito Nacional Mexicano 904 Piso 12 CDMX
             </p>
           </div>
-          <div className="col-span-12 sm:col-span-4 lg:col-span-2 md:col-span-4 text-center flex flex-col items-center">
+          <div className="col-span-12 sm:col-span-6 lg:col-span-2 md:col-span-6 text-center flex flex-col items-center">
             <a href="tel:5592400295" className="footer-up-text">
               <Image
                 src="/img/telefono-icon.svg"
@@ -42,7 +42,7 @@ export default function Footer() {
               55 9240 0295
             </a>
           </div>
-          <div className="col-span-12 sm:col-span-4 lg:col-span-2 md:col-span-4 text-center flex flex-col items-center">
+          <div className="col-span-12 sm:col-span-6 lg:col-span-2 md:col-span-6 text-center flex flex-col items-center">
             <p className="footer-up-text">
               <a href="mailto:hola@inphonity.com">
                 <Image

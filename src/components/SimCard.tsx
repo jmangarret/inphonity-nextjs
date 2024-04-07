@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function SimCard() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -42,16 +42,16 @@ export default function SimCard() {
             <source
               width="600"
               media="(max-width: 600px)"
-              srcSet="/img/sim-card-frente-720x506.webp"
+              srcSet="/img/sim-card-frente-angulo.png"
             />
             <source
               width="800"
               media="(min-width: 1200px)"
-              srcSet="/img/sim-card-frente-1080x759.webp"
+              srcSet="/img/sim-card-frente-angulo.png"
             />
             <img
               width="720"
-              src="/img/sim-card-frente-720x506.webp"
+              src="/img/sim-card-frente-angulo.png"
               alt="SIM card frente"
             />
           </picture>

@@ -1,16 +1,16 @@
 "use client";
 import React from "react";
 import PlusDecoration from "@/components/PlusDecoration";
-import {ModalContext} from "@/contexts/ModalContext";
-import {useGetInvitationByIdQuery} from "@/lib/services/invitationsApi";
-import {useRouter} from "next/navigation";
+import { ModalContext } from "@/contexts/ModalContext";
+import { useGetInvitationByIdQuery } from "@/lib/services/invitationsApi";
+import { useRouter } from "next/navigation";
 
 type SignContractProps = {
   invitationId: string;
 };
-const SignContract: React.FC<SignContractProps> = ({invitationId}) => {
+const SignContract: React.FC<SignContractProps> = ({ invitationId }) => {
   const router = useRouter();
-  const {isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch} = useGetInvitationByIdQuery(invitationId);
+  const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = useGetInvitationByIdQuery(invitationId);
   const [isTermsAccepted, setIsTermsAccepted] = React.useState(false);
   const [isConfirmationAccepted, setIsConfirmationAccepted] = React.useState(false);
   const { openModal } = React.useContext(ModalContext);
@@ -26,14 +26,14 @@ const SignContract: React.FC<SignContractProps> = ({invitationId}) => {
   const handleSubmit = () => {
     if (!isTermsAccepted && !isConfirmationAccepted) {
       openModal(
-        <div>
+        <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde text-white">
           <p
-            className={`text-center text-lg p-4 md:p-5`}
+            className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
           >
-            Para poder continuar, no
-            <br/>
-            olvides aceptar los Términos y Condiciones
-            <br/>
+            Para poder continuar,
+            <br />
+            <span className="font-medium">no olvides aceptar</span> los Términos y Condiciones
+            <br />
             y confirmar tu información.
           </p>
         </div>,
@@ -44,12 +44,12 @@ const SignContract: React.FC<SignContractProps> = ({invitationId}) => {
 
     if (invitationData && invitationData.pre_registration?.payment_status !== 'paid') {
       openModal(
-        <div>
+        <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde text-white">
           <p
-            className={`text-center text-lg`}
+            className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
           >
             Para poder continuar, no
-            <br/>
+            <br />
             olvides realizar tu pago.
           </p>
         </div>,
@@ -79,16 +79,16 @@ const SignContract: React.FC<SignContractProps> = ({invitationId}) => {
               className={`text-white text-center font-medium text-3xl sm:text-5xl mb-1 sm:mb-3`}
             >
               Estás a un paso de descubrir
-              <br/>
+              <br />
               <span className={`text-highlight`}>más</span> conectividad y <span className={`text-highlight`}>más</span>
-              <br/>
+              <br />
               comunicación
             </h3>
             <div className={`text-right`}>
               {/* PlusDecoration */}
               <PlusDecoration
                 className="ml-auto w-9 relative md:w-8 lg:w-12 xl:w-17"
-                style={{right: '5%', top: '10px'}}
+                style={{ right: '5%', top: '10px' }}
               />
             </div>
             {/* terms and conditions */}
@@ -136,7 +136,7 @@ const SignContract: React.FC<SignContractProps> = ({invitationId}) => {
           {/* PlusDecoration */}
           <PlusDecoration
             className={'w-6 md:w-12 lg:w-16 xl:w-20 relative'}
-            style={{top: '-15%'}}
+            style={{ top: '-15%' }}
           />
         </div>
       </div>
