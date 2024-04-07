@@ -27,12 +27,12 @@ const SignContract: React.FC<SignContractProps> = ({ invitationId }) => {
     if (!isTermsAccepted && !isConfirmationAccepted) {
       openModal(
         <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde text-white">
-          <p
-            className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
-          >
+          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
             Para poder continuar,
             <br />
-            <span className="font-medium">no olvides aceptar</span> los Términos y Condiciones
+            <span className="font-medium">no olvides aceptar </span> 
+            <br />
+            los Términos y Condiciones
             <br />
             y confirmar tu información.
           </p>
@@ -63,10 +63,10 @@ const SignContract: React.FC<SignContractProps> = ({ invitationId }) => {
   }
 
   return (
-    <section className="my-10">
-      <header className="mb-10 sm:mb-12">
+    <section className="p-3 md:p-6 lg:p-9 xl:p-12 mb-3 md:mb-6 lg:mb-9 xl:mb-12">
+      <header className="px-24">
         <h3 className={'font-medium text-white text-center text-3xl sm:text-5xl mb-3'}>
-          Estas a un paso de descubrir más <span className="text-highlight">conectividad</span>
+          Estas a un paso de descubrir más <span className="text-highlight">conectividad </span>
           y más <span className="text-highlight">comunicación</span>
         </h3>
         

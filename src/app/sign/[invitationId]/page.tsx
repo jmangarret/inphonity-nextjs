@@ -60,11 +60,14 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
     if (!isTermsAccepted) {
       openModal(
         <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde text-white">
-          <p
-            className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
-          >
-            Para poder continuar, <br />
-            <span className="font-medium">no olvides aceptar</span> los Términos y Condiciones.
+          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+            Para poder continuar,
+            <br />
+            <span className="font-medium">no olvides aceptar </span> 
+            <br />
+            los Términos y Condiciones
+            <br />
+            y confirmar tu información.
           </p>
         </div>,
       );
@@ -78,10 +81,8 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
   const handleSubmit = () => {
     if (password !== passwordConfirmation) {
       openModal(
-        <div>
-          <p
-            className={`text-center text-lg p-4 md:p-6`}
-          >
+        <div className="flex flex-col items-center justify-center h-full text-white">
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
             Las contraseñas no coinciden.
           </p>
         </div>,
@@ -92,10 +93,8 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
 
     if (password.length < 8) {
       openModal(
-        <div>
-          <p
-            className={`text-center text-lg p-4 md:p-6`}
-          >
+        <div className="flex flex-col items-center justify-center h-full text-white">
+          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
             La contraseña debe tener al menos 8 caracteres.
           </p>
         </div>,
@@ -106,10 +105,8 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
 
     if (!password.match(/[A-Z]/)) {
       openModal(
-        <div>
-          <p
-            className={`text-center text-lg p-4 md:p-6`}
-          >
+        <div className="flex flex-col items-center justify-center h-full text-white">
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
             La contraseña debe tener al menos una mayúscula.
           </p>
         </div>,
@@ -120,10 +117,8 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
 
     if (!password.match(/[0-9]/)) {
       openModal(
-        <div>
-          <p
-            className={`text-center text-lg`}
-          >
+        <div className="flex flex-col items-center justify-center h-full text-white">
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
             La contraseña debe tener al menos un número.
           </p>
         </div>,
@@ -134,10 +129,8 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
 
     if (!password.match(/[^A-Za-z0-9]/)) {
       openModal(
-        <div>
-          <p
-            className={`text-center text-lg p-4 md:p-6`}
-          >
+        <div className="flex flex-col items-center justify-center h-full text-white">
+          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
             La contraseña debe tener al menos un carácter especial.
           </p>
         </div>,
@@ -165,10 +158,8 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
         }
 
         openModal(
-          <div>
-            <p
-              className={`text-center text-lg p-4 md:p-6`}
-            >
+          <div className="flex flex-col items-center justify-center h-full text-white">
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
               Ocurrió un error al firmar el contrato.
             </p>
           </div>,
@@ -179,26 +170,18 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
   return (
     <>
       <Header />
-      <main
-        className={`text-black w-full`}
-        style={{ backgroundColor: '#F4F0EC' }}
-      >
-        <div
-          className={`container p-3 md:p-6 lg:p-12 py-10 md:py-16 lg:py-20 mx-auto md:w-3/4 lg:w-4/5`}
-        >
+      <main className={`text-white w-full`}>
+        <div className={`container p-3 md:p-6 lg:p-12 py-10 md:py-16 lg:py-20 mx-auto md:w-3/4 lg:w-4/5`}>
           {!isSigned && (
             <>
-              <h1
-                className={`text-3xl md:text-5xl font-bold font-medium mb-3 md:mb-5 lg:mb-7`}
-                style={{ color: '#F79F1A' }}
-              >
-                Contrato Socio inphonity
+              <h1 className={`text-3xl md:text-5xl font-bold font-medium mb-3 md:mb-5 lg:mb-7 text-center`}>
+                <span className="text-highlight">Contrato </span> socio inphonity
               </h1>
-              <p
-                className={`text-light text-lg md:text-xl mb-6 md:mb-10 lg:mb-14`}
-              >
-                Antes de comenzar, es necesario firmar los contratos donde se especifican los Términos y Condiciones de
-                uso.
+              <p className={`text-light text-lg md:text-xl mb-6 md:mb-10 lg:mb-14`}>
+                Antes de comenzar, es 
+                <span className="font-medium"> necesario firmar los contratos </span> 
+                donde se especifican 
+                los Términos y Condiciones de uso.
               </p>
 
               <iframe
@@ -207,29 +190,28 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
                 style={{ height: '70vh' }}
               />
 
-              <div
-                className={`w-full md:w-3/4 mx-auto mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14`}
-              >
-                <div className="flex items-center text-black mb-8 md:mb-12 lg:mb-14">
+              <div className={`w-full md:w-3/4 mx-auto mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14`}>
+                <div className="flex justify-center text-black mb-8 md:mb-12 lg:mb-14">
                   <input
                     type="checkbox"
                     id="terms"
-                    className="form-checkbox h-5 w-5 text-green-500 black"
+                    className="form-checkbox green-check h-5 w-5 text-green-500 black"
                     name={'terms'}
                     onChange={handleCheckboxChange}
                   />
                   <label htmlFor="terms">
-                    <span className={`ml-2 inline-block font-medium text-black`}>Acepto Términos y Condiciones</span>
+                    <span className={`ml-2 inline-block font-medium text-white`}>
+                      Acepto los Términos y Condiciones
+                    </span>
                   </label>
                 </div>
 
                 <div className="flex items-center text-black mb-2 justify-center">
-                  {/* submit button red color with text white  */}
                   <button
-                    className="bg-red-500 text-white rounded-full py-2 px-16 disabled:opacity-50"
+                    className="btn-xl multi-border text-white disabled:opacity-50"
                     onClick={handleSign}
                   >
-                    Firmar contrato
+                    FIRMAR CONTRATO
                   </button>
                 </div>
               </div>
