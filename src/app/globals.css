@@ -99,6 +99,12 @@
   background-size: cover;
 }
 
+.bg_bienvenida {
+  background-image: url("/img/bg_bienvenida.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .ajuste_centro {
   margin-top: -100px;
 }
