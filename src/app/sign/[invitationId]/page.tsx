@@ -169,7 +169,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
 
   return (
     <>
-      <Header />
+      <Header centerLogo={true}  />
       <main className={`text-white w-full`}>
         <div className={`container p-3 md:p-6 lg:p-12 py-10 md:py-16 lg:py-20 mx-auto md:w-3/4 lg:w-4/5`}>
           {!isSigned && (
@@ -219,24 +219,31 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
           )}
           {isSigned && (
             <>
-              <h1
-                className={`text-3xl md:text-5xl font-bold font-medium mb-2 md:mb-3 lg:mb-4 text-black text-center`}
-              >
-                Crea una contraseña,
+              <h1 className={`text-3xl md:text-5xl font-bold font-medium mb-2 md:mb-3 lg:mb-4 text-center`}>
+                Crea una <span className="text-highlight">contraseña</span>
               </h1>
               <p className={`text-light text-lg md:text-xl mb-6 md:mb-10 lg:mb-14 text-center`}>
-                la necesitarás para ingresar a la aplicación de inphonity
+                La necesitarás para ingresar a la App de inphonity
               </p>
               <p className={`text-light text-base md:text-lg mb-6 md:mb-10 lg:mb-14 text-center`}>
-                <strong className={`text-medium`}>Importante:</strong>
+                <strong className={`text-medium text-highlight`}>Importante:</strong>
                 <br />
-                Tu contraseña debe tener al menos 8 caracteres, ser alfanumérica, incluir una mayúscula y un carácter
+                Tu contraseña debe tener al menos 8 caracteres, 
+                <br />
+                ser alfanumérica, incluir una mayúscula y un carácter
                 especial
               </p>
 
-              <div
-                className={`w-full md:w-3/4 mx-auto mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14`}
-              >
+              <div className={`w-full md:w-3/4 mx-auto mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14`}>
+                <div className="flex items-center text-black mb-6 md:mb-8 lg:mb-10">
+                  <input
+                    type="email"
+                    className={`input input-border-gray form-input h-12 w-full`}
+                    placeholder="Correo electrónico"
+                    name={'email'}
+                    autoComplete="off"
+                  />
+                </div>
                 <div className="flex items-center text-black mb-6 md:mb-8 lg:mb-10">
                   <input
                     type="password"
@@ -258,17 +265,18 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
                   />
                 </div>
 
-                <div className="flex items-center text-black mb-6 md:mb-8 lg:mb-10">
+                <div className="flex items-center justify-center text-black mb-20">
+                  <div className="w-1/2">
                   <PasswordStrengthBar strength={passwordStrength} />
+                  </div>
                 </div>
-                <div className="flex items-center text-black mb-2 justify-center">
-                  {/* submit button red color with text white  */}
+                <div className="flex items-center my-10 mb-2 justify-center">
                   <button
-                    className="bg-red-500 text-white rounded-full py-2 px-16 text-medium disabled:opacity-50"
+                    className="btn-xl multi-border font-medium text-white disabled:opacity-50"
                     onClick={handleSubmit}
                     disabled={isLoading}
                   >
-                    Enviar
+                    ENVIAR
                   </button>
                 </div>
               </div>
@@ -288,20 +296,24 @@ type PasswordStrengthBarProps = {
 
 const PasswordStrengthBar: React.FC<PasswordStrengthBarProps> = ({ strength }) => {
   let color;
+  let colorIcon;
   let position;
 
   switch (strength) {
     case 'débil':
       color = '#F50D0D';
       position = '0%';
+      colorIcon = 'red';
       break;
     case 'regular':
       color = '#FFE174';
       position = 'calc(50% - 20px)';
+      colorIcon = 'yellow';
       break;
     case 'fuerte':
       color = '#00BF63';
       position = 'calc(100% - 40px)';
+      colorIcon = 'green';
       break;
   }
 
@@ -315,12 +327,15 @@ const PasswordStrengthBar: React.FC<PasswordStrengthBarProps> = ({ strength }) =
         style={{ height: '100%', width: '100%', backgroundColor: color }}
       />
       <Image
-        src={`/img/password-strength.svg`}
+        src={`/img/password-strength-${colorIcon}.svg`}
         alt="Password Strength"
         width={40}
         height={40}
         style={{ position: 'absolute', left: position, top: '-10px' }}
       />
+      <p className="text-base text-white text-center w-full my-3">
+        Nivel de Seguridad - <span className="uppercase">{strength}</span>
+      </p>
     </div>
   );
 };
