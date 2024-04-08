@@ -165,7 +165,7 @@ export default function PersonalDataForm() {
         <p
           className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
-          <span className="font-medium">Sube una <span className="text-highlight">foto de frente</span>
+          <span className="font-medium">Sube una <span className="text-highlight">foto de frente </span>
             de tu <span className="text-highlight">Pasaporte</span>.
           </span>
         </p>
