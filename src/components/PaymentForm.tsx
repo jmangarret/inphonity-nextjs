@@ -128,18 +128,76 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
     setActiveTab(tab);
   };
 
-  const handleTestModal = (method: string) =>{
+  const handleTestModal = (method: string) => {
     openModal(
-      <div>
-        <p
-          className={`text-center text-lg p-4 md:p-5 text-white`}
-        >
-          PRUEBA MODAL: Se ha generado tu referencia de pago {method}.
-        </p>
+      <div
+        className={`flex flex-col items-center justify-center h-full bg-black bg-modal-verde`}
+      >
+        <div className={`grid grid-cols-12`}>
+          <div className="hidden md:flex md:col-span-2 justify-center relative">
+            {/* PlusDecoration */}
+            <PlusDecoration
+              className="w-4 md:w-8 relative mx-auto"
+            />
+            {/* PlusDecoration */}
+            <PlusDecoration
+              className="w-9 md:w-12 lg:w-16 xl:w-20 absolute"
+              style={{ bottom: '0' }}
+            />
+          </div>
+
+          <div
+            className="col-span-12 md:col-span-8"
+          >
+            <h1 className={`text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro`}>
+              ¡Ups!
+            </h1>
+
+            <div
+              className={`flex mb-12 justify-center`}
+            >
+              <div>
+                <Image
+                  src={`/img/emoji-sorry.svg`}
+                  alt={`SIM física`}
+                  width={150}
+                  height={150}
+                  className={`ml-auto`}
+                />
+              </div>
+            </div>
+
+            <p className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white`}>
+              Parece que hubo un pequeño
+              <br />
+              problema al procesar tu pago.
+              <br />
+              <br />
+              No te preocupes, intenta nuevamente
+              <br />
+              o utiliza otro método de pago.
+            </p>
+
+            <div className="button-container w-4/5 lg:w-72 mx-auto">
+              <button
+                className="btn-xl multi-border font-medium block w-full text-white"
+                onClick={closeModal}
+              >
+                Reintentar
+              </button>
+            </div>
+          </div>
+          <div
+            className={`hidden md:flex md:col-span-2 justify-center items-center`}
+          >
+            {/* PlusDecoration */}
+            <PlusDecoration
+              className="w-9 md:w-12 lg:w-16 xl:w-20"
+            />
+          </div>
+        </div>
       </div>,
-    ).then(() => {
-      window.open("", '_blank');
-    });
+    );
   }
 
   const handlePayment = async (method: string) => {
@@ -296,7 +354,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   <div
                     className="col-span-12 md:col-span-8"
                   >
-                    <h1 className={`text-6xl font-medium mb-12 text-center text-white ajuste_centro`}>
+                    <h1 className={`text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro`}>
                       ¡Ups!
                     </h1>
 
@@ -314,7 +372,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                       </div>
                     </div>
 
-                    <h1 className={`text-2xl font-medium mb-12`}>
+                    <h1 className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white`}>
                       Parece que hubo un pequeño
                       problema al procesar tu pago.
                       <br />
@@ -323,9 +381,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                         o utiliza otro método de pago.</span>
                     </h1>
 
-                    <div className="button-container w-3/5 mx-auto">
+                    <div className="button-container w-4/5 lg:w-72 mx-auto">
                       <button
-                        className="btn-xl multi-border font-medium block w-full"
+                        className="btn-xl multi-border font-medium block w-full text-white font-medium"
                         onClick={closeModal}
                       >
                         Reintentar
@@ -367,7 +425,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
             <div
               className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-black bg-vertical-gradient-black`}
               id={`payment-ticket`}
-              style={{ width: '450px', height: '800px' }}
+              style={{ width: 'auto', height: 'auto' }}
             >
               <div className={`grid grid-cols-12`}>
                 <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -469,9 +527,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                       onClick={() => {
                         copyToClipboard('payment-ticket').then(() => {
                           openModal(
-                            <div>
+                            <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
                               <p
-                                className={`text-center text-lg p-4 md:p-5 text-white`}
+                                className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white`}
                               >
                                 Comprobante de pago copiado al portapapeles.
                               </p>
@@ -493,7 +551,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
 
                   <div className="button-container w-3/5 mx-auto">
                     <button
-                      className="button button-black font-medium block w-full disabled:opacity-50"
+                      className="multi-border font-medium block w-full"
                       onClick={closeModal}
                     >
                       Aceptar
@@ -519,7 +577,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         });
         openModal(
           <div
-            className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-orange-gradient`}
+            className={`flex flex-col items-center justify-center h-full bg-black bg-modal-verde`}
           >
             <div className={`grid grid-cols-12`}>
               <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -537,7 +595,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
               <div
                 className="col-span-12 md:col-span-8"
               >
-                <h1 className={`text-4xl font-medium mb-12`}>
+                <h1 className={`text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro`}>
                   ¡Ups!
                 </h1>
 
@@ -555,7 +613,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   </div>
                 </div>
 
-                <h1 className={`text-2xl font-medium mb-12`}>
+                <p className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white`}>
                   Parece que hubo un pequeño
                   <br />
                   problema al procesar tu pago.
@@ -564,11 +622,11 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   No te preocupes, intenta nuevamente
                   <br />
                   o utiliza otro método de pago.
-                </h1>
+                </p>
 
-                <div className="button-container w-3/5 mx-auto">
+                <div className="button-container w-4/5 lg:w-72 mx-auto">
                   <button
-                    className="button button-black font-medium block w-full disabled:opacity-50"
+                    className="btn-xl multi-border font-medium block w-full text-white"
                     onClick={closeModal}
                   >
                     Reintentar
@@ -604,9 +662,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         invitationRefetch();
 
         openModal(
-          <div>
+          <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
             <p
-              className={`text-center text-lg p-4 md:p-5 text-white`}
+              className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white`}
             >
               Se ha generado tu referencia de pago.
             </p>
@@ -623,7 +681,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         openModal(
           <div>
             <p
-              className={`text-center text-lg p-4 md:p-5 text-white`}
+              className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white`}
             >
               Hubo un error al generar tu referencia de pago.
               <br />
@@ -698,9 +756,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         }
         if (key === "product_id") {
           openModal(
-            <div>
+            <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
               <p
-                className={`text-center text-lg p-4 md:p-5 text-white`}
+                className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white`}
               >
                 Por favor, selecciona un plan.
               </p>
@@ -723,6 +781,18 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         </p>
       </header>
 
+      {/* <div className={'col-span-12 my-10'}>
+        <div className="button-container flex justify-center">
+          <button
+            className="btn-md multi-border font-medium text-white disabled:opacity-50"
+            onClick={() => handleTestModal('card')}
+            disabled={initialPaymentIsLoading || form.isSubmitting}
+          >
+            Probar
+          </button>
+        </div>
+      </div> */}
+
       {invitationData && invitationData.pre_registration?.payment_status === 'paid' ? (
         <div className="bg-black text-white rounded-3xl p-5 m-3 text-center mb-10 font-medium">
           <h3 className={`text-highlight text-3xl md:text-6xl mb-6`}>
@@ -738,56 +808,56 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
             <div className="mb-5">
               <span className="mr-10">
                 <Image
-                    src={'/img/pago-card.png'}
-                    alt={'Pago con tarjeta'}
-                    width={39.33}
-                    height={27.42}
-                    className={'inline-block w-5 font-medium'}
-                    />
+                  src={'/img/pago-card.png'}
+                  alt={'Pago con tarjeta'}
+                  width={39.33}
+                  height={27.42}
+                  className={'inline-block w-5 font-medium'}
+                />
               </span>
               <span className="mr-10 inline-block align-sub">
-                <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago con tarjeta")}/> 
+                <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago con tarjeta")} />
               </span>
               <label>
-                <span> Pago con tarjeta</span>  
+                <span> Pago con tarjeta</span>
               </label>
             </div>
             <div className="mb-5">
               <span className="mr-10">
-                  <Image
-                      src={'/img/pago-cash.png'}
-                      alt={'Pago con efectivo'}
-                      width={39.33}
-                      height={27.42}
-                      className={'inline-block w-5 font-medium'}
-                      />
-                </span>
-                <span className="mr-10 inline-block align-sub">
-                  <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago en efectivo")}/> 
-                </span>
-                <label>
-                  <span> Pago en efectivo</span> 
-                </label>
+                <Image
+                  src={'/img/pago-cash.png'}
+                  alt={'Pago con efectivo'}
+                  width={39.33}
+                  height={27.42}
+                  className={'inline-block w-5 font-medium'}
+                />
+              </span>
+              <span className="mr-10 inline-block align-sub">
+                <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago en efectivo")} />
+              </span>
+              <label>
+                <span> Pago en efectivo</span>
+              </label>
             </div>
             <div className="mb-5">
               <span className="mr-10">
-                  <Image
-                      src={'/img/pago-transfer.png'}
-                      alt={'Pago con transferencia'}
-                      width={39.33}
-                      height={27.42}
-                      className={'inline-block w-5 font-medium'}
-                      />
-                </span>
-                <span className="mr-10 inline-block align-sub">
-                  <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago con transferencia interbancaria (SPEI)")}/> 
-                </span>
-                <label>
-                  <span> Pago con transferencia interbancaria SPEI</span> 
-                </label>
+                <Image
+                  src={'/img/pago-transfer.png'}
+                  alt={'Pago con transferencia'}
+                  width={39.33}
+                  height={27.42}
+                  className={'inline-block w-5 font-medium'}
+                />
+              </span>
+              <span className="mr-10 inline-block align-sub">
+                <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago con transferencia interbancaria (SPEI)")} />
+              </span>
+              <label>
+                <span> Pago con transferencia interbancaria SPEI</span>
+              </label>
             </div>
           </div>
-         
+
           <div className="text-white">
             {activeTab === "Pago con tarjeta" && (
               <div className={'grid grid-cols-12'} id={'payment-card'}>
@@ -906,7 +976,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                       className={`input input-border-gray ${form.cvvError ? 'input-error' : ''}`}
                       placeholder="CVV*"
                       value={form.cvv}
-                      onChange={(e: { target: { value: any; }; }) => setForm({...form, cvv: e.target.value})}
+                      onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cvv: e.target.value })}
                     />
                     {/* error */}
                     {form.cvvError && (
@@ -926,7 +996,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     <span className="font-medium">Envío:   </span> &nbsp;&nbsp; $150
                   </div>
                   <div className="w-1/5 my-1 self-center">
-                  <hr />
+                    <hr />
                   </div>
                   <div className="flex justify-center">
                     <span className="font-medium text-3xl text-highlight">Total a Pagar</span>
@@ -935,7 +1005,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     <span className="text-3xl">$1.149</span>
                   </div>
                 </div>
-                
+
                 <div className={'col-span-12 my-10'}>
                   <div className="button-container flex justify-center">
                     <button

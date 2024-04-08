@@ -23,7 +23,7 @@ export default function CoverageSection() {
           <div className="p-4">
             <Coverage
               description={["Navega, llama y textea en ", <span className='text-highlight'>EE.UU.</span>, " y ", <span className='text-highlight'>Canadá</span>]}
-              image="/img/avion-icon.svg"
+              image="/img/avion-icon.png"
             />
           </div>
           <div className="p-4">
