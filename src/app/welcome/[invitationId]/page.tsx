@@ -10,6 +10,17 @@ export default function Welcome({ params }: { params: { invitationId: string } }
   const router = useRouter();
   const { data, error, isLoading } = useGetInvitationByIdQuery(params.invitationId);
 
+  // DATA DUMMY
+  // const error = {
+  //   status: 200
+  // }
+  // const isLoading = false;
+  // const data = {
+  //   pre_registration: {
+  //     is_esim: true
+  //   }
+  // }
+
   useEffect(() => {
     if (error && 'status' in error && error.status === 404) {
       router.push('/');
@@ -18,8 +29,8 @@ export default function Welcome({ params }: { params: { invitationId: string } }
 
   return (
     <div>
-      {/* <Header /> */}
-      <main className={`text-center ${isLoading ? 'bg-black' : data && data.pre_registration?.is_esim ? 'bg-orange-gradient' : 'bg_bienvenida'}`} style={{ height: '100vh' }}>
+      {/* <Header centerLogo={true} /> */}
+      <main className={`text-center ${isLoading ? 'bg-black' : 'bg_bienvenida'}`} style={{ height: '100vh' }}>
         <div className={`p-9 lg:w-3/4 mx-auto`}>
           <Image
             src="/logo.svg"
@@ -30,11 +41,7 @@ export default function Welcome({ params }: { params: { invitationId: string } }
             className={`mx-auto`}
           />
         </div>
-        <div
-          className={`p-4 md:p-4 lg:w-3/4 mx-auto mt-10`}
-        >
-
-
+        <div className={`p-4 md:p-4 lg:w-3/4 mx-auto mt-10`}>
           {data && !data.pre_registration?.is_esim && (
             <>
               <h1
@@ -70,7 +77,7 @@ export default function Welcome({ params }: { params: { invitationId: string } }
             </>
           )}
 
-          {/* {data && data.pre_registration?.is_esim && ( */}
+          {data && data.pre_registration?.is_esim && (
           <>
             <h1 className={`text-4xl md:text-6xl font-bold`}>
               Bienvenido a <span className="text-highlight">inphonity</span>
@@ -97,7 +104,7 @@ export default function Welcome({ params }: { params: { invitationId: string } }
               No olvides revisar tanto tu bandeja de entrada como la de <span className="font-medium">correos no deseados.</span>
             </p>
           </>
-          {/*)}*/}
+          )}
         </div>
       </main>
       <Footer />
