@@ -37,7 +37,7 @@ export default function ValidateCompatibility() {
       <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
         <h2 className="text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro">IMEI</h2>
         <p className="text-center text-2xl lg:text-xl p-4 md:p-5 text-white">
-          Es un código de 15 dígitos que <br /> identifica a tu dispositivo y lo <br /> diferencia de cualquier otro
+          Es un código de 15 dígitos que identifica a tu dispositivo y <br />lo  diferencia de cualquier otro
         </p>
       </div>
     )
