@@ -33,8 +33,8 @@ const months = [
   { index: 7, name: "Agosto" },
   { index: 8, name: "Septiembre" },
   { index: 9, name: "Octubre" },
-  { index: 10,name: "Noviembre" },
-  { index: 11,name: "Diciembre" }
+  { index: 10, name: "Noviembre" },
+  { index: 11, name: "Diciembre" }
 ];
 const currentYear = new Date().getFullYear();
 const years = Array.from({ length: 101 }, (_, i) => currentYear - i);
@@ -64,20 +64,20 @@ export default function PersonalDataForm() {
     });
   }, [fieldsOrder, personalData]);
 
-  useEffect(()=>{
-    const {dayDateOfBirth, monthDateOfBirth, yearDateOfBirth} = personalData
-    if (dayDateOfBirth && monthDateOfBirth && yearDateOfBirth){
-      let value = new Date( Number(yearDateOfBirth), Number(monthDateOfBirth),Number(dayDateOfBirth));
+  useEffect(() => {
+    const { dayDateOfBirth, monthDateOfBirth, yearDateOfBirth } = personalData
+    if (dayDateOfBirth && monthDateOfBirth && yearDateOfBirth) {
+      let value = new Date(Number(yearDateOfBirth), Number(monthDateOfBirth), Number(dayDateOfBirth));
       const age = differenceInYears(new Date(), new Date(value));
       dispatch(setDateOfBirth(value.toString()));
-  
+
       if (age < 18) {
         dispatch(setDateOfBirthError('Debes tener al menos 18 años'));
       } else {
         dispatch(setDateOfBirthError(''));
       }
     }
-  },[personalData])
+  }, [personalData])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -126,7 +126,7 @@ export default function PersonalDataForm() {
         const data = e.target?.result;
         if (name === 'idFrontPicture') {
           dispatch(setIdFrontPicture(data as string));
-        } 
+        }
         if (name === 'idBackPicture') {
           dispatch(setIdBackPicture(data as string));
         }
@@ -150,13 +150,24 @@ export default function PersonalDataForm() {
         <p
           className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
-          <span className="font-medium">Sube una <span className="text-highlight">foto clara</span> o el <span className="text-highlight">PDF</span> <br />
-            de tu Constancia de Situación<br />
-            Fiscal</span> (CSF) actualizada.
-          <br /><br />
-          Esta debe ser menor a 3 meses,<br />
-          y puedes descargarla desde<br />
-          el portal del SAT
+          <span className="font-medium">Sube una <span className="text-highlight">foto por ambos lados</span> <br />
+            de tu <span className="text-highlight">identificación oficial (INE o Pasaporte)</span>.
+          </span>
+        </p>
+      </div>,
+    );
+  }
+
+  const showModalWithPassportInfo = (e: React.MouseEvent) => {
+    e.preventDefault();
+    openModal(
+      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+        <p
+          className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
+        >
+          <span className="font-medium">Sube una <span className="text-highlight">foto de frente</span>
+            de tu <span className="text-highlight">Pasaporte</span>.
+          </span>
         </p>
       </div>,
     );
@@ -261,65 +272,65 @@ export default function PersonalDataForm() {
           </div>
           {/* name */}
 
-           {/* date of birth */}
+          {/* date of birth */}
           <div className={'col-span-12 sm:col-span-4'}>
             <input
-                id={'dateOfBirth'}
-                type="text"
-                className={`input input-border-gray ${personalData.dateOfBirthError ? 'input-error' : ''}`}
-                placeholder="Fecha de nacimiento*"
-                name={'dateOfBirth'}
-                readOnly
+              id={'dateOfBirth'}
+              type="text"
+              className={`input input-border-gray ${personalData.dateOfBirthError ? 'input-error' : ''}`}
+              placeholder="Fecha de nacimiento*"
+              name={'dateOfBirth'}
+              readOnly
             />
             {/* error */}
             {personalData.dateOfBirthError && (
-                <p
-                  className={'text-red-500 text-xs mt-1 mx-3'}
-                >
-                  {personalData.dateOfBirthError}
-                </p>
+              <p
+                className={'text-red-500 text-xs mt-1 mx-3'}
+              >
+                {personalData.dateOfBirthError}
+              </p>
             )}
           </div>
           <div className="col-span-12 sm:col-span-2">
-            <select 
-                className="input" 
-                name={'dayDateOfBirth'} 
-                onChange={handleInputChange}
-                ref={el => inputRefs.current.dayDateOfBirth = el}
-                >
+            <select
+              className="input"
+              name={'dayDateOfBirth'}
+              onChange={handleInputChange}
+              ref={el => inputRefs.current.dayDateOfBirth = el}
+            >
               <option value={''}>Día</option>
               {
-                days.map(val=>{
+                days.map(val => {
                   return <option key={val} value={val}>{val}</option>
                 })
               }
             </select>
           </div>
           <div className="col-span-12 sm:col-span-3">
-            <select 
-              className="input" 
-              name={'monthDateOfBirth'} 
+            <select
+              className="input"
+              name={'monthDateOfBirth'}
               onChange={handleInputChange}
               ref={el => inputRefs.current.monthDateOfBirth = el}
-              >
+            >
               <option value={''}>Mes</option>
               {
-                months.map(val=>{
+                months.map(val => {
                   return <option key={val.index} value={val.index}>{val.name}</option>
                 })
               }
             </select>
           </div>
           <div className="col-span-12 sm:col-span-3">
-            <select 
-              className="input" 
-              name={'yearDateOfBirth'} 
+            <select
+              className="input"
+              name={'yearDateOfBirth'}
               onChange={handleInputChange}
               ref={el => inputRefs.current.yearDateOfBirth = el}
-              >
+            >
               <option value={''}>Año</option>
               {
-                years.map(val=>{
+                years.map(val => {
                   return <option key={val} value={val}>{val}</option>
                 })
               }
@@ -400,7 +411,7 @@ export default function PersonalDataForm() {
           </div>
 
           {/* email */}
-            <div className={'col-span-12'}>
+          <div className={'col-span-12'}>
             <input
               type="email"
               className={`input input-border-gray ${personalData.emailError ? 'input-error' : ''}`}
@@ -463,184 +474,184 @@ export default function PersonalDataForm() {
           <div className="col-span-12 ">
             <div className="mb-5">
               <label>
-                <input name="docType" type="radio" className="radio" value={'INE'} onChange={handleInputChange}/> 
-                <span> INE</span>  
+                <input name="docType" type="radio" className="radio" value={'INE'} onChange={handleInputChange} />
+                <span> INE</span>
               </label>
             </div>
             <div>
               <label>
-                <input name="docType" type="radio" className="radio" value={'Passport'} onChange={handleInputChange}/> 
-                <span> Pasaporte</span> 
+                <input name="docType" type="radio" className="radio" value={'Passport'} onChange={handleInputChange} />
+                <span> Pasaporte</span>
               </label>
             </div>
           </div>
 
           {/* oficial identification image (front) */}
           {personalData.docType == 'INE' && (
-          <div className={'col-span-12 lg:col-span-6'}>
-            <label className={`flex input input-border-gray ${personalData.idFrontPictureError ? 'input-error' : ''}`}>
-              <span className={'overflow-hidden truncate'}>Identificación Oficial Frente*</span>
-              <div className={'ml-auto flex'}>
-                <Image
-                  src={'/img/upload-icon.svg'}
-                  alt={'Subir archivo'}
-                  width={20}
-                  height={20}
-                  className={'inline-block w-5'}
-                  style={{ verticalAlign: 'middle' }}
+            <div className={'col-span-12 lg:col-span-6'}>
+              <label className={`flex input input-border-gray ${personalData.idFrontPictureError ? 'input-error' : ''}`}>
+                <span className={'overflow-hidden truncate'}>Identificación Oficial Frente*</span>
+                <div className={'ml-auto flex'}>
+                  <Image
+                    src={'/img/upload-icon.svg'}
+                    alt={'Subir archivo'}
+                    width={20}
+                    height={20}
+                    className={'inline-block w-5'}
+                    style={{ verticalAlign: 'middle' }}
+                  />
+                  <Image
+                    src={'/img/question-mark-icon.svg'}
+                    alt={'¿Qué es esto?'}
+                    width={20}
+                    height={20}
+                    className={'inline-block w-5 ml-2 pointer'}
+                    style={{ verticalAlign: 'middle' }}
+                    onClick={showModalWithIdentificationInfo}
+                  />
+                </div>
+                <input
+                  type="file"
+                  accept={'image/*'}
+                  className={'hidden'}
+                  name={'idFrontPicture'}
+                  onChange={handleFileChange}
+                  ref={el => inputRefs.current.idFrontPicture = el}
                 />
-                <Image
-                  src={'/img/question-mark-icon.svg'}
-                  alt={'¿Qué es esto?'}
-                  width={20}
-                  height={20}
-                  className={'inline-block w-5 ml-2 pointer'}
-                  style={{ verticalAlign: 'middle' }}
-                  onClick={showModalWithIdentificationInfo}
-                />
-              </div>
-              <input
-                type="file"
-                accept={'image/*'}
-                className={'hidden'}
-                name={'idFrontPicture'}
-                onChange={handleFileChange}
-                ref={el => inputRefs.current.idFrontPicture = el}
-              />
-            </label>
-            {/* error */}
-            {personalData.idFrontPictureError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
-              >
-                {personalData.idFrontPictureError}
-              </p>
-            )}
-            {/* preview */}
-            <div
-              className={'flex justify-center mt-2 md:mt-3'}
-            >
-              {personalData.idFrontPicture && (
-                <img
-                  src={personalData.idFrontPicture}
-                  alt={'Identificación Oficial Frente'}
-                  width={200}
-                  height={200}
-                />
+              </label>
+              {/* error */}
+              {personalData.idFrontPictureError && (
+                <p
+                  className={'text-red-500 text-xs mt-1 mx-3'}
+                >
+                  {personalData.idFrontPictureError}
+                </p>
               )}
+              {/* preview */}
+              <div
+                className={'flex justify-center mt-2 md:mt-3'}
+              >
+                {personalData.idFrontPicture && (
+                  <img
+                    src={personalData.idFrontPicture}
+                    alt={'Identificación Oficial Frente'}
+                    width={200}
+                    height={200}
+                  />
+                )}
+              </div>
             </div>
-          </div>
           )}
 
           {/* oficial identification image (back) */}
           {personalData.docType == 'INE' && (
-          <div className={'col-span-12 lg:col-span-6'}>
-            <label className={`flex input input-border-gray ${personalData.idBackPictureError ? 'input-error' : ''}`}>
-              <span className={'overflow-hidden truncate'}>Identificación Oficial Vuelta*</span>
-              <div className={'ml-auto flex'}>
-                <Image
-                  src={'/img/upload-icon.svg'}
-                  alt={'Subir archivo'}
-                  width={20}
-                  height={20}
-                  className={'inline-block w-5'}
-                  style={{ verticalAlign: 'middle' }}
+            <div className={'col-span-12 lg:col-span-6'}>
+              <label className={`flex input input-border-gray ${personalData.idBackPictureError ? 'input-error' : ''}`}>
+                <span className={'overflow-hidden truncate'}>Identificación Oficial Vuelta*</span>
+                <div className={'ml-auto flex'}>
+                  <Image
+                    src={'/img/upload-icon.svg'}
+                    alt={'Subir archivo'}
+                    width={20}
+                    height={20}
+                    className={'inline-block w-5'}
+                    style={{ verticalAlign: 'middle' }}
+                  />
+                  <Image
+                    src={'/img/question-mark-icon.svg'}
+                    alt={'¿Qué es esto?'}
+                    width={20}
+                    height={20}
+                    className={'inline-block w-5 ml-2 pointer'}
+                    style={{ verticalAlign: 'middle' }}
+                    onClick={showModalWithIdentificationInfo}
+                  />
+                </div>
+                <input
+                  type="file"
+                  accept={'image/*'}
+                  className={'hidden'}
+                  name={'idBackPicture'}
+                  onChange={handleFileChange}
+                  ref={el => inputRefs.current.idBackPicture = el}
                 />
-                <Image
-                  src={'/img/question-mark-icon.svg'}
-                  alt={'¿Qué es esto?'}
-                  width={20}
-                  height={20}
-                  className={'inline-block w-5 ml-2 pointer'}
-                  style={{ verticalAlign: 'middle' }}
-                  onClick={showModalWithIdentificationInfo}
-                />
-              </div>
-              <input
-                type="file"
-                accept={'image/*'}
-                className={'hidden'}
-                name={'idBackPicture'}
-                onChange={handleFileChange}
-                ref={el => inputRefs.current.idBackPicture = el}
-              />
-            </label>
-            {/* error */}
-            {personalData.idBackPictureError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
-              >
-                {personalData.idBackPictureError}
-              </p>
-            )}
-            {/* preview */}
-            <div
-              className={'flex justify-center mt-2 md:mt-3'}
-            >
-              {personalData.idBackPicture && (
-                <img
-                  src={personalData.idBackPicture}
-                  alt={'Identificación Oficial Vuelta'}
-                  width={200}
-                  height={200}
-                />
+              </label>
+              {/* error */}
+              {personalData.idBackPictureError && (
+                <p
+                  className={'text-red-500 text-xs mt-1 mx-3'}
+                >
+                  {personalData.idBackPictureError}
+                </p>
               )}
+              {/* preview */}
+              <div
+                className={'flex justify-center mt-2 md:mt-3'}
+              >
+                {personalData.idBackPicture && (
+                  <img
+                    src={personalData.idBackPicture}
+                    alt={'Identificación Oficial Vuelta'}
+                    width={200}
+                    height={200}
+                  />
+                )}
+              </div>
             </div>
-          </div>
           )}
 
           {/* passport */}
           {personalData.docType == 'Passport' && (
-          <>
-          <div className={'col-span-6 lg:col-span-6'}>
-            <label className={`flex input input-border-gray ${personalData.idBackPictureError ? 'input-error' : ''}`}>
-              <span className={'overflow-hidden truncate'}>Pasaporte*</span>
-              <div className={'ml-auto flex'}>
-                <Image
-                  src={'/img/upload-icon.svg'}
-                  alt={'Subir archivo'}
-                  width={20}
-                  height={20}
-                  className={'inline-block w-5'}
-                  style={{verticalAlign: 'middle'}}
-                />
-                <Image
-                  src={'/img/question-mark-icon.svg'}
-                  alt={'¿Qué es esto?'}
-                  width={20}
-                  height={20}
-                  className={'inline-block w-5 ml-2'}
-                  style={{verticalAlign: 'middle'}}
-                  onClick={showModalWithIdentificationInfo}
-                />
+            <>
+              <div className={'col-span-6 lg:col-span-6'}>
+                <label className={`flex input input-border-gray ${personalData.idBackPictureError ? 'input-error' : ''}`}>
+                  <span className={'overflow-hidden truncate'}>Pasaporte*</span>
+                  <div className={'ml-auto flex'}>
+                    <Image
+                      src={'/img/upload-icon.svg'}
+                      alt={'Subir archivo'}
+                      width={20}
+                      height={20}
+                      className={'inline-block w-5'}
+                      style={{ verticalAlign: 'middle' }}
+                    />
+                    <Image
+                      src={'/img/question-mark-icon.svg'}
+                      alt={'¿Qué es esto?'}
+                      width={20}
+                      height={20}
+                      className={'inline-block w-5 ml-2 pointer'}
+                      style={{ verticalAlign: 'middle' }}
+                      onClick={showModalWithPassportInfo}
+                    />
+                  </div>
+                  <input
+                    type="file"
+                    accept={'image/*'}
+                    className={'hidden'}
+                    name={'idPassportPicture'}
+                    onChange={handleFileChange}
+                    ref={el => inputRefs.current.idPassportPicture = el}
+                  />
+                </label>
+                {/* preview */}
+                <div className={'flex justify-center mt-2 md:mt-3'}>
+                  {personalData.idPassportPicture && (
+                    <img
+                      src={personalData.idPassportPicture}
+                      alt={'Pasaporte'}
+                      width={200}
+                      height={200}
+                    />
+                  )}
+                </div>
               </div>
-              <input
-                type="file"
-                accept={'image/*'}
-                className={'hidden'}
-                name={'idPassportPicture'}
-                onChange={handleFileChange}
-                ref={el => inputRefs.current.idPassportPicture = el}
-              />
-            </label>
-            {/* preview */}
-            <div className={'flex justify-center mt-2 md:mt-3'}>
-              {personalData.idPassportPicture && (
-                <img
-                  src={personalData.idPassportPicture}
-                  alt={'Pasaporte'}
-                  width={200}
-                  height={200}
-                />
-              )}
-            </div>
-          </div>
-          <div className={'col-span-6 lg:col-span-6'}>
-            {/* relleno */}
-          </div>
-          </>
+              <div className={'col-span-6 lg:col-span-6'}>
+                {/* relleno */}
+              </div>
+            </>
           )}
-         
+
           {/* proof of address */}
           <div className={'col-span-12 md:col-span-6'}>
             <label className={'flex input input-border-gray'}>
@@ -707,7 +718,7 @@ export default function PersonalDataForm() {
                     className="btn-xl multi-border font-medium text-white disabled:opacity-50"
                     onClick={handleNextForm}
                     disabled={!isValidForm}
-                    >
+                  >
                     SIGUIENTE
                   </button>
                 </div>
