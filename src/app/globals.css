@@ -78,7 +78,7 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
   height: 80vh;
-  max-width: 100vh;
+  max-width: 100vw;
 }
 
 .bg_mensaje_aceptada {
