@@ -176,14 +176,16 @@ export default function AccountDataForm() {
           {/* next */}
           {!accountData.showPaymentForm && (
             <div className={`col-span-12`}>
-              <div className="button-container flex justify-center">
-                <button
-                  className="btn-xl multi-border font-medium text-white disabled:opacity-50"
-                  onClick={handleNextForm}
-                  disabled={!isValidForm}
-                >
-                  SIGUIENTE
-                </button>
+              <div className="flex justify-center">
+                <div className="button-container">
+                  <button
+                    className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                    onClick={handleNextForm}
+                    disabled={!isValidForm}
+                  >
+                    SIGUIENTE
+                  </button>
+                </div>
               </div>
             </div>
           )}

@@ -85,14 +85,16 @@ const SignContract: React.FC<SignContractProps> = ({ invitationId }) => {
       </header>
       
       <div className="my-10">
-        <div className="button-container flex flex-col">
+        <div className="flex flex-col">
           <div className="flex justify-center">
-            <button
-              className="btn-xl multi-border font-medium text-white disabled:opacity-50"
-              onClick={handleSubmit}
-            >
-              FIRMAR CONTRATO
-            </button>
+            <div className="button-container ">
+              <button
+                className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                onClick={handleSubmit}
+              >
+                FIRMAR CONTRATO
+              </button>
+            </div>
           </div>
         </div>
       </div>

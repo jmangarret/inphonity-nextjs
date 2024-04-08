@@ -967,14 +967,16 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 </div>
 
                 <div className={'col-span-12 my-10'}>
-                  <div className="button-container flex justify-center">
-                    <button
-                      className="btn-md multi-border font-medium text-white disabled:opacity-50"
-                      onClick={() => handlePayment('card', false)}
-                      disabled={initialPaymentIsLoading || form.isSubmitting}
-                    >
-                      PAGAR
-                    </button>
+                  <div className="flex justify-center">
+                    <div className="button-container">
+                      <button
+                        className="btn-md multi-border font-medium text-white disabled:opacity-50"
+                        onClick={() => handlePayment('card', false)}
+                        disabled={initialPaymentIsLoading || form.isSubmitting}
+                      >
+                        PAGAR
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1009,22 +1011,26 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
             {activeTab === "Pago con transferencia interbancaria (SPEI)" && (
               <div>
                 <p>Pago con transferencia bancaria SPEI</p>
-                <div className="button-container flex flex-col">
+                <div className="flex flex-col">
                   <div className="flex justify-center my-5">
-                    <button
-                      className="btn-xl multi-border font-medium text-white disabled:opacity-50"
-                      onClick={() => handlePayment('spei', true)}
-                    >
-                      GUARDAR SOLICITUD
-                    </button>
+                    <div className="button-container ">
+                      <button
+                        className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                        onClick={() => handlePayment('spei', true)}
+                      >
+                        GUARDAR SOLICITUD
+                      </button>
+                    </div>
                   </div>
                   <div className="flex justify-center">
-                    <button
-                      className="btn-xl multi-border font-medium text-white disabled:opacity-50"
-                      onClick={() => handlePayment('spei', false)}
-                    >
-                      GENERAR REFERENCIA
-                    </button>
+                    <div className="button-container ">
+                      <button
+                        className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                        onClick={() => handlePayment('spei', false)}
+                      >
+                        GENERAR REFERENCIA
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
