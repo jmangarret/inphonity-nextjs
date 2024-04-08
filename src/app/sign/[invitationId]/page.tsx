@@ -168,10 +168,20 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
   }
 
   return (
-    <>
-      <Header centerLogo={true}  />
-      <main className={`text-white w-full`}>
-        <div className={`container p-3 md:p-6 lg:p-12 py-10 md:py-16 lg:py-20 mx-auto md:w-3/4 lg:w-4/5`}>
+    <div>
+      {/* <Header centerLogo={true}  /> */}
+      <main className={`text-center ${isLoading ? 'bg-black' : 'bg_bienvenida'}`} style={{ height: 'auto' }}>
+        <div className={`p-9 lg:w-3/4 mx-auto`}>
+          <Image
+            src="/logo.svg"
+            alt="Logotipo de Inphonity"
+            width={156.13}
+            height={27.01}
+            priority
+            className={`mx-auto`}
+          />
+        </div>
+        <div className={`container p-3 md:p-6 lg:p-12 py-10 mx-auto md:w-3/4 lg:w-4/5`}>
           {!isSigned && (
             <>
               <h1 className={`text-3xl md:text-5xl font-bold font-medium mb-3 md:mb-5 lg:mb-7 text-center`}>
@@ -285,7 +295,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 
