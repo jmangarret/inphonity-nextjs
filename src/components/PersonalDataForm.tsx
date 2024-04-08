@@ -1,24 +1,46 @@
 "use client";
-import React, {useEffect, useMemo, useRef} from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { differenceInYears } from 'date-fns';
 import {
+  setDocType,
+  setIdPassportPicture,
   setCurp, setCurpError,
   setDateOfBirth, setDateOfBirthError,
+  setDayDateOfBirth, setDayDateOfBirthError,
+  setMonthDateOfBirth, setMonthDateOfBirthError,
+  setYearDateOfBirth, setYearDateOfBirthError,
   setEmail,
   setGender, setGenderError,
   setIdBackPicture,
   setIdFrontPicture,
-  setLastName, setLastNameError,
   setName,
   setPhone, setPhoneError,
-  setSecondLastName, setSecondLastNameError, setShowShippingForm
+  setShowShippingForm
 } from "@/lib/features/personal-data/personalDataSlice";
-import {ModalContext} from "@/contexts/ModalContext";
+import { ModalContext } from "@/contexts/ModalContext";
+
+const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, '0'));
+const months = [
+  { index: 1, name: "Febrero" },
+  { index: 2, name: "Marzo" },
+  { index: 3, name: "Abril" },
+  { index: 0, name: "Enero" },
+  { index: 4, name: "Mayo" },
+  { index: 5, name: "Junio" },
+  { index: 6, name: "Julio" },
+  { index: 7, name: "Agosto" },
+  { index: 8, name: "Septiembre" },
+  { index: 9, name: "Octubre" },
+  { index: 10,name: "Noviembre" },
+  { index: 11,name: "Diciembre" }
+];
+const currentYear = new Date().getFullYear();
+const years = Array.from({ length: 101 }, (_, i) => currentYear - i);
 
 export default function PersonalDataForm() {
-  const {openModal} = React.useContext(ModalContext);
+  const { openModal } = React.useContext(ModalContext);
   const dispatch = useAppDispatch();
   const personalData = useAppSelector((state) => state.personalData);
   const fieldsOrder: (keyof typeof personalData)[] = useMemo(() => [
@@ -27,9 +49,10 @@ export default function PersonalDataForm() {
     'email',
     'curp',
     'gender',
-    'idFrontPicture',
-    'idBackPicture',
-    'dateOfBirth',
+    'docType',
+    'dayDateOfBirth',
+    'monthDateOfBirth',
+    'yearDateOfBirth',
   ], []);
   const inputRefs = useRef<{ [key in keyof typeof personalData]: HTMLInputElement | HTMLSelectElement | null }>({} as { [key in keyof typeof personalData]: HTMLInputElement | null });
   const isValidForm = useMemo(() => {
@@ -41,9 +64,23 @@ export default function PersonalDataForm() {
     });
   }, [fieldsOrder, personalData]);
 
+  useEffect(()=>{
+    const {dayDateOfBirth, monthDateOfBirth, yearDateOfBirth} = personalData
+    if (dayDateOfBirth && monthDateOfBirth && yearDateOfBirth){
+      let value = new Date( Number(yearDateOfBirth), Number(monthDateOfBirth),Number(dayDateOfBirth));
+      const age = differenceInYears(new Date(), new Date(value));
+      dispatch(setDateOfBirth(value.toString()));
+  
+      if (age < 18) {
+        dispatch(setDateOfBirthError('Debes tener al menos 18 años'));
+      } else {
+        dispatch(setDateOfBirthError(''));
+      }
+    }
+  },[personalData])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
 
     switch (name) {
       case 'name':
@@ -58,18 +95,20 @@ export default function PersonalDataForm() {
       case 'curp':
         dispatch(setCurp(value));
         break;
+      case 'docType':
+        dispatch(setDocType(value));
+        break;
       case 'gender':
         dispatch(setGender(value));
         break;
-      case 'dateOfBirth':
-        const age = differenceInYears(new Date(), new Date(value));
-        dispatch(setDateOfBirth(value));
-
-        if (age < 18) {
-          dispatch(setDateOfBirthError('Debes tener al menos 18 años'));
-        } else {
-          dispatch(setDateOfBirthError(''));
-        }
+      case 'dayDateOfBirth':
+        dispatch(setDayDateOfBirth(value));
+        break;
+      case 'monthDateOfBirth':
+        dispatch(setMonthDateOfBirth(value));
+        break;
+      case 'yearDateOfBirth':
+        dispatch(setYearDateOfBirth(value));
         break;
       default:
         break;
@@ -77,7 +116,7 @@ export default function PersonalDataForm() {
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, files} = e.target;
+    const { name, files } = e.target;
 
     if (files) {
       const file = files[0];
@@ -87,8 +126,12 @@ export default function PersonalDataForm() {
         const data = e.target?.result;
         if (name === 'idFrontPicture') {
           dispatch(setIdFrontPicture(data as string));
-        } else {
+        } 
+        if (name === 'idBackPicture') {
           dispatch(setIdBackPicture(data as string));
+        }
+        if (name === 'idPassportPicture') {
+          dispatch(setIdPassportPicture(data as string));
         }
       }
 
@@ -103,15 +146,17 @@ export default function PersonalDataForm() {
   const showModalWithIdentificationInfo = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div>
+      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
         <p
-          className={`text-center text-lg p-4 md:p-5`}
+          className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
-          Sube una foto por ambos
-          <br/>
-          lados de tu identificación oficial
-          <br/>
-          (INE o Pasaporte).
+          <span className="font-medium">Sube una <span className="text-highlight">foto clara</span> o el <span className="text-highlight">PDF</span> <br />
+            de tu Constancia de Situación<br />
+            Fiscal</span> (CSF) actualizada.
+          <br /><br />
+          Esta debe ser menor a 3 meses,<br />
+          y puedes descargarla desde<br />
+          el portal del SAT
         </p>
       </div>,
     );
@@ -120,27 +165,19 @@ export default function PersonalDataForm() {
   const showModalWithAddressProof = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div>
+      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
         <p
-          className={`text-center text-lg p-4 md:p-5`}
+          className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
-          Sube una foto clara o el PDF
-          <br/>
-          de tu comprobante de
-          <br/>domicilio (de la dirección
-          <br/>
-          donde quieres recibir tu
-          <br/>
-          Kit de Bienvenida).
-          <br/>
-          <br/>
-          Este debe ser menor a 3
-          <br/>
-          meses. Los comprobantes
-          <br/>oficiales son los siguientes:
-          <br/>
-          Gas, luz, teléfono, internet,
-          <br/>
+          <span className="font-medium">Sube una <span className="text-highlight">foto</span> clara o el <span className="text-highlight">PDF</span><br />
+            de tu comprobante de domicilio</span><br />
+          (de la dirección donde quieres recibir<br />
+          tu Kit de Bienvenida).
+          <br /><br />
+          Este debe ser menor a 3 meses.<br />
+          Los comprobantes oficiales<br />
+          son los siguientes:<br />
+          gas, luz, teléfono, internet,<br />
           agua o predial.
         </p>
       </div>,
@@ -150,21 +187,21 @@ export default function PersonalDataForm() {
   const showModalWithTaxStatusProof = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div>
+      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
         <p
-          className={`text-center text-lg p-4 md:p-5`}
+          className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
-          Sube una foto clara o el PDF de
-          <br/>
-          tu Constancia de Situación
-          <br/>
-          Fiscal (CSF) actualizada.
-          <br/>
-          <br/>
+          <span className="font-medium">Sube una <span className="text-highlight">foto clara</span> o el <span className="text-highlight">PDF</span> de
+            <br />
+            tu Constancia de Situación
+            <br />
+            Fiscal</span> (CSF) actualizada.
+          <br />
+          <br />
           Esta debe ser menor a 3 meses,
-          <br/>
+          <br />
           y puedes descargarla desde el
-          <br/>
+          <br />
           portal del SAT
         </p>
       </div>,
@@ -187,10 +224,7 @@ export default function PersonalDataForm() {
       {/* form */}
       <div className={'lg:container mx-auto w-full'}>
         <div className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 text-white w-full mx-auto p-6 md:p-8 lg:p-10 xl:p-12'}>
-          
-          <div
-            className={'col-span-12'}
-          >
+          <div className={'col-span-12'}>
             <input
               type="text"
               className={`input input-border-gray ${personalData.nameError ? 'input-error' : ''}`}
@@ -210,13 +244,9 @@ export default function PersonalDataForm() {
             )}
           </div>
           {/* nationality */}
-          <div
-            className={'col-span-12'}
-          >
-            <select
-              className={`input input-border-gray`}
-            >
-              <option value="">Nacionalidad*</option>
+          <div className={'col-span-12'}>
+            <select className={`input input-border-gray`}>
+              <option value="" aria-readonly>Nacionalidad*</option>
               <option
                 value={'mexican'}
               >
@@ -232,43 +262,72 @@ export default function PersonalDataForm() {
           {/* name */}
 
            {/* date of birth */}
-           <div className={'col-span-12'}>
-            <div className={'flex justify-between items-center mb-2'}>
-              {/* <label
-                htmlFor={`dateOfBirth`}
-                className={'flex-grow'}
-                style={{width: '200px'}}
+          <div className={'col-span-12 sm:col-span-4'}>
+            <input
+                id={'dateOfBirth'}
+                type="text"
+                className={`input input-border-gray ${personalData.dateOfBirthError ? 'input-error' : ''}`}
+                placeholder="Fecha de nacimiento*"
+                name={'dateOfBirth'}
+                readOnly
+            />
+            {/* error */}
+            {personalData.dateOfBirthError && (
+                <p
+                  className={'text-red-500 text-xs mt-1 mx-3'}
+                >
+                  {personalData.dateOfBirthError}
+                </p>
+            )}
+          </div>
+          <div className="col-span-12 sm:col-span-2">
+            <select 
+                className="input" 
+                name={'dayDateOfBirth'} 
+                onChange={handleInputChange}
+                ref={el => inputRefs.current.dayDateOfBirth = el}
+                >
+              <option value={''}>Día</option>
+              {
+                days.map(val=>{
+                  return <option key={val} value={val}>{val}</option>
+                })
+              }
+            </select>
+          </div>
+          <div className="col-span-12 sm:col-span-3">
+            <select 
+              className="input" 
+              name={'monthDateOfBirth'} 
+              onChange={handleInputChange}
+              ref={el => inputRefs.current.monthDateOfBirth = el}
               >
-                Fecha de nacimiento*
-              </label> */}
-              <div className={`w-full`}>
-                <input
-                  id={'dateOfBirth'}
-                  type="date"
-                  className={`input input-border-gray ${personalData.dateOfBirthError ? 'input-error' : ''}`}
-                  placeholder="Fecha de nacimiento*"
-                  value={personalData.dateOfBirth}
-                  name={'dateOfBirth'}
-                  onChange={handleInputChange}
-                  ref={el => inputRefs.current.dateOfBirth = el}
-                />
-                {/* error */}
-                {personalData.dateOfBirthError && (
-                  <p
-                    className={'text-red-500 text-xs mt-1 mx-3'}
-                  >
-                    {personalData.dateOfBirthError}
-                  </p>
-                )}
-              </div>
-            </div>
+              <option value={''}>Mes</option>
+              {
+                months.map(val=>{
+                  return <option key={val.index} value={val.index}>{val.name}</option>
+                })
+              }
+            </select>
+          </div>
+          <div className="col-span-12 sm:col-span-3">
+            <select 
+              className="input" 
+              name={'yearDateOfBirth'} 
+              onChange={handleInputChange}
+              ref={el => inputRefs.current.yearDateOfBirth = el}
+              >
+              <option value={''}>Año</option>
+              {
+                years.map(val=>{
+                  return <option key={val} value={val}>{val}</option>
+                })
+              }
+            </select>
           </div>
 
-
           {/* curp */}
-          <div
-            className={'col-span-12'}
-          >
+          <div className={'col-span-12'}>
             <input
               type="text"
               className={`input input-border-gray ${personalData.curpError ? 'input-error' : ''}`}
@@ -287,11 +346,9 @@ export default function PersonalDataForm() {
               </p>
             )}
           </div>
-          
+
           {/* gender */}
-          <div
-            className={'col-span-12'}
-          >
+          <div className={'col-span-12'}>
             <select
               className={`input input-border-gray ${personalData.genderError ? 'input-error' : ''}`}
               value={personalData.gender}
@@ -322,9 +379,7 @@ export default function PersonalDataForm() {
           </div>
 
           {/* phone */}
-          <div
-            className={'col-span-12'}
-          >
+          <div className={'col-span-12'}>
             <input
               type="text"
               className={`input input-border-gray ${personalData.phoneError ? 'input-error' : ''}`}
@@ -343,11 +398,9 @@ export default function PersonalDataForm() {
               </p>
             )}
           </div>
-          
+
           {/* email */}
-            <div
-            className={'col-span-12'}
-          >
+            <div className={'col-span-12'}>
             <input
               type="email"
               className={`input input-border-gray ${personalData.emailError ? 'input-error' : ''}`}
@@ -368,9 +421,7 @@ export default function PersonalDataForm() {
           </div>
 
           {/* occupation */}
-          <div
-            className={'col-span-12'}
-          >
+          <div className={'col-span-12'}>
             <select
               className={`input input-border-gray`}
               name={'occupation'}
@@ -411,39 +462,40 @@ export default function PersonalDataForm() {
 
           <div className="col-span-12 ">
             <div className="mb-5">
-              <input type="radio" className="radio" /> INE
+              <label>
+                <input name="docType" type="radio" className="radio" value={'INE'} onChange={handleInputChange}/> 
+                <span> INE</span>  
+              </label>
             </div>
             <div>
-              <input type="radio" className="radio" /> Pasaporte
+              <label>
+                <input name="docType" type="radio" className="radio" value={'Passport'} onChange={handleInputChange}/> 
+                <span> Pasaporte</span> 
+              </label>
             </div>
           </div>
 
           {/* oficial identification image (front) */}
-          <div
-            className={'col-span-12 lg:col-span-6'}
-          >
-            <label
-              className={`flex input input-border-gray ${personalData.idFrontPictureError ? 'input-error' : ''}`}
-            >
+          {personalData.docType == 'INE' && (
+          <div className={'col-span-12 lg:col-span-6'}>
+            <label className={`flex input input-border-gray ${personalData.idFrontPictureError ? 'input-error' : ''}`}>
               <span className={'overflow-hidden truncate'}>Identificación Oficial Frente*</span>
-              <div
-                className={'ml-auto flex'}
-              >
+              <div className={'ml-auto flex'}>
                 <Image
                   src={'/img/upload-icon.svg'}
                   alt={'Subir archivo'}
                   width={20}
                   height={20}
                   className={'inline-block w-5'}
-                  style={{verticalAlign: 'middle'}}
+                  style={{ verticalAlign: 'middle' }}
                 />
                 <Image
                   src={'/img/question-mark-icon.svg'}
                   alt={'¿Qué es esto?'}
                   width={20}
                   height={20}
-                  className={'inline-block w-5 ml-2'}
-                  style={{verticalAlign: 'middle'}}
+                  className={'inline-block w-5 ml-2 pointer'}
+                  style={{ verticalAlign: 'middle' }}
                   onClick={showModalWithIdentificationInfo}
                 />
               </div>
@@ -465,7 +517,7 @@ export default function PersonalDataForm() {
               </p>
             )}
             {/* preview */}
-            {/* <div
+            <div
               className={'flex justify-center mt-2 md:mt-3'}
             >
               {personalData.idFrontPicture && (
@@ -476,19 +528,74 @@ export default function PersonalDataForm() {
                   height={200}
                 />
               )}
-            </div> */}
+            </div>
           </div>
+          )}
+
           {/* oficial identification image (back) */}
-          <div
-            className={'col-span-12 lg:col-span-6'}
-          >
-            <label
-              className={`flex input input-border-gray ${personalData.idBackPictureError ? 'input-error' : ''}`}
-            >
+          {personalData.docType == 'INE' && (
+          <div className={'col-span-12 lg:col-span-6'}>
+            <label className={`flex input input-border-gray ${personalData.idBackPictureError ? 'input-error' : ''}`}>
               <span className={'overflow-hidden truncate'}>Identificación Oficial Vuelta*</span>
-              <div
-                className={'ml-auto flex'}
+              <div className={'ml-auto flex'}>
+                <Image
+                  src={'/img/upload-icon.svg'}
+                  alt={'Subir archivo'}
+                  width={20}
+                  height={20}
+                  className={'inline-block w-5'}
+                  style={{ verticalAlign: 'middle' }}
+                />
+                <Image
+                  src={'/img/question-mark-icon.svg'}
+                  alt={'¿Qué es esto?'}
+                  width={20}
+                  height={20}
+                  className={'inline-block w-5 ml-2 pointer'}
+                  style={{ verticalAlign: 'middle' }}
+                  onClick={showModalWithIdentificationInfo}
+                />
+              </div>
+              <input
+                type="file"
+                accept={'image/*'}
+                className={'hidden'}
+                name={'idBackPicture'}
+                onChange={handleFileChange}
+                ref={el => inputRefs.current.idBackPicture = el}
+              />
+            </label>
+            {/* error */}
+            {personalData.idBackPictureError && (
+              <p
+                className={'text-red-500 text-xs mt-1 mx-3'}
               >
+                {personalData.idBackPictureError}
+              </p>
+            )}
+            {/* preview */}
+            <div
+              className={'flex justify-center mt-2 md:mt-3'}
+            >
+              {personalData.idBackPicture && (
+                <img
+                  src={personalData.idBackPicture}
+                  alt={'Identificación Oficial Vuelta'}
+                  width={200}
+                  height={200}
+                />
+              )}
+            </div>
+          </div>
+          )}
+
+          {/* passport */}
+          {personalData.docType == 'Passport' && (
+          <>
+          <div className={'col-span-6 lg:col-span-6'}>
+            <label className={`flex input input-border-gray ${personalData.idBackPictureError ? 'input-error' : ''}`}>
+              <span className={'overflow-hidden truncate'}>Pasaporte*</span>
+              <div className={'ml-auto flex'}>
                 <Image
                   src={'/img/upload-icon.svg'}
                   alt={'Subir archivo'}
@@ -511,97 +618,80 @@ export default function PersonalDataForm() {
                 type="file"
                 accept={'image/*'}
                 className={'hidden'}
-                name={'idBackPicture'}
+                name={'idPassportPicture'}
                 onChange={handleFileChange}
-                ref={el => inputRefs.current.idBackPicture = el}
+                ref={el => inputRefs.current.idPassportPicture = el}
               />
             </label>
-            {/* error */}
-            {personalData.idBackPictureError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
-              >
-                {personalData.idBackPictureError}
-              </p>
-            )}
             {/* preview */}
-            {/* <div
-              className={'flex justify-center mt-2 md:mt-3'}
-            >
-              {personalData.idBackPicture && (
+            <div className={'flex justify-center mt-2 md:mt-3'}>
+              {personalData.idPassportPicture && (
                 <img
-                  src={personalData.idBackPicture}
-                  alt={'Identificación Oficial Vuelta'}
+                  src={personalData.idPassportPicture}
+                  alt={'Pasaporte'}
                   width={200}
                   height={200}
                 />
               )}
-            </div> */}
+            </div>
           </div>
+          <div className={'col-span-6 lg:col-span-6'}>
+            {/* relleno */}
+          </div>
+          </>
+          )}
          
           {/* proof of address */}
-          <div
-            className={'col-span-12 md:col-span-6'}
-          >
-            <label
-              className={'flex input input-border-gray'}
-            >
+          <div className={'col-span-12 md:col-span-6'}>
+            <label className={'flex input input-border-gray'}>
               <span className={'overflow-hidden truncate'}>Comprobante de domicilio*</span>
-              <div
-                className={'ml-auto flex'}
-              >
+              <div className={'ml-auto flex'}>
                 <Image
                   src={'/img/upload-icon.svg'}
                   alt={'Subir archivo'}
                   width={20}
                   height={20}
                   className={'inline-block w-5'}
-                  style={{verticalAlign: 'middle'}}
+                  style={{ verticalAlign: 'middle' }}
                 />
                 <Image
                   src={'/img/question-mark-icon.svg'}
                   alt={'¿Qué es esto?'}
                   width={20}
                   height={20}
-                  className={'inline-block w-5 ml-2'}
-                  style={{verticalAlign: 'middle'}}
+                  className={'inline-block w-5 ml-2 pointer'}
+                  style={{ verticalAlign: 'middle' }}
                   onClick={showModalWithAddressProof}
                 />
               </div>
             </label>
           </div>
           {/* proof of tax status */}
-          <div
-            className={'col-span-12 md:col-span-6'}
-          >
-            <label
-              className={'flex input input-border-gray'}
-            >
+          <div className={'col-span-12 md:col-span-6'}>
+            <label className={'flex input input-border-gray'}>
               <span className={'overflow-hidden truncate'}>Constancia de situación fiscal*</span>
-              <div
-                className={'ml-auto flex'}
-              >
+              <div className={'ml-auto flex'}>
                 <Image
                   src={'/img/upload-icon.svg'}
                   alt={'Subir archivo'}
                   width={20}
                   height={20}
                   className={'inline-block w-5'}
-                  style={{verticalAlign: 'middle'}}
+                  style={{ verticalAlign: 'middle' }}
                 />
                 <Image
                   src={'/img/question-mark-icon.svg'}
                   alt={'¿Qué es esto?'}
                   width={20}
                   height={20}
-                  className={'inline-block w-5 ml-2'}
-                  style={{verticalAlign: 'middle'}}
+                  className={'inline-block w-5 ml-2 pointer'}
+                  style={{ verticalAlign: 'middle' }}
                   onClick={showModalWithTaxStatusProof}
                 />
               </div>
             </label>
           </div>
-         
+
           <div className={'col-span-12'}>
             <p className={`text-base text-white font-medium`}>
               Campos Obligatorios*
@@ -611,14 +701,16 @@ export default function PersonalDataForm() {
           {/* next */}
           {!personalData.showShippingForm && (
             <div className={`col-span-12`}>
-              <div className="button-container flex justify-center">
-                <button
-                  className="btn-xl multi-border font-medium text-white disabled:opacity-50"
-                  onClick={handleNextForm}
-                  disabled={!isValidForm}
-                >
-                  SIGUIENTE
-                </button>
+              <div className="flex justify-center">
+                <div className="button-container ">
+                  <button
+                    className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                    onClick={handleNextForm}
+                    disabled={!isValidForm}
+                    >
+                    SIGUIENTE
+                  </button>
+                </div>
               </div>
             </div>
           )}

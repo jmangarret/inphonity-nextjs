@@ -358,14 +358,16 @@ export default function TaxDataForm() {
           {/* next */}
           {!taxData.showAccountDataForm && (
             <div className={`col-span-12`}>
-              <div className="button-container flex justify-center">
-                <button
-                  className="btn-xl multi-border text-white font-medium block disabled:opacity-50"
-                  onClick={handleNextForm}
-                  disabled={!isValidForm && !dontHaveTaxData}
-                >
-                  Siguiente
-                </button>
+              <div className="flex justify-center">
+                <div className="button-container">
+                  <button
+                    className="btn-xl multi-border text-white font-medium block disabled:opacity-50"
+                    onClick={handleNextForm}
+                    disabled={!isValidForm && !dontHaveTaxData}
+                    >
+                    SIGUIENTE
+                  </button>
+                </div>
               </div>
             </div>
           )}

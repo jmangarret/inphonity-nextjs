@@ -132,7 +132,7 @@ export default function ShippingForm() {
     dispatch(setTaxState(shipping.state));
     dispatch(setTaxMunicipality(shipping.city));
     dispatch(setTaxEmail(personalData.email));
-    dispatch(setTaxName(`${personalData.name} ${personalData.lastName} ${personalData.secondLastName}`));
+    dispatch(setTaxName(`${personalData.name}`));
   }
 
   const emptyTaxAddressData = () => {
@@ -417,14 +417,16 @@ export default function ShippingForm() {
             {/* next */}
             {!shipping.showTaxDataForm && (
               <div className={`col-span-12`}>
-                <div className="button-container flex justify-center">
-                  <button
-                    className="btn-xl multi-border font-medium text-white disabled:opacity-50"
-                    onClick={handleNextForm}
-                    disabled={!isValidForm}
-                  >
-                    SIGUIENTE
-                  </button>
+                <div className="flex justify-center">
+                  <div className="button-container">
+                    <button
+                      className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                      onClick={handleNextForm}
+                      disabled={!isValidForm}
+                      >
+                      SIGUIENTE
+                    </button>
+                  </div>
                 </div>
               </div>
             )}

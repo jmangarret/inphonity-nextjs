@@ -85,7 +85,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
           {/* countdown */}
           <div className={`col-span-12 md:col-span-12 mb-10`}>
             <h2
-              className="font-medium text-2xl sm:text-3xl lg:text-5xl mb-5 sm:mb-7 md:mb-9 lg:mb-12 xl:mb-14 text-center mx-auto"
+              className="font-medium text-3xl sm:text-3xl lg:text-5xl mb-5 sm:mb-7 md:mb-9 lg:mb-12 xl:mb-14 text-center mx-auto"
             >
               Tiempo restante
             </h2>

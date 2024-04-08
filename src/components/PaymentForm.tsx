@@ -1,14 +1,12 @@
 "use client";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks";
-import {useInitialPaymentMutation, useRegisterMutation, ApiValidationError} from "@/lib/services/registersApi";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useInitialPaymentMutation, useRegisterMutation, ApiValidationError } from "@/lib/services/registersApi";
 import {
-  setLastNameError,
   setNameError,
   setPhoneError,
-  setSecondLastNameError,
   setEmailError,
   setCurpError,
   setDateOfBirthError,
@@ -25,36 +23,31 @@ import {
   setZipCodeError,
   resetErrors as shippingResetErrors
 } from "@/lib/features/shipping/shippingSlice";
-import {ModalContext} from "@/contexts/ModalContext";
+import { ModalContext } from "@/contexts/ModalContext";
 import {
   setBankAccountNumberError,
   setBankNameError,
   setInterbankClabeError,
   resetErrors as accountDataResetErrors
 } from "@/lib/features/account-data/accountDataSlice";
-import {resetErrors as taxDateResetErrors} from "@/lib/features/tax-data/taxDataSlice";
-import {PreRegistration, useGetInvitationByIdQuery} from "@/lib/services/invitationsApi";
-import {setIsPaid} from "@/lib/features/plan/planSlice";
+import { resetErrors as taxDateResetErrors } from "@/lib/features/tax-data/taxDataSlice";
+import { PreRegistration, useGetInvitationByIdQuery } from "@/lib/services/invitationsApi";
+import { setIsPaid } from "@/lib/features/plan/planSlice";
 import PlusDecoration from "@/components/PlusDecoration";
 
 type PaymentFormProps = {
   invitationId: string;
 };
 
-interface TabItemProps {
-  title: string;
-  activeTab: string;
-  onClick: () => void;
-}
-
 declare let OpenPay: any;
 
 const formatNumberToMoney = (number: number) => {
-  return new Intl.NumberFormat('es-MX', {style: 'currency', currency: 'MXN'}).format(number);
+  return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(number);
 }
 
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { ContenTiendasAfiliadas, HeaderTiendasAfiliadas } from "./ModalPayments";
 
 async function printDiv(divId: string) {
   const input = document.getElementById(divId);
@@ -96,8 +89,8 @@ async function copyToClipboard(divId: string) {
   }
 }
 
-const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
-  const {openModal, closeModal} = React.useContext(ModalContext);
+const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
+  const { openModal, closeModal } = React.useContext(ModalContext);
   const dispatch = useAppDispatch();
   const accountData = useAppSelector((state) => state.accountData);
   const personalData = useAppSelector((state) => state.personalData);
@@ -112,7 +105,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
     error: invitationError,
     refetch: invitationRefetch
   } = useGetInvitationByIdQuery(invitationId);
-  const [register, {isLoading: registerIsLoading, error: registerError}] = useRegisterMutation();
+  const [register, { isLoading: registerIsLoading, error: registerError }] = useRegisterMutation();
   const [initialPayment, {
     isLoading: initialPaymentIsLoading,
     error: initialPaymentError
@@ -136,7 +129,29 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
     setActiveTab(tab);
   };
 
-  const handlePayment = async (method: string) => {
+  const handleTestModal = (method: string,onlySaveRegister=false) =>{
+    openModal(
+      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+        <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+          Da
+          <span className="text-highlight cursor-pointer" onClick={handleInfo}> 
+          &nbsp;clic aquí&nbsp;
+          </span>  
+          para conocer las tiendas en las que puedes realizar tu pago. 
+
+        </p>
+        <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white`}>
+          Tu proceso se ha guardado, pronto recibirás un correo con un enlace para continuar con la firma del contrato. 
+        </p>
+      </div>,
+    );
+  }
+
+  const handleInfo = ()=>{
+    openModal(<ContenTiendasAfiliadas />,<HeaderTiendasAfiliadas />);
+  }
+
+  const handlePayment = async (method: string, onlySaveRegister: boolean) => {
     setForm({
       ...form,
       isSubmitting: true
@@ -155,8 +170,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
       await register({
         invitation_id: invitationId,
         first_name: personalData.name,
-        last_name: personalData.lastName,
-        mother_last_name: personalData.secondLastName,
+        last_name: "",
+        mother_last_name: "",
         contact_phone_number: personalData.phone,
         curp: personalData.curp,
         gender: personalData.gender,
@@ -191,15 +206,30 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
         product_id: plan.id!,
         is_esim: shippingData.isEsim,
       }).unwrap();
+
+      if (onlySaveRegister){
+        openModal(
+          <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+              Da
+              <span className="text-highlight cursor-pointer" onClick={handleInfo}> 
+              &nbsp;clic aquí&nbsp;
+              </span>  
+              para conocer las tiendas en las que puedes realizar tu pago. 
+            </p>
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white`}>
+              Tu proceso se ha guardado, pronto recibirás un correo con un enlace para continuar con la firma del contrato. 
+            </p>
+          </div>,
+        )
+      }
     } catch (error) {
-      const {data} = error as ApiValidationError;
+      const { data } = error as ApiValidationError;
 
       if (data.message) {
         openModal(
-          <div>
-            <p
-              className={`text-center text-lg p-4 md:p-5`}
-            >
+          <div className="flex flex-col items-center justify-center h-full">
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
               {data.message}
             </p>
           </div>,
@@ -211,6 +241,11 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
         isSubmitting: false
       });
 
+      return;
+    }
+
+    //stop process if only register
+    if (onlySaveRegister){
       return;
     }
 
@@ -272,7 +307,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
           if (response.data.error) {
             openModal(
               <div
-                className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-orange-gradient`}
+                className={`flex flex-col items-center justify-center h-full`}
               >
                 <div className={`grid grid-cols-12`}>
                   <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -283,19 +318,19 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                     {/* PlusDecoration */}
                     <PlusDecoration
                       className="w-9 md:w-12 lg:w-16 xl:w-20 absolute"
-                      style={{bottom: '0'}}
+                      style={{ bottom: '0' }}
                     />
                   </div>
 
                   <div
                     className="col-span-12 md:col-span-8"
                   >
-                    <h1 className={`text-4xl font-medium mb-12`}>
+                    <h1 className={`text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro`}>
                       ¡Ups!
                     </h1>
 
                     <div
-                      className={`flex mb-12 justify-center`}
+                      className={`flex mt-10 mb-10 justify-center`}
                     >
                       <div>
                         <Image
@@ -308,23 +343,21 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                       </div>
                     </div>
 
-                    <h1 className={`text-2xl font-medium mb-12`}>
+                    <h1 className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white`}>
                       Parece que hubo un pequeño
-                      <br/>
                       problema al procesar tu pago.
-                      <br/>
-                      <br/>
-                      No te preocupes, intenta nuevamente
-                      <br/>
-                      o utiliza otro método de pago.
+                      <br />
+                      <br />
+                      No te preocupes, <span className="text-highlight">intenta nuevamente
+                        o utiliza otro método de pago.</span>
                     </h1>
 
-                    <div className="button-container w-3/5 mx-auto">
+                    <div className="button-container w-4/5 lg:w-72 mx-auto">
                       <button
-                        className="button button-black font-medium block w-full disabled:opacity-50"
+                        className="btn-xl multi-border font-medium block w-full text-white font-medium"
                         onClick={closeModal}
                       >
-                        Reintentar
+                        REINTENTAR
                       </button>
                     </div>
                   </div>
@@ -349,7 +382,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
           }
 
 
-          const {data}: { data: PreRegistration } = response;
+          const { data }: { data: PreRegistration } = response;
 
           setForm({
             ...form,
@@ -363,7 +396,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
             <div
               className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-black bg-vertical-gradient-black`}
               id={`payment-ticket`}
-              style={{width: '450px', height: '800px'}}
+              style={{ width: 'auto', height: 'auto' }}
             >
               <div className={`grid grid-cols-12`}>
                 <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -374,7 +407,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                   {/* PlusDecoration */}
                   <PlusDecoration
                     className="w-9 md:w-12 lg:w-16 xl:w-20 absolute"
-                    style={{bottom: '0'}}
+                    style={{ bottom: '0' }}
                   />
                 </div>
                 <div
@@ -389,9 +422,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                   />
                   <h1 className={`text-2xl font-medium mb-12`}>
                     Bienvenido a inphonity
-                    <br/>
-                    <span style={{color: '#00BF63'}}>Tu pago fue exitoso</span>
-                    <br/>
+                    <br />
+                    <span style={{ color: '#00BF63' }}>Tu pago fue exitoso</span>
+                    <br />
                     {formatNumberToMoney(data.product.price)}
                   </h1>
 
@@ -405,14 +438,14 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                         className={`text-sm font-light p-4 text-left`}
                       >
                         Pagado con
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         Fecha de pago
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         Descripción
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         Referencia
                       </p>
                     </div>
@@ -423,14 +456,14 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                         className={`text-sm font-medium p-4 text-right`}
                       >
                         {form.cardNumber.slice(0, 4) + '**** **** ' + form.cardNumber.slice(-4)}
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         {new Date().toLocaleDateString()}
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         {data.product.name}
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         {data.payment_reference}
                       </p>
                     </div>
@@ -441,7 +474,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                   >
                     <p>
                       Tu comprobante de pago ha sido enviado a
-                      <br/>
+                      <br />
                       <span className={`font-medium`}>{personalData.email}</span>
                     </p>
                   </div>
@@ -465,10 +498,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                       onClick={() => {
                         copyToClipboard('payment-ticket').then(() => {
                           openModal(
-                            <div>
-                              <p
-                                className={`text-center text-lg p-4 md:p-5`}
-                              >
+                            <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+                              <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
                                 Comprobante de pago copiado al portapapeles.
                               </p>
                             </div>,
@@ -489,7 +520,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
 
                   <div className="button-container w-3/5 mx-auto">
                     <button
-                      className="button button-black font-medium block w-full disabled:opacity-50"
+                      className="multi-border font-medium block w-full"
                       onClick={closeModal}
                     >
                       Aceptar
@@ -515,7 +546,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
         });
         openModal(
           <div
-            className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-orange-gradient`}
+            className={`flex flex-col items-center justify-center h-full bg-black bg-modal-verde`}
           >
             <div className={`grid grid-cols-12`}>
               <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -526,14 +557,14 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                 {/* PlusDecoration */}
                 <PlusDecoration
                   className="w-9 md:w-12 lg:w-16 xl:w-20 absolute"
-                  style={{bottom: '0'}}
+                  style={{ bottom: '0' }}
                 />
               </div>
 
               <div
                 className="col-span-12 md:col-span-8"
               >
-                <h1 className={`text-4xl font-medium mb-12`}>
+                <h1 className={`text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro`}>
                   ¡Ups!
                 </h1>
 
@@ -552,19 +583,16 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                 </div>
 
                 <h1 className={`text-2xl font-medium mb-12`}>
-                  Parece que hubo un pequeño
-                  <br/>
-                  problema al procesar tu pago.
-                  <br/>
-                  <br/>
-                  No te preocupes, intenta nuevamente
-                  <br/>
-                  o utiliza otro método de pago.
+                  Parece que hubo un pequeño problema al procesar tu pago.
+                  <br />
+                  <br />
+                  No te preocupes, 
+                  <span className="text-highlight"> intenta nuevamente o utiliza otro método de pago.</span> 
                 </h1>
 
-                <div className="button-container w-3/5 mx-auto">
+                <div className="button-container w-4/5 lg:w-72 mx-auto">
                   <button
-                    className="button button-black font-medium block w-full disabled:opacity-50"
+                    className="btn-xl mulit-border font-medium disabled:opacity-50"
                     onClick={closeModal}
                   >
                     Reintentar
@@ -585,10 +613,11 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
       });
     }
 
-    if (method === 'cash') {
+    if (method === 'cash' || method === 'spei') {
+
       initialPayment({
         invitation_id: parseInt(invitationId),
-        payment_method: 'cash',
+        payment_method: method,
       }).unwrap().then((data: any) => {
 
         setForm({
@@ -599,10 +628,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
         invitationRefetch();
 
         openModal(
-          <div>
-            <p
-              className={`text-center text-lg p-4 md:p-5`}
-            >
+          <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
               Se ha generado tu referencia de pago.
             </p>
           </div>,
@@ -616,12 +643,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
         });
 
         openModal(
-          <div>
-            <p
-              className={`text-center text-lg p-4 md:p-5`}
-            >
+          <div className="flex flex-col items-center justify-center h-full">
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
               Hubo un error al generar tu referencia de pago.
-              <br/>
+              <br />
               Intenta nuevamente.
             </p>
           </div>,
@@ -632,7 +657,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
 
   useEffect(() => {
     if (registerError && 'data' in registerError) {
-      const {data} = registerError as ApiValidationError;
+      const { data } = registerError as ApiValidationError;
 
       Object.entries(data.errors).forEach((error) => {
         const [key, value] = error;
@@ -640,12 +665,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
         if (key === "first_name") {
           dispatch(setNameError(value[0]));
         }
-        if (key === "last_name") {
-          dispatch(setLastNameError(value[0]));
-        }
-        if (key === "mother_last_name") {
-          dispatch(setSecondLastNameError(value[0]));
-        }
+        // if (key === "last_name") {
+        //   dispatch(setLastNameError(value[0]));
+        // }
+        // if (key === "mother_last_name") {
+        //   dispatch(setSecondLastNameError(value[0]));
+        // }
         if (key === "contact_phone_number") {
           dispatch(setPhoneError(value[0]));
         }
@@ -693,10 +718,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
         }
         if (key === "product_id") {
           openModal(
-            <div>
-              <p
-                className={`text-center text-lg p-4 md:p-5`}
-              >
+            <div className="flex flex-col items-center justify-center h-full">
+              <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
                 Por favor, selecciona un plan.
               </p>
             </div>,
@@ -707,26 +730,28 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
   }, [registerError, initialPaymentError]);
 
   return (
-    <div className="m-3 md:p-6 lg:p-9 xl:p-12">
+    <div className="m-3 md:p-6 lg:p-9 xl:p-12 bg-black/[.80]">
       {/* header */}
-      <header
-        className={'mb-4 md:mb-8 lg:mb-12 xl:mb-16 lg:ml-12'}
-      >
-        <h3
-          className={'font-medium text-3xl sm:text-5xl mb-1 sm:mb-3'}
-          style={{color: '#F79F1A'}}
-        >
-          <Image
-            src={`/img/orange-isotipo.svg`}
-            alt={`inphonity isotipo`}
-            width={40}
-            height={40}
-            className={`inline-block mr-2 w-7 h-7 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14`}
-            style={{verticalAlign: 'middle'}}
-          />
-          Realiza pago
+      <header className="mb-10 sm:mb-12">
+        <h3 className={'font-medium text-white text-center text-3xl sm:text-5xl mb-3'}>
+          Realizar <span className="text-highlight">pago</span>
         </h3>
+        <p className={'text-base text-white text-center px-16'}>
+          ¿Cómo quieres realizar tu pago?
+        </p>
       </header>
+
+      {/* <div className={'col-span-12 my-10'}>
+        <div className="button-container flex justify-center">
+          <button
+            className="btn-md multi-border font-medium text-white disabled:opacity-50"
+            onClick={() => handleTestModal('card')}
+            disabled={initialPaymentIsLoading || form.isSubmitting}
+          >
+            Probar
+          </button>
+        </div>
+      </div> */}
 
       {invitationData && invitationData.pre_registration?.payment_status === 'paid' ? (
         <div className="bg-black text-white rounded-3xl p-5 m-3 text-center mb-10 font-medium">
@@ -739,39 +764,69 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
         </div>
       ) : (
         <>
-          <div className="flex flex-col sm:flex-row rounded-tl-md rounded-tr-md">
-            <TabItem
-              title={`Pago con tarjeta`}
-              activeTab={activeTab}
-              onClick={() => handleTabClick("Pago con tarjeta")}
-            />
-            <TabItem
-              title={`Pago en efectivo`}
-              activeTab={activeTab}
-              onClick={() => handleTabClick("Pago en efectivo")}
-            />
-            <TabItem
-              title={`Pago con transferencia interbancaria (SPEI)`}
-              activeTab={activeTab}
-              onClick={() => handleTabClick("Pago con transferencia interbancaria (SPEI)")}
-            />
+          <div className="text-white text-base">
+            <div className="mb-5">
+              <span className="mr-10">
+                <Image
+                  src={'/img/pago-card.png'}
+                  alt={'Pago con tarjeta'}
+                  width={39.33}
+                  height={27.42}
+                  className={'inline-block w-5 font-medium'}
+                />
+              </span>
+              <span className="mr-10 inline-block align-sub">
+                <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago con tarjeta")} />
+              </span>
+              <label>
+                <span> Pago con tarjeta</span>
+              </label>
+            </div>
+            <div className="mb-5">
+              <span className="mr-10">
+                <Image
+                  src={'/img/pago-cash.png'}
+                  alt={'Pago con efectivo'}
+                  width={39.33}
+                  height={27.42}
+                  className={'inline-block w-5 font-medium'}
+                />
+              </span>
+              <span className="mr-10 inline-block align-sub">
+                <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago en efectivo")} />
+              </span>
+              <label>
+                <span> Pago en efectivo</span>
+              </label>
+            </div>
+            <div className="mb-5">
+              <span className="mr-10">
+                <Image
+                  src={'/img/pago-transfer.png'}
+                  alt={'Pago con transferencia'}
+                  width={39.33}
+                  height={27.42}
+                  className={'inline-block w-5 font-medium'}
+                />
+              </span>
+              <span className="mr-10 inline-block align-sub">
+                <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago con transferencia interbancaria (SPEI)")} />
+              </span>
+              <label>
+                <span> Pago con transferencia interbancaria SPEI</span>
+              </label>
+            </div>
           </div>
-          <div className="bg-white rounded-bl-md rounded-br-md p-6 md:p-8 lg:p-10 xl:p-12 border-2 border-highlight">
+
+          <div className="text-white">
             {activeTab === "Pago con tarjeta" && (
-              <div
-                className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 bg-white w-full mx-auto'}
-                id={'payment-card'}
-              >
-                <p
-                  className={`col-span-12 text-black text-3xl font-medium`}
-                >
-                  Tarjeta de crédito y débito
+              <div className={'grid grid-cols-12'} id={'payment-card'}>
+                <p className={`col-span-12 text-2xl mb-5`}>
+                  Pago con Tarjeta de crédito y débito
                 </p>
-                <div
-                  className={'col-span-12'}
-                >
+                <div className={'col-span-12 my-3'}>
                   <Image
-                    src={`/img/card-brands.svg`}
+                    src={`/img/card-brands.png`}
                     alt={`cards`}
                     width={150}
                     height={30}
@@ -779,59 +834,50 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                   />
                 </div>
                 {/* cardholder name */}
-                <div className={'col-span-12'}>
+                <div className={'col-span-12 my-3'}>
                   <input
                     type="text"
                     className={`input input-border-gray ${form.cadHolderNameError ? 'input-error' : ''}`}
-                    placeholder={'Nombre en la tarjeta'}
+                    placeholder={'Nombre del titular'}
                     value={form.cardHolderName}
-                    onChange={(e) => setForm({...form, cardHolderName: e.target.value})}
+                    onChange={(e) => setForm({ ...form, cardHolderName: e.target.value })}
                   />
                   {form.cadHolderNameError && (
-                    <p
-                      className={'text-red-500 text-xs mt-1 mx-3'}
-                    >
+                    <p className={'text-red-500 text-xs mt-1 mx-3'}>
                       {form.cadHolderNameError}
                     </p>
                   )}
                 </div>
 
                 {/* card number */}
-                <div className={'col-span-12'}>
+                <div className={'col-span-12 my-3'}>
                   <input
                     value={form.cardNumber}
-                    onChange={(e: { target: { value: any; }; }) => setForm({...form, cardNumber: e.target.value})}
+                    onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cardNumber: e.target.value })}
                     type="text"
                     className={`input input-border-gray ${form.cardNumberError ? 'input-error' : ''}`}
                     placeholder="Número de tarjeta"
                   />
                   {/* error */}
                   {form.cardNumberError && (
-                    <p
-                      className={'text-red-500 text-xs mt-1 mx-3'}
-                    >
+                    <p className={'text-red-500 text-xs mt-1 mx-3'}>
                       {form.cardNumberError}
                     </p>
                   )}
                 </div>
 
-                <div
-                  className={'col-span-12 flex gap-3 items-center'}
-                >
-                  <div
-                  >
+                <div className={'col-span-12 flex gap-3 items-center my-3'}>
+                  <div>
                     <label htmlFor="">
-                      Fecha de expiración
+                      Fecha de vencimiento
                     </label>
                   </div>
                   {/* expiration date month */}
-                  <div
-                    className={'flex-1'}
-                  >
+                  <div className={'flex-1'}>
                     <select
                       className={`input input-border-gray`}
                       value={form.expirationDateMonth}
-                      onChange={(e) => setForm({...form, expirationDateMonth: e.target.value})}
+                      onChange={(e) => setForm({ ...form, expirationDateMonth: e.target.value })}
                     >
                       <option value={""}>Mes</option>
                       {Array.from(Array(12).keys()).map((month) => {
@@ -862,7 +908,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                     <select
                       className={`input input-border-gray`}
                       value={form.expirationDateYear}
-                      onChange={(e) => setForm({...form, expirationDateYear: e.target.value})}
+                      onChange={(e) => setForm({ ...form, expirationDateYear: e.target.value })}
                     >
                       <option value={""}>Año</option>
                       {Array.from(Array(10).keys()).map((year) => (
@@ -883,81 +929,116 @@ const PaymentForm: React.FC<PaymentFormProps> = ({invitationId}) => {
                       </p>
                     )}
                   </div>
+                  {/* cvv */}
+                  <div className={'flex-1'}>
+                    <input
+                      type="text"
+                      className={`input input-border-gray ${form.cvvError ? 'input-error' : ''}`}
+                      placeholder="CVV*"
+                      value={form.cvv}
+                      onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cvv: e.target.value })}
+                    />
+                    {/* error */}
+                    {form.cvvError && (
+                      <p
+                        className={'text-red-500 text-xs mt-1 mx-3'}
+                      >
+                        {form.cvvError}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="col-span-12 text-2xl flex flex-col mt-10">
+                  <div className="flex justify-center my-3">
+                    <span className="font-medium">Plan:   </span> &nbsp;&nbsp; $999
+                  </div>
+                  <div className="flex justify-center mb-3">
+                    <span className="font-medium">Envío:   </span> &nbsp;&nbsp; $150
+                  </div>
+                  <div className="w-1/5 my-1 self-center">
+                    <hr />
+                  </div>
+                  <div className="flex justify-center">
+                    <span className="font-medium text-3xl text-highlight">Total a Pagar</span>
+                  </div>
+                  <div className="flex justify-center">
+                    <span className="text-3xl">$1.149</span>
+                  </div>
                 </div>
 
-                {/* cvv */}
-                <div className={'col-span-6'}>
-                  <input
-                    type="text"
-                    className={`input input-border-gray ${form.cvvError ? 'input-error' : ''}`}
-                    placeholder="Ingresa CVV"
-                    value={form.cvv}
-                    onChange={(e: { target: { value: any; }; }) => setForm({...form, cvv: e.target.value})}
-                  />
-                  {/* error */}
-                  {form.cvvError && (
-                    <p
-                      className={'text-red-500 text-xs mt-1 mx-3'}
-                    >
-                      {form.cvvError}
-                    </p>
-                  )}
+                <div className={'col-span-12 my-10'}>
+                  <div className="flex justify-center">
+                    <div className="button-container">
+                      <button
+                        className="btn-md multi-border font-medium text-white disabled:opacity-50"
+                        onClick={() => handlePayment('card', false)}
+                        disabled={initialPaymentIsLoading || form.isSubmitting}
+                      >
+                        PAGAR
+                      </button>
+                    </div>
+                  </div>
                 </div>
+              </div>
+            )}
 
-                <div
-                  className={'col-span-12'}
-                >
-                  <div className="button-container w-2/4 mx-auto">
+
+            {activeTab === "Pago en efectivo" && (
+              <div>
+                <p>Pago con efectivo</p>
+                <div className="button-container flex flex-col">
+                  <div className="flex justify-center my-5">
                     <button
-                      className="button button-black font-medium block w-full disabled:opacity-50"
-                      onClick={() => handlePayment('card')}
-                      disabled={initialPaymentIsLoading || form.isSubmitting}
+                      className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                      onClick={() => handlePayment('cash', true)}
                     >
-                      Pagar
+                      GUARDAR SOLICITUD
+                    </button>
+                  </div>
+                  <div className="flex justify-center">
+                    <button
+                      className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                      onClick={() => handlePayment('cash', false)}
+                    >
+                      GENERAR REFERENCIA
                     </button>
                   </div>
                 </div>
               </div>
             )}
-            {activeTab === "Pago en efectivo" && (
+
+
+            {activeTab === "Pago con transferencia interbancaria (SPEI)" && (
               <div>
-                <div className="button-container w-2/4 mx-auto">
-                  <button
-                    className="button button-black font-medium block w-full disabled:opacity-50"
-                    onClick={() => handlePayment('cash')}
-                    disabled={initialPaymentIsLoading || form.isSubmitting}
-                  >
-                    Generar referencia
-                  </button>
+                <p>Pago con transferencia bancaria SPEI</p>
+                <div className="flex flex-col">
+                  <div className="flex justify-center my-5">
+                    <div className="button-container ">
+                      <button
+                        className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                        onClick={() => handlePayment('spei', true)}
+                      >
+                        GUARDAR SOLICITUD
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex justify-center">
+                    <div className="button-container ">
+                      <button
+                        className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                        onClick={() => handlePayment('spei', false)}
+                      >
+                        GENERAR REFERENCIA
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            )}
-            {activeTab === "Pago con transferencia interbancaria (SPEI)" && (
-              <p>No disponible por el momento.</p>
             )}
           </div>
         </>
       )}
     </div>
-  );
-};
-
-const TabItem: React.FC<TabItemProps> = ({title, activeTab, onClick}) => {
-  return (
-    <button
-      className={`px-4 py-2 bg-white ${
-        activeTab === title
-          ? "border-t-2 border-x-2 border-highlight relative"
-          : "text-gray-500"
-      }`}
-      onClick={onClick}
-      style={{
-        borderBottom: '2px solid #FFF',
-        bottom: '-2px'
-      }}
-    >
-      {title}
-    </button>
   );
 };
 

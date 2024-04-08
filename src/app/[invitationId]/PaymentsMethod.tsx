@@ -4,30 +4,13 @@ import React from "react";
 import Payment from "@/components/Payment";
 import { ModalContext } from "@/contexts/ModalContext";
 import Image from "next/image";
+import { ContenTiendasAfiliadas, HeaderTiendasAfiliadas } from "@/components/ModalPayments";
 // import PlusDecoration from "@/components/PlusDecoration";
 
 export default function PaymentsSection() {
   const ctxModal = React.useContext(ModalContext);
 
-  const HeaderTiendasAfiliadas = () =>{
-    return (
-      <div className="font-medium text-center">
-        Tiendas <span className="text-highlight">Afiliadas</span>
-      </div>
-    )
-  }
-  const ContenTiendasAfiliadas = () => {
-    return (
-      <div className="bg-black bg-luces">
-        <Image
-          src="/img/tiendas-afiliadas.png"
-          alt="Tiendas Afiliadas"
-          width={354}
-          height={1570}
-        />
-      </div>
-    )
-  }
+  
 
   const handleInfo = ()=>{
     ctxModal.openModal(<ContenTiendasAfiliadas />,<HeaderTiendasAfiliadas />);

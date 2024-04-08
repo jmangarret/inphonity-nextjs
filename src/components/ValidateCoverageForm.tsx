@@ -15,7 +15,7 @@ type ValidateCoverageFormProps = {
 declare var L: any;
 
 const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, style}) => {
-  const {openModal} = React.useContext(ModalContext);
+  const {openModal, closeModal} = React.useContext(ModalContext);
   const [postalCode, setPostalCode] = React.useState<string>('');
   const [geocoder, setGeocoder] = React.useState<google.maps.Geocoder>();
 
@@ -38,10 +38,8 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
     // validate postal code
     if (!postalCode) {
       openModal(
-        <div>
-          <p
-            className={`text-center text-lg p-4 md:p-5`}
-          >
+        <div className="flex flex-col items-center justify-center h-full text-white">
+          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
             Debes ingresar un código postal.
           </p>
         </div>,
@@ -51,10 +49,8 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
     }
     if (isNaN(Number(postalCode))) {
       openModal(
-        <div>
-          <p
-            className={`text-center text-lg p-4 md:p-5`}
-          >
+        <div className="flex flex-col items-center justify-center h-full text-white">
+          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
             El código postal ingresado no es válido.
           </p>
         </div>,
@@ -64,10 +60,8 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
     }
     if (postalCode.length !== 5) {
       openModal(
-        <div>
-          <p
-            className={`text-center text-lg p-4 md:p-5`}
-          >
+        <div className="flex flex-col items-center justify-center h-full text-white">
+          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
             El código postal ingresado no es válido.
           </p>
         </div>,
@@ -87,10 +81,8 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
         lng = location.lng();
       } else {
         openModal(
-          <div>
-            <p
-              className={`text-center text-lg p-4 md:p-5`}
-            >
+          <div className="flex flex-col items-center justify-center h-full text-white">
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
               No se encontró el código postal ingresado.
             </p>
           </div>,
@@ -99,9 +91,7 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
     });
 
     openModal(
-      <div
-        className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-soft-blue lg:w-[1100px]`}
-      >
+      <div className={`text-center text-white bg_bienvenida lg:w-[1100px]`}>
         <div className={`grid grid-cols-12`}>
           <div className="hidden md:flex md:col-span-2 justify-center">
             {/* PlusDecoration */}
@@ -110,9 +100,7 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
             />
           </div>
 
-          <div
-            className="col-span-12 md:col-span-8"
-          >
+          <div className="col-span-12">
             <div>
               <Image
                 src={`/img/marker-icon.svg`}
@@ -122,10 +110,10 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
                 className={`mx-auto block mb-4`}
               />
 
-              <h1 className={`text-2xl font-medium mb-8 relative`}>
-                Si tu zona <span style={{color: '#F9D08B'}}>no está</span> marcada en verde podrías
-                <br/>
-                presentar menor velocidad en tu servicio
+              <h1 className={`text-2xl mb-8 relative`}>
+                Si tu zona está 
+                <span className="text-highlight"> marcada en verde </span>
+                la velocidad de tu servicio será mayor.
                 <br/>
                 {/* PlusDecoration */}
                 <PlusDecoration
@@ -135,13 +123,8 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
               </h1>
             </div>
 
-            <div
-              className={`flex justify-center`}
-            >
-              <div
-                className={`relative`}
-                style={{width: '100%'}}
-              >
+            <div className={`flex justify-center`}>
+              <div className={`relative w-4/5`}>
                 <div
                   id={`map`}
                   style={{width: '100%', height: '400px'}}
@@ -149,13 +132,24 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
               </div>
             </div>
           </div>
-          <div
-            className={`hidden md:flex md:col-span-2 justify-center items-end`}
-          >
+          <div className={`hidden md:flex md:col-span-2 justify-center items-end`}>
             {/* PlusDecoration */}
             <PlusDecoration
               className="w-9 md:w-12 lg:w-16 xl:w-20"
             />
+          </div>
+
+          <div className="col-span-12 my-10">
+            <div className="flex justify-center">
+              <div className="button-container">
+                <button
+                  className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                  onClick={closeModal}
+                >
+                  ACEPTAR
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>,
@@ -210,7 +204,7 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
               className="multi-border font-medium block w-full"
               onClick={handleSubmit}
             >
-              Revisar
+              REVISAR
             </button>
           </div>
         </div>

@@ -1,9 +1,13 @@
 import Image from "next/image";
 
-export default function Header() {
+type HeaderProps = {
+  centerLogo?: boolean;
+};
+
+const Header: React.FC<HeaderProps> = ({ centerLogo= false }) => {
   return (
     <header className="">
-      <nav className="container mx-auto px-4 py-9 flex justify-between items-center">
+      <nav className={`container mx-auto px-4 py-9 flex justify-${centerLogo ? 'center' : 'between'} items-center`}>
         <div>
           <Image
             src="/logo.svg"
@@ -18,3 +22,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default Header;

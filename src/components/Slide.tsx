@@ -67,7 +67,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
         </div>
       )}
       <div className="col-span-10 relative text-center mb-3 md:mb-4 ">
-        <h3 className="text-4xl font-medium mb-3">
+        <h3 className="text-4xl font-medium mb-3 font-yellow">
           {name}
         </h3>
         <h3 className="text-6xl font-medium mb-3">
