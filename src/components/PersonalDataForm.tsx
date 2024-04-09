@@ -87,7 +87,7 @@ export default function PersonalDataForm() {
         dispatch(setName(value.replace(/[^A-Za-z\s]+/g, '')));
         break;
       case 'phone':
-        dispatch(setPhone(value));
+        dispatch(setPhone(value.replace(/\D/g, '')));
         break;
       case 'email':
         dispatch(setEmail(value));
