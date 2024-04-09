@@ -63,7 +63,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
             />
           </div> */}
           <div className={`col-span-12 md:col-span-12`}>
-            <h2 className="text-2xl sm:text-3xl lg:text-5xl mb-8 sm:mb-12 md:mb-16 lg:mb-20 text-center mt-6 lg:mt-8 xl:mt-10">
+            <h2 className="text-3xl lg:text-5xl mb-8 sm:mb-12 md:mb-16 lg:mb-20 text-center mt-6 lg:mt-8 xl:mt-10">
               Haz realidad todo lo que <div className="font-medium text-highlight">siempre imaginaste</div>
             </h2>
           </div>
