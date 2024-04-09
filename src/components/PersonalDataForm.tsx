@@ -282,14 +282,7 @@ export default function PersonalDataForm() {
               name={'dateOfBirth'}
               readOnly
             />
-            {/* error */}
-            {personalData.dateOfBirthError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
-              >
-                {personalData.dateOfBirthError}
-              </p>
-            )}
+            
           </div>
           <div className="col-span-12 sm:col-span-2">
             <select
@@ -336,7 +329,14 @@ export default function PersonalDataForm() {
               }
             </select>
           </div>
-
+          {/* error */}
+          {personalData.dateOfBirthError && (
+            <span className="col-span-12 text-center">
+              <p className={'text-red-500 text-xs mt-1 mx-3'}>
+                {personalData.dateOfBirthError}
+              </p>
+            </span>
+          )}
           {/* curp */}
           <div className={'col-span-12'}>
             <input
