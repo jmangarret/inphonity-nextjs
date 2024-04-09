@@ -840,7 +840,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     className={`input input-border-gray ${form.cadHolderNameError ? 'input-error' : ''}`}
                     placeholder={'Nombre del titular'}
                     value={form.cardHolderName}
-                    onChange={(e) => setForm({ ...form, cardHolderName: e.target.value })}
+                    onChange={(e) => setForm({ ...form, cardHolderName: e.target.value.replace(/[^A-Za-z\s]+/g, '') })}
                   />
                   {form.cadHolderNameError && (
                     <p className={'text-red-500 text-xs mt-1 mx-3'}>
