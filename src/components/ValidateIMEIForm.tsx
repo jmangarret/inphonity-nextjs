@@ -260,8 +260,9 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
               type="text"
               className="input bg-white rounded-full outline-amber-500 transition duration-300 text-black font-light w-full"
               placeholder="Introduce tu IMEI"
-              onChange={(e) => setImei(e.target.value)}
+              onChange={(e) => {e.target.value=e.target.value.trim(); setImei(e.target.value)}}
               value={imei}
+              maxLength={16}
             />
           </div>
           <div className="button-container">
