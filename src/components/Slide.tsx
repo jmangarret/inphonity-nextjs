@@ -250,12 +250,12 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, gbPromo, background, m
           )}
         </div>
         {plan.id === id ? (
-          <button className="btn-xl multi-border-white text-white bg-promo-orange">
+          <button className="w-full multi-border-white text-white bg-promo-orange">
             PLAN SELECCIONADO
           </button>
         ) : (
           <button
-            className="btn-xl multi-border text-white bg-opacity-50"
+            className="w-full multi-border text-white bg-opacity-50"
             onClick={handleButtonClick}
           >
             QUIERO ESTE PLAN

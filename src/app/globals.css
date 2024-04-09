@@ -512,7 +512,6 @@ swiper-container::part(bullet) {
   border-radius: 50px;
   border: 1px solid;
   border-color: #FFF;
-  width: 18.5rem;
   height: 3.125rem;
   font-size: 1rem;
 }
