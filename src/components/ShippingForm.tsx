@@ -77,7 +77,7 @@ export default function ShippingForm() {
         dispatch(setIsEsim(value === 'true'));
         break;
       case 'zipCode':
-        dispatch(setZipCode(value));
+        dispatch(setZipCode(value.replace(/\D/g, '')));
         break;
       case 'neighborhood':
         dispatch(setNeighborhood(value));
@@ -86,10 +86,10 @@ export default function ShippingForm() {
         dispatch(setStreet(value));
         break;
       case 'number':
-        dispatch(setNumber(value));
+        dispatch(setNumber(value.replace(/\D/g, '')));
         break;
       case 'interiorNumber':
-        dispatch(setInteriorNumber(value));
+        dispatch(setInteriorNumber(value.replace(/\D/g, '')));
         break;
       case 'complement':
         dispatch(setComplement(value));
@@ -229,6 +229,7 @@ export default function ShippingForm() {
                 name={'zipCode'}
                 onChange={handleInputChange}
                 ref={el => inputRefs.current.zipCode = el}
+                maxLength={5}
               />
               {/* error */}
               {shipping.zipCodeError && (

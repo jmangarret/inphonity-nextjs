@@ -48,10 +48,10 @@ export default function AccountDataForm() {
         dispatch(setBankName(value));
         break;
       case "bankAccountNumber":
-        dispatch(setBankAccountNumber(value));
+        dispatch(setBankAccountNumber(value.replace(/\D/g, '')));
         break;
       case "bankAccountNumberConfirmation":
-        dispatch(setBankAccountNumberConfirmation(value));
+        dispatch(setBankAccountNumberConfirmation(value.replace(/\D/g, '')));
         break;
       case "interbankClabe":
         dispatch(setInterbankClabe(value));

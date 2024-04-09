@@ -71,16 +71,17 @@ export default function TaxDataForm() {
         dispatch(setStreet(value));
         break;
       case "exteriorNumber":
-        dispatch(setExteriorNumber(value));
+
+        dispatch(setExteriorNumber(value.replace(/\D/g, '')));
         break;
       case "interiorNumber":
-        dispatch(setInteriorNumber(value));
+        dispatch(setInteriorNumber(value.replace(/\D/g, '')));
         break;
       case "neighborhood":
         dispatch(setNeighborhood(value));
         break;
       case "zipCode":
-        dispatch(setZipCode(value));
+        dispatch(setZipCode(value.replace(/\D/g, '')));
         break;
       case "state":
         dispatch(setState(value));
@@ -259,6 +260,7 @@ export default function TaxDataForm() {
               name={`zipCode`}
               onChange={handleInputChange}
               ref={el => inputRefs.current.zipCode = el}
+              maxLength={5}
             />
             {/* error */}
             {taxData.zipCodeError && (
