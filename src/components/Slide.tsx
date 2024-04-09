@@ -9,13 +9,15 @@ export enum SlideBackground {
   BLUE = 'bg-promo-blue',
   GREEN = 'bg-promo-green',
   ORANGE = 'bg-promo-orange',
+  YELLOW = 'bg-promo-yellow',
   CUSTOM = 'bg-plan1'
 }
 
-type SlideProps = {
+export type SlideProps = {
   id: number;
   name: string;
-  hasPromo?: boolean;
+  hasPromo: boolean;
+  gbPromo?: number;
   background?: SlideBackground;
   mobileData: string;
   sharedData: boolean;
@@ -38,7 +40,7 @@ const formatNumber = (number: number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData, sharedData, minutes, sms, referralIncome, cashback, price, hasWhatsapp, hasInstagram, hasFacebook, hasMessenger, hasTiktok, hasX, hasTelegram, hasSnapchat}) => {
+const Slide: React.FC<SlideProps> = ({id, name, hasPromo, gbPromo, background, mobileData, sharedData, minutes, sms, referralIncome, cashback, price, hasWhatsapp, hasInstagram, hasFacebook, hasMessenger, hasTiktok, hasX, hasTelegram, hasSnapchat}) => {
   const dispatch = useAppDispatch();
   const plan = useAppSelector((state) => state.plan);
 
@@ -62,7 +64,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, background, mobileData
           <p>
             <span className="text-black">PROMO POR PORTABILIDAD</span>
             <br/>
-            <span className="text-[1.5rem] font-medium">+15<sup>GB</sup></span>
+            <span className="text-[1.5rem] font-medium">+{gbPromo}<sup>GB</sup></span>
           </p>
         </div>
       )}

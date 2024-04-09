@@ -589,7 +589,6 @@ swiper-container::part(bullet) {
   top: -20px;
   right: 7px;
   z-index: 1992;
-  box-shadow: -1px 6px 6px 0px #00000040;
 }
 
 @media screen and (min-width: 640px) {
@@ -612,6 +611,10 @@ swiper-container::part(bullet) {
 
 .bg-promo-orange {
   background: linear-gradient(116deg, #FA8F22 4.64%, #E04C37 79.15%);
+}
+
+.bg-promo-yellow{
+  background: linear-gradient(100deg, #007F8E 15.02%, #F7D690 87.4%);
 }
 
 @keyframes doodle-animation-left {
