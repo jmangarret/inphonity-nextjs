@@ -11,16 +11,17 @@ const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState<ReactNode>(null);
   const [header, setHeader] = useState<ReactNode>('');
+  const [bgFull, setBgFull] = useState<string>('');
   const [fullScreen, setFullScreen] = useState<boolean>(false);
   const [resolveFn, setResolveFn] = useState<(() => void) | null>(null);
 
-  const openModal = (content: ReactNode, header?: string|ReactNode, fullScreen?: boolean): Promise<void> => {
+  const openModal = (content: ReactNode, header?: string|ReactNode, fullScreen?: boolean, bgFull?: string): Promise<void> => {
     return new Promise((resolve) => {
       setContent(content);
       setHeader(header || '');
       setIsOpen(true);
       setFullScreen(fullScreen || false);
-
+      setBgFull(bgFull || '')
       // Guarda la función resolve para llamarla cuando el modal se cierre
       setResolveFn(() => resolve);
     });
@@ -31,7 +32,7 @@ const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     setContent(null);
     setHeader('');
     setFullScreen(false);
-
+    setBgFull('')
     // Llama a la función resolve cuando el modal se cierre
     if (resolveFn) {
       resolveFn();
@@ -47,6 +48,7 @@ const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
           header={header}
           onClose={closeModal}
           fullScreen={fullScreen}
+          bgFull={bgFull}
         >
           {content}
         </Modal>

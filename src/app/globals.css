@@ -77,13 +77,15 @@
   border-radius: 20px;
 }
 
-.modal-content {
+.bg-modal-default{
   background-image: url("/img/bg_modal_rechazo.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  min-height: 50vh;
-  max-height: 80vh;
-  max-width: 100vh;
+}
+
+.modal-content {
+  height: 80vh;
+  max-width: 100vw;
 }
 
 .bg_mensaje_aceptada {
@@ -1010,6 +1012,11 @@ body {
   background: url('/img/bg-luces.png') #000 50% / cover no-repeat;
   width: auto;
   height: auto;
+}
+
+.bg-modal-coverage {
+  background: url('/img/bg-modal-coverage.png') #000 50% / cover no-repeat;
+  background-size: 100% 100%;
 }
 
 .icon-instagram {

@@ -80,18 +80,18 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
         lat = location.lat();
         lng = location.lng();
       } else {
-        openModal(
-          <div className="flex flex-col items-center justify-center h-full text-white">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-              No se encontró el código postal ingresado.
-            </p>
-          </div>,
-        );
+        // openModal(
+        //   <div className="flex flex-col items-center justify-center h-full text-white">
+        //     <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+        //       No se encontró el código postal ingresado.
+        //     </p>
+        //   </div>,
+        // );
       }
     });
 
     openModal(
-      <div className={`text-center text-white bg_bienvenida lg:w-[1100px]`}>
+      <div className={`text-center text-white w-full`}>
         <div className={`grid grid-cols-12`}>
           <div className="hidden md:flex md:col-span-2 justify-center">
             {/* PlusDecoration */}
@@ -110,7 +110,7 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
                 className={`mx-auto block mb-4`}
               />
 
-              <h1 className={`text-2xl mb-8 relative`}>
+              <h1 className={`text-2xl mb-8 relative p-8`}>
                 Si tu zona está 
                 <span className="text-highlight"> marcada en verde </span>
                 la velocidad de tu servicio será mayor.
@@ -153,6 +153,9 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
           </div>
         </div>
       </div>,
+      <div></div>,
+      false,
+      'bg-modal-coverage'
     );
 
     setTimeout(() => {
