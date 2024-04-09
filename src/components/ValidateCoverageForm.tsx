@@ -91,7 +91,7 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
     });
 
     openModal(
-      <div className={`text-center text-white bg_bienvenida lg:w-[1100px]`}>
+      <div className={`text-center text-white w-full`}>
         <div className={`grid grid-cols-12`}>
           <div className="hidden md:flex md:col-span-2 justify-center">
             {/* PlusDecoration */}
@@ -110,7 +110,7 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
                 className={`mx-auto block mb-4`}
               />
 
-              <h1 className={`text-2xl mb-8 relative`}>
+              <h1 className={`text-2xl mb-8 relative p-8`}>
                 Si tu zona está 
                 <span className="text-highlight"> marcada en verde </span>
                 la velocidad de tu servicio será mayor.
@@ -153,6 +153,9 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
           </div>
         </div>
       </div>,
+      <div></div>,
+      false,
+      'bg-modal-coverage'
     );
 
     setTimeout(() => {
@@ -195,8 +198,10 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
               type="text"
               className="input bg-white rounded-full outline-amber-500 transition duration-300 text-black font-light w-full"
               placeholder="Introduce tu Código Postal"
-              onChange={(e) => setPostalCode(e.target.value)}
+              onChange={(e) => {e.target.value=e.target.value.replace(/\D/g, ''); setPostalCode(e.target.value)}}
               value={postalCode}
+              maxLength={5}
+              autoComplete="off"
             />
           </div>
           <div className="button-container">

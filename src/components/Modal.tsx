@@ -7,10 +7,11 @@ interface ModalProps {
   className?: string;
   style?: CSSProperties;
   fullScreen?: boolean;
+  bgFull?: string
   onClose: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ header, children, className, style, fullScreen, onClose }) => {
+const Modal: React.FC<ModalProps> = ({ header, children, className, style, fullScreen, onClose, bgFull }) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -38,10 +39,10 @@ const Modal: React.FC<ModalProps> = ({ header, children, className, style, fullS
         className={`modal ${fullScreen ? '' : 'bg-black bg-opacity-50 backdrop-blur-sm'} absolute inset-0`} onClick={onClose}
       ></div>
       <div
-        className="modal-content relative"
+        className={`relative ${bgFull ? bgFull : 'bg-modal-default'} border-20`}
       >
         <div
-          className={`w-full modal-header flex justify-between items-center bg-black text-white p-2 md:p-3 ${!fullScreen ? 'rounded-t-md' : ''}`}
+          className={`w-full border-20 modal-header flex justify-between items-center ${bgFull ? '' : 'bg-black'} text-white p-2 md:p-3 ${!fullScreen ? 'rounded-t-md' : ''}`}
         >
           <h2 className='w-full'>{header}</h2>
           <button onClick={onClose} className="focus:outline-none">
@@ -53,9 +54,7 @@ const Modal: React.FC<ModalProps> = ({ header, children, className, style, fullS
             />
           </button>
         </div>
-        <div
-          className="overflow-auto modal-content bg-black rounded-b-md grid flex flex-col items-center"
-        >
+        <div className={`overflow-y-auto modal-content ${bgFull ? '' : 'bg-modal-default'} rounded-b-md grid flex flex-col items-center border-20`}>
           {children}
         </div>
       </div>

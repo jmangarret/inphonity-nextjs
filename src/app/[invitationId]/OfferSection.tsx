@@ -11,7 +11,7 @@ export default function OfferSection() {
 
         </div>
         <div className="col-span-6">
-          <h2 className="mx-auto text-center font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl mb-5 sm:mb-10 lg:mb-20">
+          <h2 className="mx-auto text-center font-medium text-2xl lg:text-3xl xl:text-5xl mb-5 sm:mb-10 lg:mb-20">
             Conoce nuestros <span className="text-highlight">planes</span>
           </h2>
         </div>

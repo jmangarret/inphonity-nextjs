@@ -1,19 +1,20 @@
 "use client";
 import {register, SwiperContainer} from 'swiper/element/bundle';
 import {useEffect, useRef} from "react";
-import Slide, {SlideBackground} from "@/components/Slide";
+import Slide, {SlideBackground, SlideProps} from "@/components/Slide";
 
 register();
 
 const Sliders = () => {
   const swiperElRef = useRef<SwiperContainer>(null);
   // list of plans
-  const plans = [
+  const plans: SlideProps[] = [
     {
       id: 1,
       name: 'Ready',
-      hasPromo: false,
-      background: SlideBackground.CUSTOM,
+      hasPromo: true,
+      gbPromo: 7,
+      background: SlideBackground.YELLOW,
       mobileData: '3GB',
       sharedData: true,
       minutes: 'Ilimitados',
@@ -34,6 +35,7 @@ const Sliders = () => {
       id: 2,
       name: 'Go',
       hasPromo: true,
+      gbPromo: 15,
       background: SlideBackground.BLUE,
       mobileData: '5GB',
       sharedData: false,

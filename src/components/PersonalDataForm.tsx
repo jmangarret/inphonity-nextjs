@@ -84,10 +84,10 @@ export default function PersonalDataForm() {
 
     switch (name) {
       case 'name':
-        dispatch(setName(value));
+        dispatch(setName(value.replace(/[^A-Za-z\s]+/g, '')));
         break;
       case 'phone':
-        dispatch(setPhone(value));
+        dispatch(setPhone(value.replace(/\D/g, '')));
         break;
       case 'email':
         dispatch(setEmail(value));
@@ -257,7 +257,7 @@ export default function PersonalDataForm() {
           {/* nationality */}
           <div className={'col-span-12'}>
             <select className={`input input-border-gray`}>
-              <option value="" aria-readonly>Nacionalidad*</option>
+              <option disabled selected value="" aria-readonly>Nacionalidad*</option>
               <option
                 value={'mexican'}
               >
@@ -282,14 +282,7 @@ export default function PersonalDataForm() {
               name={'dateOfBirth'}
               readOnly
             />
-            {/* error */}
-            {personalData.dateOfBirthError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
-              >
-                {personalData.dateOfBirthError}
-              </p>
-            )}
+            
           </div>
           <div className="col-span-12 sm:col-span-2">
             <select
@@ -298,7 +291,7 @@ export default function PersonalDataForm() {
               onChange={handleInputChange}
               ref={el => inputRefs.current.dayDateOfBirth = el}
             >
-              <option value={''}>Día</option>
+              <option disabled selected value={''}>Día</option>
               {
                 days.map(val => {
                   return <option key={val} value={val}>{val}</option>
@@ -313,7 +306,7 @@ export default function PersonalDataForm() {
               onChange={handleInputChange}
               ref={el => inputRefs.current.monthDateOfBirth = el}
             >
-              <option value={''}>Mes</option>
+              <option disabled selected value={''}>Mes</option>
               {
                 months.map(val => {
                   return <option key={val.index} value={val.index}>{val.name}</option>
@@ -328,7 +321,7 @@ export default function PersonalDataForm() {
               onChange={handleInputChange}
               ref={el => inputRefs.current.yearDateOfBirth = el}
             >
-              <option value={''}>Año</option>
+              <option disabled selected value={''}>Año</option>
               {
                 years.map(val => {
                   return <option key={val} value={val}>{val}</option>
@@ -336,7 +329,14 @@ export default function PersonalDataForm() {
               }
             </select>
           </div>
-
+          {/* error */}
+          {personalData.dateOfBirthError && (
+            <span className="col-span-12 text-center">
+              <p className={'text-red-500 text-xs mt-1 mx-3'}>
+                {personalData.dateOfBirthError}
+              </p>
+            </span>
+          )}
           {/* curp */}
           <div className={'col-span-12'}>
             <input
@@ -367,7 +367,7 @@ export default function PersonalDataForm() {
               onChange={handleInputChange}
               ref={el => inputRefs.current.gender = el}
             >
-              <option value="">Sexo*</option>
+              <option disabled selected value="">Sexo*</option>
               <option
                 value={'male'}
               >
@@ -437,7 +437,7 @@ export default function PersonalDataForm() {
               className={`input input-border-gray`}
               name={'occupation'}
             >
-              <option value="">Ocupación*</option>
+              <option disabled selected value="">Ocupación*</option>
               <option
                 value={'student'}
               >

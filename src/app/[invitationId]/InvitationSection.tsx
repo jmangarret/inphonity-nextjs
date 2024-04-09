@@ -63,7 +63,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
             />
           </div> */}
           <div className={`col-span-12 md:col-span-12`}>
-            <h2 className="text-2xl sm:text-3xl lg:text-5xl mb-8 sm:mb-12 md:mb-16 lg:mb-20 text-center mt-6 lg:mt-8 xl:mt-10">
+            <h2 className="text-3xl lg:text-5xl mb-8 sm:mb-12 md:mb-16 lg:mb-20 text-center mt-6 lg:mt-8 xl:mt-10">
               Haz realidad todo lo que <div className="font-medium text-highlight">siempre imaginaste</div>
             </h2>
           </div>
@@ -105,7 +105,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
           {/* accept invitation */}
           <div className="col-span-12 sm:col-span-0 md:col-span-0 lg:col-span-2"></div>
           <div className="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4">
-            <div className="button-container w-4/5 lg:w-72 mx-auto">
+            <div className="button-container w-4/5 lg:w-72 mx-auto flex justify-center">
               <button className="btn-xl multi-border font-medium block w-full"
                 onClick={handleReject}
                 disabled={isRejectingInvitation}
@@ -115,7 +115,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
             </div>
           </div>
           <div className="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4">
-            <div className="button-container w-4/5 lg:w-72 mx-auto mb-6">
+            <div className="button-container w-4/5 lg:w-72 mx-auto mb-6 flex justify-center">
               <button className="btn-xl multi-border font-medium block w-full"
                 onClick={handleAccept}
               >

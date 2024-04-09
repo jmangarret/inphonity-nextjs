@@ -65,7 +65,7 @@ export default function TaxDataForm() {
         dispatch(setRfc(value));
         break;
       case "name":
-        dispatch(setName(value));
+        dispatch(setName(value.replace(/[^A-Za-z\s]+/g, '')));
         break;
       case "street":
         dispatch(setStreet(value));

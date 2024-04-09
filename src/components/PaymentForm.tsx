@@ -840,7 +840,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     className={`input input-border-gray ${form.cadHolderNameError ? 'input-error' : ''}`}
                     placeholder={'Nombre del titular'}
                     value={form.cardHolderName}
-                    onChange={(e) => setForm({ ...form, cardHolderName: e.target.value })}
+                    onChange={(e) => setForm({ ...form, cardHolderName: e.target.value.replace(/[^A-Za-z\s]+/g, '') })}
                   />
                   {form.cadHolderNameError && (
                     <p className={'text-red-500 text-xs mt-1 mx-3'}>
@@ -879,7 +879,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                       value={form.expirationDateMonth}
                       onChange={(e) => setForm({ ...form, expirationDateMonth: e.target.value })}
                     >
-                      <option value={""}>Mes</option>
+                      <option disabled selected value={""}>Mes</option>
                       {Array.from(Array(12).keys()).map((month) => {
                         const paddedMonth = (month + 1).toString().padStart(2, '0');
                         return (
@@ -910,7 +910,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                       value={form.expirationDateYear}
                       onChange={(e) => setForm({ ...form, expirationDateYear: e.target.value })}
                     >
-                      <option value={""}>Año</option>
+                      <option disabled selected value={""}>Año</option>
                       {Array.from(Array(10).keys()).map((year) => (
                         <option
                           key={year}
