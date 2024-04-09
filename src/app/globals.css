@@ -73,11 +73,16 @@
   color: #EB522D;
 }
 
+.border-20 {
+  border-radius: 20px;
+}
+
 .modal-content {
   background-image: url("/img/bg_modal_rechazo.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  height: 80vh;
+  min-height: 50vh;
+  max-height: 80vh;
   max-width: 100vh;
 }
 
@@ -521,14 +526,17 @@ swiper-container::part(bullet) {
   border-color: rgba(0, 0, 0, 0);
   border-width: 1px;
 }
-.btn-md{
+
+.btn-md {
   width: 14.375rem;
   height: 3.125rem;
 }
-.btn-xl{
+
+.btn-xl {
   width: 18.5rem;
   height: 3.125rem;
 }
+
 .multi-border::before {
   content: "";
   position: absolute;
@@ -986,9 +994,10 @@ select.input {
 **/
 
 body {
-  background: url('/img/bg-landing-full.png') transparent 50% / cover no-repeat;
-  width: auto;
-  height: auto;
+  background: url('/img/bg-landing-full.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 .bg-plan1 {
@@ -1054,6 +1063,6 @@ body {
   background-color: black !important;
 }
 
-.font-yellow{
+.font-yellow {
   color: #F7D690;
 }
