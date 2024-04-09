@@ -4,9 +4,9 @@ type HeaderProps = {
   centerLogo?: boolean;
 };
 
-const Header: React.FC<HeaderProps> = ({ centerLogo= false }) => {
+const Header: React.FC<HeaderProps> = ({ centerLogo = false }) => {
   return (
-    <header className="">
+    <header className="mt-10">
       <nav className={`container mx-auto px-4 py-9 flex justify-${centerLogo ? 'center' : 'between'} items-center`}>
         <div>
           <Image
