@@ -165,7 +165,7 @@ export default function PersonalDataForm() {
         <p
           className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
-          <span className="font-medium">Sube una <span className="text-highlight">foto de frente</span>
+          <span className="font-medium">Sube una <span className="text-highlight">foto de frente </span>
             de tu <span className="text-highlight">Pasaporte</span>.
           </span>
         </p>
@@ -257,7 +257,7 @@ export default function PersonalDataForm() {
           {/* nationality */}
           <div className={'col-span-12'}>
             <select className={`input input-border-gray`}>
-              <option value="" aria-readonly>Nacionalidad*</option>
+              <option disabled selected value="" aria-readonly>Nacionalidad*</option>
               <option
                 value={'mexican'}
               >
@@ -298,7 +298,7 @@ export default function PersonalDataForm() {
               onChange={handleInputChange}
               ref={el => inputRefs.current.dayDateOfBirth = el}
             >
-              <option value={''}>Día</option>
+              <option disabled selected value={''}>Día</option>
               {
                 days.map(val => {
                   return <option key={val} value={val}>{val}</option>
@@ -313,7 +313,7 @@ export default function PersonalDataForm() {
               onChange={handleInputChange}
               ref={el => inputRefs.current.monthDateOfBirth = el}
             >
-              <option value={''}>Mes</option>
+              <option disabled selected value={''}>Mes</option>
               {
                 months.map(val => {
                   return <option key={val.index} value={val.index}>{val.name}</option>
@@ -328,7 +328,7 @@ export default function PersonalDataForm() {
               onChange={handleInputChange}
               ref={el => inputRefs.current.yearDateOfBirth = el}
             >
-              <option value={''}>Año</option>
+              <option disabled selected value={''}>Año</option>
               {
                 years.map(val => {
                   return <option key={val} value={val}>{val}</option>
@@ -367,7 +367,7 @@ export default function PersonalDataForm() {
               onChange={handleInputChange}
               ref={el => inputRefs.current.gender = el}
             >
-              <option value="">Sexo*</option>
+              <option disabled selected value="">Sexo*</option>
               <option
                 value={'male'}
               >
@@ -437,7 +437,7 @@ export default function PersonalDataForm() {
               className={`input input-border-gray`}
               name={'occupation'}
             >
-              <option value="">Ocupación*</option>
+              <option disabled selected value="">Ocupación*</option>
               <option
                 value={'student'}
               >
