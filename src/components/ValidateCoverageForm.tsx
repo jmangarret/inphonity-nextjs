@@ -80,13 +80,13 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
         lat = location.lat();
         lng = location.lng();
       } else {
-        // openModal(
-        //   <div className="flex flex-col items-center justify-center h-full text-white">
-        //     <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-        //       No se encontró el código postal ingresado.
-        //     </p>
-        //   </div>,
-        // );
+        openModal(
+          <div className="flex flex-col items-center justify-center h-full text-white">
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+              No se encontró el código postal ingresado.
+            </p>
+          </div>,
+        );
       }
     });
 
