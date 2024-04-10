@@ -32,7 +32,6 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
     }
   }, [invitationError, router]);
 
-
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.id === 'terms') {
       setIsTermsAccepted(e.target.checked);
@@ -78,8 +77,12 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
     setIsSigned(true);
   }
 
-  const handleSubmit = () => {
+  const handlePassword = () => {
     if (password !== passwordConfirmation) {
+      if (!password || !passwordConfirmation){
+        return;
+      }
+      
       openModal(
         <div className="flex flex-col items-center justify-center h-full text-white">
             <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
@@ -138,6 +141,9 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
 
       return;
     }
+  }
+  const handleSubmit = () => {
+    handlePassword();
 
     signature({
       invitation_id: parseInt(params.invitationId),
@@ -262,6 +268,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
                     name={'password'}
                     placeholder={'Contraseña'}
                     onChange={handlePasswordChange}
+                    onBlur={handlePassword}
                   />
                 </div>
                 <div className="flex items-center text-black mb-6 md:mb-8 lg:mb-10">
@@ -272,6 +279,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
                     name={'passwordConfirmation'}
                     placeholder={'Confirmar contraseña'}
                     onChange={(e) => setPasswordConfirmation(e.target.value)}
+                    onBlur={handlePassword}
                   />
                 </div>
 
