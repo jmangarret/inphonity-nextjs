@@ -264,7 +264,7 @@ export default function PersonalDataForm() {
           </div>
           {/* nationality */}
           <div className={'col-span-12'}>
-            <select disabled={isValidForm && personalData.showShippingForm} className={`input input-border-gray`}>
+            <select disabled={isValidForm && personalData.showShippingForm} defaultValue="" className={`input input-border-gray`}>
               <option disabled selected value="" aria-readonly>Nacionalidad*</option>
               <option
                 value={'mexican'}
@@ -293,7 +293,7 @@ export default function PersonalDataForm() {
             
           </div>
           <div className="col-span-12 sm:col-span-2">
-            <select disabled={isValidForm && personalData.showShippingForm}
+            <select disabled={isValidForm && personalData.showShippingForm} defaultValue=""
               className="input"
               name={'dayDateOfBirth'}
               onChange={handleInputChange}
@@ -308,7 +308,7 @@ export default function PersonalDataForm() {
             </select>
           </div>
           <div className="col-span-12 sm:col-span-3">
-            <select disabled={isValidForm && personalData.showShippingForm}
+            <select disabled={isValidForm && personalData.showShippingForm} defaultValue=""
               className="input"
               name={'monthDateOfBirth'}
               onChange={handleInputChange}
@@ -323,7 +323,7 @@ export default function PersonalDataForm() {
             </select>
           </div>
           <div className="col-span-12 sm:col-span-3">
-            <select disabled={isValidForm && personalData.showShippingForm}
+            <select disabled={isValidForm && personalData.showShippingForm} defaultValue=""
               className="input"
               name={'yearDateOfBirth'}
               onChange={handleInputChange}
@@ -368,7 +368,7 @@ export default function PersonalDataForm() {
 
           {/* gender */}
           <div className={'col-span-12'}>
-            <select disabled={isValidForm && personalData.showShippingForm}
+            <select disabled={isValidForm && personalData.showShippingForm} defaultValue=""
               className={`input input-border-gray ${personalData.genderError ? 'input-error' : ''}`}
               value={personalData.gender}
               name={'gender'}
@@ -441,7 +441,7 @@ export default function PersonalDataForm() {
 
           {/* occupation */}
           <div className={'col-span-12'}>
-            <select disabled={isValidForm && personalData.showShippingForm}
+            <select disabled={isValidForm && personalData.showShippingForm} defaultValue=""
               className={`input input-border-gray`}
               name={'occupation'}
             >

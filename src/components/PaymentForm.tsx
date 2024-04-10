@@ -874,7 +874,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   </div>
                   {/* expiration date month */}
                   <div className={'flex-1'}>
-                    <select
+                    <select defaultValue=""
                       className={`input input-border-gray`}
                       value={form.expirationDateMonth}
                       onChange={(e) => setForm({ ...form, expirationDateMonth: e.target.value })}
