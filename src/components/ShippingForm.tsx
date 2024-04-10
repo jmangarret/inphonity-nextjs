@@ -175,7 +175,7 @@ export default function ShippingForm() {
                   <span className={`font-medium mr-2 inline-block text-white`}>
                     Tarjeta SIM
                   </span>
-                  <input
+                  <input disabled={isValidForm && shipping.showTaxDataForm}
                     className={`${shipping.isEsimError ? 'input-error' : ''}`}
                     style={{accentColor: '#EF7911'}}
                     type="radio"
@@ -191,7 +191,7 @@ export default function ShippingForm() {
                   <span className={`font-medium mr-2 inline-block text-white`}>
                     Tarjeta eSIM
                   </span>
-                  <input
+                  <input disabled={isValidForm && shipping.showTaxDataForm}
                     className={`${shipping.isEsimError ? 'input-error' : ''}`}
                     style={{accentColor: '#EF7911'}}
                     type="radio"
@@ -221,7 +221,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input
+              <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
                 className={`input input-border-gray ${shipping.zipCodeError ? 'input-error' : ''}`}
                 placeholder="Código postal*"
@@ -244,7 +244,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input
+              <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
                 className={`input input-border-gray ${shipping.neighborhoodError ? 'input-error' : ''}`}
                 placeholder="Colonia*"
@@ -266,7 +266,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12'}
             >
-              <input
+              <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
                 className={`input input-border-gray ${shipping.streetError ? 'input-error' : ''}`}
                 placeholder="Calle*"
@@ -288,7 +288,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input
+              <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
                 className={`input input-border-gray ${shipping.numberError ? 'input-error' : ''}`}
                 placeholder="Número*"
@@ -310,7 +310,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input
+              <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
                 className={`input input-border-gray ${shipping.interiorNumberError ? 'input-error' : ''}`}
                 placeholder="Número interior"
@@ -332,7 +332,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12'}
             >
-              <input
+              <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
                 className={`input input-border-gray ${shipping.complementError ? 'input-error' : ''}`}
                 placeholder={`Referencia`}
@@ -354,7 +354,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input
+              <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
                 className={`input input-border-gray ${shipping.stateError ? 'input-error' : ''}`}
                 placeholder="Estado*"
@@ -376,7 +376,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input
+              <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
                 className={`input input-border-gray ${shipping.cityError ? 'input-error' : ''}`}
                 placeholder="Municipio/Alcaldía*"
@@ -397,7 +397,7 @@ export default function ShippingForm() {
 
             <div className={'col-span-12 flex justify-between'}>
               <div className="flex items-center text-white mb-2 ml-2">
-                <input
+                <input disabled={isValidForm && shipping.showTaxDataForm}
                   type="checkbox"
                   id={'myAddressAreEqual'}
                   className="form-checkbox green-check h-5 w-5 text-green-500"

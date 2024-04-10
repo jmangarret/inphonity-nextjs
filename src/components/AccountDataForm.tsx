@@ -70,9 +70,9 @@ export default function AccountDataForm() {
   const handleAccountNumber = () => {
     if (accountData.bankAccountNumber !== accountData.bankAccountNumberConfirmation) {
       if (!accountData.bankAccountNumber || !accountData.bankAccountNumberConfirmation){
-        return;
+        return true;
       }
-      
+      setShowPaymentForm(false);
       openModal(
         <div className="flex flex-col items-center justify-center h-full text-white">
             <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
@@ -81,16 +81,17 @@ export default function AccountDataForm() {
         </div>,
       );
 
-      return;
+      return false;
     }
+    return true;
   }
 
   const handleClave = () => {
     if (accountData.interbankClabe !== accountData.interbankClabeConfirmation) {
       if (!accountData.interbankClabe || !accountData.interbankClabeConfirmation){
-        return;
+        return true;
       }
-      
+      setShowPaymentForm(false);
       openModal(
         <div className="flex flex-col items-center justify-center h-full text-white">
             <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
@@ -99,12 +100,15 @@ export default function AccountDataForm() {
         </div>,
       );
 
-      return;
+      return false;
     }
+    return true;
   }
 
   const handleNextForm = () => {
-    dispatch(setShowPaymentForm(true));
+    if (handleAccountNumber() && handleClave()){
+      dispatch(setShowPaymentForm(true));
+    }
   }
 
   return (
@@ -125,7 +129,7 @@ export default function AccountDataForm() {
         <div className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 w-full mx-auto p-6 md:p-8 lg:p-10 xl:p-12'}>
           {/* bank name */}
           <div className={'col-span-12'}>
-            <input
+            <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
               className={`input input-border-gray ${accountData.bankNameError ? 'input-error' : ''}`}
               placeholder={`Banco*`}
@@ -144,7 +148,7 @@ export default function AccountDataForm() {
 
           {/* bank account number */}
           <div className={'col-span-12'}>
-            <input
+            <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
               className={`input input-border-gray ${accountData.bankAccountNumberError ? 'input-error' : ''}`}
               placeholder={`Número de Cuenta*`}
@@ -164,7 +168,7 @@ export default function AccountDataForm() {
 
           {/* confirmation */}
           <div className={'col-span-12'}>
-            <input
+            <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
               className={`input input-border-gray`}
               placeholder={`Confirma tu Número de Cuenta*`}
@@ -178,7 +182,7 @@ export default function AccountDataForm() {
 
           {/* interbank clabe */}
           <div className={'col-span-12'}>
-            <input
+            <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
               className={`input input-border-gray ${accountData.interbankClabeError ? 'input-error' : ''}`}
               placeholder={`Clave Interbancaria*`}
@@ -198,7 +202,7 @@ export default function AccountDataForm() {
 
           {/* confirmation */}
           <div className={'col-span-12'}>
-            <input
+            <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
               className={`input input-border-gray`}
               placeholder={`Confirma tu clave interbancaria*`}

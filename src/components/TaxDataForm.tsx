@@ -147,7 +147,7 @@ export default function TaxDataForm() {
       <div className={'lg:container mx-auto w-full'}>
         <div className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 w-full mx-auto p-6 md:p-8 lg:p-10 xl:p-12'}>
           <div className="col-span-12 flex items-center text-white mb-2">
-            <input
+            <input disabled={isValidForm && personalData.showShippingForm}
               type="checkbox"
               id={'dontHaveTaxData'}
               className="form-checkbox green-check h-5 w-5 text-green-500"
@@ -163,7 +163,7 @@ export default function TaxDataForm() {
           <div
             className={'col-span-12'}
           >
-            <input
+            <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
               className={`input input-border-gray ${taxData.nameError ? 'input-error' : ''}`}
               placeholder={`Nombre completo*`}
@@ -184,7 +184,7 @@ export default function TaxDataForm() {
 
            {/* rfc */}
            <div className={'col-span-12'}>
-            <input
+            <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
               className={`input input-border-gray ${taxData.rfcError ? 'input-error' : ''}`}
               placeholder={`RFC*`}
@@ -208,7 +208,7 @@ export default function TaxDataForm() {
           <div
             className={'col-span-12'}
           >
-            <input
+            <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
               className={`input input-border-gray ${taxData.streetError ? 'input-error' : ''}`}
               placeholder={`Dirección Fiscal - Calle*`}
@@ -231,7 +231,7 @@ export default function TaxDataForm() {
           <div
             className={'col-span-6'}
           >
-            <input
+            <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
               className={`input input-border-gray ${taxData.exteriorNumberError ? 'input-error' : ''}`}
               placeholder={`Número Exterior*`}
@@ -254,7 +254,7 @@ export default function TaxDataForm() {
           <div
             className={'col-span-6'}
           >
-            <input
+            <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
               className={`input input-border-gray ${taxData.interiorNumberError ? 'input-error' : ''}`}
               placeholder={`Número Interior`}
@@ -277,7 +277,7 @@ export default function TaxDataForm() {
            <div
             className={'col-span-6'}
           >
-            <input
+            <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
               className={`input input-border-gray ${taxData.zipCodeError ? 'input-error' : ''}`}
               placeholder={`Código Postal*`}
@@ -299,7 +299,7 @@ export default function TaxDataForm() {
 
           {/* neighborhood */}
           <div className={'col-span-6'}>
-            <input
+            <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
               className={`input input-border-gray ${taxData.neighborhoodError ? 'input-error' : ''}`}
               placeholder={`Colonia*`}
@@ -320,7 +320,7 @@ export default function TaxDataForm() {
 
           {/* state */}
           <div className={'col-span-6'}>
-            <input
+            <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
               className={`input input-border-gray ${taxData.stateError ? 'input-error' : ''}`}
               placeholder={`Estado*`}
@@ -343,7 +343,7 @@ export default function TaxDataForm() {
           <div
             className={'col-span-6'}
           >
-            <input
+            <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
               className={`input input-border-gray ${taxData.municipalityError ? 'input-error' : ''}`}
               placeholder={`Municipio/Alcaldía*`}
@@ -364,7 +364,7 @@ export default function TaxDataForm() {
 
           <div className={'col-span-12 flex justify-between'}>
               <div className="flex items-center text-white mb-2 ml-2">
-                <input
+                <input disabled={isValidForm && personalData.showShippingForm}
                   type="checkbox"
                   id={'myAddressAreEqual'}
                   className="form-checkbox green-check h-5 w-5 text-green-500"
