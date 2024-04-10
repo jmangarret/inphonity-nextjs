@@ -2,7 +2,7 @@ import PlusDecoration from "@/components/PlusDecoration";
 import Image from "next/image";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { setPlan } from "@/lib/features/plan/planSlice";
+import { setPlan, setPrice, setName } from "@/lib/features/plan/planSlice";
 
 export enum SlideBackground {
   TRANSPARENT = 'bg-promo-transparent',
@@ -43,7 +43,7 @@ const formatNumber = (number: number) => {
 const Slide: React.FC<SlideProps> = ({ id, name, hasPromo, gbPromo, background, mobileData, sharedData, minutes, sms, referralIncome, cashback, price, hasWhatsapp, hasInstagram, hasFacebook, hasMessenger, hasTiktok, hasX, hasTelegram, hasSnapchat }) => {
   const dispatch = useAppDispatch();
   const plan = useAppSelector((state) => state.plan);
-
+  
   const handleButtonClick = () => {
     if (!location.pathname.includes('accepted')) {
       window.scrollTo({
@@ -53,6 +53,8 @@ const Slide: React.FC<SlideProps> = ({ id, name, hasPromo, gbPromo, background, 
     }
 
     dispatch(setPlan(id));
+    dispatch(setPrice(price));
+    dispatch(setName(name));
   };
 
   return (

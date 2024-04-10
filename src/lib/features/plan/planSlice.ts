@@ -5,12 +5,16 @@ export interface Plan {
   id: number | null;
   isPaid: boolean;
   supportEsim?: boolean;
+  price: number;
+  name: string; 
 }
 
 const initialState: Plan = {
   id: 2,
   isPaid: false,
   supportEsim: false,
+  price: 0,
+  name: ''
 };
 
 const planSlice = createSlice({
@@ -26,6 +30,12 @@ const planSlice = createSlice({
     setSupportEsim: (state, action: PayloadAction<boolean>) => {
       state.supportEsim = action.payload;
     },
+    setPrice: (state, action: PayloadAction<number>) => {
+      state.price = action.payload;
+    },
+    setName: (state, action: PayloadAction<string>) => {
+      state.name = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder.addMatcher(invitationsApi.endpoints.getInvitationById.matchFulfilled, (state, action: PayloadAction<Invitation>) => {
@@ -44,6 +54,8 @@ export const {
   setPlan,
   setIsPaid,
   setSupportEsim,
+  setPrice,
+  setName
 } = planSlice.actions;
 
 export default planSlice.reducer;

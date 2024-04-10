@@ -98,6 +98,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
   const taxData = useAppSelector((state) => state.taxData);
   const plan = useAppSelector((state) => state.plan);
   const shippingData = useAppSelector((state) => state.shipping);
+  const shippingCost = 150;
   const {
     isLoading: invitationIsLoading,
     isFetching: invitationIsFetching,
@@ -853,7 +854,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 <div className={'col-span-12 my-3'}>
                   <input
                     value={form.cardNumber}
-                    onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cardNumber: e.target.value })}
+                    onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cardNumber: e.target.value.replace(/\D/g, '') })}
                     type="text"
                     className={`input input-border-gray ${form.cardNumberError ? 'input-error' : ''}`}
                     placeholder="Número de tarjeta"
@@ -950,10 +951,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 </div>
                 <div className="col-span-12 text-2xl flex flex-col mt-10">
                   <div className="flex justify-center my-3">
-                    <span className="font-medium">Plan:   </span> &nbsp;&nbsp; $999
+                    <span className="font-medium">Plan:   </span> &nbsp;&nbsp; ${plan.price}
                   </div>
                   <div className="flex justify-center mb-3">
-                    <span className="font-medium">Envío:   </span> &nbsp;&nbsp; $150
+                    <span className="font-medium">Envío:   </span> &nbsp;&nbsp; ${shippingCost}
                   </div>
                   <div className="w-1/5 my-1 self-center">
                     <hr />
@@ -962,7 +963,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     <span className="font-medium text-3xl text-highlight">Total a Pagar</span>
                   </div>
                   <div className="flex justify-center">
-                    <span className="text-3xl">$1.149</span>
+                    <span className="text-3xl">${plan.price + shippingCost}</span>
                   </div>
                 </div>
 
