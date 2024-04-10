@@ -17,7 +17,9 @@ import {
   setIdFrontPicture,
   setName,
   setPhone, setPhoneError,
-  setShowShippingForm
+  setShowShippingForm,
+  setIdAddressPicture,
+  setIdTaxPicture
 } from "@/lib/features/personal-data/personalDataSlice";
 import { ModalContext } from "@/contexts/ModalContext";
 
@@ -132,6 +134,12 @@ export default function PersonalDataForm() {
         }
         if (name === 'idPassportPicture') {
           dispatch(setIdPassportPicture(data as string));
+        }
+        if (name === 'idAddressPicture') {
+          dispatch(setIdAddressPicture(data as string));
+        }
+        if (name === 'idTaxPicture') {
+          dispatch(setIdTaxPicture(data as string));
         }
       }
 
@@ -675,7 +683,28 @@ export default function PersonalDataForm() {
                   onClick={showModalWithAddressProof}
                 />
               </div>
+              <input
+                  type="file"
+                  accept={'image/*'}
+                  className={'hidden'}
+                  name={'idAddressPicture'}
+                  onChange={handleFileChange}
+                  ref={el => inputRefs.current.idAddressPicture = el}
+                />
             </label>
+            {/* preview */}
+            <div
+                className={'flex justify-center mt-2 md:mt-3'}
+              >
+                {personalData.idAddressPicture && (
+                  <img
+                    src={personalData.idAddressPicture}
+                    alt={'Comprobante de Domicilio'}
+                    width={200}
+                    height={200}
+                  />
+                )}
+              </div>
           </div>
           {/* proof of tax status */}
           <div className={'col-span-12 md:col-span-6'}>
@@ -700,7 +729,28 @@ export default function PersonalDataForm() {
                   onClick={showModalWithTaxStatusProof}
                 />
               </div>
+              <input
+                type="file"
+                accept={'image/*'}
+                className={'hidden'}
+                name={'idTaxPicture'}
+                onChange={handleFileChange}
+                ref={el => inputRefs.current.idTaxPicture = el}
+              />
             </label>
+            {/* preview */}
+            <div
+                className={'flex justify-center mt-2 md:mt-3'}
+              >
+                {personalData.idTaxPicture && (
+                  <img
+                    src={personalData.idTaxPicture}
+                    alt={'Constancia de Situación Fiscal'}
+                    width={200}
+                    height={200}
+                  />
+                )}
+              </div>
           </div>
 
           <div className={'col-span-12'}>
