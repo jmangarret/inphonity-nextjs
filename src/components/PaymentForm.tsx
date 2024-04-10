@@ -874,12 +874,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   </div>
                   {/* expiration date month */}
                   <div className={'flex-1'}>
-                    <select
+                    <select 
+                      defaultValue={form.expirationDateMonth}
                       className={`input input-border-gray`}
-                      value={form.expirationDateMonth}
                       onChange={(e) => setForm({ ...form, expirationDateMonth: e.target.value })}
                     >
-                      <option disabled selected value={""}>Mes</option>
+                      <option disabled value={""}>Mes</option>
                       {Array.from(Array(12).keys()).map((month) => {
                         const paddedMonth = (month + 1).toString().padStart(2, '0');
                         return (

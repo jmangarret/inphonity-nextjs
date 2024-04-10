@@ -264,8 +264,10 @@ export default function PersonalDataForm() {
           </div>
           {/* nationality */}
           <div className={'col-span-12'}>
-            <select disabled={isValidForm && personalData.showShippingForm} className={`input input-border-gray`}>
-              <option disabled selected value="" aria-readonly>Nacionalidad*</option>
+            <select disabled={isValidForm && personalData.showShippingForm} 
+              defaultValue="" 
+              className={`input input-border-gray`}>
+              <option disabled value="" aria-readonly>Nacionalidad*</option>
               <option
                 value={'mexican'}
               >
@@ -293,13 +295,14 @@ export default function PersonalDataForm() {
             
           </div>
           <div className="col-span-12 sm:col-span-2">
-            <select disabled={isValidForm && personalData.showShippingForm}
+            <select disabled={isValidForm && personalData.showShippingForm} 
+              defaultValue=""
               className="input"
               name={'dayDateOfBirth'}
               onChange={handleInputChange}
               ref={el => inputRefs.current.dayDateOfBirth = el}
             >
-              <option disabled selected value={''}>Día</option>
+              <option disabled value={''}>Día</option>
               {
                 days.map(val => {
                   return <option key={val} value={val}>{val}</option>
@@ -308,13 +311,14 @@ export default function PersonalDataForm() {
             </select>
           </div>
           <div className="col-span-12 sm:col-span-3">
-            <select disabled={isValidForm && personalData.showShippingForm}
+            <select disabled={isValidForm && personalData.showShippingForm} 
+              defaultValue=""
               className="input"
               name={'monthDateOfBirth'}
               onChange={handleInputChange}
               ref={el => inputRefs.current.monthDateOfBirth = el}
             >
-              <option disabled selected value={''}>Mes</option>
+              <option disabled value={''}>Mes</option>
               {
                 months.map(val => {
                   return <option key={val.index} value={val.index}>{val.name}</option>
@@ -323,13 +327,14 @@ export default function PersonalDataForm() {
             </select>
           </div>
           <div className="col-span-12 sm:col-span-3">
-            <select disabled={isValidForm && personalData.showShippingForm}
+            <select disabled={isValidForm && personalData.showShippingForm} 
+              defaultValue=""
               className="input"
               name={'yearDateOfBirth'}
               onChange={handleInputChange}
               ref={el => inputRefs.current.yearDateOfBirth = el}
             >
-              <option disabled selected value={''}>Año</option>
+              <option disabled value={''}>Año</option>
               {
                 years.map(val => {
                   return <option key={val} value={val}>{val}</option>
@@ -368,14 +373,14 @@ export default function PersonalDataForm() {
 
           {/* gender */}
           <div className={'col-span-12'}>
-            <select disabled={isValidForm && personalData.showShippingForm}
+            <select disabled={isValidForm && personalData.showShippingForm} 
+              defaultValue={personalData.gender}
               className={`input input-border-gray ${personalData.genderError ? 'input-error' : ''}`}
-              value={personalData.gender}
               name={'gender'}
               onChange={handleInputChange}
               ref={el => inputRefs.current.gender = el}
             >
-              <option disabled selected value="">Sexo*</option>
+              <option disabled value="">Sexo*</option>
               <option
                 value={'male'}
               >
@@ -441,11 +446,12 @@ export default function PersonalDataForm() {
 
           {/* occupation */}
           <div className={'col-span-12'}>
-            <select disabled={isValidForm && personalData.showShippingForm}
+            <select disabled={isValidForm && personalData.showShippingForm} 
+              defaultValue=""
               className={`input input-border-gray`}
               name={'occupation'}
             >
-              <option disabled selected value="">Ocupación*</option>
+              <option disabled value="">Ocupación*</option>
               <option
                 value={'student'}
               >
