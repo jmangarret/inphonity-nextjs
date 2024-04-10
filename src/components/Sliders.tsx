@@ -1,7 +1,7 @@
 "use client";
-import {register, SwiperContainer} from 'swiper/element/bundle';
-import {useEffect, useRef} from "react";
-import Slide, {SlideBackground, SlideProps} from "@/components/Slide";
+import { register, SwiperContainer } from 'swiper/element/bundle';
+import { useEffect, useRef } from "react";
+import Slide, { SlideBackground, SlideProps } from "@/components/Slide";
 
 register();
 
@@ -129,9 +129,24 @@ const Sliders = () => {
     swiperElRef.current?.addEventListener('interchangeability', (e) => {
     });
     // watch click event
-    swiperElRef.current?.addEventListener('click', (e: any) => {
-      swiperElRef.current?.swiper.slideTo(swiperElRef.current?.swiper.clickedIndex);
-    });
+    // swiperElRef.current?.addEventListener('click', (e: any) => {
+    //   swiperElRef.current?.swiper.slideTo(swiperElRef.current?.swiper.clickedIndex);
+    // });
+    // Función para manejar el clic en un elemento con la clase "click-listen"
+    const handleClickListen = (e: any) => {
+      // Verificar si el elemento clickeado tiene la clase "click-listen"
+      if (e.target.classList.contains('click-listen')) {
+        swiperElRef.current?.swiper.slideTo(swiperElRef.current?.swiper.clickedIndex);
+      }
+    };
+
+    // Agregar un event listener para clics en elementos con la clase "click-listen"
+    document.addEventListener('click', handleClickListen);
+
+    // Eliminar el event listener cuando el componente se desmonta
+    return () => {
+      document.removeEventListener('click', handleClickListen);
+    };
   }, []);
 
   return (
@@ -141,7 +156,8 @@ const Sliders = () => {
         slidesPerView={3}
         ref={swiperElRef}
         slides-per-view="auto"
-        pagination="true"
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
         effect=""
         grab-cursor="true"
         centered-slides="true"
