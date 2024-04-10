@@ -28,6 +28,8 @@ export interface PersonalData {
   yearDateOfBirth: string;
   yearDateOfBirthError: string;
   showShippingForm: boolean;
+  idAddressPicture: string;
+  idTaxPicture: string;
 }
 
 const initialState: PersonalData = {
@@ -56,6 +58,8 @@ const initialState: PersonalData = {
   yearDateOfBirth: "",
   yearDateOfBirthError: "",
   showShippingForm: false,
+  idAddressPicture: "",
+  idTaxPicture: ""
 }
 
 const personalDataSlice = createSlice({
@@ -88,6 +92,8 @@ const personalDataSlice = createSlice({
       state.yearDateOfBirth = "";
       state.yearDateOfBirthError = "";
       state.showShippingForm = false;
+      state.idAddressPicture = "";
+      state.idTaxPicture = "";
     },
     resetErrors: (state) => {
       state.nameError = "";
@@ -176,6 +182,12 @@ const personalDataSlice = createSlice({
     },
     setShowShippingForm: (state, action: PayloadAction<boolean>) => {
       state.showShippingForm = action.payload;
+    },
+    setIdAddressPicture: (state, action: PayloadAction<string>) => {
+      state.idAddressPicture = action.payload;
+    },
+    setIdTaxPicture: (state, action: PayloadAction<string>) => {
+      state.idTaxPicture = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -238,7 +250,9 @@ export const {
   setMonthDateOfBirthError,
   setYearDateOfBirth,
   setYearDateOfBirthError,
-  setShowShippingForm
+  setShowShippingForm,
+  setIdAddressPicture,
+  setIdTaxPicture
 } = personalDataSlice.actions;
 
 export default personalDataSlice.reducer;

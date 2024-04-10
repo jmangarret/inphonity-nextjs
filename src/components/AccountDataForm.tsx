@@ -8,10 +8,13 @@ import {
   setInterbankClabe,
   setInterbankClabeConfirmation, setShowPaymentForm,
 } from "@/lib/features/account-data/accountDataSlice";
+import { ModalContext } from "@/contexts/ModalContext";
 
 export default function AccountDataForm() {
   const dispatch = useAppDispatch();
   const accountData = useAppSelector((state) => state.accountData);
+  const { openModal } = React.useContext(ModalContext);
+
   const fieldsOrder: (keyof typeof accountData)[] = useMemo(() => [
     "bankName",
     "bankAccountNumber",
@@ -48,10 +51,10 @@ export default function AccountDataForm() {
         dispatch(setBankName(value));
         break;
       case "bankAccountNumber":
-        dispatch(setBankAccountNumber(value));
+        dispatch(setBankAccountNumber(value.replace(/\D/g, '')));
         break;
       case "bankAccountNumberConfirmation":
-        dispatch(setBankAccountNumberConfirmation(value));
+        dispatch(setBankAccountNumberConfirmation(value.replace(/\D/g, '')));
         break;
       case "interbankClabe":
         dispatch(setInterbankClabe(value));
@@ -64,8 +67,48 @@ export default function AccountDataForm() {
     }
   }
 
+  const handleAccountNumber = () => {
+    if (accountData.bankAccountNumber !== accountData.bankAccountNumberConfirmation) {
+      if (!accountData.bankAccountNumber || !accountData.bankAccountNumberConfirmation){
+        return true;
+      }
+      setShowPaymentForm(false);
+      openModal(
+        <div className="flex flex-col items-center justify-center h-full text-white">
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+            El Número de Cuenta no coincide.
+          </p>
+        </div>,
+      );
+
+      return false;
+    }
+    return true;
+  }
+
+  const handleClave = () => {
+    if (accountData.interbankClabe !== accountData.interbankClabeConfirmation) {
+      if (!accountData.interbankClabe || !accountData.interbankClabeConfirmation){
+        return true;
+      }
+      setShowPaymentForm(false);
+      openModal(
+        <div className="flex flex-col items-center justify-center h-full text-white">
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+            La clave interbancaria no coincide.
+          </p>
+        </div>,
+      );
+
+      return false;
+    }
+    return true;
+  }
+
   const handleNextForm = () => {
-    dispatch(setShowPaymentForm(true));
+    if (handleAccountNumber() && handleClave()){
+      dispatch(setShowPaymentForm(true));
+    }
   }
 
   return (
@@ -86,7 +129,7 @@ export default function AccountDataForm() {
         <div className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 w-full mx-auto p-6 md:p-8 lg:p-10 xl:p-12'}>
           {/* bank name */}
           <div className={'col-span-12'}>
-            <input
+            <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
               className={`input input-border-gray ${accountData.bankNameError ? 'input-error' : ''}`}
               placeholder={`Banco*`}
@@ -105,13 +148,14 @@ export default function AccountDataForm() {
 
           {/* bank account number */}
           <div className={'col-span-12'}>
-            <input
+            <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
               className={`input input-border-gray ${accountData.bankAccountNumberError ? 'input-error' : ''}`}
               placeholder={`Número de Cuenta*`}
               value={accountData.bankAccountNumber}
               name={`bankAccountNumber`}
               onChange={handleInputChange}
+              onBlur={handleAccountNumber}
               ref={el => inputRefs.current.bankAccountNumber = el}
             />
             {/* error */}
@@ -124,26 +168,28 @@ export default function AccountDataForm() {
 
           {/* confirmation */}
           <div className={'col-span-12'}>
-            <input
+            <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
               className={`input input-border-gray`}
               placeholder={`Confirma tu Número de Cuenta*`}
               value={accountData.bankAccountNumberConfirmation}
               name={`bankAccountNumberConfirmation`}
               onChange={handleInputChange}
+              onBlur={handleAccountNumber}
               ref={el => inputRefs.current.bankAccountNumberConfirmation = el}
             />
           </div>
 
           {/* interbank clabe */}
           <div className={'col-span-12'}>
-            <input
+            <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
               className={`input input-border-gray ${accountData.interbankClabeError ? 'input-error' : ''}`}
               placeholder={`Clave Interbancaria*`}
               value={accountData.interbankClabe}
               name={`interbankClabe`}
               onChange={handleInputChange}
+              onBlur={handleClave}
               ref={el => inputRefs.current.interbankClabe = el}
             />
             {/* error */}
@@ -156,13 +202,14 @@ export default function AccountDataForm() {
 
           {/* confirmation */}
           <div className={'col-span-12'}>
-            <input
+            <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
               className={`input input-border-gray`}
               placeholder={`Confirma tu clave interbancaria*`}
               value={accountData.interbankClabeConfirmation}
               name={`interbankClabeConfirmation`}
               onChange={handleInputChange}
+              onBlur={handleClave}
               ref={el => inputRefs.current.interbankClabeConfirmation = el}
             />
           </div>

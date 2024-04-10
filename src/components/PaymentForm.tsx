@@ -936,7 +936,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                       className={`input input-border-gray ${form.cvvError ? 'input-error' : ''}`}
                       placeholder="CVV*"
                       value={form.cvv}
-                      onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cvv: e.target.value })}
+                      onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cvv: e.target.value.replace(/\D/g, '') })}
                     />
                     {/* error */}
                     {form.cvvError && (
