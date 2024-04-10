@@ -5,7 +5,7 @@ const Sliders = dynamic(() => import("@/components/Sliders"), { ssr: false });
 
 export default function SelectOfferSection() {
   return (
-    <section className="xl:container mx-auto py-4 sm:py-5 md:py-6 lg:py-7 xl:py-8">
+    <section className="mx-auto py-4 sm:py-5 md:py-6 lg:py-7 xl:py-8">
       <div className="grid grid-cols-12">
         <div className="col-span-2 flex justify-center items-center">
           <PlusDecoration
@@ -26,12 +26,12 @@ export default function SelectOfferSection() {
           <div className={'relative'}>
             <PlusDecoration
               className="inline-block w-12 sm:w-16 md:w-20 lg:w-24 xl:w-28"
-              style={{position: 'absolute', top: '-15px'}}
+              style={{ position: 'absolute', top: '-15px' }}
             />
           </div>
         </div>
         <div className="col-span-12">
-          <Sliders/>
+          <Sliders />
         </div>
       </div>
     </section>

@@ -1,8 +1,8 @@
 import PlusDecoration from "@/components/PlusDecoration";
 import Image from "next/image";
 import React from "react";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks";
-import {setPlan} from "@/lib/features/plan/planSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { setPlan } from "@/lib/features/plan/planSlice";
 
 export enum SlideBackground {
   TRANSPARENT = 'bg-promo-transparent',
@@ -21,8 +21,8 @@ export type SlideProps = {
   background?: SlideBackground;
   mobileData: string;
   sharedData: boolean;
-  minutes: number|string;
-  sms: number|string;
+  minutes: number | string;
+  sms: number | string;
   referralIncome: number;
   cashback: number;
   price: number;
@@ -40,7 +40,7 @@ const formatNumber = (number: number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const Slide: React.FC<SlideProps> = ({id, name, hasPromo, gbPromo, background, mobileData, sharedData, minutes, sms, referralIncome, cashback, price, hasWhatsapp, hasInstagram, hasFacebook, hasMessenger, hasTiktok, hasX, hasTelegram, hasSnapchat}) => {
+const Slide: React.FC<SlideProps> = ({ id, name, hasPromo, gbPromo, background, mobileData, sharedData, minutes, sms, referralIncome, cashback, price, hasWhatsapp, hasInstagram, hasFacebook, hasMessenger, hasTiktok, hasX, hasTelegram, hasSnapchat }) => {
   const dispatch = useAppDispatch();
   const plan = useAppSelector((state) => state.plan);
 
@@ -63,7 +63,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, gbPromo, background, m
         <div className="absolute p-10 rounded-[1.25rem]-full text-center font-medium flex items-center justify-center promo">
           <p>
             <span className="text-black">PROMO POR PORTABILIDAD</span>
-            <br/>
+            <br />
             <span className="text-[1.5rem] font-medium">+{gbPromo}<sup>GB</sup></span>
           </p>
         </div>
@@ -86,7 +86,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, gbPromo, background, m
                 width={20}
                 height={20}
                 className="inline"
-                style={{verticalAlign: "top"}}
+                style={{ verticalAlign: "top" }}
               />
             </>
           ) : (
@@ -99,7 +99,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, gbPromo, background, m
                 width={20}
                 height={20}
                 className="inline"
-                style={{verticalAlign: "top"}}
+                style={{ verticalAlign: "top" }}
               />
             </>
           )}
@@ -114,7 +114,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, gbPromo, background, m
               width={20}
               height={20}
               className="inline w-4"
-              style={{verticalAlign: "middle"}}
+              style={{ verticalAlign: "middle" }}
             />
             {' '}
             MINUTOS
@@ -131,7 +131,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, gbPromo, background, m
               width={20}
               height={20}
               className="inline w-4"
-              style={{verticalAlign: "middle"}}
+              style={{ verticalAlign: "middle" }}
             />
             {' '}
             SMS
@@ -203,7 +203,7 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, gbPromo, background, m
               className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
             />
           )}
-           {hasInstagram && (
+          {hasInstagram && (
             <Image
               src="/img/rs_instagram.svg"
               alt="Instagram"
@@ -250,12 +250,12 @@ const Slide: React.FC<SlideProps> = ({id, name, hasPromo, gbPromo, background, m
           )}
         </div>
         {plan.id === id ? (
-          <button className="w-full multi-border-white text-white bg-promo-orange">
+          <button className="w-full multi-border-white text-white bg-promo-orange click-listen">
             PLAN SELECCIONADO
           </button>
         ) : (
           <button
-            className="w-full multi-border text-white bg-opacity-50"
+            className="w-full multi-border text-white bg-opacity-50 click-listen"
             onClick={handleButtonClick}
           >
             QUIERO ESTE PLAN
