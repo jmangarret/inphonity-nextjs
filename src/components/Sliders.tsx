@@ -157,7 +157,6 @@ const Sliders = () => {
         ref={swiperElRef}
         slides-per-view="auto"
         pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
         effect=""
         grab-cursor="true"
         centered-slides="true"
