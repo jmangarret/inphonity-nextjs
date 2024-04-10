@@ -57,7 +57,7 @@ const Slide: React.FC<SlideProps> = ({ id, name, hasPromo, gbPromo, background, 
 
   return (
     <div
-      className={`mx-3 p-3 sm:p-4 md:p-9 grid grid-cols-10 border border-white rounded-[1.25rem] ${background || SlideBackground.TRANSPARENT}`}
+      className={`click-listen mx-3 p-3 sm:p-4 md:p-9 grid grid-cols-10 border border-white rounded-[1.25rem] ${background || SlideBackground.TRANSPARENT}`}
     >
       {hasPromo && (
         <div className="absolute p-10 rounded-[1.25rem]-full text-center font-medium flex items-center justify-center promo">
