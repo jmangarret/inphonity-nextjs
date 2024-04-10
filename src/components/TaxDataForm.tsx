@@ -20,6 +20,8 @@ export default function TaxDataForm() {
   const [myAddressAreEqual, setMyAddressAreEqual] = React.useState(false);
   const [dontHaveTaxData, setDontHaveTaxData] = React.useState(false);
   const taxData = useAppSelector((state) => state.taxData);
+  const shipping = useAppSelector((state) => state.shipping);
+  const personalData = useAppSelector((state) => state.personalData);
   const fieldsOrder: (keyof typeof taxData)[] = useMemo(() => [
     "rfc",
     "name",
@@ -96,13 +98,36 @@ export default function TaxDataForm() {
 
     // fill tax data form with shipping data
     if (e.target.checked) {
-      //updateTaxAddressData();
+      updateTaxAddressData();
 
       return;
     }
 
-    //emptyTaxAddressData();
+    emptyTaxAddressData();
   }
+
+  const updateTaxAddressData = () => {
+    dispatch(setStreet(shipping.street));
+    dispatch(setExteriorNumber(shipping.number));
+    dispatch(setInteriorNumber(shipping.interiorNumber));
+    dispatch(setNeighborhood(shipping.neighborhood));
+    dispatch(setZipCode(shipping.zipCode));
+    dispatch(setState(shipping.state));
+    dispatch(setMunicipality(shipping.city));
+    dispatch(setName(`${personalData.name}`));
+  }
+
+  const emptyTaxAddressData = () => {
+    dispatch(setStreet(''));
+    dispatch(setExteriorNumber(''));
+    dispatch(setInteriorNumber(''));
+    dispatch(setNeighborhood(''));
+    dispatch(setZipCode(''));
+    dispatch(setZipCode(''));
+    dispatch(setMunicipality(''));
+    dispatch(setName(''));
+  }
+
   const handleNextForm = () => {
     dispatch(setShowAccountDataForm(true));
   }
