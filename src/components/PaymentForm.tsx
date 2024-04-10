@@ -854,7 +854,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 <div className={'col-span-12 my-3'}>
                   <input
                     value={form.cardNumber}
-                    onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cardNumber: e.target.value })}
+                    onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cardNumber: e.target.value.replace(/\D/g, '') })}
                     type="text"
                     className={`input input-border-gray ${form.cardNumberError ? 'input-error' : ''}`}
                     placeholder="Número de tarjeta"
