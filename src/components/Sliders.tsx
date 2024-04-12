@@ -2,6 +2,7 @@
 import { register, SwiperContainer } from 'swiper/element/bundle';
 import { useEffect, useRef } from "react";
 import Slide, { SlideBackground, SlideProps } from "@/components/Slide";
+import { Navigation, Pagination } from 'swiper/modules';
 
 register();
 
@@ -156,7 +157,8 @@ const Sliders = () => {
         slidesPerView={3}
         ref={swiperElRef}
         slides-per-view="auto"
-        pagination={{ clickable: true }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
         effect=""
         grab-cursor="true"
         centered-slides="true"
