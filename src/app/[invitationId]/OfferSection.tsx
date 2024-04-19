@@ -1,9 +1,12 @@
+"use client";
 import dynamic from "next/dynamic";
 import PlusDecoration from "@/components/PlusDecoration";
+import Planes from "@/components/Planes";
 
 const Sliders = dynamic(() => import("@/components/Sliders"), { ssr: false });
 
 export default function OfferSection() {
+
   return (
     <section className="mx-auto mb-10 md:mb-16 lg:mb-20 xl:mb-24">
       <div className="grid grid-cols-10 items-center">
@@ -19,7 +22,7 @@ export default function OfferSection() {
 
         </div>
         <div className="col-span-10">
-          <Sliders />
+          <Planes />
         </div>
       </div>
     </section>

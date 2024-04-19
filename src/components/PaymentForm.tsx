@@ -88,7 +88,9 @@ async function copyToClipboard(divId: string) {
     });
   }
 }
-
+const formatNumber = (number: number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
   const { openModal, closeModal } = React.useContext(ModalContext);
   const dispatch = useAppDispatch();
@@ -963,7 +965,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     <span className="font-medium text-3xl text-highlight">Total a Pagar</span>
                   </div>
                   <div className="flex justify-center">
-                    <span className="text-3xl">${plan.price + shippingCost}</span>
+                    <span className="text-3xl">${formatNumber(Number(plan.price) + shippingCost)}</span>
                   </div>
                 </div>
 

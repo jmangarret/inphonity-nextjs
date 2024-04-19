@@ -13,13 +13,13 @@ type InvitationSectionProps = {
 const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) => {
   const router = useRouter();
   const { openModal } = React.useContext(ModalContext);
-  // TODO:
-  // const {
-  //   isLoading: isLoadingInvitation,
-  //   isFetching: isFetchingInvitation,
-  //   data: invitationData,
-  //   error: invitationError
-  // } = useGetInvitationByIdQuery(invitationId);
+  // TODO: descomentar
+  const {
+    isLoading: isLoadingInvitation,
+    isFetching: isFetchingInvitation,
+    data: invitationData,
+    error: invitationError
+  } = useGetInvitationByIdQuery(invitationId);
   const [rejectInvitation, {
     isLoading: isRejectingInvitation,
     error: rejectError
@@ -89,18 +89,19 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
             >
               Tiempo restante
             </h2>
-            {/* TODO: descomentar {isLoadingInvitation || isFetchingInvitation ? (
+            {/* TODO: descomentar  */}
+            {isLoadingInvitation || isFetchingInvitation ? (
               <div
                 className="font-medium text-2xl sm:text-3xl lg:text-5xl xl:text-8xl bg-gray-300 animate-pulse h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10 mb-3 w-3/4 inline-block"
                 style={{verticalAlign: "middle"}}
               ></div>
             ) : (
-              invitationData && ( */}
+              invitationData && (
             <Countdown
-              expiresAt={'2024-04-05 00:00:00'}
+              expiresAt={invitationData.expires_at}
             />
-            {/* )
-            )} */}
+             )
+            )}
           </div>
           {/* accept invitation */}
           <div className="col-span-12 sm:col-span-0 md:col-span-0 lg:col-span-2"></div>
