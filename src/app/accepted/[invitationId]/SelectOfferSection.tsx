@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import PlusDecoration from "@/components/PlusDecoration";
+import Planes from "@/components/Planes";
 
 const Sliders = dynamic(() => import("@/components/Sliders"), { ssr: false });
 
@@ -31,7 +32,7 @@ export default function SelectOfferSection() {
           </div>
         </div>
         <div className="col-span-12">
-          <Sliders />
+          <Planes />
         </div>
       </div>
     </section>

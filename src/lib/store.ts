@@ -8,6 +8,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import {invitationsApi} from "@/lib/services/invitationsApi";
 import {registersApi} from "@/lib/services/registersApi";
 import {validateImeiApi} from "@/lib/services/validateCompatibilityApi";
+import { plansApi } from './services/plansApi';
 
 export const makeStore = () => {
   return configureStore({
@@ -20,6 +21,7 @@ export const makeStore = () => {
       [invitationsApi.reducerPath]: invitationsApi.reducer,
       [registersApi.reducerPath]: registersApi.reducer,
       [validateImeiApi.reducerPath]: validateImeiApi.reducer,
+      [plansApi.reducerPath]: plansApi.reducer
     },
     devTools: process.env.NODE_ENV !== "production",
     middleware: (getDefaultMiddleware) =>
@@ -27,6 +29,7 @@ export const makeStore = () => {
         invitationsApi.middleware,
         registersApi.middleware,
         validateImeiApi.middleware,
+        plansApi.middleware
       ]),
   })
 }
