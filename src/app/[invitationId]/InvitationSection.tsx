@@ -98,7 +98,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
             ) : (
               invitationData && (
             <Countdown
-              expiresAt={'2024-04-05 00:00:00'}
+              expiresAt={invitationData.expires_at}
             />
              )
             )}
