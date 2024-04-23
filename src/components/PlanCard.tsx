@@ -49,7 +49,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
           <p>
             <span className="text-black">PROMO POR PORTABILIDAD</span>
             <br />
-            <span className="text-[1.5rem] font-medium">+{planData.portability_promo}<sup>GB</sup></span>
+            <span className="text-[1.5rem] font-medium" dangerouslySetInnerHTML={{__html: planData.portability_promo}}></span>
           </p>
         </div>
       )}
