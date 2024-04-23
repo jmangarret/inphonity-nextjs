@@ -13,7 +13,7 @@ const Planes = () => {
   // list of plans
 
   const {data, error, isFetching, isLoading} = useGetPlansQuery(null);
-
+  const planes = data?.filter(d => d.type == 'plan')
   useEffect(() => {
     // jump to second slide
     swiperElRef.current?.swiper.slideTo(1);
@@ -59,7 +59,7 @@ const Planes = () => {
         centered-slides="true"
         speed="600"
       >
-        {data && data.map((plan) => (
+        {planes && planes.map((plan) => (
           <swiper-slide
             key={plan.id}
           >

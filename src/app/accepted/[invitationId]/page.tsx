@@ -20,11 +20,11 @@ export default function Accepted({ params }: { params: { invitationId: string } 
   } = useGetInvitationByIdQuery(params.invitationId);
   const router = useRouter();
   //TODO: descomentar
-  // React.useEffect(() => {
-  //   if (invitationError) {
-  //     router.push('/404');
-  //   }
-  // }, [invitationError, router]);
+  React.useEffect(() => {
+    if (invitationError) {
+      router.push('/404');
+    }
+  }, [invitationError, router]);
 
   return (
     <>

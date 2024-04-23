@@ -47,7 +47,7 @@ export interface Plan {
     has_x:             number;
     has_tl:             number;
     has_sc:             number;
-    portability_promo: null | string;
+    portability_promo: TrustedHTML | string | HTMLSpanElement;
     price:             number;
     code:              string;
     status:            Status;

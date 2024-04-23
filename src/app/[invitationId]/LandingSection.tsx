@@ -18,7 +18,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
 
   useEffect(() => {
     if (error && 'status' in error && error.status === 404) {
-      router.push('/');
+      router.push('/404');
     }
   }, [error, router]);
 
