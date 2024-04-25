@@ -25,10 +25,10 @@ import { ModalContext } from "@/contexts/ModalContext";
 
 const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, '0'));
 const months = [
+  { index: 0, name: "Enero" },
   { index: 1, name: "Febrero" },
   { index: 2, name: "Marzo" },
   { index: 3, name: "Abril" },
-  { index: 0, name: "Enero" },
   { index: 4, name: "Mayo" },
   { index: 5, name: "Junio" },
   { index: 6, name: "Julio" },

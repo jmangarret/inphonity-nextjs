@@ -88,8 +88,7 @@ export default function RegisterForms({invitationId}: { invitationId: string }) 
                 <p className={`text-base leading-none`}>
                   <span className="font-medium">Importante: </span>
                   Es necesario que tengas RFC con homoclave para que podamos realizar los pagos de tu cashback. Si aún
-                  no lo tienes, cuentas con 90 días naturales para tramitarlo, de lo contrario no podrás seguir recibiendo el
-                  beneficio de cashback.
+                  no lo tienes, cuentas con 90 días naturales para tramitarlo, de lo contrario no podrás recibir el beneficio del cashback.
                 </p>
                 <p className={`text-base leading-none`}>
                   También es necesario que cuentes con tu Constancia de Situación Fiscal actualizada y que se encuentre

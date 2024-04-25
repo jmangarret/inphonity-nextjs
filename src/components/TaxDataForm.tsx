@@ -363,7 +363,7 @@ export default function TaxDataForm() {
           </div>
 
           <div className={'col-span-12 flex justify-between'}>
-              <div className="flex items-center text-white mb-2 ml-2">
+              {/* <div className="flex items-center text-white mb-2 ml-2">
                 <input disabled={isValidForm && taxData.showAccountDataForm }
                   type="checkbox"
                   id={'myAddressAreEqual'}
@@ -374,7 +374,7 @@ export default function TaxDataForm() {
                 <label htmlFor={'myAddressAreEqual'}>
                   <span className={`ml-2 inline-block text-white`}>Mi dirección de envío y facturación son iguales</span>
                 </label>
-              </div>
+              </div> */}
               <div>
                 <span className={`text-base text-white font-medium`}>
                   Campos Obligatorios*
