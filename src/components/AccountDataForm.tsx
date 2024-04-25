@@ -185,7 +185,7 @@ export default function AccountDataForm() {
             <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
               className={`input input-border-gray ${accountData.interbankClabeError ? 'input-error' : ''}`}
-              placeholder={`Clave Interbancaria*`}
+              placeholder={`CLABE interbancaria*`}
               value={accountData.interbankClabe}
               name={`interbankClabe`}
               onChange={handleInputChange}
@@ -205,7 +205,7 @@ export default function AccountDataForm() {
             <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
               className={`input input-border-gray`}
-              placeholder={`Confirma tu clave interbancaria*`}
+              placeholder={`Confirma tu CLABE interbancaria*`}
               value={accountData.interbankClabeConfirmation}
               name={`interbankClabeConfirmation`}
               onChange={handleInputChange}
