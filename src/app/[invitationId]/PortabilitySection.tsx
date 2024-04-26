@@ -23,21 +23,21 @@ export default function PortabilitySection() {
           <Step
             step={1}
             // style={{backgroundColor: "#F2472F"}}
-            className={'bg-gradient-to-r from-black to-gray-700 border-l-2 border-t-2 border-b-2 border-amber-800'}
+            className={'bg-white from-black border-l-4 border-t-4 border-b-4 border-orange-700'}
           >
             Llama al <span className="font-medium">051</span> o manda un <span className="font-medium">SMS</span> con la palabra <span className="font-medium">&quot;NIP&quot;</span> desde la <span className="font-medium">SIM de tu compañía anterior.</span>
           </Step>
           <Step
             step={2}
             // style={{backgroundColor: "#007F8E"}}
-            className={'bg-gradient-to-r from-black to-gray-700 border-l-2 border-t-2 border-b-2 border-teal-400'}
+            className={'bg-white from-black border-l-4 border-t-4 border-b-4 border-teal-400'}
           >
             Recibirás un <span className="font-medium">código de 4 dígitos.</span>
           </Step>
           <Step
             step={3}
             // style={{backgroundColor: "#FFAE39"}}
-            className={'bg-gradient-to-r from-black to-gray-700 border-l-2 border-t-2 border-b-2 border-amber-400'}
+            className={'bg-white from-black border-l-4 border-t-4 border-b-4 border-amber-400'}
           >
             Realiza tu portabilidad desde nuestra App, sitio web <a href="https://www.inphonity.com" target="_blank" className="hover:underline"><span className="font-medium">www.inphonity.com</span></a> o marcando <a
               href="tel:*4444" className="hover:underline"><span className="font-medium">*4444</span></a> <span className="font-medium">desde tu línea inphonity.</span>

@@ -10,10 +10,10 @@ import { ContenTiendasAfiliadas, HeaderTiendasAfiliadas } from "@/components/Mod
 export default function PaymentsSection() {
   const ctxModal = React.useContext(ModalContext);
 
-  
 
-  const handleInfo = ()=>{
-    ctxModal.openModal(<ContenTiendasAfiliadas />,<HeaderTiendasAfiliadas />);
+
+  const handleInfo = () => {
+    ctxModal.openModal(<ContenTiendasAfiliadas />, <HeaderTiendasAfiliadas />);
   }
 
   return (
@@ -29,6 +29,9 @@ export default function PaymentsSection() {
             Métodos de
             <span className="text-highlight"> pago</span>
           </h2>
+          <h5 className="text-3xl text-center font-light py-6">
+            <b>Contamos con diferentes opciones</b> para que escojas la que más se adapte a ti
+          </h5>
         </div>
         <div className="col-span-1">
           {/* <PlusDecoration
@@ -36,24 +39,24 @@ export default function PaymentsSection() {
           /> */}
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10">
         <div
-          className="p-9"
+          className="p-9 bg-white border-20"
         >
           <Payment
             title="Pago con tarjeta"
             description="Realiza tus pagos vía online con tu tarjeta de crédito o débito"
-            image="/img/tarjeta-icon.svg"
+            image="/img/tarjeta-icon2.svg"
           />
         </div>
         <div
-          className="p-9"
+          className="p-9 bg-white border-20"
         >
           <Payment
             title="Pago con efectivo"
             description="Conoce nuestros establecimientos afiliados en donde puedes pagar tu plan en efectivo "
-            image="/img/efectivo-icon.svg"
-            action={<button onClick={handleInfo}> 
+            image="/img/efectivo-icon2.svg"
+            action={<button onClick={handleInfo}>
               <Image
                 src="/img/info-ico.svg"
                 alt="info check"
@@ -65,12 +68,12 @@ export default function PaymentsSection() {
           />
         </div>
         <div
-          className="p-9"
+          className="p-9 bg-white border-20"
         >
           <Payment
             title="Pago transferencia"
             description="Realiza una transferencia interbancaria (SPEI)"
-            image="/img/transferencia-icon.svg"
+            image="/img/transferencia-icon2.svg"
           />
         </div>
       </div>

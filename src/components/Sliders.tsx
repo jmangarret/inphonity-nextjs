@@ -157,6 +157,7 @@ const Sliders = () => {
         slidesPerView={3}
         ref={swiperElRef}
         slides-per-view="auto"
+        Updated upstream
         navigation={true}
         modules={[Pagination, Navigation]}
         effect=""

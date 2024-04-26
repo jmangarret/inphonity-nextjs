@@ -48,6 +48,21 @@
   margin-bottom: 5rem;
 }
 
+.border-l-4 {
+  border-left-width: 4px;
+}
+
+.border-t-4 {
+  border-top-width: 4px;
+}
+
+.border-b-4 {
+  border-bottom-width: 4px;
+}
+
+.gap-10 {
+  gap: 10rem;
+}
 
 .pointer {
   cursor: pointer;
@@ -145,6 +160,10 @@
   .ml-text-contact {
     margin-left: 5.5rem;
   }
+}
+
+.bg-white {
+  background-color: white;
 }
 
 .mx-auto {
@@ -1083,11 +1102,11 @@ body {
   color: #F7D690;
 }
 
-.text-10px{
+.text-10px {
   font-size: 0.625rem;
 }
 
-.planes-content{
+.planes-content {
   width: 64.375rem;
   height: 26.25rem;
   margin-top: 3.5rem;
@@ -1098,16 +1117,16 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-  .planes-content{
+  .planes-content {
     height: 22rem;
   }
 }
 
-.planes-container{
+.planes-container {
   position: relative;
   top: -220px;
 }
 
-sup{
+sup {
   font-size: 50%;
 }
