@@ -17,7 +17,7 @@ const Step: React.FC<StepProps> = ({step, children, style, className}) => {
         className="flex items-center justify-center w-12 h-12"
       >
         <p
-          className="text-white font-bold text-6xl"
+          className="text-black font-bold text-6xl"
         >
           {step}
         </p>
