@@ -44,6 +44,10 @@
   }
 }
 
+/* main{
+  background: #fff;
+} */
+
 .mb-20 {
   margin-bottom: 5rem;
 }
@@ -1110,6 +1114,7 @@ body {
   width: 64.375rem;
   height: 26.25rem;
   margin-top: 3.5rem;
+  margin-bottom: -220px;
   padding-top: 4.375rem;
   border-radius: 1.875rem;
   background: linear-gradient(180deg, #00DDBA 0%, #007764 100%);
@@ -1122,11 +1127,20 @@ body {
   }
 }
 
-.planes-container {
+/* .planes-container{
   position: relative;
   top: -220px;
-}
+} */
 
 sup {
   font-size: 50%;
+}
+
+.text-custom-blue {
+  color: #298a9a;
+}
+
+.bg-custom-green {
+  background: linear-gradient(180deg, #27E1C1 0%, rgba(39, 225, 193, 0.00) 100%);
+  ;
 }
