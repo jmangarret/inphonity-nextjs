@@ -10,10 +10,10 @@ import { ContenTiendasAfiliadas, HeaderTiendasAfiliadas } from "@/components/Mod
 export default function PaymentsSection() {
   const ctxModal = React.useContext(ModalContext);
 
-  
 
-  const handleInfo = ()=>{
-    ctxModal.openModal(<ContenTiendasAfiliadas />,<HeaderTiendasAfiliadas />);
+
+  const handleInfo = () => {
+    ctxModal.openModal(<ContenTiendasAfiliadas />, <HeaderTiendasAfiliadas />);
   }
 
   return (
@@ -28,6 +28,9 @@ export default function PaymentsSection() {
           <h2 className="font-medium text-3xl xl:text-5xl text-center mt-10">
             Métodos de pago
           </h2>
+          <h5 className="text-3xl text-center font-light py-6">
+            <b>Contamos con diferentes opciones</b> para que escojas la que más se adapte a ti
+          </h5>
         </div>
         <div className="col-span-12">
           <p className="text-xl lg:text-2xl text-center mt-5 mx-5"> <span className="font-medium">Contamos con diferentes opciones </span> para que escojas la que más se adapte a ti </p>
@@ -43,15 +46,15 @@ export default function PaymentsSection() {
           <Payment
             title="Con tarjeta"
             description="Realiza tus pagos vía online con tu tarjeta de crédito o débito"
-            image="/img/tarjeta-icon.svg"
+            image="/img/tarjeta-icon2.svg"
           />
         </div>
         <div className="mx-10 my-5 sm:mx-5">
           <Payment
             title="Con efectivo"
             description="Conoce nuestros establecimientos afiliados en donde puedes pagar tu plan en efectivo "
-            image="/img/efectivo-icon.svg"
-            action={<button onClick={handleInfo}> 
+            image="/img/efectivo-icon2.svg"
+            action={<button onClick={handleInfo}>
               <Image
                 src="/img/info-icon.svg"
                 alt="info check"
@@ -66,7 +69,7 @@ export default function PaymentsSection() {
           <Payment
             title="Con transferencia"
             description="Realiza una transferencia interbancaria (SPEI)"
-            image="/img/transferencia-icon.svg"
+            image="/img/transferencia-icon2.svg"
           />
         </div>
       </div>

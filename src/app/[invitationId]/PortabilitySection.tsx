@@ -13,7 +13,7 @@ export default function PortabilitySection() {
             Una vez que tengas tu SIM o eSIM de inphonity, <span className="font-medium">podrás realizar</span>
           </p>
           <p className="text-black font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-5 md:mb-8 lg:mb-11 xl:mb-14">
-              <span className="text-custom-blue">la portabilidad de tu número </span>
+            <span className="text-custom-blue">la portabilidad de tu número </span>
           </p>
         </div>
         <div className="col-span-10 sm:col-span-4 flex items-center">
