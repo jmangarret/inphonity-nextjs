@@ -14,6 +14,7 @@ type LandingSectionProps = {
 const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
   //TODO descomentar request
   const { isLoading, isFetching, data, error } = useGetInvitationByIdQuery(invitationId);
+  // const { isLoading, isFetching, data, error } = request;
   const router = useRouter();
 
   useEffect(() => {

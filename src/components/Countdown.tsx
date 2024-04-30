@@ -40,22 +40,22 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ expiresAt }) => {
     <div className="w-1/3 mx-auto">
       <div className="grid grid-cols-5 gap-1 text-2xl lg:text-6xl text-center">
         <div className="col-span-1">
-          <span className="block font-medium">{timeLeft.hours}</span>
-          <span className="text-sm lg:text-base xl:text-lg">Horas</span>
+          <span className="text-black block font-medium">{timeLeft.hours}</span>
+          <span className="text-sm lg:text-base xl:text-lg text-black">Horas</span>
         </div>
         <div className="col-span-1">
           <span className='text-highlight'>:</span>
         </div>
         <div className="col-span-1">
-          <span className="block font-medium">{timeLeft.minutes}</span>
-          <span className="text-sm lg:text-base xl:text-lg">Minutos</span>
+          <span className="text-black block font-medium">{timeLeft.minutes}</span>
+          <span className="text-sm lg:text-base xl:text-lg text-black">Minutos</span>
         </div>
         <div className="col-span-1">
           <span className='text-highlight'>:</span>
         </div>
         <div className="col-span-1">
-          <span className="block font-medium">{timeLeft.seconds}</span>
-          <span className="text-sm lg:text-base xl:text-lg">Segundos</span>
+          <span className="text-black block font-medium">{timeLeft.seconds}</span>
+          <span className="text-sm lg:text-base xl:text-lg text-black">Segundos</span>
         </div>
       </div>
     </div>

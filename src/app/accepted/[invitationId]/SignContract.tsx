@@ -4,6 +4,7 @@ import PlusDecoration from "@/components/PlusDecoration";
 import { ModalContext } from "@/contexts/ModalContext";
 import { useGetInvitationByIdQuery } from "@/lib/services/invitationsApi";
 import { useRouter } from "next/navigation";
+import { request } from "@/mocks/request-data";
 
 type SignContractProps = {
   invitationId: string;
@@ -11,6 +12,7 @@ type SignContractProps = {
 const SignContract: React.FC<SignContractProps> = ({ invitationId }) => {
   const router = useRouter();
   const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = useGetInvitationByIdQuery(invitationId);
+  // const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = request;
   const [isTermsAccepted, setIsTermsAccepted] = React.useState(false);
   const [isConfirmationAccepted, setIsConfirmationAccepted] = React.useState(false);
   const { openModal } = React.useContext(ModalContext);

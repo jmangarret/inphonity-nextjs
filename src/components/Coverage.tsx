@@ -19,7 +19,7 @@ const Coverage: React.FC<CoverageProps> = ({ description, image }) => {
           style={{ width: "auto" }}
         />
       </div>
-      <div className="text-center lg:text-xl mt-2">
+      <div className="text-black text-center lg:text-xl mt-2">
         {
           description.map((textOrHTML, index) => <span key={index}>{textOrHTML}</span>)
         }

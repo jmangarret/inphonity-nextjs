@@ -48,6 +48,7 @@ const formatNumberToMoney = (number: number) => {
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ContenTiendasAfiliadas, HeaderTiendasAfiliadas } from "./ModalPayments";
+import { request } from "@/mocks/request-data";
 
 async function printDiv(divId: string) {
   const input = document.getElementById(divId);
@@ -108,6 +109,13 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
     error: invitationError,
     refetch: invitationRefetch
   } = useGetInvitationByIdQuery(invitationId);
+  // const {
+  //   isLoading: invitationIsLoading,
+  //   isFetching: invitationIsFetching,
+  //   data: invitationData,
+  //   error: invitationError,
+  //   refetch: invitationRefetch
+  // } = request;
   const [register, { isLoading: registerIsLoading, error: registerError }] = useRegisterMutation();
   const [initialPayment, {
     isLoading: initialPaymentIsLoading,
@@ -733,13 +741,13 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
   }, [registerError, initialPaymentError]);
 
   return (
-    <div className="m-3 md:p-6 lg:p-9 xl:p-12 bg-black/[.80]">
+    <div className="m-3 md:p-6 lg:p-9 xl:p-12 bg-white">
       {/* header */}
       <header className="mb-10 sm:mb-12">
-        <h3 className={'font-medium text-white text-center text-3xl sm:text-5xl mb-3'}>
-          Realizar <span className="text-highlight">pago</span>
+        <h3 className={'font-medium text-black text-center text-3xl sm:text-5xl mb-3'}>
+          Realizar <span className="text-custom-blue">pago</span>
         </h3>
-        <p className={'text-base text-white text-center px-16'}>
+        <p className={'text-xl text-black text-center px-16'}>
           ¿Cómo quieres realizar tu pago?
         </p>
       </header>
@@ -767,11 +775,11 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         </div>
       ) : (
         <>
-          <div className="text-white text-base">
+          <div className="text-black text-base">
             <div className="mb-5">
               <span className="mr-10">
                 <Image
-                  src={'/img/pago-card.png'}
+                  src={'/img/pago-card.svg'}
                   alt={'Pago con tarjeta'}
                   width={39.33}
                   height={27.42}
@@ -788,7 +796,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
             <div className="mb-5">
               <span className="mr-10">
                 <Image
-                  src={'/img/pago-cash.png'}
+                  src={'/img/pago-cash.svg'}
                   alt={'Pago con efectivo'}
                   width={39.33}
                   height={27.42}
@@ -805,7 +813,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
             <div className="mb-5">
               <span className="mr-10">
                 <Image
-                  src={'/img/pago-transfer.png'}
+                  src={'/img/pago-transfer.svg'}
                   alt={'Pago con transferencia'}
                   width={39.33}
                   height={27.42}
@@ -821,7 +829,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
             </div>
           </div>
 
-          <div className="text-white">
+          <div className="text-black font-medium">
             {activeTab === "Pago con tarjeta" && (
               <div className={'grid grid-cols-12'} id={'payment-card'}>
                 <p className={`col-span-12 text-2xl mb-5`}>
@@ -838,9 +846,13 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 </div>
                 {/* cardholder name */}
                 <div className={'col-span-12 my-3'}>
+                  <p className="text-base font-light mb-6">
+                    <span className="text-highlight-red">Importante: </span>
+                    Si el pago es rechazado al usar el número que viene en tu tarjeta física, por favor realiza tu compra con el número de tu tarjeta digital. 
+                  </p>
                   <input
                     type="text"
-                    className={`input input-border-gray ${form.cadHolderNameError ? 'input-error' : ''}`}
+                    className={`input input-border-black ${form.cadHolderNameError ? 'input-error' : ''}`}
                     placeholder={'Nombre del titular'}
                     value={form.cardHolderName}
                     onChange={(e) => setForm({ ...form, cardHolderName: e.target.value.replace(/[^A-Za-z\s]+/g, '') })}
@@ -858,7 +870,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     value={form.cardNumber}
                     onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cardNumber: e.target.value.replace(/\D/g, '') })}
                     type="text"
-                    className={`input input-border-gray ${form.cardNumberError ? 'input-error' : ''}`}
+                    className={`input input-border-black ${form.cardNumberError ? 'input-error' : ''}`}
                     placeholder="Número de tarjeta"
                   />
                   {/* error */}
@@ -871,7 +883,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
 
                 <div className={'col-span-12 flex gap-3 items-center my-3'}>
                   <div>
-                    <label htmlFor="">
+                    <label className="font-light" htmlFor="">
                       Fecha de vencimiento
                     </label>
                   </div>
@@ -879,7 +891,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   <div className={'flex-1'}>
                     <select 
                       defaultValue={form.expirationDateMonth}
-                      className={`input input-border-gray`}
+                      className={`input input-border-black`}
                       onChange={(e) => setForm({ ...form, expirationDateMonth: e.target.value })}
                     >
                       <option disabled value={""}>Mes</option>
@@ -909,7 +921,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   {/* expiration date year */}
                   <div className={'flex-1'}>
                     <select
-                      className={`input input-border-gray`}
+                      className={`input input-border-black`}
                       value={form.expirationDateYear}
                       onChange={(e) => setForm({ ...form, expirationDateYear: e.target.value })}
                     >
@@ -936,7 +948,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   <div className={'flex-1'}>
                     <input
                       type="text"
-                      className={`input input-border-gray ${form.cvvError ? 'input-error' : ''}`}
+                      className={`input input-border-black ${form.cvvError ? 'input-error' : ''}`}
                       placeholder="CVV*"
                       value={form.cvv}
                       onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cvv: e.target.value.replace(/\D/g, '') })}
@@ -951,18 +963,18 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     )}
                   </div>
                 </div>
-                <div className="col-span-12 text-2xl flex flex-col mt-10">
-                  <div className="flex justify-center my-3">
+                <div className="col-span-12 text-2xl flex flex-col mt-10 mx-auto p-10 w-80 rounded-2xl border-2 border-black">
+                  <div className="flex justify-center my-3 font-light">
                     <span className="font-medium">Plan:   </span> &nbsp;&nbsp; ${plan.price}
                   </div>
-                  <div className="flex justify-center mb-3">
+                  <div className="flex justify-center mb-3 font-light">
                     <span className="font-medium">Envío:   </span> &nbsp;&nbsp; ${shippingCost}
                   </div>
                   <div className="w-1/5 my-1 self-center">
                     <hr />
                   </div>
                   <div className="flex justify-center">
-                    <span className="font-medium text-3xl text-highlight">Total a Pagar</span>
+                    <span className="font-medium text-3xl text-custom-blue">Total a Pagar</span>
                   </div>
                   <div className="flex justify-center">
                     <span className="text-3xl">${formatNumber(Number(plan.price) + shippingCost)}</span>
@@ -973,7 +985,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   <div className="flex justify-center">
                     <div className="button-container">
                       <button
-                        className="btn-md multi-border font-medium text-white disabled:opacity-50"
+                        className="btn-md multi-border bg-black font-medium text-white disabled:opacity-50"
                         onClick={() => handlePayment('card', false)}
                         disabled={initialPaymentIsLoading || form.isSubmitting}
                       >

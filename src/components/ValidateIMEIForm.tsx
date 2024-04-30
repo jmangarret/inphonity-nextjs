@@ -267,7 +267,7 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
           </div>
           <div className="button-container">
             <button
-              className="multi-border font-medium block w-full disabled:opacity-50"
+              className="multi-border font-medium block w-full disabled:opacity-50 bg-black"
               onClick={handleSubmit}
               disabled={isLoading || isFetching}
             >
