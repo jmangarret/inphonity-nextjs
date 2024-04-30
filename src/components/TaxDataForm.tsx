@@ -138,8 +138,8 @@ export default function TaxDataForm() {
     >
       {/* header */}
       <header>
-        <h3 className={'font-medium text-white text-center text-3xl sm:text-5xl mb-3 sm:mb-6 lg:ml-12'}>
-          Llena tus datos <span className="text-highlight">fiscales</span>
+        <h3 className={'font-medium text-black text-center text-3xl sm:text-5xl mb-3 sm:mb-6 lg:ml-12'}>
+          Llena tus datos <span className="text-custom-blue">fiscales</span>
         </h3>
       </header>
 
@@ -155,7 +155,7 @@ export default function TaxDataForm() {
               onChange={() => setDontHaveTaxData(!dontHaveTaxData)}
             />
             <label htmlFor={`dontHaveTaxData`}>
-              <span className={`ml-2 inline-block text-white`}>No tengo mi información fiscal a la mano o actualizada</span>
+              <span className={`ml-2 inline-block text-black`}>No tengo mi información fiscal a la mano o actualizada</span>
             </label>
           </div>
          
@@ -165,7 +165,7 @@ export default function TaxDataForm() {
           >
             <input disabled={isValidForm && taxData.showAccountDataForm }
               type="text"
-              className={`input input-border-gray ${taxData.nameError ? 'input-error' : ''}`}
+              className={`input input-border-black ${taxData.nameError ? 'input-error' : ''}`}
               placeholder={`Nombre completo*`}
               value={taxData.name}
               name={`name`}
@@ -186,7 +186,7 @@ export default function TaxDataForm() {
            <div className={'col-span-12'}>
             <input disabled={isValidForm && taxData.showAccountDataForm }
               type="text"
-              className={`input input-border-gray ${taxData.rfcError ? 'input-error' : ''}`}
+              className={`input input-border-black ${taxData.rfcError ? 'input-error' : ''}`}
               placeholder={`RFC*`}
               value={taxData.rfc}
               name={'rfc'}
@@ -210,8 +210,8 @@ export default function TaxDataForm() {
           >
             <input disabled={isValidForm && taxData.showAccountDataForm }
               type="text"
-              className={`input input-border-gray ${taxData.streetError ? 'input-error' : ''}`}
-              placeholder={`Dirección Fiscal - Calle*`}
+              className={`input input-border-black ${taxData.streetError ? 'input-error' : ''}`}
+              placeholder={`Dirección fiscal - calle*`}
               value={taxData.street}
               name={`street`}
               onChange={handleInputChange}
@@ -233,8 +233,8 @@ export default function TaxDataForm() {
           >
             <input disabled={isValidForm && taxData.showAccountDataForm }
               type="text"
-              className={`input input-border-gray ${taxData.exteriorNumberError ? 'input-error' : ''}`}
-              placeholder={`Número Exterior*`}
+              className={`input input-border-black ${taxData.exteriorNumberError ? 'input-error' : ''}`}
+              placeholder={`Número exterior*`}
               value={taxData.exteriorNumber}
               name={`exteriorNumber`}
               onChange={handleInputChange}
@@ -256,8 +256,8 @@ export default function TaxDataForm() {
           >
             <input disabled={isValidForm && taxData.showAccountDataForm }
               type="text"
-              className={`input input-border-gray ${taxData.interiorNumberError ? 'input-error' : ''}`}
-              placeholder={`Número Interior`}
+              className={`input input-border-black ${taxData.interiorNumberError ? 'input-error' : ''}`}
+              placeholder={`Número interior`}
               value={taxData.interiorNumber}
               name={`interiorNumber`}
               onChange={handleInputChange}
@@ -279,8 +279,8 @@ export default function TaxDataForm() {
           >
             <input disabled={isValidForm && taxData.showAccountDataForm }
               type="text"
-              className={`input input-border-gray ${taxData.zipCodeError ? 'input-error' : ''}`}
-              placeholder={`Código Postal*`}
+              className={`input input-border-black ${taxData.zipCodeError ? 'input-error' : ''}`}
+              placeholder={`Código postal*`}
               value={taxData.zipCode}
               name={`zipCode`}
               onChange={handleInputChange}
@@ -301,7 +301,7 @@ export default function TaxDataForm() {
           <div className={'col-span-6'}>
             <input disabled={isValidForm && taxData.showAccountDataForm }
               type="text"
-              className={`input input-border-gray ${taxData.neighborhoodError ? 'input-error' : ''}`}
+              className={`input input-border-black ${taxData.neighborhoodError ? 'input-error' : ''}`}
               placeholder={`Colonia*`}
               value={taxData.neighborhood}
               name={`neighborhood`}
@@ -322,7 +322,7 @@ export default function TaxDataForm() {
           <div className={'col-span-6'}>
             <input disabled={isValidForm && taxData.showAccountDataForm }
               type="text"
-              className={`input input-border-gray ${taxData.stateError ? 'input-error' : ''}`}
+              className={`input input-border-black ${taxData.stateError ? 'input-error' : ''}`}
               placeholder={`Estado*`}
               value={taxData.state}
               name={`state`}
@@ -345,7 +345,7 @@ export default function TaxDataForm() {
           >
             <input disabled={isValidForm && taxData.showAccountDataForm }
               type="text"
-              className={`input input-border-gray ${taxData.municipalityError ? 'input-error' : ''}`}
+              className={`input input-border-black ${taxData.municipalityError ? 'input-error' : ''}`}
               placeholder={`Municipio/Alcaldía*`}
               value={taxData.municipality}
               name={`municipality`}
@@ -376,7 +376,7 @@ export default function TaxDataForm() {
                 </label>
               </div> */}
               <div>
-                <span className={`text-base text-white font-medium`}>
+                <span className={`text-base text-black font-medium`}>
                   Campos Obligatorios*
                 </span>
               </div>
@@ -388,7 +388,7 @@ export default function TaxDataForm() {
               <div className="flex justify-center">
                 <div className="button-container">
                   <button
-                    className="btn-xl multi-border text-white font-medium block disabled:opacity-50"
+                    className="btn-xl multi-border bg-black text-white font-medium block disabled:opacity-50"
                     onClick={handleNextForm}
                     disabled={!isValidForm && !dontHaveTaxData}
                     >

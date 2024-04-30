@@ -206,7 +206,7 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
           </div>
           <div className="button-container">
             <button
-              className="multi-border font-medium block w-full"
+              className="multi-border font-medium block w-full bg-black"
               onClick={handleSubmit}
             >
               REVISAR
