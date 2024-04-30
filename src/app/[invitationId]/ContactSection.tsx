@@ -1,6 +1,6 @@
 export default function ContactSection() {
     return (
-        <section className="container mx-auto p-3 sm:p-6 md:p-8 lg:p-10 xl:p-12">
+        <section className="container mx-auto p-3 sm:p-6 md:p-8 bg-[url('/img/Seccion-8.png')]">
             <div className="mx-auto grid grid-cols-12 gap-3 flex items-center mb-20">
                 <div className="col-span-12 md:col-span-2"></div>
                 <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-4 text-left ml-text-contact center-text-contact">

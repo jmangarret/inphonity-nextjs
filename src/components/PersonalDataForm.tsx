@@ -228,15 +228,15 @@ export default function PersonalDataForm() {
   }
 
   return (
-    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-3 md:mb-6 lg:mb-9 xl:mb-12'}>
+    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-3 md:mb-6 lg:mb-9 xl:mb-12 bg-white'}>
       {/* header */}
       <header className={'mb-2'}>
-        <h3 className={'font-medium text-3xl sm:text-5xl mb-1 sm:mb-3 text-white text-center'}>
-          Llena los <span className="text-highlight"> siguientes datos</span>
+        <h3 className={'font-medium text-3xl sm:text-5xl mb-1 sm:mb-3 text-black text-center'}>
+          Llena los <span className="text-custom-blue"> siguientes datos</span>
         </h3>
-        <p className={'text-base text-white text-center'}>
-          <strong className={'font-medium text-highlight'}>Importante:</strong> Ten a la mano tu Credencial de Elector y Comprobante de
-          Domicilio
+        <p className={'text-base text-black text-center'}>
+          <strong className={'font-medium text-custom-blue'}>Importante:</strong> 
+          Ten a la mano tu credencial de elector y comprobante de domicilio
         </p>
       </header>
 
@@ -246,7 +246,7 @@ export default function PersonalDataForm() {
           <div className={'col-span-12'}>
             <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
-              className={`input input-border-gray ${personalData.nameError ? 'input-error' : ''}`}
+              className={`input input-border-black ${personalData.nameError ? 'input-error' : ''}`}
               placeholder="Nombre Completo*"
               value={personalData.name}
               name={'name'}
@@ -266,7 +266,7 @@ export default function PersonalDataForm() {
           <div className={'col-span-12'}>
             <select disabled={isValidForm && personalData.showShippingForm} 
               defaultValue="" 
-              className={`input input-border-gray`}>
+              className={`input input-border-black`}>
               <option disabled value="" aria-readonly>Nacionalidad*</option>
               <option
                 value={'mexican'}
@@ -287,7 +287,7 @@ export default function PersonalDataForm() {
             <input
               id={'dateOfBirth'}
               type="text"
-              className={`input input-border-gray ${personalData.dateOfBirthError ? 'input-error' : ''}`}
+              className={`input input-border-black ${personalData.dateOfBirthError ? 'input-error' : ''}`}
               placeholder="Fecha de nacimiento*"
               name={'dateOfBirth'}
               readOnly
@@ -354,7 +354,7 @@ export default function PersonalDataForm() {
           <div className={'col-span-12'}>
             <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
-              className={`input input-border-gray ${personalData.curpError ? 'input-error' : ''}`}
+              className={`input input-border-black ${personalData.curpError ? 'input-error' : ''}`}
               placeholder="CURP*"
               value={personalData.curp}
               name={'curp'}
@@ -375,7 +375,7 @@ export default function PersonalDataForm() {
           <div className={'col-span-12'}>
             <select disabled={isValidForm && personalData.showShippingForm} 
               defaultValue={personalData.gender}
-              className={`input input-border-gray ${personalData.genderError ? 'input-error' : ''}`}
+              className={`input input-border-black ${personalData.genderError ? 'input-error' : ''}`}
               name={'gender'}
               onChange={handleInputChange}
               ref={el => inputRefs.current.gender = el}
@@ -406,7 +406,7 @@ export default function PersonalDataForm() {
           <div className={'col-span-12'}>
             <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
-              className={`input input-border-gray ${personalData.phoneError ? 'input-error' : ''}`}
+              className={`input input-border-black ${personalData.phoneError ? 'input-error' : ''}`}
               placeholder="Teléfono*"
               value={personalData.phone}
               name={'phone'}
@@ -427,7 +427,7 @@ export default function PersonalDataForm() {
           <div className={'col-span-12'}>
             <input disabled={isValidForm && personalData.showShippingForm}
               type="email"
-              className={`input input-border-gray ${personalData.emailError ? 'input-error' : ''}`}
+              className={`input input-border-black ${personalData.emailError ? 'input-error' : ''}`}
               placeholder="Correo electrónico*"
               value={personalData.email}
               name={'email'}
@@ -448,7 +448,7 @@ export default function PersonalDataForm() {
           <div className={'col-span-12'}>
             <select disabled={isValidForm && personalData.showShippingForm} 
               defaultValue=""
-              className={`input input-border-gray`}
+              className={`input input-border-black`}
               name={'occupation'}
             >
               <option disabled value="">Ocupación*</option>
@@ -485,14 +485,14 @@ export default function PersonalDataForm() {
             </select>
           </div>
 
-          <div className="col-span-12 ">
-            <div className="mb-5">
+          <div className="col-span-12 text-black">
+            <div className="mb-5 ml-6">
               <label>
                 <input disabled={isValidForm && personalData.showShippingForm} name="docType" type="radio" className="radio" value={'INE'} onChange={handleInputChange} />
                 <span> INE</span>
               </label>
             </div>
-            <div>
+            <div className="ml-6">
               <label>
                 <input disabled={isValidForm && personalData.showShippingForm} name="docType" type="radio" className="radio" value={'Passport'} onChange={handleInputChange} />
                 <span> Pasaporte</span>
@@ -503,8 +503,8 @@ export default function PersonalDataForm() {
           {/* oficial identification image (front) */}
           {personalData.docType == 'INE' && (
             <div className={'col-span-12 lg:col-span-6'}>
-              <label className={`flex input input-border-gray ${personalData.idFrontPictureError ? 'input-error' : ''}`}>
-                <span className={'overflow-hidden truncate'}>Identificación Oficial Frente*</span>
+              <label className={`flex input input-border-black ${personalData.idFrontPictureError ? 'input-error' : ''}`}>
+                <span className={'overflow-hidden truncate'}>Identificación oficial frente*</span>
                 <div className={'ml-auto flex'}>
                   <Image
                     src={'/img/upload-icon.svg'}
@@ -548,7 +548,7 @@ export default function PersonalDataForm() {
                 {personalData.idFrontPicture && (
                   <img
                     src={personalData.idFrontPicture}
-                    alt={'Identificación Oficial Frente'}
+                    alt={'Identificación oficial frente'}
                     width={200}
                     height={200}
                   />
@@ -560,8 +560,8 @@ export default function PersonalDataForm() {
           {/* oficial identification image (back) */}
           {personalData.docType == 'INE' && (
             <div className={'col-span-12 lg:col-span-6'}>
-              <label className={`flex input input-border-gray ${personalData.idBackPictureError ? 'input-error' : ''}`}>
-                <span className={'overflow-hidden truncate'}>Identificación Oficial Vuelta*</span>
+              <label className={`flex input input-border-black ${personalData.idBackPictureError ? 'input-error' : ''}`}>
+                <span className={'overflow-hidden truncate'}>Identificación oficial vuelta*</span>
                 <div className={'ml-auto flex'}>
                   <Image
                     src={'/img/upload-icon.svg'}
@@ -605,7 +605,7 @@ export default function PersonalDataForm() {
                 {personalData.idBackPicture && (
                   <img
                     src={personalData.idBackPicture}
-                    alt={'Identificación Oficial Vuelta'}
+                    alt={'Identificación oficial vuelta'}
                     width={200}
                     height={200}
                   />
@@ -618,7 +618,7 @@ export default function PersonalDataForm() {
           {personalData.docType == 'Passport' && (
             <>
               <div className={'col-span-6 lg:col-span-6'}>
-                <label className={`flex input input-border-gray ${personalData.idBackPictureError ? 'input-error' : ''}`}>
+                <label className={`flex input input-border-black ${personalData.idBackPictureError ? 'input-error' : ''}`}>
                   <span className={'overflow-hidden truncate'}>Pasaporte*</span>
                   <div className={'ml-auto flex'}>
                     <Image
@@ -668,7 +668,7 @@ export default function PersonalDataForm() {
 
           {/* proof of address */}
           <div className={'col-span-12 md:col-span-6'}>
-            <label className={'flex input input-border-gray'}>
+            <label className={'flex input input-border-black'}>
               <span className={'overflow-hidden truncate'}>Comprobante de domicilio*</span>
               <div className={'ml-auto flex'}>
                 <Image
@@ -705,7 +705,7 @@ export default function PersonalDataForm() {
                 {personalData.idAddressPicture && (
                   <img
                     src={personalData.idAddressPicture}
-                    alt={'Comprobante de Domicilio'}
+                    alt={'Comprobante de domicilio'}
                     width={200}
                     height={200}
                   />
@@ -714,7 +714,7 @@ export default function PersonalDataForm() {
           </div>
           {/* proof of tax status */}
           <div className={'col-span-12 md:col-span-6'}>
-            <label className={'flex input input-border-gray'}>
+            <label className={'flex input input-border-black'}>
               <span className={'overflow-hidden truncate'}>Constancia de situación fiscal*</span>
               <div className={'ml-auto flex'}>
                 <Image
@@ -751,7 +751,7 @@ export default function PersonalDataForm() {
                 {personalData.idTaxPicture && (
                   <img
                     src={personalData.idTaxPicture}
-                    alt={'Constancia de Situación Fiscal'}
+                    alt={'Constancia de situación fiscal'}
                     width={200}
                     height={200}
                   />
@@ -760,7 +760,7 @@ export default function PersonalDataForm() {
           </div>
 
           <div className={'col-span-12'}>
-            <p className={`text-base text-white font-medium`}>
+            <p className={`text-base text-black font-medium`}>
               Campos Obligatorios*
             </p>
           </div>
@@ -771,8 +771,8 @@ export default function PersonalDataForm() {
               <div className="flex justify-center">
                 <div className="button-container ">
                   <button
-                    className="btn-xl multi-border font-medium text-white disabled:opacity-50"
-                    onClick={handleNextForm}
+                    className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
+                    onClick={()=>handleNextForm()}
                     disabled={!isValidForm}
                   >
                     SIGUIENTE

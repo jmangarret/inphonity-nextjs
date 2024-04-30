@@ -5,6 +5,7 @@ import ValidateIMEIForm from "@/components/ValidateIMEIForm";
 import ValidateCoverageForm from "@/components/ValidateCoverageForm";
 import { ModalContext } from "@/contexts/ModalContext";
 import React from "react";
+import SliderMarketing from "@/components/SliderMarketing";
 
 export default function ValidateCompatibility() {
   const { openModal } = React.useContext(ModalContext);
@@ -63,17 +64,17 @@ export default function ValidateCompatibility() {
 
   return (
     <>
-      <section className="relative py-9 md:py-14 xl:py-16">
+      <section className="relative py-9 md:py-14 xl:py-16 bg-white">
         <div className="grid grid-cols-10 gap-3">
           <div className="col-span-10 md:col-span-5 lg:col-span-6">
             <header className="text-center md:text-left relative">
               <div className="md:ml-10 lg:ml-14 xl:ml-20 relative">
-                <h2 className="font-medium text-4xl lg:text-6xl xl:text-7xl mb-5">
-                  ¡Ya eres parte de<br />
-                  <span className="text-highlight"> inphonity</span>!
+                <h2 className="text-black font-medium text-4xl lg:text-6xl xl:text-7xl mb-5">
+                  ¡Gracias por unirte al<br />
+                  <span className="text-custom-blue"> Círculo inphonity!</span>
                 </h2>
-                <p className="text-2xl lg:text-3xl xl:text-4xl">
-                  ¿Qué sigue? Valida la compatibilidad<br /> de tu celular siguiendo estos pasos
+                <p className="text-2xl lg:text-3xl xl:text-4xl text-black mt-10">
+                  A continuación, valida la compatibilidad con tu celular siguiendo estos paso
                 </p>
                 <PlusDecoration
                   className="w-7 md:w-8 lg:w-12 xl:w-17 absolute"
@@ -115,8 +116,8 @@ export default function ValidateCompatibility() {
                 className={'mb-6 md:mb-8 lg:mb-10 xl:mb-12'}
                 borderClass={'border-col-1'}
               >
-                <p className={'font-light mb-4 text-base md:text-xl xl:text-2xl'}>
-                  Conoce si tu teléfono es compatible con <strong className={'font-medium'}>inphonity.</strong> Marca *#06# y recibe tu IMEI
+                <p className={'font-light mb-4 text-base md:text-xl xl:text-2xl text-black'}>
+                  Conoce si tu teléfono es <strong className={'font-medium'}>compatible</strong> con <strong className={'font-medium'}>inphonity.</strong> Marca *#06# y recibe tu IMEI
                   {' '}
                   <Image
                     src={'/img/question-mark-icon.svg'}
@@ -135,9 +136,8 @@ export default function ValidateCompatibility() {
                 className={'mb-6 md:mb-8 lg:mb-10 xl:mb-12'}
                 borderClass={'border-col-2'}
               >
-                <p className={'font-light mb-4 text-base md:text-xl xl:text-2xl'}>
-                  Ingresa tu <strong className={'font-medium'}>código postal</strong> y revisa la <strong className={'font-medium'}>cobertura </strong>
-                  en tu zona
+                <p className={'text-black font-light mb-4 text-base md:text-xl xl:text-2xl'}>
+                  Ingresa tu código postal y revisa la cobertura en tu zona
                 </p>
                 <ValidateCoverageForm />
               </ValidateStep>
@@ -147,7 +147,7 @@ export default function ValidateCompatibility() {
                 className={'mb-6 md:mb-8 lg:mb-10 xl:mb-12'}
                 borderClass={'border-col-3'}
               >
-                <p className={'font-light mb-4 text-base md:text-xl xl:text-2xl'}>
+                <p className={'font-light mb-4 text-base md:text-xl xl:text-2xl text-black'}>
                   Para poder adquirir un plan de inphonity,
                   tu teléfono debe estar liberado
                   {' '}
@@ -167,12 +167,15 @@ export default function ValidateCompatibility() {
                 className={'mb-6 md:mb-8 lg:mb-10 xl:mb-12'}
                 borderClass={'border-col-4'}
               >
-                <p className={'font-light mb-4 text-base md:text-xl xl:text-2xl'}>
-                  Ya eres parte de inphonity, el siguiente paso es seleccionar tu plan
+                <p className={'font-light mb-4 text-base md:text-xl xl:text-2xl text-black'}>
+                  ¡Estás muy cerca! Ahora selecciona tu plan
                 </p>
               </ValidateStep>
             </div>
           </div>
+        </div>
+        <div className="w-full">
+          <SliderMarketing />
         </div>
       </section>
     </>
