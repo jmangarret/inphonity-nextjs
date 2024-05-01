@@ -115,11 +115,11 @@ export default function AccountDataForm() {
     <div className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-3 md:mb-6 lg:mb-9 xl:mb-12'}>
       {/* header */}
       <header>
-        <h3 className={'font-medium text-white text-center text-3xl sm:text-5xl mb-3 sm:mb-6'}>
-          ¿Dónde quieres recibir tu <span className="text-highlight">cashback</span>?
+        <h3 className={'font-medium text-custom-blue text-center text-3xl sm:text-5xl mb-3 sm:mb-6'}>
+          ¿Dónde quieres recibir tu cashback?
         </h3>
-        <p className={'text-base text-white text-center px-16'}>
-          <span className={'font-medium text-highlight'}>Importante: </span> 
+        <p className={'text-base text-black text-center px-16'}>
+          <span className={'font-medium text-highlight-red'}>Importante: </span> 
           Asegúrate de ser el titular de la cuenta, ingresar los datos correctos y verificar que no haya límite de depósitos mensuales para recibir tu cashback correctamente.
         </p>
       </header>
@@ -131,7 +131,7 @@ export default function AccountDataForm() {
           <div className={'col-span-12'}>
             <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
-              className={`input input-border-gray ${accountData.bankNameError ? 'input-error' : ''}`}
+              className={`input input-border-black ${accountData.bankNameError ? 'input-error' : ''}`}
               placeholder={`Banco*`}
               value={accountData.bankName}
               name={'bankName'}
@@ -150,8 +150,8 @@ export default function AccountDataForm() {
           <div className={'col-span-12'}>
             <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
-              className={`input input-border-gray ${accountData.bankAccountNumberError ? 'input-error' : ''}`}
-              placeholder={`Número de Cuenta*`}
+              className={`input input-border-black ${accountData.bankAccountNumberError ? 'input-error' : ''}`}
+              placeholder={`Número de cuenta*`}
               value={accountData.bankAccountNumber}
               name={`bankAccountNumber`}
               onChange={handleInputChange}
@@ -170,8 +170,8 @@ export default function AccountDataForm() {
           <div className={'col-span-12'}>
             <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
-              className={`input input-border-gray`}
-              placeholder={`Confirma tu Número de Cuenta*`}
+              className={`input input-border-black`}
+              placeholder={`Confirma tu número de cuenta*`}
               value={accountData.bankAccountNumberConfirmation}
               name={`bankAccountNumberConfirmation`}
               onChange={handleInputChange}
@@ -184,7 +184,7 @@ export default function AccountDataForm() {
           <div className={'col-span-12'}>
             <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
-              className={`input input-border-gray ${accountData.interbankClabeError ? 'input-error' : ''}`}
+              className={`input input-border-black ${accountData.interbankClabeError ? 'input-error' : ''}`}
               placeholder={`CLABE interbancaria*`}
               value={accountData.interbankClabe}
               name={`interbankClabe`}
@@ -204,7 +204,7 @@ export default function AccountDataForm() {
           <div className={'col-span-12'}>
             <input disabled={isValidForm && accountData.showPaymentForm}
               type="text"
-              className={`input input-border-gray`}
+              className={`input input-border-black`}
               placeholder={`Confirma tu CLABE interbancaria*`}
               value={accountData.interbankClabeConfirmation}
               name={`interbankClabeConfirmation`}
@@ -215,7 +215,7 @@ export default function AccountDataForm() {
           </div>
 
           <div className={'col-span-12'}>
-            <p className={`text-base text-white font-medium`}>
+            <p className={`text-base text-black font-medium`}>
               Campos Obligatorios*
             </p>
           </div>
@@ -226,7 +226,7 @@ export default function AccountDataForm() {
               <div className="flex justify-center">
                 <div className="button-container">
                   <button
-                    className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                    className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
                     onClick={handleNextForm}
                     disabled={!isValidForm}
                   >

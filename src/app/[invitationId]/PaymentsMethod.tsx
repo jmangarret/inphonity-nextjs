@@ -29,9 +29,6 @@ export default function PaymentsSection() {
             <h2 className="font-medium text-3xl xl:text-5xl text-center mt-10">
               Métodos de pago
             </h2>
-            <h5 className="text-3xl text-center font-light py-6">
-              <b>Contamos con diferentes opciones</b> para que escojas la que más se adapte a ti
-            </h5>
           </div>
           <div className="col-span-12">
             <p className="text-xl lg:text-2xl text-center mt-5 mx-5"> <span className="font-medium">Contamos con diferentes opciones </span> para que escojas la que más se adapte a ti </p>

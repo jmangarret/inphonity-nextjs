@@ -15,7 +15,7 @@ export default function RegisterForms({invitationId}: { invitationId: string }) 
 
   return (
     <section
-      className={'py-4 sm:py-5 md:py-6 lg:py-7 xl:py-8'}
+      className={'py-4 sm:py-5 md:py-6 lg:py-7 xl:py-8 bg-white'}
     >
       <div className={'mx-auto max-w-screen-xl grid grid-cols-12'}>
         {/* personal data */}
@@ -79,12 +79,12 @@ export default function RegisterForms({invitationId}: { invitationId: string }) 
             </div>
             <div className="col-span-12 md:col-span-10 mb-20">
               {/* notice */}
-              <div className="text-white m-3 text-center font-medium">
-                <h3 className={`text-highlight text-3xl`}>
+              <div className="text-white m-3 pb-2.5 text-center font-medium">
+                <h3 className={`text-highlight-red text-3xl`}>
                   Aviso importante
                 </h3>
               </div>
-              <div className="lg:container bg-white p-8 text-black rounded-md mx-auto w-[90%] lg:w-[80%]">
+              <div className="lg:container bg-white p-8 text-black rounded-md mx-auto w-[90%] lg:w-[80%] border-2 border-[#EB522D]">
                 <p className={`text-base leading-none`}>
                   <span className="font-medium">Importante: </span>
                   Es necesario que tengas RFC con homoclave para que podamos realizar los pagos de tu cashback. Si aún

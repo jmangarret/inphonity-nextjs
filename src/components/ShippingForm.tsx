@@ -149,18 +149,18 @@ export default function ShippingForm() {
   }
 
   return (
-    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-6'}>
+    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-6 bg-white'}>
       {/* header */}
       <header>
-        <h3 className={'font-medium text-white text-center text-3xl sm:text-5xl mb-1 sm:mb-3'}>
-          Elige tu tipo de <span className="text-highlight">SIM</span>
+        <h3 className={'font-medium text-black text-center text-3xl sm:text-5xl mb-1 sm:mb-3'}>
+          Elige tu tipo de <span className="text-custom-blue">SIM</span>
         </h3>
-        <p className={`font-medium text-white text-center font-base mb-4`}>
+        <p className={`font-medium text-black text-center font-base mb-4`}>
           Si tu dispositivo es compatible con tarjeta SIM y eSIM, elige la que prefieras
         </p>
         {/* {shipping.isEsim && !plan.supportEsim && ( */}
-          <p className={'text-highlight text-base text-center mt-1'}>
-            * El dispositivo validado no es compatible con eSIM. ¿Estas seguro que deseas continuar con esta opción?
+          <p className={'text-highlight-red text-base text-center mt-1'}>
+            * El dispositivo validado no es compatible con eSIM. ¿Estás seguro que deseas continuar con esta opción?
           </p>
         {/* )} */}
       </header>
@@ -172,9 +172,6 @@ export default function ShippingForm() {
             <div className={'col-span-12'}>
               <div className="mb-5">
                 <label>
-                  <span className={`font-medium mr-2 inline-block text-white`}>
-                    Tarjeta SIM
-                  </span>
                   <input disabled={isValidForm && shipping.showTaxDataForm}
                     className={`${shipping.isEsimError ? 'input-error' : ''}`}
                     style={{accentColor: '#EF7911'}}
@@ -184,13 +181,13 @@ export default function ShippingForm() {
                     onChange={handleInputChange}
                     checked={!shipping.isEsim}
                   />
+                  <span className={`ml-2 inline-block text-black`}>
+                    Tarjeta SIM
+                  </span>
                 </label>
               </div>
               <div>
                 <label>
-                  <span className={`font-medium mr-2 inline-block text-white`}>
-                    Tarjeta eSIM
-                  </span>
                   <input disabled={isValidForm && shipping.showTaxDataForm}
                     className={`${shipping.isEsimError ? 'input-error' : ''}`}
                     style={{accentColor: '#EF7911'}}
@@ -200,6 +197,9 @@ export default function ShippingForm() {
                     onChange={handleInputChange}
                     checked={shipping.isEsim}
                   />
+                  <span className={`ml-2 inline-block text-black`}>
+                    Tarjeta eSIM
+                  </span>
                 </label>
               </div>
               {/* error */}
@@ -213,7 +213,7 @@ export default function ShippingForm() {
             </div>
 
             <div className={`col-span-12`}>
-              <p className={`font-medium text-white font-base mb-4`}>
+              <p className={`font-medium text-black text-xl mb-4`}>
                 Dirección a la que llegará tu SIM de inphonity
               </p>
             </div>
@@ -223,7 +223,7 @@ export default function ShippingForm() {
             >
               <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
-                className={`input input-border-gray ${shipping.zipCodeError ? 'input-error' : ''}`}
+                className={`input input-border-black ${shipping.zipCodeError ? 'input-error' : ''}`}
                 placeholder="Código postal*"
                 value={shipping.zipCode}
                 name={'zipCode'}
@@ -246,7 +246,7 @@ export default function ShippingForm() {
             >
               <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
-                className={`input input-border-gray ${shipping.neighborhoodError ? 'input-error' : ''}`}
+                className={`input input-border-black ${shipping.neighborhoodError ? 'input-error' : ''}`}
                 placeholder="Colonia*"
                 value={shipping.neighborhood}
                 name={'neighborhood'}
@@ -268,7 +268,7 @@ export default function ShippingForm() {
             >
               <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
-                className={`input input-border-gray ${shipping.streetError ? 'input-error' : ''}`}
+                className={`input input-border-black ${shipping.streetError ? 'input-error' : ''}`}
                 placeholder="Calle*"
                 value={shipping.street}
                 name={'street'}
@@ -290,7 +290,7 @@ export default function ShippingForm() {
             >
               <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
-                className={`input input-border-gray ${shipping.numberError ? 'input-error' : ''}`}
+                className={`input input-border-black ${shipping.numberError ? 'input-error' : ''}`}
                 placeholder="Número*"
                 value={shipping.number}
                 name={'number'}
@@ -312,7 +312,7 @@ export default function ShippingForm() {
             >
               <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
-                className={`input input-border-gray ${shipping.interiorNumberError ? 'input-error' : ''}`}
+                className={`input input-border-black ${shipping.interiorNumberError ? 'input-error' : ''}`}
                 placeholder="Número interior"
                 value={shipping.interiorNumber}
                 name={'interiorNumber'}
@@ -334,8 +334,8 @@ export default function ShippingForm() {
             >
               <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
-                className={`input input-border-gray ${shipping.complementError ? 'input-error' : ''}`}
-                placeholder={`Referencia`}
+                className={`input input-border-black ${shipping.complementError ? 'input-error' : ''}`}
+                placeholder={`Referencia*`}
                 value={shipping.complement}
                 name={'complement'}
                 onChange={handleInputChange}
@@ -356,7 +356,7 @@ export default function ShippingForm() {
             >
               <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
-                className={`input input-border-gray ${shipping.stateError ? 'input-error' : ''}`}
+                className={`input input-border-black ${shipping.stateError ? 'input-error' : ''}`}
                 placeholder="Estado*"
                 value={shipping.state}
                 name={'state'}
@@ -378,7 +378,7 @@ export default function ShippingForm() {
             >
               <input disabled={isValidForm && shipping.showTaxDataForm}
                 type="text"
-                className={`input input-border-gray ${shipping.cityError ? 'input-error' : ''}`}
+                className={`input input-border-black ${shipping.cityError ? 'input-error' : ''}`}
                 placeholder="Municipio/Alcaldía*"
                 value={shipping.city}
                 name={'city'}
@@ -405,11 +405,11 @@ export default function ShippingForm() {
                   onChange={handleMyAddressAreEqualChange}
                 />
                 <label htmlFor={'myAddressAreEqual'}>
-                  <span className={`ml-2 inline-block text-base text-white`}>Mi dirección de envío y facturación son iguales</span>
+                  <span className={`ml-2 inline-block text-base text-black`}>Mi dirección de envío y facturación son iguales</span>
                 </label>
               </div>
               <div>
-                <span className={`text-base text-white font-medium`}>
+                <span className={`text-base text-black font-medium`}>
                   Campos Obligatorios*
                 </span>
               </div>
@@ -421,7 +421,7 @@ export default function ShippingForm() {
                 <div className="flex justify-center">
                   <div className="button-container">
                     <button
-                      className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                      className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
                       onClick={handleNextForm}
                       disabled={!isValidForm}
                       >

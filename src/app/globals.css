@@ -754,7 +754,7 @@ swiper-container::part(bullet) {
 .input {
   background-color: #FFF;
   padding: 6px 16px;
-  border: 1px solid #FFF;
+  border: 1px solid #000;
   border-radius: 50px;
   color: #000;
   font-weight: 300;
@@ -822,12 +822,12 @@ select.input {
 
   input[type=checkbox],
   input[type=radio] {
-    --active: #000;
-    --active-inner: #FFF;
+    --active: fff;
+    --active-inner: #000;
     --focus: 2px 0 0 0 var(--active);
-    --border: #F4F0EC;
+    --border: #000;
     --border-hover: #EF7911;
-    --background: #000;
+    --background: fff;
     --disabled: #F6F8FF;
     --disabled-inner: #E1E6F9;
     -webkit-appearance: none;
@@ -839,7 +839,7 @@ select.input {
     position: relative;
     margin: 0;
     cursor: pointer;
-    border: 1px solid #FFF;
+    border: 2px solid #000;
     background: var(--b, var(--background));
     transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
   }
@@ -1152,7 +1152,7 @@ body {
 .green-check {
   border-radius: 0px !important;
   border: #27E1C1 solid 2px !important;
-  background-color: black !important;
+  background-color: #fff !important;
 }
 
 .font-yellow {
@@ -1194,6 +1194,6 @@ sup {
 }
 
 .bg-custom-green {
-  background: linear-gradient(180deg, #27E1C1 0%, rgba(39, 225, 193, 0.00) 100%);
+  background: linear-gradient(180deg, #27E1C1 0%, rgba(6, 6, 6, 0) 100%);
   ;
 }

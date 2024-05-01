@@ -44,10 +44,15 @@ export const request = {
         mother_last_name: "",
       }
     },
+    pre_registration: {
+      payment_status: null
+    }
   },
   isLoading: false,
   isFetching: false,
   error: {
     status: 200,
+  },
+  refetch: () => {
   }
 }
