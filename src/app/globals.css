@@ -606,23 +606,22 @@ swiper-container::part(bullet) {
 
 .promo {
   background: url('/img/circle-promo.svg') transparent 50% / cover no-repeat;
-  width: 100px;
-  height: 100px;
+  width: 8.313rem;
+  height: 8.313rem;
   font-size: 0.6rem;
-  top: -20px;
-  right: 7px;
+  top: -3.125rem;
+  right: 0.438rem;
   z-index: 1992;
 }
 
-@media screen and (min-width: 640px) {
+/* @media screen and (min-width: 640px) {
   .promo {
-    width: 121px;
-    height: 121px;
+     width: 121px;
+    height: 121px; 
     font-size: 0.7rem;
-    top: -40px;
-    right: 20px;
+    top: -50px;
   }
-}
+} */
 
 .bg-promo-blue {
   background: linear-gradient(206deg, #000 26.38%, #01808E 92.03%);
@@ -1078,8 +1077,8 @@ body {
 }
 
 .card-plan {
-  width: 9rem;
-  height: 6.25rem;
+  width: 10rem;
+  height: 7.5rem;
 }
 
 .card-plan-promo {
@@ -1133,7 +1132,8 @@ body {
 } */
 
 sup {
-  font-size: 50%;
+  font-size: 1.125rem;
+  top: -1.25rem;
 }
 
 .text-custom-blue {

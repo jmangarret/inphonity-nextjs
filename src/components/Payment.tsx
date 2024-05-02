@@ -10,9 +10,9 @@ type PaymentProps = {
 
 const Payment: React.FC<PaymentProps> = ({ title, description, image, action }) => {
   return (
-    <div className="flex flex-col items-center w-80 h-96 rounded-lg border border-white bg-white shadow-md p-10 md:p-0">
+    <div className="flex flex-col items-center w-80 h-96 rounded-[1.25rem] border border-white bg-white shadow-md">
       <div
-        className="flex items-center justify-center w-full h-30 sm:h-40"
+        className="flex items-center justify-center mt-[2.625rem] mb-10 mx-[7.313rem] w-[5.375rem] h-[3.75rem]"
       >
         <Image
           src={image}
@@ -26,13 +26,13 @@ const Payment: React.FC<PaymentProps> = ({ title, description, image, action }) 
 
       {title && (
         <h3
-          className="font-medium text-xl lg:text-3xl mt-10 md:mt-2 text-center text-black"
+          className="font-medium text-xl lg:text-3xl text-center text-black"
         >
           {title}
         </h3>
       )}
       <p
-        className="text-black text-center lg:text-xl mt-10 md:mt-4 mx-5"
+        className="text-black text-center text-xl mt-6 mx-5"
       >
         {description}
         {action}

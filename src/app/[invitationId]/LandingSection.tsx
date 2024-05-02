@@ -39,7 +39,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
   }, [data, isFetching, isLoading, router]);
 
   return (
-    <section className="container mx-auto my-10 bg-section-1">
+    <section className="container bg-section-1 ml-10 sm:ml-24 mt-7">
       {/* <PlusDecoration 
         isGreen={true}
         style={{left: "90%"}}
@@ -50,10 +50,10 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
         className="sm:flex"
       >
         <div
-          className="sm:w-1/2 px-4 sm:mt-10 md:mt-16 lg:mt-24 xl:mt-32"
+          className="sm:w-1/2"
         >
           <h1
-            className={`font-medium text-6xl sm:text-4xl lg:text-5xl xl:text-6xl`}
+            className={`font-medium text-5xl md:text-7xl lg:text-8xl`}
           >
             {isLoading || isFetching ? (
               <div
@@ -106,7 +106,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
         <div
           className="sm:w-1/2 py-5 text-right"
         >
-          <div className="flex justify-center md:justify-end">
+          <div className="flex justify-start md:justify-end">
             <picture>
               <source width="300" media="(max-width: 600px)" srcSet="/img/img_header_600px.webp" />
               <source width="600" media="(min-width: 600px) and (max-width: 1200px)" srcSet="/img/img_header_1200px.webp" />
@@ -118,7 +118,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
       </div>
       <div className="sm:flex">
         <div className="px-4 my-20 sm:my-20 md:my-20 lg:my-20">
-          <h2 className="w-3/5 font-medium text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-4 sm:mb-4 lg:mb-4">
+          <h2 className="w-full sm:w-3/5 font-medium text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-4 sm:mb-4 lg:mb-4">
             ¿Qué es <span className="text-highlight">Círculo inphonity?</span>
           </h2>
           <p className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl text-justify">
