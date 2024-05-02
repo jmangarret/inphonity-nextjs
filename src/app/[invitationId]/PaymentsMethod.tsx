@@ -26,12 +26,12 @@ export default function PaymentsSection() {
           /> */}
           </div>
           <div className="col-span-8">
-            <h2 className="font-medium text-3xl xl:text-5xl text-center mt-10">
+            <h2 className="font-medium text-5xl xl:text-6xl text-center mt-20">
               Métodos de pago
             </h2>
           </div>
           <div className="col-span-12">
-            <p className="text-xl lg:text-2xl text-center mt-5 mx-5"> <span className="font-medium">Contamos con diferentes opciones </span> para que escojas la que más se adapte a ti </p>
+            <p className="text-xl lg:text-3xl text-center mt-5 mx-5"> <span className="font-medium">Contamos con diferentes opciones </span> para que escojas la que más se adapte a ti </p>
           </div>
           <div className="col-span-1">
             {/* <PlusDecoration
@@ -39,15 +39,15 @@ export default function PaymentsSection() {
           /> */}
           </div>
         </div>
-        <div className="flex justify-center md:justify-between flex-wrap p-5 lg:p-24">
-          <div className="mx-10 my-5 sm:mx-5">
+        <div className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-1 mx-auto">
+          <div className="mx-10 my-5 mx-auto">
             <Payment
               title="Con tarjeta"
               description="Realiza tus pagos vía online con tu tarjeta de crédito o débito"
               image="/img/tarjeta-icon2.svg"
             />
           </div>
-          <div className="mx-10 my-5 sm:mx-5">
+          <div className="mx-10 my-5 mx-auto">
             <Payment
               title="Con efectivo"
               description="Conoce nuestros establecimientos afiliados en donde puedes pagar tu plan en efectivo "
@@ -63,7 +63,7 @@ export default function PaymentsSection() {
               </button>}
             />
           </div>
-          <div className="mx-10 my-5 sm:mx-5">
+          <div className="mx-10 my-5 mx-auto">
             <Payment
               title="Con transferencia"
               description="Realiza una transferencia interbancaria (SPEI)"

@@ -8,7 +8,11 @@
 
 @layer components {
   .lg\:grid-cols-3 {
-    @apply grid-template-columns: repeat(3, minmax(0, 1fr));
+    @apply grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .lg\:grid-cols-5 {
+    @apply grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
   }
 
   .lg\:col-span-3 {
@@ -66,6 +70,23 @@
 
 .gap-10 {
   gap: 10rem;
+}
+
+.lg\:grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.lg\:pb-24 {
+  padding-bottom: 6rem;
+}
+
+.lg\:px-24 {
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+
+.mt-20 {
+  margin-top: 5rem;
 }
 
 .pointer {
