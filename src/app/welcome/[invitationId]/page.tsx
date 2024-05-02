@@ -35,8 +35,8 @@ export default function Welcome({ params }: { params: { invitationId: string } }
           <Image
             src="/logo.svg"
             alt="Logotipo de Inphonity"
-            width={156.13}
-            height={27.01}
+            width={203}
+            height={29.4}
             priority
             className={`mx-auto`}
           />
@@ -78,32 +78,32 @@ export default function Welcome({ params }: { params: { invitationId: string } }
           )}
 
           {data && data.pre_registration?.is_esim && (
-          <>
-            <h1 className={`text-4xl md:text-6xl font-bold`}>
-              Bienvenido a <span className="text-highlight">inphonity</span>
-            </h1>
-            <br />
-            <h2 className={`text-4xl md:text-6xl font-bold mb-8 md:mb-12`}>
-              ¡Buenas noticias!
-            </h2>
-            <p
-              className={`text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl text-center mb-6 md:mb-10 lg:mb-14 font-light`}
-            >
-              Tu eSIM está en camino y <span className="font-medium">pronto llegará a tu correo.</span>
-            </p>
-            <Image
-              src={`/img/mail-send-icon.svg`}
-              alt={`Icono de correo`}
-              width={150}
-              height={150}
-              className={`mx-auto my-10`}
-            />
-            <p
-              className={`text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl text-center mb-6 md:mb-10 lg:mb-14 font-light`}
-            >
-              No olvides revisar tanto tu bandeja de entrada como la de <span className="font-medium">correos no deseados.</span>
-            </p>
-          </>
+            <>
+              <h1 className={`text-4xl md:text-6xl font-bold`}>
+                Bienvenido a <span className="text-highlight">inphonity</span>
+              </h1>
+              <br />
+              <h2 className={`text-4xl md:text-6xl font-bold mb-8 md:mb-12`}>
+                ¡Buenas noticias!
+              </h2>
+              <p
+                className={`text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl text-center mb-6 md:mb-10 lg:mb-14 font-light`}
+              >
+                Tu eSIM está en camino y <span className="font-medium">pronto llegará a tu correo.</span>
+              </p>
+              <Image
+                src={`/img/mail-send-icon.svg`}
+                alt={`Icono de correo`}
+                width={150}
+                height={150}
+                className={`mx-auto my-10`}
+              />
+              <p
+                className={`text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl text-center mb-6 md:mb-10 lg:mb-14 font-light`}
+              >
+                No olvides revisar tanto tu bandeja de entrada como la de <span className="font-medium">correos no deseados.</span>
+              </p>
+            </>
           )}
         </div>
       </main>

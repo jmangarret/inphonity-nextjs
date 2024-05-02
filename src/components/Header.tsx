@@ -12,8 +12,8 @@ const Header: React.FC<HeaderProps> = ({ centerLogo = false }) => {
           <Image
             src="/logo.svg"
             alt="Logotipo de Inphonity"
-            width={156.13}
-            height={27.01}
+            width={203}
+            height={29.4}
             priority
           />
         </div>

@@ -97,14 +97,14 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
               {isLoadingInvitation || isFetchingInvitation ? (
                 <div
                   className="font-medium text-2xl sm:text-3xl lg:text-5xl xl:text-8xl bg-gray-300 animate-pulse h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10 mb-3 w-3/4 inline-block"
-                  style={{verticalAlign: "middle"}}
+                  style={{ verticalAlign: "middle" }}
                 ></div>
               ) : (
                 invitationData && (
-              <Countdown
-                expiresAt={invitationData.expires_at}
-              />
-              )
+                  <Countdown
+                    expiresAt={invitationData.expires_at}
+                  />
+                )
               )}
             </div>
             {/* accept invitation */}
