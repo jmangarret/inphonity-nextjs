@@ -193,7 +193,7 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
         <div
           className="flex items-center py-2 gap-3"
         >
-          <div className="basis-3/4">
+          <div className="w-3/5">
             <input
               type="text"
               className="input bg-white rounded-full outline-amber-500 transition duration-300 text-black font-light w-full"
@@ -204,7 +204,7 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
               autoComplete="off"
             />
           </div>
-          <div className="button-container">
+          <div className="button-container w-2/5">
             <button
               className="multi-border font-medium block w-full bg-black"
               onClick={handleSubmit}

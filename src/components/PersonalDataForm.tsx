@@ -228,7 +228,7 @@ export default function PersonalDataForm() {
   }
 
   return (
-    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-3 md:mb-6 lg:mb-9 xl:mb-12 bg-white'}>
+    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 bg-white'}>
       {/* header */}
       <header className={'mb-2'}>
         <h3 className={'font-medium text-3xl sm:text-5xl mb-1 sm:mb-3 text-black text-center'}>
@@ -247,7 +247,7 @@ export default function PersonalDataForm() {
             <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
               className={`input input-border-black ${personalData.nameError ? 'input-error' : ''}`}
-              placeholder="Nombre Completo*"
+              placeholder="Nombre completo*"
               value={personalData.name}
               name={'name'}
               onChange={handleInputChange}

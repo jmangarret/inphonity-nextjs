@@ -95,7 +95,7 @@ export default function AccountDataForm() {
       openModal(
         <div className="flex flex-col items-center justify-center h-full text-white">
             <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            La clave interbancaria no coincide.
+            La CLABE interbancaria no coincide.
           </p>
         </div>,
       );
@@ -112,7 +112,7 @@ export default function AccountDataForm() {
   }
 
   return (
-    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-3 md:mb-6 lg:mb-9 xl:mb-12'}>
+    <div className={'p-3 md:p-6 lg:p-9 xl:p-12'}>
       {/* header */}
       <header>
         <h3 className={'font-medium text-custom-blue text-center text-3xl sm:text-5xl mb-3 sm:mb-6'}>

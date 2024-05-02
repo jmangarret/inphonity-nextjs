@@ -134,7 +134,7 @@ export default function TaxDataForm() {
 
   return (
     <div
-      className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-3 md:mb-6 lg:mb-9 xl:mb-12'}
+      className={'p-3 md:p-6 lg:p-9 xl:p-12'}
     >
       {/* header */}
       <header>

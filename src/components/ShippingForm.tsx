@@ -217,6 +217,76 @@ export default function ShippingForm() {
                 Dirección a la que llegará tu SIM de inphonity
               </p>
             </div>
+            {/* street */}
+            <div
+              className={'col-span-12'}
+            >
+              <input disabled={isValidForm && shipping.showTaxDataForm}
+                type="text"
+                className={`input input-border-black ${shipping.streetError ? 'input-error' : ''}`}
+                placeholder="Calle*"
+                value={shipping.street}
+                name={'street'}
+                onChange={handleInputChange}
+                ref={el => inputRefs.current.street = el}
+              />
+              {/* error */}
+              {shipping.streetError && (
+                <p
+                  className={'text-red-500 text-xs mt-1 mx-3'}
+                >
+                  {shipping.streetError}
+                </p>
+              )}
+            </div>
+
+            {/* exterior number */}
+            <div
+              className={'col-span-12 sm:col-span-6'}
+            >
+              <input disabled={isValidForm && shipping.showTaxDataForm}
+                type="text"
+                className={`input input-border-black ${shipping.numberError ? 'input-error' : ''}`}
+                placeholder="Número exterior*"
+                value={shipping.number}
+                name={'number'}
+                onChange={handleInputChange}
+                ref={el => inputRefs.current.number = el}
+              />
+              {/* error */}
+              {shipping.numberError && (
+                <p
+                  className={'text-red-500 text-xs mt-1 mx-3'}
+                >
+                  {shipping.numberError}
+                </p>
+              )}
+            </div>
+
+            {/* interior number */}
+            <div
+              className={'col-span-12 sm:col-span-6'}
+            >
+              <input disabled={isValidForm && shipping.showTaxDataForm}
+                type="text"
+                className={`input input-border-black ${shipping.interiorNumberError ? 'input-error' : ''}`}
+                placeholder="Número interior"
+                value={shipping.interiorNumber}
+                name={'interiorNumber'}
+                onChange={handleInputChange}
+                ref={el => inputRefs.current.interiorNumber = el}
+              />
+              {/* error */}
+              {shipping.interiorNumberError && (
+                <p
+                  className={'text-red-500 text-xs mt-1 mx-3'}
+                >
+                  {shipping.interiorNumberError}
+                </p>
+              )}
+            </div>
+
+
             {/* zip code */}
             <div
               className={'col-span-12 sm:col-span-6'}
@@ -262,94 +332,7 @@ export default function ShippingForm() {
                 </p>
               )}
             </div>
-            {/* street */}
-            <div
-              className={'col-span-12'}
-            >
-              <input disabled={isValidForm && shipping.showTaxDataForm}
-                type="text"
-                className={`input input-border-black ${shipping.streetError ? 'input-error' : ''}`}
-                placeholder="Calle*"
-                value={shipping.street}
-                name={'street'}
-                onChange={handleInputChange}
-                ref={el => inputRefs.current.street = el}
-              />
-              {/* error */}
-              {shipping.streetError && (
-                <p
-                  className={'text-red-500 text-xs mt-1 mx-3'}
-                >
-                  {shipping.streetError}
-                </p>
-              )}
-            </div>
-            {/* number */}
-            <div
-              className={'col-span-12 sm:col-span-6'}
-            >
-              <input disabled={isValidForm && shipping.showTaxDataForm}
-                type="text"
-                className={`input input-border-black ${shipping.numberError ? 'input-error' : ''}`}
-                placeholder="Número*"
-                value={shipping.number}
-                name={'number'}
-                onChange={handleInputChange}
-                ref={el => inputRefs.current.number = el}
-              />
-              {/* error */}
-              {shipping.numberError && (
-                <p
-                  className={'text-red-500 text-xs mt-1 mx-3'}
-                >
-                  {shipping.numberError}
-                </p>
-              )}
-            </div>
-            {/* interior number */}
-            <div
-              className={'col-span-12 sm:col-span-6'}
-            >
-              <input disabled={isValidForm && shipping.showTaxDataForm}
-                type="text"
-                className={`input input-border-black ${shipping.interiorNumberError ? 'input-error' : ''}`}
-                placeholder="Número interior"
-                value={shipping.interiorNumber}
-                name={'interiorNumber'}
-                onChange={handleInputChange}
-                ref={el => inputRefs.current.interiorNumber = el}
-              />
-              {/* error */}
-              {shipping.interiorNumberError && (
-                <p
-                  className={'text-red-500 text-xs mt-1 mx-3'}
-                >
-                  {shipping.interiorNumberError}
-                </p>
-              )}
-            </div>
-            {/* complement */}
-            <div
-              className={'col-span-12'}
-            >
-              <input disabled={isValidForm && shipping.showTaxDataForm}
-                type="text"
-                className={`input input-border-black ${shipping.complementError ? 'input-error' : ''}`}
-                placeholder={`Referencia*`}
-                value={shipping.complement}
-                name={'complement'}
-                onChange={handleInputChange}
-                ref={el => inputRefs.current.complement = el}
-              />
-              {/* error */}
-              {shipping.complementError && (
-                <p
-                  className={'text-red-500 text-xs mt-1 mx-3'}
-                >
-                  {shipping.complementError}
-                </p>
-              )}
-            </div>
+
             {/* state */}
             <div
               className={'col-span-12 sm:col-span-6'}
@@ -394,6 +377,30 @@ export default function ShippingForm() {
                 </p>
               )}
             </div>
+            
+            {/* complement */}
+            <div
+              className={'col-span-12'}
+            >
+              <input disabled={isValidForm && shipping.showTaxDataForm}
+                type="text"
+                className={`input input-border-black ${shipping.complementError ? 'input-error' : ''}`}
+                placeholder={`Referencia*`}
+                value={shipping.complement}
+                name={'complement'}
+                onChange={handleInputChange}
+                ref={el => inputRefs.current.complement = el}
+              />
+              {/* error */}
+              {shipping.complementError && (
+                <p
+                  className={'text-red-500 text-xs mt-1 mx-3'}
+                >
+                  {shipping.complementError}
+                </p>
+              )}
+            </div>
+            
 
             <div className={'col-span-12 flex justify-between'}>
               <div className="flex items-center text-white mb-2 ml-2">
