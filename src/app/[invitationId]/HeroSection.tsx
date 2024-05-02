@@ -32,7 +32,7 @@ export default function HeroSection() {
             </p>
           </div>
         </div>
-        <div className="col-span-12 md:col-span-4 mb-10 sm:mb-20 md:mb-30 lg:mb-40">
+        <div className="col-span-12 md:col-span-4 mb-10">
           <div className="button-container text-center lg:w-72 mx-auto mb-30 flex justify-center">
             <button className={`btn-xl multi-border font-medium block`} onClick={handleNewVideoClick}>
               CONOCE MÁS

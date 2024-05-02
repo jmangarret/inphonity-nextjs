@@ -13,7 +13,7 @@ import ContactSection from "./ContactSection";
 export default function Home({ params }: { params: { invitationId: string } }) {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main>
         <LandingSection
           invitationId={params.invitationId}
