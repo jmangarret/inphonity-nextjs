@@ -963,21 +963,22 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     )}
                   </div>
                 </div>
-                <div className="col-span-12 text-2xl flex flex-col mt-10 mx-auto p-10 w-80 rounded-2xl border-2 border-black">
-                  <div className="flex justify-center my-3 font-light">
-                    <span className="font-medium">Plan:   </span> &nbsp;&nbsp; ${plan.price}
-                  </div>
-                  <div className="flex justify-center mb-3 font-light">
-                    <span className="font-medium">Envío:   </span> &nbsp;&nbsp; ${shippingCost}
-                  </div>
-                  <div className="w-1/5 my-1 self-center">
-                    <hr />
-                  </div>
-                  <div className="flex justify-center">
-                    <span className="font-medium text-3xl text-custom-blue">Total a Pagar</span>
+                <div className="col-span-12 text-3xl flex flex-col mt-10 mx-auto justify-between px-5 w-[23.125rem] py-[3rem] h-[21.25rem] rounded-2xl border-2 border-black">
+                  <div className="flex justify-between mx-auto gap-x-8">
+                    <div className="flex flex-col justify-start font-light">
+                      <span className="font-medium">Plan:</span>
+                      <span className="font-medium">Envío:</span> 
+                    </div>
+                    <div className="flex flex-col justify-start font-light">
+                      <span>${plan.price}</span>
+                      <span>${shippingCost}</span>
+                    </div>
                   </div>
                   <div className="flex justify-center">
-                    <span className="text-3xl">${formatNumber(Number(plan.price) + shippingCost)}</span>
+                    <span className="font-medium text-[3.125rem] my-[1.75rem] text-custom-blue">Total a Pagar</span>
+                  </div>
+                  <div className="flex justify-center pt-4">
+                    <span className="text-[3.125rem]">${formatNumber(Number(plan.price) + shippingCost)}</span>
                   </div>
                 </div>
 

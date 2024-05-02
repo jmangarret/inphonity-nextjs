@@ -255,7 +255,7 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
         <div
           className="flex items-center py-2 gap-3"
         >
-          <div className="basis-3/4">
+          <div className="w-3/5">
             <input
               type="text"
               className="input bg-white rounded-full outline-amber-500 transition duration-300 text-black font-light w-full"
@@ -265,13 +265,13 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
               maxLength={16}
             />
           </div>
-          <div className="button-container">
+          <div className="button-container w-2/5">
             <button
               className="multi-border font-medium block w-full disabled:opacity-50 bg-black"
               onClick={handleSubmit}
               disabled={isLoading || isFetching}
             >
-              Enviar
+              ENVIAR
             </button>
           </div>
         </div>
