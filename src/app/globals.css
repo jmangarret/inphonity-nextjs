@@ -220,6 +220,10 @@
   .modal-content {
     width: 100%;
   }
+
+  .text-center-mobile {
+    text-align: center;
+  }
 }
 
 @media (min-width: 1024px) {

@@ -10,7 +10,7 @@ export default function ContactSection() {
                         </h2>
                         <span className="text-highlight text-2xl">¡Contáctanos!</span>
                     </div>
-                    <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-4 text-center">
+                    <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-4 text-center-mobile">
                         <button className="btn-xl multi-border font-medium">
                             CHATEA EN LÍNEA
                         </button>
