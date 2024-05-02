@@ -39,7 +39,23 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
   }, [data, isFetching, isLoading, router]);
 
   return (
-    <section className="container mx-auto my-10 bg-section-1">
+    <section className="bg-section-1">
+      <header className="pt-10 ml-10 sm:ml-24">
+      <nav className={`container py-9 flex justify-between items-center`}>
+        <div>
+          <Image
+            src="/logo.svg"
+            alt="Logotipo de Inphonity"
+            width={203}
+            height={29.4}
+            priority
+          />
+        </div>
+        <div></div>
+      </nav>
+    </header>
+      <div className="ml-10 sm:ml-24 mt-7">
+
       {/* <PlusDecoration 
         isGreen={true}
         style={{left: "90%"}}
@@ -48,17 +64,17 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
       /> */}
       <div
         className="sm:flex"
-      >
-        <div
-          className="sm:w-1/2 px-4 sm:mt-10 md:mt-16 lg:mt-24 xl:mt-32"
         >
-          <h1
-            className={`font-medium text-6xl sm:text-4xl lg:text-5xl xl:text-6xl`}
+        <div
+          className="sm:w-1/2"
           >
+          <h1
+            className={`font-medium text-5xl md:text-7xl lg:text-8xl`}
+            >
             {isLoading || isFetching ? (
               <div
-                className="font-medium text-6xl sm:text-7xl lg:text-8xl xl:text-9xl bg-gray-300 animate-pulse h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10 mb-3 w-3/4 inline-block"
-                style={{verticalAlign: "middle"}}
+              className="font-medium text-6xl sm:text-7xl lg:text-8xl xl:text-9xl bg-gray-300 animate-pulse h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10 mb-3 w-3/4 inline-block"
+              style={{verticalAlign: "middle"}}
               ></div>
             ) : (
               data && (
@@ -75,7 +91,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
                       width={25}
                       height={25}
                       className="inline mb-3 w-6 sm:w-8 md:w-10 sm:mb-5 md:mb-7 ml-2"
-                    />
+                      />
                   </span>
                 </>
               )
@@ -84,8 +100,8 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
           <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl my-10">
             {isLoading || isFetching ? (
               <span
-                className="font-medium text-2xl sm:text-3xl lg:text-5xl xl:text-8xl bg-gray-300 animate-pulse h-5 sm:h-6 md:h-7 ld:h-8 xl:h-9 mb-3 w-3/4 inline-block"
-                style={{ verticalAlign: "middle" }}
+              className="font-medium text-2xl sm:text-3xl lg:text-5xl xl:text-8xl bg-gray-300 animate-pulse h-5 sm:h-6 md:h-7 ld:h-8 xl:h-9 mb-3 w-3/4 inline-block"
+              style={{ verticalAlign: "middle" }}
               ></span>
             ) : (
               <>
@@ -97,7 +113,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
             {/* <source width="150" media="(max-width: 600px)" srcSet="/img/circulo-inphonity-300x142.webp"/>
             <source width="300" media="(min-width: 600px) and (max-width: 1200px)"
                     srcSet="/img/circulo-inphonity-600x283.webp"/>
-            <source width="600" media="(min-width: 1200px)" srcSet="/img/circulo-inphonity-900x425.webp"/> */}
+                  <source width="600" media="(min-width: 1200px)" srcSet="/img/circulo-inphonity-900x425.webp"/> */}
             <img src="/img/circulo.svg" alt="Círculo Inphonity" />
           </picture>
         </div>
@@ -105,8 +121,8 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
 
         <div
           className="sm:w-1/2 py-5 text-right"
-        >
-          <div className="flex justify-center md:justify-end">
+          >
+          <div className="flex justify-start md:justify-end">
             <picture>
               <source width="300" media="(max-width: 600px)" srcSet="/img/img_header_600px.webp" />
               <source width="600" media="(min-width: 600px) and (max-width: 1200px)" srcSet="/img/img_header_1200px.webp" />
@@ -118,7 +134,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
       </div>
       <div className="sm:flex">
         <div className="px-4 my-20 sm:my-20 md:my-20 lg:my-20">
-          <h2 className="w-3/5 font-medium text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-4 sm:mb-4 lg:mb-4">
+          <h2 className="w-full sm:w-3/5 font-medium text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-4 sm:mb-4 lg:mb-4">
             ¿Qué es <span className="text-highlight">Círculo inphonity?</span>
           </h2>
           <p className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl text-justify">
@@ -130,14 +146,15 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
       </div>
       {/* <div className="relative mt-3 h-10 lg:h-20">
         <PlusDecoration
-          style={{left: "15%"}}
-          className="absolute my-3 w-6 sm:w-9 md:w-12 lg:w-15 xl:w-18"
+        style={{left: "15%"}}
+        className="absolute my-3 w-6 sm:w-9 md:w-12 lg:w-15 xl:w-18"
         />
         <PlusDecoration
-          style={{right: "10%"}}
-          className="absolute my-3 w-8 sm:w-11 md:w-14 lg:w-17 xl:w-20"
+        style={{right: "10%"}}
+        className="absolute my-3 w-8 sm:w-11 md:w-14 lg:w-17 xl:w-20"
         />
       </div> */}
+      </div>
     </section>
   );
 }

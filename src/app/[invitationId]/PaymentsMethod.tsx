@@ -17,20 +17,21 @@ export default function PaymentsSection() {
   }
 
   return (
-    <section className="mx-auto mb-10 bg-custom-green">
-      <div className="grid grid-cols-10 md:mb-5 lg:mb-10 xl:mb-15">
+    <section className="bg-section-6">
+      <div className="mx-auto mb-10">
+        <div className="grid grid-cols-10">
         <div className="col-span-1">
           {/* <PlusDecoration
             className="my-3 lg:my-4 w-3 sm:w-6 md:w-8 lg:w-10 xl:w-12 mx-auto"
           /> */}
         </div>
         <div className="col-span-8">
-          <h2 className="font-medium text-3xl xl:text-5xl text-center mt-10">
+          <h2 className="font-medium text-3xl xl:text-5xl text-center mt-[6.25rem]">
             Métodos de pago
           </h2>
         </div>
         <div className="col-span-12">
-          <p className="text-xl lg:text-2xl text-center mt-5 mx-5"> <span className="font-medium">Contamos con diferentes opciones </span> para que escojas la que más se adapte a ti </p>
+          <p className="text-xl lg:text-2xl text-center mt-[2.188rem] mx-5"> <span className="font-medium">Contamos con diferentes opciones </span> para que escojas la que más se adapte a ti </p>
         </div>
         <div className="col-span-1">
           {/* <PlusDecoration
@@ -38,15 +39,15 @@ export default function PaymentsSection() {
           /> */}
         </div>
       </div>
-      <div className="flex justify-center md:justify-between flex-wrap p-5 lg:p-24">
-        <div className="mx-10 my-5 sm:mx-5">
+      <div className="flex justify-center md:justify-between flex-wrap mx-[6.25rem]">
+        <div className="mx-10 mt-[3.938rem] mb-5 sm:mx-5">
           <Payment
             title="Con tarjeta"
             description="Realiza tus pagos vía online con tu tarjeta de crédito o débito"
             image="/img/tarjeta-icon2.svg"
           />
         </div>
-        <div className="mx-10 my-5 sm:mx-5">
+        <div className="mx-10 mt-[3.938rem] mb-5 sm:mx-5">
           <Payment
             title="Con efectivo"
             description="Conoce nuestros establecimientos afiliados en donde puedes pagar tu plan en efectivo "
@@ -62,7 +63,7 @@ export default function PaymentsSection() {
             </button>}
           />
         </div>
-        <div className="mx-10 my-5 sm:mx-5">
+        <div className="mx-10 mt-[3.938rem] mb-5 sm:mx-5">
           <Payment
             title="Con transferencia"
             description="Realiza una transferencia interbancaria (SPEI)"
@@ -79,6 +80,7 @@ export default function PaymentsSection() {
           {/* <PlusDecoration
             className="my-5 lg:my-10 lg:my-4 w-3 sm:w-6 md:w-8 lg:w-10 xl:w-12 ml-auto mr-6 md:mr-0"
           /> */}
+          </div>
         </div>
       </div>
     </section>

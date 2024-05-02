@@ -11,8 +11,8 @@ export default function Canceled() {
           <Image
             src="/logo.svg"
             alt="Logotipo de Inphonity"
-            width={156.13}
-            height={27.01}
+            width={203}
+            height={29.4}
             priority
             className={`mx-auto`}
           />

@@ -65,7 +65,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
           <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
             Para poder continuar,
             <br />
-            <span className="font-medium">no olvides aceptar </span> 
+            <span className="font-medium">no olvides aceptar </span>
             <br />
             los Términos y Condiciones
             <br />
@@ -82,13 +82,13 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
 
   const handlePassword = () => {
     if (password !== passwordConfirmation) {
-      if (!password || !passwordConfirmation){
+      if (!password || !passwordConfirmation) {
         return;
       }
-      
+
       openModal(
         <div className="flex flex-col items-center justify-center h-full text-white">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
             Las contraseñas no coinciden.
           </p>
         </div>,
@@ -112,7 +112,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
     if (!password.match(/[A-Z]/)) {
       openModal(
         <div className="flex flex-col items-center justify-center h-full text-white">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
             La contraseña debe tener al menos una mayúscula.
           </p>
         </div>,
@@ -124,7 +124,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
     if (!password.match(/[0-9]/)) {
       openModal(
         <div className="flex flex-col items-center justify-center h-full text-white">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
             La contraseña debe tener al menos un número.
           </p>
         </div>,
@@ -184,8 +184,8 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
           <Image
             src="/logo.svg"
             alt="Logotipo de Inphonity"
-            width={156.13}
-            height={27.01}
+            width={203}
+            height={29.4}
             priority
             className={`mx-auto`}
           />
@@ -197,9 +197,9 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
                 <span className="text-highlight">Contrato </span> socio inphonity
               </h1>
               <p className={`text-light text-lg md:text-xl mb-6 md:mb-10 lg:mb-14`}>
-                Antes de comenzar, es 
-                <span className="font-medium"> necesario firmar los contratos </span> 
-                donde se especifican 
+                Antes de comenzar, es
+                <span className="font-medium"> necesario firmar los contratos </span>
+                donde se especifican
                 los Términos y Condiciones de uso.
               </p>
 
@@ -247,7 +247,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
               <p className={`text-light text-base md:text-lg mb-6 md:mb-10 lg:mb-14 text-center`}>
                 <strong className={`text-medium text-highlight`}>Importante:</strong>
                 <br />
-                Tu contraseña debe tener al menos 8 caracteres, 
+                Tu contraseña debe tener al menos 8 caracteres,
                 <br />
                 ser alfanumérica, incluir una mayúscula y un carácter
                 especial
@@ -288,7 +288,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
 
                 <div className="flex items-center justify-center text-black mb-20">
                   <div className="w-1/2">
-                  <PasswordStrengthBar strength={passwordStrength} />
+                    <PasswordStrengthBar strength={passwordStrength} />
                   </div>
                 </div>
                 <div className="flex items-center my-10 mb-2 justify-center">

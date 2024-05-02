@@ -4,9 +4,9 @@ import SimCard from "@/components/SimCard";
 export default function PortabilitySection() {
   return (
     <section className="mx-auto bg-white">
-      <div className="grid grid-cols-10">
-        <div className="col-span-10 text-center p-3 sm:p-4 md:p-5 lg:p-6 xl:p-7">
-          <h2 className="text-black font-medium text-2xl sm:text-3xl lg:text-6xl xl:text-6xl mb-3 lg:mb-5 mt-6 lg:mt-8 xl:mt-10">
+      <div className="grid grid-cols-10 relative lg:top-[-10.625rem]">
+        <div className="col-span-10 text-center px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7">
+          <h2 className="text-black font-medium text-2xl sm:text-3xl lg:text-6xl xl:text-6xl mb-3 lg:mb-5">
             <span className="text-custom-blue">Conserva</span> tu número
           </h2>
           <p className="font-extralight text-black text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl">

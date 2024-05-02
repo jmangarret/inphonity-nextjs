@@ -86,10 +86,10 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
             />
           </div> */}
           {/* countdown */}
-          <div className="col-span-12 bg-white p-10 rounded-3xl border-4 border-white shadow-lg gap-4 mx-auto">
+          <div className="col-span-12 bg-white p-10 rounded-3xl border-4 border-white shadow-lg gap-4 mx-auto lg:w-[64.375rem] lg:h-[29.438rem]">
             <div className={`col-span-12 md:col-span-12 mb-10`}>
               <h2
-                className="text-black font-medium text-3xl sm:text-3xl lg:text-5xl mb-5 sm:mb-7 md:mb-9 lg:mb-12 xl:mb-14 text-center mx-auto"
+                className="text-black font-medium text-3xl sm:text-4xl lg:text-5xl mb-5 sm:mb-7 md:mb-9 lg:mb-12 xl:mb-14 text-center mx-auto"
               >
                 Tiempo restante
               </h2>
@@ -97,18 +97,18 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
               {isLoadingInvitation || isFetchingInvitation ? (
                 <div
                   className="font-medium text-2xl sm:text-3xl lg:text-5xl xl:text-8xl bg-gray-300 animate-pulse h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10 mb-3 w-3/4 inline-block"
-                  style={{verticalAlign: "middle"}}
+                  style={{ verticalAlign: "middle" }}
                 ></div>
               ) : (
                 invitationData && (
-              <Countdown
-                expiresAt={invitationData.expires_at}
-              />
-              )
+                  <Countdown
+                    expiresAt={invitationData.expires_at}
+                  />
+                )
               )}
             </div>
             {/* accept invitation */}
-            <div className="col-span-12 sm:col-span-0 md:col-span-0 lg:col-span-2"></div>
+            <div className="col-span-12 sm:col-span-0 md:col-span-0 lg:col-span-2 mt-10"></div>
             <div className="flex justify-center gap-4 flex-wrap">
               <div className="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4">
                 <div className="button-container w-4/5 lg:w-72 mx-auto flex justify-center">

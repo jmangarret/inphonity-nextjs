@@ -46,32 +46,31 @@ const PlanCard: React.FC<Plan> = (planData) => {
 
   return (
     <div className="click-listen">
-      <div className="bg-white rounded-xl shadow-2xl overflow-hidden md:max-w-2xl m-2">
+      <div className="bg-white rounded-[1.25rem] border-2 border-white shadow-2xl overflow-hidden md:max-w-2xl m-2">
         <div className="md:flex flex-col">
           {planData.portability_promo && (
-          <div className="absolute p-10 rounded-[1.25rem]-full text-center font-medium flex items-center justify-center promo">
-            <p>
-              <span className="text-black text-xs font-medium">TRAE TU NÚMERO Y OBTEN</span>
-              <br />
-              <span className="text-[1.5rem] font-medium" dangerouslySetInnerHTML={{__html: planData.portability_promo}}></span>
+          <div className="absolute rounded-[1.25rem]-full text-center font-medium flex items-center justify-center promo">
+            <p className="flex flex-col px-5 py-12">
+              <span className="text-black text-xs font-medium absolute top-1 right-px pt-2 px-6">TRAE TU NÚMERO Y OBTEN</span>
+              <span className="text-[3.125rem] font-medium absolute top-10 right-1 mt-2 mx-3" dangerouslySetInnerHTML={{__html: planData.portability_promo}}></span>
             </p>
           </div>
           )}
-          <div className={`w-full md:flex-shrink-0 rounded-t-lg p-8 rounded-[1.25rem]-full text-center ${SlideBackground.CUSTOM}`}>
-                <h3 className="text-4xl font-medium font-yellow capitalize">
+          <div className={`w-full md:flex-shrink-0 rounded-t-lg px-8 py-4 rounded-[1.25rem]-full text-center ${SlideBackground.CUSTOM}`}>
+                <h3 className="text-[3.125rem] font-medium font-yellow capitalize">
                   {planData.name}
                 </h3>
-                <h3 className="text-6xl font-medium mb-3">
+                <h3 className="text-7xl font-medium leading-[0.5]">
                   {planData.internet}
                 </h3>
-                <p className="font-medium text-sm">
+                <p className="font-medium text-[0.938rem] mt-[1.75rem]">
 
                 {planData.share_data ? 'COMPARTE DATOS' : 'NO COMPARTE DATOS'}
               </p>
           </div>
           <div className="mx-3 p-3 sm:p-4">
             <div className="col-span-10 flex justify-between">
-              <div className="card-plan-promo text-center border border-white rounded-[1.25rem] bg-black p-3 m-1">
+              <div className="card-plan text-center border border-white rounded-[1.25rem] bg-black px-3 py-6 m-1">
                 <p className="text-xs mx-auto mb-2.5">
                   <Image
                     src="/img/phone-circle-icon.svg"
@@ -87,7 +86,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                   {planData.minutes}
                 </p>
               </div>
-              <div className="card-plan-promo text-center border border-white rounded-[1.25rem] bg-black p-3 m-1">
+              <div className="card-plan text-center border border-white rounded-[1.25rem] bg-black px-3 py-6 m-1">
                 <p className="text-xs mx-auto mb-2.5">
                   <Image
                     src="/img/message-icon.svg"
@@ -104,8 +103,8 @@ const PlanCard: React.FC<Plan> = (planData) => {
                 </p>
               </div>
             </div>
-            <div className="col-span-10 p-2 text-center bg-black border rounded-[1.25rem]">
-              <p className="font-medium text-sm text-center mb-3">
+            <div className="col-span-10 px-3 py-4 text-center bg-black border rounded-[1.25rem]">
+              <p className="font-medium text-xs text-center mt-5 mb-3">
                 REDES SOCIALES ILIMITADAS
               </p>
               <div className="flex justify-center items-center mb-5">
@@ -225,7 +224,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
               </div>
             </div>
 
-            <div className="col-span-10 text-center border-2 border-black rounded-[1.25rem] bg-white p-3 m-1">
+            <div className="col-span-10 text-center border-2 border-black rounded-[1.25rem] bg-white p-3 mx-1 mt-1 mb-6">
               <p className="font-medium text-6xl text-black">
                 ${formatNumber(planData.price)}
               </p>

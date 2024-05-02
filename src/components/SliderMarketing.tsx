@@ -18,7 +18,7 @@ const SliderMarketing = () => {
     swiperElRef.current?.addEventListener("swiperprogress", (e: any) => {
       const [swiper, progress] = e.detail;
     });
-    swiperElRef.current?.addEventListener("interchangeability", (e) => {});
+    swiperElRef.current?.addEventListener("interchangeability", (e) => { });
     // watch click event
     swiperElRef.current?.addEventListener("click", (e: any) => {
       swiperElRef.current?.swiper.slideTo(
@@ -44,7 +44,7 @@ const SliderMarketing = () => {
         <swiper-slide key={1}>
           <div className="w-full">
             <Image
-              src="/img/Cashback-1.svg"
+              src="/img/Cashback-1.jpg"
               alt="info check"
               width={2000}
               height={2000}
@@ -56,7 +56,7 @@ const SliderMarketing = () => {
         <swiper-slide key={2}>
           <div className="w-full">
             <Image
-              src="/img/crecen.svg"
+              src="/img/crecen.jpg"
               alt="info check"
               width={2000}
               height={2000}
@@ -68,7 +68,7 @@ const SliderMarketing = () => {
         <swiper-slide key={3}>
           <div className="w-full">
             <Image
-              src="/img/cambiar-linea.svg"
+              src="/img/cambiar-linea.jpg"
               alt="info check"
               width={2000}
               height={2000}
