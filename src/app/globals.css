@@ -1094,12 +1094,12 @@ select.input {
 *
 **/
 
-body {
+/* body {
   background: url('/img/bg-landing-full.png');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-}
+} */
 
 .bg-plan1 {
   background: url('/img/bg-plan.png') transparent 50% / cover no-repeat;
@@ -1131,22 +1131,26 @@ body {
 }
 
 .border-col-1 {
-  background: linear-gradient(90deg, gray 0%, #000 100%);
+  /* background: linear-gradient(90deg, gray 0%, #000 100%); */
+  color: black;
   border: 2px solid #27E1C1;
 }
 
 .border-col-2 {
-  background: linear-gradient(90deg, gray 0%, #000 100%);
+  /* background: linear-gradient(90deg, gray 0%, #000 100%); */
+  color: black;
   border: 2px solid #FDB827;
 }
 
 .border-col-3 {
-  background: linear-gradient(90deg, gray 0%, #000 100%);
+  /* background: linear-gradient(90deg, gray 0%, #000 100%); */
+  color: black;
   border: 2px solid #298A9A;
 }
 
 .border-col-4 {
-  background: linear-gradient(90deg, gray 0%, #000 100%);
+  /* background: linear-gradient(90deg, gray 0%, #000 100%); */
+  color: black;
   border: 2px solid #EB522D;
 }
 

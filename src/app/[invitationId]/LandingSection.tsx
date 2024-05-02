@@ -40,7 +40,21 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
 
   return (
     <section className="bg-section-1">
-      <div className="container ml-10 sm:ml-24 mt-7">
+      <header className="pt-10 ml-10 sm:ml-24">
+      <nav className={`container py-9 flex justify-between items-center`}>
+        <div>
+          <Image
+            src="/logo.svg"
+            alt="Logotipo de Inphonity"
+            width={203}
+            height={29.4}
+            priority
+          />
+        </div>
+        <div></div>
+      </nav>
+    </header>
+      <div className="ml-10 sm:ml-24 mt-7">
 
       {/* <PlusDecoration 
         isGreen={true}
