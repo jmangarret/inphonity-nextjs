@@ -1,4 +1,5 @@
 "use client";
+import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 
 interface CountdownTimerProps {
@@ -37,25 +38,37 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ expiresAt }) => {
   }, [expiresAt]);
 
   return (
-    <div className="w-1/3 mx-auto">
-      <div className="grid grid-cols-5 gap-1 text-2xl lg:text-6xl text-center">
-        <div className="col-span-1">
+    <div className="w-2/4 md:w-1/3 mx-auto">
+      <div className="grid grid grid-flow-col auto-cols-min sm:auto-cols-auto md:auto-cols-max gap-1 text-4xl sm:text-6xl lg:text-8xl text-center">
+        <div className="col-span-2 flex flex-col">
           <span className="text-black block font-medium">{timeLeft.hours}</span>
-          <span className="text-sm lg:text-base xl:text-lg text-black">Horas</span>
+          <span className="text-sm lg:text-base xl:text-lg text-black mt-2.5">Horas</span>
         </div>
         <div className="col-span-1">
-          <span className='text-highlight'>:</span>
+          <Image
+            src="/img/puntos.svg"
+            alt="puntos"
+            width={7}
+            height={23}
+            className="inline align-middle w-auto mx-3"
+          />
         </div>
-        <div className="col-span-1">
+        <div className="col-span-2 flex flex-col">
           <span className="text-black block font-medium">{timeLeft.minutes}</span>
-          <span className="text-sm lg:text-base xl:text-lg text-black">Minutos</span>
+          <span className="text-sm lg:text-base xl:text-lg text-black mt-2.5">Minutos</span>
         </div>
         <div className="col-span-1">
-          <span className='text-highlight'>:</span>
+          <Image
+              src="/img/puntos.svg"
+              alt="puntos"
+              width={7}
+              height={23}
+              className="inline align-middle w-auto mx-3"
+            />
         </div>
-        <div className="col-span-1">
+        <div className="col-span-2 flex flex-col">
           <span className="text-black block font-medium">{timeLeft.seconds}</span>
-          <span className="text-sm lg:text-base xl:text-lg text-black">Segundos</span>
+          <span className="text-sm lg:text-base xl:text-lg text-black mt-2.5">Segundos</span>
         </div>
       </div>
     </div>
