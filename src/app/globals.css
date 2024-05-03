@@ -187,7 +187,7 @@
 .bg_gracias_por_unirte {
   background-image: url("/img/bg_gracias_por_unirte_parte_1.jpg");
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: contain;
   background-position: top right;
 }
 
