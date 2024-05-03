@@ -65,6 +65,20 @@ export default function ValidateCompatibility() {
   return (
     <>
       <section className="relative pt-[5.563rem] bg-white bg_gracias_por_unirte">
+        <header>
+          <nav className="mx-auto pl-20 pt-9 flex justify-between items-center bg-white text-black">
+            <div>
+              <Image
+                src="/Logo3.svg"
+                alt="Logotipo de Inphonity"
+                width={203}
+                height={29.4}
+                priority
+              />
+            </div>
+            <div></div>
+          </nav>
+        </header>
         <div className="grid grid-cols-10 gap-3">
           <div className="col-span-10 md:col-span-5 lg:col-span-6">
             <header className="text-center md:text-left relative">

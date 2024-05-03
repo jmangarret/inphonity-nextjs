@@ -32,20 +32,6 @@ export default function Accepted({ params }: { params: { invitationId: string } 
 
   return (
     <>
-      <header>
-        <nav className="mx-auto pl-20 pt-9 flex justify-between items-center bg-white text-black">
-          <div>
-            <Image
-              src="/Logo3.svg"
-              alt="Logotipo de Inphonity"
-              width={203}
-              height={29.4}
-              priority
-            />
-          </div>
-          <div></div>
-        </nav>
-      </header>
       <main>
         <ValidateCompatibility />
         <SelectOfferSection />
