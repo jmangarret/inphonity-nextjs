@@ -1,82 +1,42 @@
-"use client";
-import { register, SwiperContainer } from "swiper/element/bundle";
-import { useEffect, useRef } from "react";
-import Slide, { SlideBackground, SlideProps } from "@/components/Slide";
-import { Navigation, Pagination } from "swiper/modules";
-import Image from "next/image";
+import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
 
-register();
-
-const SliderMarketing = () => {
-  const swiperElRef = useRef<SwiperContainer>(null);
+const Slider: React.FC<{ slides: string[] }> = ({ slides }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    // jump to second slide
-    swiperElRef.current?.swiper.slideTo(0);
+    const interval = setInterval(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+    }, 3000);
 
-    // listen for Swiper events using addEventListener
-    swiperElRef.current?.addEventListener("swiperprogress", (e: any) => {
-      const [swiper, progress] = e.detail;
-    });
-    swiperElRef.current?.addEventListener("interchangeability", (e) => { });
-    // watch click event
-    swiperElRef.current?.addEventListener("click", (e: any) => {
-      swiperElRef.current?.swiper.slideTo(
-        swiperElRef.current?.swiper.clickedIndex
-      );
-    });
-  }, []);
+    return () => clearInterval(interval);
+  }, [slides]);
 
   return (
-    <div className="slider-container">
-      <swiper-container
-        spaceBetween={50}
-        slidesPerView={1}
-        ref={swiperElRef}
-        slides-per-view="1"
-        navigation={true}
-        modules={[Pagination, Navigation]}
-        effect=""
-        grab-cursor="true"
-        centered-slides="true"
-        speed="600"
-      >
-        <swiper-slide key={1}>
-          <div className="w-full">
+    <ul className="slider">
+      {slides.map((slide, index) => (
+        <li
+          key={index}
+          className={`slide ${index === currentSlide ? 'active' : ''}`}
+        >
             <Image
-              src="/img/Cashback-1.jpg"
+              src={`/img/${slide}`}
               alt="info check"
               width={2000}
               height={2000}
               className="inline"
             />
-          </div>
-        </swiper-slide>
+        </li>
+      ))}
+    </ul>
+  );
+};
 
-        <swiper-slide key={2}>
-          <div className="w-full">
-            <Image
-              src="/img/crecen.jpg"
-              alt="info check"
-              width={2000}
-              height={2000}
-              className="inline"
-            />
-          </div>
-        </swiper-slide>
-
-        <swiper-slide key={3}>
-          <div className="w-full">
-            <Image
-              src="/img/cambiar-linea.jpg"
-              alt="info check"
-              width={2000}
-              height={2000}
-              className="inline"
-            />
-          </div>
-        </swiper-slide>
-      </swiper-container>
+const SliderMarketing: React.FC = () => {
+  const slideContents = ['Cashback-1.jpg', 'crecen.jpg', 'cambiar-linea.jpg'];
+  return (
+    <div>
+      <Slider slides={slideContents} />
     </div>
   );
 };

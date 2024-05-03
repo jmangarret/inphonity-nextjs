@@ -717,19 +717,23 @@ swiper-container::part(bullet) {
   }
 } */
 
-.bg-promo-blue {
+.bg-promo-0 {
   background: linear-gradient(206deg, #000 26.38%, #01808E 92.03%);
 }
 
-.bg-promo-green {
+.bg-promo-1 {
+  background: linear-gradient(206deg, #000 26.38%, #01808E 92.03%);
+}
+
+.bg-promo-2 {
   background: linear-gradient(270deg, #00DDBA -70%, rgba(0, 0, 0, 0) 100%);
 }
 
-.bg-promo-orange {
+.bg-promo-3 {
   background: linear-gradient(116deg, #FA8F22 4.64%, #E04C37 79.15%);
 }
 
-.bg-promo-yellow {
+.bg-promo-4 {
   background: linear-gradient(100deg, #007F8E 15.02%, #F7D690 87.4%);
 }
 
@@ -1241,4 +1245,21 @@ sup {
 .bg-custom-green {
   background: linear-gradient(180deg, #27E1C1 0%, rgba(6, 6, 6, 0) 100%);
   ;
+}
+
+.slider {
+  overflow: hidden;
+}
+
+.slider li {
+  position: relative;
+  display: none;
+}
+
+.slider li {
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider li.active {
+  display: block;
 }

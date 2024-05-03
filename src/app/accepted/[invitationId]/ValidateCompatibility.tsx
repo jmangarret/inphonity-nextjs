@@ -64,16 +64,17 @@ export default function ValidateCompatibility() {
 
   return (
     <>
-      <section className="relative py-9 md:py-14 xl:py-16 bg-white">
+      <section className="relative pt-[5.563rem] bg-white">
         <div className="grid grid-cols-10 gap-3">
           <div className="col-span-10 md:col-span-5 lg:col-span-6">
             <header className="text-center md:text-left relative">
               <div className="md:ml-10 lg:ml-14 xl:ml-20 relative">
-                <h2 className="text-black font-medium text-4xl lg:text-6xl xl:text-7xl mb-5">
-                  ¡Gracias por unirte al<br />
+                <h2 className="text-black font-medium text-4xl lg:text-[3.125rem] leading-tight mb-5">
+                  ¡Gracias por unirte<br />
+                  <span>al</span>
                   <span className="text-custom-blue"> Círculo inphonity!</span>
                 </h2>
-                <p className="text-2xl lg:text-3xl xl:text-4xl text-black mt-10">
+                <p className="text-2xl lg:text-3xl text-black mt-10 px-1 xl:pr-[17rem] font-[15.625rem]">
                   A continuación, valida la compatibilidad con tu celular siguiendo estos paso
                 </p>
                 <PlusDecoration
@@ -109,7 +110,7 @@ export default function ValidateCompatibility() {
                 right: '10%'
               }}
             />
-            <div className={'lg:p-6 xl:p-9'}>
+            <div className={'lg:px-6 xl:px-9'}>
               <ValidateStep
                 step={1}
                 title={'Obtén tu IMEI'}
