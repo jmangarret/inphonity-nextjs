@@ -1,8 +1,8 @@
 "use client";
 import { register, SwiperContainer } from 'swiper/element/bundle';
 import { useEffect, useRef } from "react";
-import Slide, { SlideBackground, SlideProps } from "@/components/Slide";
-import { Navigation, Pagination } from 'swiper/modules';
+// import Slide, { SlideBackground, SlideProps } from "@/components/Slide";
+// import { Navigation, Pagination } from 'swiper/modules';
 import { useGetPlansQuery } from "@/lib/services/plansApi";
 import PlanCard from './PlanCard';
 
@@ -53,7 +53,7 @@ const Planes = () => {
         ref={swiperElRef}
         slides-per-view="auto"
         navigation={true}
-        modules={[Pagination, Navigation]}
+        // modules={[Pagination, Navigation]}
         effect=""
         grab-cursor="true"
         centered-slides="true"

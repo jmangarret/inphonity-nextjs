@@ -1,8 +1,8 @@
 "use client";
 import { register, SwiperContainer } from "swiper/element/bundle";
 import { useEffect, useRef } from "react";
-import Slide, { SlideBackground, SlideProps } from "@/components/Slide";
-import { Navigation, Pagination } from "swiper/modules";
+// import Slide, { SlideBackground, SlideProps } from "@/components/Slide";
+// import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 
 register();
@@ -35,7 +35,7 @@ const SliderMarketing = () => {
         ref={swiperElRef}
         slides-per-view="1"
         navigation={true}
-        modules={[Pagination, Navigation]}
+        // modules={[Pagination, Navigation]}
         effect=""
         grab-cursor="true"
         centered-slides="true"
