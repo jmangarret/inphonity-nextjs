@@ -39,15 +39,15 @@ export default function PaymentsSection() {
           /> */}
           </div>
         </div>
-        <div className="flex justify-center md:justify-between flex-wrap mx-[6.25rem]">
-          <div className="mx-10 mt-[3.938rem] mb-5 sm:mx-5">
+        <div className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-1 mx-auto">
+          <div className="mx-auto mt-[3.938rem] mb-5">
             <Payment
               title="Con tarjeta"
               description="Realiza tus pagos vía online con tu tarjeta de crédito o débito"
               image="/img/tarjeta-icon2.svg"
             />
           </div>
-          <div className="mx-10 mt-[3.938rem] mb-5 sm:mx-5">
+          <div className="mx-auto mt-[3.938rem] mb-5">
             <Payment
               title="Con efectivo"
               description="Conoce nuestros establecimientos afiliados en donde puedes pagar tu plan en efectivo "
@@ -63,7 +63,7 @@ export default function PaymentsSection() {
               </button>}
             />
           </div>
-          <div className="mx-10 mt-[3.938rem] mb-5 sm:mx-5">
+          <div className="mx-auto mt-[3.938rem] mb-5">
             <Payment
               title="Con transferencia"
               description="Realiza una transferencia interbancaria (SPEI)"

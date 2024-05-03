@@ -7,10 +7,6 @@
 @tailwind utilities;
 
 @layer components {
-  .lg\:grid-cols-3 {
-    @apply grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
-
   .lg\:grid-cols-5 {
     @apply grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
   }
@@ -82,10 +78,6 @@
 
 .gap-10 {
   gap: 10rem;
-}
-
-.lg\:grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
 }
 
 .lg\:pb-24 {
