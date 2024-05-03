@@ -55,7 +55,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
   };
 
   return (
-    <section className="container mx-auto p-3 sm:p-6 md:p-8 bg-[url('/img/Seccion-7.svg')]">
+    <section className="mx-auto p-3 sm:p-6 md:p-8 bg-section-7">
       <div className="container mx-auto">
         <div className="grid grid-cols-12 gap-3 text-center">
           {/* plus decoration */}

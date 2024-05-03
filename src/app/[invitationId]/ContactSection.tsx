@@ -1,6 +1,6 @@
 export default function ContactSection() {
     return (
-        <div className=" bg-section-8">
+        <div className="bg-section-8">
             <section className="container mx-auto p-3 sm:p-6 md:p-8 lg:p-10 xl:p-12">
                 <div className="mx-auto grid grid-cols-12 gap-3 flex items-center mb-20">
                     <div className="col-span-12 md:col-span-2"></div>
