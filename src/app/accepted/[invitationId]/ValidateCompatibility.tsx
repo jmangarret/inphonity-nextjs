@@ -64,7 +64,7 @@ export default function ValidateCompatibility() {
 
   return (
     <>
-      <section className="relative pb-9 md:pb-14 xl:pb-16 pt-[5.563rem] bg-white">
+      <section className="relative pt-[5.563rem] bg-white">
         <div className="grid grid-cols-10 gap-3">
           <div className="col-span-10 md:col-span-5 lg:col-span-6">
             <header className="text-center md:text-left relative">
