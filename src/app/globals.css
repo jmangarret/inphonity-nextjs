@@ -7,10 +7,6 @@
 @tailwind utilities;
 
 @layer components {
-  .lg\:grid-cols-3 {
-    @apply grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
-
   .lg\:grid-cols-5 {
     @apply grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
   }
@@ -46,6 +42,18 @@
     @apply padding-left: 6rem;
     @apply padding-right: 6rem;
   }
+
+  .md\:pb-10 {
+    padding-bottom: 2.5rem;
+  }
+
+  .lg\:pb-15 {
+    padding-bottom: 3rem;
+  }
+
+  .xl\:pb-20 {
+    padding-bottom: 5rem;
+  }
 }
 
 /* main{
@@ -72,8 +80,14 @@
   gap: 10rem;
 }
 
-.lg\:grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+.input-imei-postal {
+  height: 50px;
+  font-size: 18px !important;
+  padding-left: 30px !important;
+}
+
+.btn-imei-postal {
+  max-width: 185px;
 }
 
 .lg\:pb-24 {
@@ -147,27 +161,34 @@
 }
 
 .bg-section-6 {
-  background-image: url("/img/secc6.jpg");
+  background-image: url("/img/secc6.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
 .bg-section-7 {
-  background-image: url("/img/secc7.jpg");
+  background-image: url("/img/secc7.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
 .bg-section-8 {
-  background-image: url("/img/secc8.jpg");
+  background-image: url("/img/secc8.png");
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: 100%;
 }
 
 .bg-modal-default {
   background-image: url("/img/bg_modal_rechazo.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
+}
+
+.bg_gracias_por_unirte {
+  background-image: url("/img/bg_gracias_por_unirte_parte_1.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: top right;
 }
 
 .modal-content {
@@ -207,6 +228,10 @@
 @media (max-width: 640px) {
   .center-text-contact {
     text-align: center;
+  }
+
+  .bg-section-2 {
+    background-size: 100%;
   }
 
   .bg-section-3 {
@@ -1169,6 +1194,7 @@ select.input {
 
 .card-plan-promo {
   width: 10rem;
+  height: 7.5rem;
   min-height: 7.5rem;
   max-height: 10rem;
 }
@@ -1246,4 +1272,10 @@ sup {
 
 .slider li.active {
   display: block;
+}
+
+.slidesBtn{
+  width: 4.46rem;
+  height: 0.875rem;
+  flex-shrink: 0; 
 }

@@ -258,16 +258,16 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
           <div className="w-3/5">
             <input
               type="text"
-              className="input bg-white rounded-full outline-amber-500 transition duration-300 text-black font-light w-full"
+              className="input bg-white rounded-full outline-amber-500 transition duration-300 text-black font-light w-full input-imei-postal"
               placeholder="Introduce tu IMEI"
-              onChange={(e) => {e.target.value=e.target.value.trim(); setImei(e.target.value)}}
+              onChange={(e) => { e.target.value = e.target.value.trim(); setImei(e.target.value) }}
               value={imei}
               maxLength={16}
             />
           </div>
           <div className="button-container w-2/5">
             <button
-              className="multi-border font-medium block w-full disabled:opacity-50 bg-black"
+              className="multi-border font-medium block w-full disabled:opacity-50 bg-black btn-imei-postal"
               onClick={handleSubmit}
               disabled={isLoading || isFetching}
             >

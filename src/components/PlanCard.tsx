@@ -46,7 +46,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
 
   return (
     <div className="click-listen">
-      <div className="bg-white rounded-[1.25rem] border-2 border-white shadow-2xl overflow-hidden md:max-w-2xl m-2">
+      <div className="bg-white rounded-[1.25rem] border-2 border-white shadow-2xl overflow-hidden md:w-[25rem] m-2">
         <div className="md:flex flex-col">
           {planData.portability_promo && (
           <div className="absolute rounded-[1.25rem]-full text-center font-medium flex items-center justify-center promo">
@@ -68,7 +68,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                 {planData.share_data ? 'COMPARTE DATOS' : 'NO COMPARTE DATOS'}
               </p>
           </div>
-          <div className="mx-3 p-3 sm:p-4">
+          <div className="flex flex-col gap-x-1 mx-3 p-3">
             <div className="col-span-10 flex justify-between">
               <div className="card-plan text-center border border-white rounded-[1.25rem] bg-black px-3 py-6 m-1">
                 <p className="text-xs mx-auto mb-2.5">
@@ -103,7 +103,8 @@ const PlanCard: React.FC<Plan> = (planData) => {
                 </p>
               </div>
             </div>
-            <div className="col-span-10 px-3 py-4 text-center bg-black border rounded-[1.25rem]">
+
+            <div className="col-span-10 h-[7.5rem] px-3 py-3 text-center bg-black border-2 rounded-[1.25rem] m-1">
               <p className="font-medium text-xs text-center mt-5 mb-3">
                 REDES SOCIALES ILIMITADAS
               </p>
@@ -185,7 +186,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
 
             <div className="col-span-10 flex justify-between">
               <div className="card-plan-promo text-center border-2 border-black rounded-[1.25rem] bg-white p-3 m-1 flex flex-col">
-                <div className="h-2/4">
+                <div className="">
                   <p className="text-xs mx-auto mb-0.5 text-black font-medium">
                     BONO ÚNICO
                   </p>
@@ -195,14 +196,14 @@ const PlanCard: React.FC<Plan> = (planData) => {
                   </p>
                 </div>
 
-                <div className="h-2/4">
-                  <p className="font-medium text-4xl text-black">
+                <div className="">
+                  <p className="font-medium text-xl md:text-4xl  text-black mt-6 sm:mt-2.5">
                     {formatNumber(Number(referralIncome))}%
                   </p>
                 </div>
               </div>
               <div className="card-plan-promo text-center border-2 border-black rounded-[1.25rem] bg-white p-3 m-1 flex flex-col">
-                <div className="h-2/4">
+                <div className="">
                   <p className="text-xs mx-auto mb-0.5 text-black font-medium">
                     CASHBACK AL DOBLE
                   </p>
@@ -212,8 +213,8 @@ const PlanCard: React.FC<Plan> = (planData) => {
                   </p>
                 </div>
 
-                <div className="h-2/4">
-                  <p className="font-medium text-4xl text-black">
+                <div className="">
+                  <p className="font-medium text-xl md:text-4xl text-black">
                     {formatNumber(cashback)}%
                   </p>
 
@@ -224,7 +225,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
               </div>
             </div>
 
-            <div className="col-span-10 text-center border-2 border-black rounded-[1.25rem] bg-white p-3 mx-1 mt-1 mb-6">
+            <div className="col-span-10 h-[7.5rem] text-center border-2 border-black rounded-[1.25rem] bg-white p-3 mx-1 mt-1 mb-6">
               <p className="font-medium text-6xl text-black">
                 ${formatNumber(planData.price)}
               </p>
@@ -234,12 +235,12 @@ const PlanCard: React.FC<Plan> = (planData) => {
             </div>
 
             {plan.id === planData.id ? (
-              <button className="w-full multi-border-white text-white bg-promo-3 font-medium click-listen">
+              <button className="w-full multi-border-white text-white bg-promo-3 font-medium click-listen p-1">
                 PLAN SELECCIONADO
               </button>
             ) : (
               <button
-                className="w-full multi-border text-white bg-black font-medium click-listen"
+                className="w-full multi-border text-white bg-black font-medium click-listen p-1"
                 onClick={handleButtonClick}
               >
                 QUIERO ESTE PLAN
