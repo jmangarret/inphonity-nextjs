@@ -1230,3 +1230,20 @@ sup {
   background: linear-gradient(180deg, #27E1C1 0%, rgba(6, 6, 6, 0) 100%);
   ;
 }
+
+.slider {
+  overflow: hidden;
+}
+
+.slider li {
+  position: relative;
+  display: none;
+}
+
+.slider li {
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider li.active {
+  display: block;
+}
