@@ -64,7 +64,7 @@ export default function ValidateCompatibility() {
 
   return (
     <>
-      <section className="relative pt-[5.563rem] bg-white">
+      <section className="relative pt-[5.563rem] bg-white bg_gracias_por_unirte">
         <div className="grid grid-cols-10 gap-3">
           <div className="col-span-10 md:col-span-5 lg:col-span-6">
             <header className="text-center md:text-left relative">
@@ -118,7 +118,7 @@ export default function ValidateCompatibility() {
                 borderClass={'border-col-1'}
               >
                 <p className={'font-light mb-4 text-base md:text-xl xl:text-2xl text-black'}>
-                  Conoce si tu teléfono es <strong className={'font-medium'}>compatible</strong> con <strong className={'font-medium'}>inphonity.</strong> Marca *#06# y recibe tu IMEI
+                  Conoce si tu teléfono es <strong className={'font-medium'}>compatible</strong> con <br></br><strong className={'font-medium'}>inphonity.</strong> Marca *#06# y recibe tu IMEI
                   {' '}
                   <Image
                     src={'/img/question-mark-icon.svg'}
