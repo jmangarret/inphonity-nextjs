@@ -35,7 +35,7 @@ export default function Canceled() {
           <p
             className={`text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl text-center mb-6 md:mb-10 lg:mb-14 font-light`}
           >
-            ¡Si estás listo para <span className={`font-medium`}>unirte a inphonity</span>!, pide <span className={`font-medium`}>una</span>
+            ¡Si estás listo para <span className={`font-medium`}>unirte a inphonity</span>!, pide <span className={`font-medium`}> una &nbsp;</span>
             <span className={`font-medium`}>nueva invitación</span> a la persona <br />
             que te contactó y empieza a tener <span className={`font-medium`}>más de lo que te imaginas.</span>
             <br />

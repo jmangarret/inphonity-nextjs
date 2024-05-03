@@ -1169,6 +1169,7 @@ select.input {
 
 .card-plan-promo {
   width: 10rem;
+  height: 7.5rem;
   min-height: 7.5rem;
   max-height: 10rem;
 }
@@ -1246,4 +1247,10 @@ sup {
 
 .slider li.active {
   display: block;
+}
+
+.slidesBtn{
+  width: 4.46rem;
+  height: 0.875rem;
+  flex-shrink: 0; 
 }
