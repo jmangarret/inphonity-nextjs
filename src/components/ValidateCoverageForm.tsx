@@ -1,7 +1,7 @@
 /// <reference types="@types/google.maps" />
 "use client";
 import React from "react";
-import {ModalContext} from "@/contexts/ModalContext";
+import { ModalContext } from "@/contexts/ModalContext";
 // @ts-ignore
 import { Loader } from "@googlemaps/js-api-loader";
 import PlusDecoration from "@/components/PlusDecoration";
@@ -14,8 +14,8 @@ type ValidateCoverageFormProps = {
 
 declare var L: any;
 
-const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, style}) => {
-  const {openModal, closeModal} = React.useContext(ModalContext);
+const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({ className, style }) => {
+  const { openModal, closeModal } = React.useContext(ModalContext);
   const [postalCode, setPostalCode] = React.useState<string>('');
   const [geocoder, setGeocoder] = React.useState<google.maps.Geocoder>();
 
@@ -73,7 +73,7 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
     let lat = 0;
     let lng = 0;
 
-    geocoder.geocode({address: `CP: ${postalCode}, México`}, (results, status) => {
+    geocoder.geocode({ address: `CP: ${postalCode}, México` }, (results, status) => {
       if (status === "OK" && results) {
         const location = results[0].geometry.location;
 
@@ -111,14 +111,14 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
               />
 
               <h1 className={`text-2xl mb-8 relative p-8`}>
-                Si tu zona está 
+                Si tu zona está
                 <span className="text-highlight"> marcada en verde </span>
                 la velocidad de tu servicio será mayor.
-                <br/>
+                <br />
                 {/* PlusDecoration */}
                 <PlusDecoration
                   className="w-4 md:w-8 absolute"
-                  style={{right: '-30px', bottom: '-10px'}}
+                  style={{ right: '-30px', bottom: '-10px' }}
                 />
               </h1>
             </div>
@@ -127,7 +127,7 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
               <div className={`relative w-4/5`}>
                 <div
                   id={`map`}
-                  style={{width: '100%', height: '400px'}}
+                  style={{ width: '100%', height: '400px' }}
                 ></div>
               </div>
             </div>
@@ -167,7 +167,7 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
       map.setZoom(12);
 
       const results = L.layerGroup().addTo(map);
-      let marker = new L.Marker({lat, lng})
+      let marker = new L.Marker({ lat, lng })
       results.addLayer(marker)
 
       const baselayers = {
@@ -196,9 +196,9 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
           <div className="w-3/5">
             <input
               type="text"
-              className="input bg-white rounded-full outline-amber-500 transition duration-300 text-black font-light w-full"
+              className="input bg-white rounded-full outline-amber-500 transition duration-300 text-black font-light w-full input-imei-postal"
               placeholder="Introduce tu Código Postal"
-              onChange={(e) => {e.target.value=e.target.value.replace(/\D/g, ''); setPostalCode(e.target.value)}}
+              onChange={(e) => { e.target.value = e.target.value.replace(/\D/g, ''); setPostalCode(e.target.value) }}
               value={postalCode}
               maxLength={5}
               autoComplete="off"
@@ -206,7 +206,7 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({className, s
           </div>
           <div className="button-container w-2/5">
             <button
-              className="multi-border font-medium block w-full bg-black"
+              className="multi-border font-medium block w-full bg-black btn-imei-postal"
               onClick={handleSubmit}
             >
               REVISAR

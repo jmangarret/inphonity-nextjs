@@ -80,6 +80,16 @@
   gap: 10rem;
 }
 
+.input-imei-postal {
+  height: 50px;
+  font-size: 18px !important;
+  padding-left: 30px !important;
+}
+
+.btn-imei-postal {
+  max-width: 185px;
+}
+
 .lg\:pb-24 {
   padding-bottom: 6rem;
 }
@@ -172,6 +182,13 @@
   background-image: url("/img/bg_modal_rechazo.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
+}
+
+.bg_gracias_por_unirte {
+  background-image: url("/img/bg_gracias_por_unirte_parte_1.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: top right;
 }
 
 .modal-content {
