@@ -185,7 +185,7 @@ export default function ValidateCompatibility() {
           </div>
         </div>
       </section>
-      <section>
+      <section className="bg-white">
         <div className="w-full">
           <SliderMarketing />
         </div>
