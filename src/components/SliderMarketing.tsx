@@ -5,13 +5,13 @@ import "react-image-gallery/styles/css/image-gallery.css";
 const SliderMarketing: React.FC = () => {
   const images = [
     {
-      original: "/img/Cashback-1.svg",
+      original: "/img/Cashback-1.png",
     },
     {
-      original: "/img/crecen.svg",
+      original: "/img/crecen.png",
     },
     {
-      original: "/img/cambiar-linea.svg",
+      original: "/img/cambiar-linea.png",
     },
   ];
   
