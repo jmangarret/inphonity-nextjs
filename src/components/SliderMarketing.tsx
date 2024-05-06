@@ -35,9 +35,16 @@ const Slider: React.FC<{ slides: string[] }> = ({ slides }) => {
 const SliderMarketing: React.FC = () => {
   const slideContents = ['Cashback-1.jpg', 'crecen.jpg', 'cambiar-linea.jpg'];
   return (
-    <div>
-      <Slider slides={slideContents} />
-    </div>
+    <>
+      <div>
+        <Slider slides={slideContents} />
+      </div>
+      <div className='bg-white'>
+        <br />
+        <br />
+        <br />
+      </div>
+    </>
   );
 };
 
