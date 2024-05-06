@@ -9,21 +9,19 @@ export default function OfferSection() {
 
   return (
     <section className="mx-auto bg-white">
-      <div className="grid grid-cols-10 items-center">
-        <div className="col-span-2 flex justify-end">
-
+      <div className="grid grid-cols-12">
+        <div className="col-span-2">
         </div>
-        <div className="col-span-12 lg:col-span-6 flex justify-center">
-          <div className=" planes-content">
-            <h2 className="mx-auto text-center text-2xl lg:text-3xl xl:text-5xl mb-5 sm:mb-10 lg:mb-20">
+        <div className="col-span-8">
+          <div className="planes-content">
+            <h2 className="mx-auto text-center text-3xl xl:text-5xl mb-5 sm:mb-10 lg:mb-20">
               Conoce <span className="font-medium"> nuestros planes</span>
             </h2>
           </div>
         </div>
-        <div className="col-span-2 text-right">
-
+        <div className="col-span-2">
         </div>
-        <div className="col-span-12 lg:col-span-10">
+        <div className="col-span-12">
           <Planes />
         </div>
       </div>

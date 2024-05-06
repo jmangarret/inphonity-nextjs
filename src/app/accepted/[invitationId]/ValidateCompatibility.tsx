@@ -64,7 +64,7 @@ export default function ValidateCompatibility() {
 
   return (
     <>
-      <section className="bg_gracias_por_unirte">
+      <section className="bg-white bg-contain bg_gracias_por_unirte">
         <header>
           <nav className="mx-auto pl-20 pt-9 flex justify-between items-center text-black">
             <div>
@@ -108,16 +108,9 @@ export default function ValidateCompatibility() {
                     srcSet="/img/validate-compatibility-600x575.png" />
                   <img width="1200" src="/img/validate-compatibility-600x575.png" alt="Valida compatibilidad" />
                 </picture>
-                <PlusDecoration
-                  className="w-10 md:w-11 lg:w-15 xl:w-20 absolute"
-                  style={{
-                    bottom: '25%',
-                    left: '10px'
-                  }}
-                />
               </header>
             </div>
-            <div className="col-span-10 md:col-span-5 lg:col-span-4 relative">
+            <div className="col-span-10 md:col-span-5 lg:col-span-4">
               <PlusDecoration
                 className="w-7 md:w-8 lg:w-12 xl:w-17 absolute"
                 style={{
@@ -190,9 +183,11 @@ export default function ValidateCompatibility() {
               </div>
             </div>
           </div>
-          <div className="w-full">
-            <SliderMarketing />
-          </div>
+        </div>
+      </section>
+      <section>
+        <div className="w-full">
+          <SliderMarketing />
         </div>
       </section>
     </>

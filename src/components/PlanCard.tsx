@@ -46,7 +46,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
 
   return (
     <div className="click-listen">
-      <div className="bg-white rounded-[1.25rem] border-2 border-white shadow-2xl overflow-hidden md:w-[25rem] m-2">
+      <div className="bg-white rounded-[1.25rem] border-2 border-white shadow-2xl overflow-hidden m-2">
         <div className="md:flex flex-col">
           {planData.portability_promo && (
           <div className="absolute rounded-[1.25rem]-full text-center font-medium flex items-center justify-center promo">
@@ -82,7 +82,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                   {' '}
                   MINUTOS
                 </p>
-                <p className="font-medium text-2xl">
+                <p className="font-medium text-[2rem]">
                   {planData.minutes}
                 </p>
               </div>
@@ -98,7 +98,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                   {' '}
                   SMS
                 </p>
-                <p className="font-medium text-2xl">
+                <p className="font-medium text-[2rem]">
                   {planData.sms}
                 </p>
               </div>
@@ -108,14 +108,14 @@ const PlanCard: React.FC<Plan> = (planData) => {
               <p className="font-medium text-xs text-center mt-5 mb-3">
                 REDES SOCIALES ILIMITADAS
               </p>
-              <div className="flex justify-center items-center mb-5">
+              <div className="flex flex-gap gap-x-4 justify-center items-center mb-5">
                 {Boolean(planData.has_fb) && (
                   <Image
                     src="/img/facebook-icon.svg"
                     alt="Facebook"
                     width={30}
                     height={30}
-                    className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
+                    className="inline-block w-5"
                   />
                 )}
                 {Boolean(planData.has_wa) && (
@@ -124,7 +124,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                     alt="WhatsApp"
                     width={30}
                     height={30}
-                    className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
+                    className="inline-block w-5"
                   />
                 )}
                 {Boolean(planData.has_fm) && (
@@ -133,7 +133,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                     alt="Messenger"
                     width={30}
                     height={30}
-                    className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
+                    className="inline-block w-5"
                   />
                 )}
                 {Boolean(planData.has_ig) && (
@@ -142,7 +142,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                     alt="Instagram"
                     width={30}
                     height={30}
-                    className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
+                    className="inline-block w-5"
                   />
                 )}
                 {Boolean(planData.has_tt) && (
@@ -151,7 +151,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                     alt="TikTok"
                     width={30}
                     height={30}
-                    className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
+                    className="inline-block w-5"
                   />
                 )}
               {Boolean(planData.has_sc) && (
@@ -160,7 +160,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                     alt="Snapchat"
                     width={30}
                     height={30}
-                    className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
+                    className="inline-block w-5"
                   />
                 )}
                 {Boolean(planData.has_tl) && (
@@ -169,7 +169,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                     alt="Telegram"
                     width={30}
                     height={30}
-                    className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
+                    className="inline-block w-5"
                   />
                 )}
                 {Boolean(planData.has_x) && (
@@ -178,7 +178,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                     alt="X"
                     width={30}
                     height={30}
-                    className="mr-3 sm:mr-4 md:mr-5 inline-block w-5"
+                    className="inline-block w-5"
                   />
                 )}
               </div>
