@@ -191,12 +191,12 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({ className, 
         className="w-full"
       >
         <div
-          className="flex items-center py-2 gap-3"
+          className="flex items-center py-2 gap-3 flex-col sm:flex-row"
         >
-          <div className="w-3/5">
+          <div className="w-full sm:w-3/5">
             <input
               type="text"
-              className="input bg-white rounded-full outline-amber-500 transition duration-300 text-black font-light w-full input-imei-postal"
+              className="input bg-white rounded-full outline-amber-500 transition duration-300 text-black font-light w-full sm:w-[18.438rem !important] input-imei-postal"
               placeholder="Introduce tu Código Postal"
               onChange={(e) => { e.target.value = e.target.value.replace(/\D/g, ''); setPostalCode(e.target.value) }}
               value={postalCode}
@@ -204,9 +204,9 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({ className, 
               autoComplete="off"
             />
           </div>
-          <div className="button-container w-2/5">
+          <div className="button-container w-full sm:w-2/5">
             <button
-              className="multi-border font-medium block w-full bg-black btn-imei-postal"
+              className="multi-border font-medium block w-full bg-black w-full sm:btn-imei-postal"
               onClick={handleSubmit}
             >
               REVISAR
