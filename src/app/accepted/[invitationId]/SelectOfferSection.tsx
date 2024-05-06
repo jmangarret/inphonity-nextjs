@@ -12,7 +12,7 @@ export default function SelectOfferSection() {
         <div className="col-span-12 lg:col-span-6 flex justify-center">
           <div className=" planes-content">
             <h2 className="mx-auto text-center text-3xl lg:text-5xl mb-24 sm:mb-20">
-              Conoce <span className="font-medium"> nuestros planes</span>
+              Elige <span className="font-medium"> nuestros planes</span>
             </h2>
           </div>
         </div>
