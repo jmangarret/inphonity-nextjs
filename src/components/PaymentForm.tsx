@@ -89,8 +89,13 @@ async function copyToClipboard(divId: string) {
     });
   }
 }
-const formatNumber = (number: number) => {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+const formatNumber = (number: number, decimals=0) => {
+  let val = 0;
+  if (decimals==0){
+    val = Math.trunc(number)
+  }
+
+  return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
   const { openModal, closeModal } = React.useContext(ModalContext);
@@ -102,20 +107,22 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
   const plan = useAppSelector((state) => state.plan);
   const shippingData = useAppSelector((state) => state.shipping);
   const shippingCost = 150;
-  const {
-    isLoading: invitationIsLoading,
-    isFetching: invitationIsFetching,
-    data: invitationData,
-    error: invitationError,
-    refetch: invitationRefetch
-  } = useGetInvitationByIdQuery(invitationId);
+  console.log(plan);
+  
   // const {
   //   isLoading: invitationIsLoading,
   //   isFetching: invitationIsFetching,
   //   data: invitationData,
   //   error: invitationError,
   //   refetch: invitationRefetch
-  // } = request;
+  // } = useGetInvitationByIdQuery(invitationId);
+  const {
+    isLoading: invitationIsLoading,
+    isFetching: invitationIsFetching,
+    data: invitationData,
+    error: invitationError,
+    refetch: invitationRefetch
+  } = request;
   const [register, { isLoading: registerIsLoading, error: registerError }] = useRegisterMutation();
   const [initialPayment, {
     isLoading: initialPaymentIsLoading,
@@ -970,7 +977,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                       <span className="font-medium">Envío:</span> 
                     </div>
                     <div className="flex flex-col justify-start font-light">
-                      <span>${plan.price}</span>
+                      <span>${formatNumber(plan.price)}</span>
                       <span>${shippingCost}</span>
                     </div>
                   </div>

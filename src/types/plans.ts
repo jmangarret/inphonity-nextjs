@@ -55,6 +55,8 @@ export interface Plan {
     updated_at:        string;
     deleted_at:        null;
     commissions?:      Commission[];
+    isPaid?:            boolean;
+    supportEsim?:       boolean;
 }
 
 export enum Status {
