@@ -235,7 +235,7 @@ export default function PersonalDataForm() {
           Llena los <span className="text-custom-blue"> siguientes datos</span>
         </h3>
         <p className={'text-base text-black text-center'}>
-          <strong className={'font-medium text-custom-blue'}>Importante:</strong> 
+          <strong className={'font-medium text-custom-blue'}>Importante:</strong>
           Ten a la mano tu credencial de elector y comprobante de domicilio
         </p>
       </header>
@@ -264,8 +264,8 @@ export default function PersonalDataForm() {
           </div>
           {/* nationality */}
           <div className={'col-span-12'}>
-            <select disabled={isValidForm && personalData.showShippingForm} 
-              defaultValue="" 
+            <select disabled={isValidForm && personalData.showShippingForm}
+              defaultValue=""
               className={`input input-border-black`}>
               <option disabled value="" aria-readonly>Nacionalidad*</option>
               <option
@@ -287,15 +287,15 @@ export default function PersonalDataForm() {
             <input
               id={'dateOfBirth'}
               type="text"
-              className={`input input-border-black ${personalData.dateOfBirthError ? 'input-error' : ''}`}
+              className={`input input_fecha input-border-black ${personalData.dateOfBirthError ? 'input-error' : ''}`}
               placeholder="Fecha de nacimiento*"
               name={'dateOfBirth'}
               readOnly
             />
-            
+
           </div>
           <div className="col-span-12 sm:col-span-2">
-            <select disabled={isValidForm && personalData.showShippingForm} 
+            <select disabled={isValidForm && personalData.showShippingForm}
               defaultValue=""
               className="input"
               name={'dayDateOfBirth'}
@@ -311,7 +311,7 @@ export default function PersonalDataForm() {
             </select>
           </div>
           <div className="col-span-12 sm:col-span-3">
-            <select disabled={isValidForm && personalData.showShippingForm} 
+            <select disabled={isValidForm && personalData.showShippingForm}
               defaultValue=""
               className="input"
               name={'monthDateOfBirth'}
@@ -327,7 +327,7 @@ export default function PersonalDataForm() {
             </select>
           </div>
           <div className="col-span-12 sm:col-span-3">
-            <select disabled={isValidForm && personalData.showShippingForm} 
+            <select disabled={isValidForm && personalData.showShippingForm}
               defaultValue=""
               className="input"
               name={'yearDateOfBirth'}
@@ -373,7 +373,7 @@ export default function PersonalDataForm() {
 
           {/* gender */}
           <div className={'col-span-12'}>
-            <select disabled={isValidForm && personalData.showShippingForm} 
+            <select disabled={isValidForm && personalData.showShippingForm}
               defaultValue={personalData.gender}
               className={`input input-border-black ${personalData.genderError ? 'input-error' : ''}`}
               name={'gender'}
@@ -446,7 +446,7 @@ export default function PersonalDataForm() {
 
           {/* occupation */}
           <div className={'col-span-12'}>
-            <select disabled={isValidForm && personalData.showShippingForm} 
+            <select disabled={isValidForm && personalData.showShippingForm}
               defaultValue=""
               className={`input input-border-black`}
               name={'occupation'}
@@ -690,27 +690,27 @@ export default function PersonalDataForm() {
                 />
               </div>
               <input disabled={isValidForm && personalData.showShippingForm}
-                  type="file"
-                  accept={'image/*'}
-                  className={'hidden'}
-                  name={'idAddressPicture'}
-                  onChange={handleFileChange}
-                  ref={el => inputRefs.current.idAddressPicture = el}
-                />
+                type="file"
+                accept={'image/*'}
+                className={'hidden'}
+                name={'idAddressPicture'}
+                onChange={handleFileChange}
+                ref={el => inputRefs.current.idAddressPicture = el}
+              />
             </label>
             {/* preview */}
             <div
-                className={'flex justify-center mt-2 md:mt-3'}
-              >
-                {personalData.idAddressPicture && (
-                  <img
-                    src={personalData.idAddressPicture}
-                    alt={'Comprobante de domicilio'}
-                    width={200}
-                    height={200}
-                  />
-                )}
-              </div>
+              className={'flex justify-center mt-2 md:mt-3'}
+            >
+              {personalData.idAddressPicture && (
+                <img
+                  src={personalData.idAddressPicture}
+                  alt={'Comprobante de domicilio'}
+                  width={200}
+                  height={200}
+                />
+              )}
+            </div>
           </div>
           {/* proof of tax status */}
           <div className={'col-span-12 md:col-span-6'}>
@@ -746,17 +746,17 @@ export default function PersonalDataForm() {
             </label>
             {/* preview */}
             <div
-                className={'flex justify-center mt-2 md:mt-3'}
-              >
-                {personalData.idTaxPicture && (
-                  <img
-                    src={personalData.idTaxPicture}
-                    alt={'Constancia de situación fiscal'}
-                    width={200}
-                    height={200}
-                  />
-                )}
-              </div>
+              className={'flex justify-center mt-2 md:mt-3'}
+            >
+              {personalData.idTaxPicture && (
+                <img
+                  src={personalData.idTaxPicture}
+                  alt={'Constancia de situación fiscal'}
+                  width={200}
+                  height={200}
+                />
+              )}
+            </div>
           </div>
 
           <div className={'col-span-12'}>
@@ -772,7 +772,7 @@ export default function PersonalDataForm() {
                 <div className="button-container ">
                   <button
                     className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
-                    onClick={()=>handleNextForm()}
+                    onClick={() => handleNextForm()}
                     disabled={!isValidForm}
                   >
                     SIGUIENTE

@@ -196,6 +196,14 @@
   max-height: 80vh;
 }
 
+.input_fecha {
+  border: 0 !important;
+}
+
+.input_fecha:focus {
+  outline-color: #fff !important;
+}
+
 .bg_mensaje_aceptada {
   background-image: url("/img/bg_mensaje_invitacion_aceptada.png");
   background-repeat: no-repeat;
@@ -229,6 +237,10 @@
     text-align: center;
   }
 
+  .ajuste_centro {
+    margin-top: 0px;
+  }
+
   .bg-section-2 {
     background-size: 100%;
   }
@@ -241,6 +253,10 @@
 }
 
 @media (max-width: 992px) {
+  .ajuste_centro {
+    margin-top: -50px;
+  }
+
   .modal-content {
     width: 100%;
   }
@@ -250,9 +266,13 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 993px) {
   .ml-text-contact {
     margin-left: 0.5rem;
+  }
+
+  .ajuste_centro {
+    margin-top: -50px;
   }
 }
 
@@ -1272,8 +1292,8 @@ sup {
   display: block;
 }
 
-.slidesBtn{
+.slidesBtn {
   width: 4.46rem;
   height: 0.875rem;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
