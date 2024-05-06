@@ -794,7 +794,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 />
               </span>
               <span className="mr-10 inline-block align-sub">
-                <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago con tarjeta")} />
+                <input name="activeTab" type="radio" className="radio" checked onChange={() => handleTabClick("Pago con tarjeta")} />
               </span>
               <label>
                 <span> Pago con tarjeta</span>
@@ -844,7 +844,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 </p>
                 <div className={'col-span-12 my-3'}>
                   <Image
-                    src={`/img/card-brands.png`}
+                    src={`/img/card-brands.svg`}
                     alt={`cards`}
                     width={150}
                     height={30}
@@ -974,10 +974,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   <div className="flex justify-between mx-auto gap-x-8">
                     <div className="flex flex-col justify-start font-light">
                       <span className="font-medium">Plan:</span>
+                      <span className="font-medium">Costo de SIM:</span>
                       <span className="font-medium">Envío:</span> 
                     </div>
                     <div className="flex flex-col justify-start font-light">
                       <span>${formatNumber(plan.price)}</span>
+                      <span>${formatNumber(0)}</span>
                       <span>${shippingCost}</span>
                     </div>
                   </div>
@@ -1009,23 +1011,27 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
             {activeTab === "Pago en efectivo" && (
               <div>
                 <p>Pago con efectivo</p>
-                <div className="button-container flex flex-col">
+                <div className="flex flex-col">
                   <div className="flex justify-center my-5">
-                    <button
-                      className="btn-xl multi-border font-medium text-white disabled:opacity-50"
-                      onClick={() => handlePayment('cash', true)}
-                    >
-                      GUARDAR SOLICITUD
-                    </button>
+                    <div className="button-container ">
+                      <button
+                        className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
+                        onClick={() => handlePayment('cash', true)}
+                      >
+                        GUARDAR SOLICITUD
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex justify-center">
-                    <button
-                      className="btn-xl multi-border font-medium text-white disabled:opacity-50"
-                      onClick={() => handlePayment('cash', false)}
-                    >
-                      GENERAR REFERENCIA
-                    </button>
-                  </div>
+                    <div className="flex justify-center my-5">
+                      <div className="button-container ">
+                        <button
+                          className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
+                          onClick={() => handlePayment('cash', false)}
+                        >
+                          GENERAR REFERENCIA
+                        </button>
+                      </div>
+                    </div>
                 </div>
               </div>
             )}
@@ -1038,7 +1044,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   <div className="flex justify-center my-5">
                     <div className="button-container ">
                       <button
-                        className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                        className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
                         onClick={() => handlePayment('spei', true)}
                       >
                         GUARDAR SOLICITUD
@@ -1048,7 +1054,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   <div className="flex justify-center">
                     <div className="button-container ">
                       <button
-                        className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                        className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
                         onClick={() => handlePayment('spei', false)}
                       >
                         GENERAR REFERENCIA
