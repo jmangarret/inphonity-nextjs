@@ -794,7 +794,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 />
               </span>
               <span className="mr-10 inline-block align-sub">
-                <input name="activeTab" type="radio" className="radio" checked onChange={() => handleTabClick("Pago con tarjeta")} />
+                <input name="activeTab" type="radio" className="radio" checked={activeTab=="Pago con tarjeta"} onChange={() => handleTabClick("Pago con tarjeta")} />
               </span>
               <label>
                 <span> Pago con tarjeta</span>
@@ -811,7 +811,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 />
               </span>
               <span className="mr-10 inline-block align-sub">
-                <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago en efectivo")} />
+                <input name="activeTab" type="radio" className="radio" checked={activeTab=="Pago en efectivo"} onChange={() => handleTabClick("Pago en efectivo")} />
               </span>
               <label>
                 <span> Pago en efectivo</span>
@@ -828,7 +828,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 />
               </span>
               <span className="mr-10 inline-block align-sub">
-                <input name="activeTab" type="radio" className="radio" onChange={() => handleTabClick("Pago con transferencia interbancaria (SPEI)")} />
+                <input name="activeTab" type="radio" className="radio" checked={activeTab=="Pago con transferencia interbancaria (SPEI)"} onChange={() => handleTabClick("Pago con transferencia interbancaria (SPEI)")} />
               </span>
               <label>
                 <span> Pago con transferencia interbancaria SPEI</span>
@@ -1022,7 +1022,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                       </button>
                     </div>
                   </div>
-                    <div className="flex justify-center my-5">
+                    <div className="flex justify-center">
                       <div className="button-container ">
                         <button
                           className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
