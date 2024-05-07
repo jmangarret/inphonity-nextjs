@@ -42,8 +42,12 @@ const months = [
   { index: 10, name: "Noviembre" },
   { index: 11, name: "Diciembre" }
 ];
+const currentDay = new Date().getDate();
+const currentMonth = new Date().getMonth();
 const currentYear = new Date().getFullYear();
 const years = Array.from({ length: 101 }, (_, i) => currentYear - i);
+
+const maxDate = currentYear - 18 + "-" + 0 + (currentMonth + 1) + "-" + 0 + currentDay;
 
 export default function PersonalDataForm() {
   const { openModal } = React.useContext(ModalContext);
@@ -391,6 +395,7 @@ export default function PersonalDataForm() {
               name={'dateOfBirth'}
               onChange={handleInputChange}
               ref={el => inputRefs.current.dateOfBirth = el}
+              max={maxDate}
             />
             {/* error */}
             {personalData.dateOfBirthError && (
