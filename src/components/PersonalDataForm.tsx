@@ -206,7 +206,7 @@ export default function PersonalDataForm() {
   const showModalWithAddressProof = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+      <div className="flex flex-col items-center justify-center h-[600px] bg-black bg-modal-verde">
         <p
           className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
@@ -228,7 +228,7 @@ export default function PersonalDataForm() {
   const showModalWithTaxStatusProof = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+      <div className="flex flex-col items-center justify-center h-[500px] bg-black bg-modal-verde">
         <p
           className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
@@ -257,7 +257,7 @@ export default function PersonalDataForm() {
           Llena los <span className="text-custom-blue"> siguientes datos</span>
         </h3>
         <p className={'text-base text-black text-center'}>
-          <strong className={'font-medium text-custom-blue'}>Importante:</strong> 
+          <strong className={'font-medium text-custom-blue'}>Importante:</strong>
           Ten a la mano tu credencial de elector y comprobante de domicilio
         </p>
       </header>
@@ -381,7 +381,7 @@ export default function PersonalDataForm() {
             <input
               id={'dateOfBirth'}
               type="date"
-              className={`input input-border-black ${personalData.dateOfBirthError ? 'input-error' : ''}`}
+              className={`input input_fecha input-border-black ${personalData.dateOfBirthError ? 'input-error' : ''}`}
               placeholder="Fecha de nacimiento*"
               value={personalData.dateOfBirth}
               name={'dateOfBirth'}
@@ -811,17 +811,17 @@ export default function PersonalDataForm() {
                 )}
             {/* preview */}
             <div
-                className={'flex justify-center mt-2 md:mt-3'}
-              >
-                {personalData.idAddressPicture && (
-                  <img
-                    src={personalData.idAddressPicture}
-                    alt={'Comprobante de domicilio'}
-                    width={200}
-                    height={200}
-                  />
-                )}
-              </div>
+              className={'flex justify-center mt-2 md:mt-3'}
+            >
+              {personalData.idAddressPicture && (
+                <img
+                  src={personalData.idAddressPicture}
+                  alt={'Comprobante de domicilio'}
+                  width={200}
+                  height={200}
+                />
+              )}
+            </div>
           </div>
           {/* proof of tax status */}
           <div className={'col-span-12 md:col-span-6'}>
@@ -865,17 +865,17 @@ export default function PersonalDataForm() {
                 )}
             {/* preview */}
             <div
-                className={'flex justify-center mt-2 md:mt-3'}
-              >
-                {personalData.idTaxPicture && (
-                  <img
-                    src={personalData.idTaxPicture}
-                    alt={'Constancia de situación fiscal'}
-                    width={200}
-                    height={200}
-                  />
-                )}
-              </div>
+              className={'flex justify-center mt-2 md:mt-3'}
+            >
+              {personalData.idTaxPicture && (
+                <img
+                  src={personalData.idTaxPicture}
+                  alt={'Constancia de situación fiscal'}
+                  width={200}
+                  height={200}
+                />
+              )}
+            </div>
           </div>
 
           <div className={'col-span-12'}>
@@ -891,7 +891,7 @@ export default function PersonalDataForm() {
                 <div className="button-container ">
                   <button
                     className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
-                    onClick={()=>handleNextForm()}
+                    onClick={() => handleNextForm()}
                     disabled={!isValidForm}
                   >
                     SIGUIENTE

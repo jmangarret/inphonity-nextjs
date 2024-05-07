@@ -89,9 +89,9 @@ async function copyToClipboard(divId: string) {
     });
   }
 }
-const formatNumber = (number: number, decimals=0) => {
+const formatNumber = (number: number, decimals = 0) => {
   let val = 0;
-  if (decimals==0){
+  if (decimals == 0) {
     val = Math.trunc(number)
   }
 
@@ -108,7 +108,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
   const shippingData = useAppSelector((state) => state.shipping);
   const shippingCost = 150;
   console.log(plan);
-  
+
   // const {
   //   isLoading: invitationIsLoading,
   //   isFetching: invitationIsFetching,
@@ -147,26 +147,18 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
     setActiveTab(tab);
   };
 
-  const handleTestModal = (method: string,onlySaveRegister=false) =>{
+  const handleTestModal = (method: string, onlySaveRegister = false) => {
     openModal(
-      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+      <div className="flex flex-col items-center justify-center h-full text-white">
         <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-          Da
-          <span className="text-highlight cursor-pointer" onClick={handleInfo}> 
-          &nbsp;clic aquí&nbsp;
-          </span>  
-          para conocer las tiendas en las que puedes realizar tu pago. 
-
-        </p>
-        <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white`}>
-          Tu proceso se ha guardado, pronto recibirás un correo con un enlace para continuar con la firma del contrato. 
+          El Número de Cuenta no coincide.
         </p>
       </div>,
     );
   }
 
-  const handleInfo = ()=>{
-    openModal(<ContenTiendasAfiliadas />,<HeaderTiendasAfiliadas />);
+  const handleInfo = () => {
+    openModal(<ContenTiendasAfiliadas />, <HeaderTiendasAfiliadas />);
   }
 
   const handlePayment = async (method: string, onlySaveRegister: boolean) => {
@@ -225,18 +217,18 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         is_esim: shippingData.isEsim,
       }).unwrap();
 
-      if (onlySaveRegister){
+      if (onlySaveRegister) {
         openModal(
           <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white`}>
               Da
-              <span className="text-highlight cursor-pointer" onClick={handleInfo}> 
-              &nbsp;clic aquí&nbsp;
-              </span>  
-              para conocer las tiendas en las que puedes realizar tu pago. 
+              <span className="text-highlight cursor-pointer" onClick={handleInfo}>
+                &nbsp;clic aquí&nbsp;
+              </span>
+              para conocer las tiendas en las que puedes realizar tu pago.
             </p>
             <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white`}>
-              Tu proceso se ha guardado, pronto recibirás un correo con un enlace para continuar con la firma del contrato. 
+              Tu proceso se ha guardado, pronto recibirás un correo con un enlace para continuar con la firma del contrato.
             </p>
           </div>,
         )
@@ -263,7 +255,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
     }
 
     //stop process if only register
-    if (onlySaveRegister){
+    if (onlySaveRegister) {
       return;
     }
 
@@ -325,7 +317,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
           if (response.data.error) {
             openModal(
               <div
-                className={`flex flex-col items-center justify-center h-full`}
+                className={`flex flex-col items-center justify-center h-[600px]`}
               >
                 <div className={`grid grid-cols-12`}>
                   <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -370,9 +362,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                         o utiliza otro método de pago.</span>
                     </h1>
 
-                    <div className="button-container w-4/5 lg:w-72 mx-auto">
+                    <div className="button-container w-full mx-auto">
                       <button
-                        className="btn-xl multi-border font-medium block w-full text-white font-medium"
+                        className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
                         onClick={closeModal}
                       >
                         REINTENTAR
@@ -564,7 +556,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         });
         openModal(
           <div
-            className={`flex flex-col items-center justify-center h-full bg-black bg-modal-verde`}
+            className={`flex flex-col items-center justify-center h-[600px]`}
           >
             <div className={`grid grid-cols-12`}>
               <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -600,17 +592,17 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   </div>
                 </div>
 
-                <h1 className={`text-2xl font-medium mb-12`}>
+                <h1 className={`text-2xl lg:text-xl p-4 md:p-5 text-white`}>
                   Parece que hubo un pequeño problema al procesar tu pago.
                   <br />
                   <br />
-                  No te preocupes, 
-                  <span className="text-highlight"> intenta nuevamente o utiliza otro método de pago.</span> 
+                  No te preocupes,
+                  <span className="text-highlight"> intenta nuevamente o utiliza otro método de pago.</span>
                 </h1>
 
                 <div className="button-container w-4/5 lg:w-72 mx-auto">
                   <button
-                    className="btn-xl mulit-border font-medium disabled:opacity-50"
+                    className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
                     onClick={closeModal}
                   >
                     Reintentar
@@ -794,7 +786,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 />
               </span>
               <span className="mr-10 inline-block align-sub">
-                <input name="activeTab" type="radio" className="radio" checked={activeTab=="Pago con tarjeta"} onChange={() => handleTabClick("Pago con tarjeta")} />
+                <input name="activeTab" type="radio" className="radio" checked={activeTab == "Pago con tarjeta"} onChange={() => handleTabClick("Pago con tarjeta")} />
               </span>
               <label>
                 <span> Pago con tarjeta</span>
@@ -811,7 +803,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 />
               </span>
               <span className="mr-10 inline-block align-sub">
-                <input name="activeTab" type="radio" className="radio" checked={activeTab=="Pago en efectivo"} onChange={() => handleTabClick("Pago en efectivo")} />
+                <input name="activeTab" type="radio" className="radio" checked={activeTab == "Pago en efectivo"} onChange={() => handleTabClick("Pago en efectivo")} />
               </span>
               <label>
                 <span> Pago en efectivo</span>
@@ -828,7 +820,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 />
               </span>
               <span className="mr-10 inline-block align-sub">
-                <input name="activeTab" type="radio" className="radio" checked={activeTab=="Pago con transferencia interbancaria (SPEI)"} onChange={() => handleTabClick("Pago con transferencia interbancaria (SPEI)")} />
+                <input name="activeTab" type="radio" className="radio" checked={activeTab == "Pago con transferencia interbancaria (SPEI)"} onChange={() => handleTabClick("Pago con transferencia interbancaria (SPEI)")} />
               </span>
               <label>
                 <span> Pago con transferencia interbancaria SPEI</span>
@@ -855,7 +847,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 <div className={'col-span-12 my-3'}>
                   <p className="text-base font-light mb-6">
                     <span className="text-highlight-red">Importante: </span>
-                    Si el pago es rechazado al usar el número que viene en tu tarjeta física, por favor realiza tu compra con el número de tu tarjeta digital. 
+                    Si el pago es rechazado al usar el número que viene en tu tarjeta física, por favor realiza tu compra con el número de tu tarjeta digital.
                   </p>
                   <input
                     type="text"
@@ -896,7 +888,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   </div>
                   {/* expiration date month */}
                   <div className={'flex-1'}>
-                    <select 
+                    <select
                       defaultValue={form.expirationDateMonth}
                       className={`input input-border-black`}
                       onChange={(e) => setForm({ ...form, expirationDateMonth: e.target.value })}
@@ -974,8 +966,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   <div className="flex justify-between mx-auto gap-x-8">
                     <div className="flex flex-col justify-start font-light">
                       <span className="font-medium">Plan:</span>
-                      <span className="font-medium">Costo de SIM:</span>
-                      <span className="font-medium">Envío:</span> 
+                      <span className="font-medium">Envío:</span>
                     </div>
                     <div className="flex flex-col justify-start font-light">
                       <span>${formatNumber(plan.price)}</span>
@@ -1022,16 +1013,16 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                       </button>
                     </div>
                   </div>
-                    <div className="flex justify-center">
-                      <div className="button-container ">
-                        <button
-                          className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
-                          onClick={() => handlePayment('cash', false)}
-                        >
-                          GENERAR REFERENCIA
-                        </button>
-                      </div>
+                  <div className="flex justify-center">
+                    <div className="button-container ">
+                      <button
+                        className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
+                        onClick={() => handlePayment('cash', false)}
+                      >
+                        GENERAR REFERENCIA
+                      </button>
                     </div>
+                  </div>
                 </div>
               </div>
             )}
