@@ -4,15 +4,6 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { setPlan, setPrice, setName } from "@/lib/features/plan/planSlice";
 import { Plan } from "@/types/plans";
 
-export enum SlideBackground {
-  TRANSPARENT = 'bg-promo-transparent',
-  BLUE = 'bg-promo-blue',
-  GREEN = 'bg-promo-green',
-  ORANGE = 'bg-promo-orange',
-  YELLOW = 'bg-promo-yellow',
-  CUSTOM = 'bg-plan1'
-}
-
 const formatNumber = (number: number, decimals=0) => {
   let val = 0;
   if (decimals==0){

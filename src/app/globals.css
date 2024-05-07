@@ -726,7 +726,7 @@ swiper-container::part(bullet) {
 } */
 
 .bg-promo-0 {
-  background: linear-gradient(206deg, #000 26.38%, #01808E 92.03%);
+  background: linear-gradient(206deg, #252525 26.38%, #000000 92.03%);
 }
 
 .bg-promo-1 {
