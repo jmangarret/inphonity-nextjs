@@ -266,7 +266,7 @@ export default function PersonalDataForm() {
       <div className={'lg:container mx-auto w-full'}>
         <div className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 text-white w-full mx-auto p-6 md:p-8 lg:p-10 xl:p-12'}>
           {/* <div className={'col-span-12'}>
-            <input disabled={isValidForm && personalData.showShippingForm}
+            <input 
               type="text"
               className={`input input-border-black ${personalData.nameError ? 'input-error' : ''}`}
               placeholder="Nombre completo*"
@@ -351,7 +351,7 @@ export default function PersonalDataForm() {
           </div>
           {/* nationality */}
           <div className={'col-span-12'}>
-            <select disabled={isValidForm && personalData.showShippingForm} 
+            <select  
               defaultValue="" 
               className={`input input-border-black`}
               name="nationality"
@@ -396,7 +396,7 @@ export default function PersonalDataForm() {
             )}
           </div>
           {/* <div className="col-span-12 sm:col-span-2">
-            <select disabled={isValidForm && personalData.showShippingForm} 
+            <select  
               defaultValue=""
               className="input"
               name={'dayDateOfBirth'}
@@ -412,7 +412,7 @@ export default function PersonalDataForm() {
             </select>
           </div>
           <div className="col-span-12 sm:col-span-3">
-            <select disabled={isValidForm && personalData.showShippingForm} 
+            <select  
               defaultValue=""
               className="input"
               name={'monthDateOfBirth'}
@@ -428,7 +428,7 @@ export default function PersonalDataForm() {
             </select>
           </div>
           <div className="col-span-12 sm:col-span-3">
-            <select disabled={isValidForm && personalData.showShippingForm} 
+            <select  
               defaultValue=""
               className="input"
               name={'yearDateOfBirth'}
@@ -453,7 +453,7 @@ export default function PersonalDataForm() {
           )}*/}
           {/* curp */}
           <div className={'col-span-12'}>
-            <input disabled={isValidForm && personalData.showShippingForm}
+            <input 
               type="text"
               className={`input input-border-black ${personalData.curpError ? 'input-error' : ''}`}
               placeholder="CURP*"
@@ -474,7 +474,7 @@ export default function PersonalDataForm() {
 
           {/* gender */}
           <div className={'col-span-12'}>
-            <select disabled={isValidForm && personalData.showShippingForm} 
+            <select  
               defaultValue={personalData.gender}
               className={`input input-border-black ${personalData.genderError ? 'input-error' : ''}`}
               name={'gender'}
@@ -505,7 +505,7 @@ export default function PersonalDataForm() {
 
           {/* phone */}
           <div className={'col-span-12'}>
-            <input disabled={isValidForm && personalData.showShippingForm}
+            <input 
               type="text"
               className={`input input-border-black ${personalData.phoneError ? 'input-error' : ''}`}
               placeholder="Teléfono*"
@@ -526,7 +526,7 @@ export default function PersonalDataForm() {
 
           {/* email */}
           <div className={'col-span-12'}>
-            <input disabled={isValidForm && personalData.showShippingForm}
+            <input 
               type="email"
               className={`input input-border-black ${personalData.emailError ? 'input-error' : ''}`}
               placeholder="Correo electrónico*"
@@ -547,7 +547,7 @@ export default function PersonalDataForm() {
 
           {/* occupation */}
           <div className={'col-span-12'}>
-            <select disabled={isValidForm && personalData.showShippingForm} 
+            <select  
               defaultValue=""
               className={`input input-border-black`}
               name={'occupation'}
@@ -591,13 +591,13 @@ export default function PersonalDataForm() {
           <div className="col-span-12 text-black">
             <div className="mb-5 ml-6">
               <label>
-                <input disabled={isValidForm && personalData.showShippingForm} name="docType" type="radio" className="radio" value={'INE'} onChange={handleInputChange} />
+                <input  name="docType" type="radio" className="radio" value={'INE'} onChange={handleInputChange} />
                 <span> INE</span>
               </label>
             </div>
             <div className="ml-6">
               <label>
-                <input disabled={isValidForm && personalData.showShippingForm} name="docType" type="radio" className="radio" value={'Passport'} onChange={handleInputChange} />
+                <input  name="docType" type="radio" className="radio" value={'Passport'} onChange={handleInputChange} />
                 <span> Pasaporte</span>
               </label>
             </div>
@@ -627,7 +627,7 @@ export default function PersonalDataForm() {
                     onClick={showModalWithIdentificationInfo}
                   />
                 </div>
-                <input disabled={isValidForm && personalData.showShippingForm}
+                <input 
                   type="file"
                   accept={'image/*'}
                   className={'hidden'}
@@ -684,7 +684,7 @@ export default function PersonalDataForm() {
                     onClick={showModalWithIdentificationInfo}
                   />
                 </div>
-                <input disabled={isValidForm && personalData.showShippingForm}
+                <input 
                   type="file"
                   accept={'image/*'}
                   className={'hidden'}
@@ -742,7 +742,7 @@ export default function PersonalDataForm() {
                       onClick={showModalWithPassportInfo}
                     />
                   </div>
-                  <input disabled={isValidForm && personalData.showShippingForm}
+                  <input 
                     type="file"
                     accept={'image/*'}
                     className={'hidden'}
@@ -792,7 +792,7 @@ export default function PersonalDataForm() {
                   onClick={showModalWithAddressProof}
                 />
               </div>
-              <input disabled={isValidForm && personalData.showShippingForm}
+              <input 
                   type="file"
                   accept={'image/*'}
                   className={'hidden'}
@@ -846,7 +846,7 @@ export default function PersonalDataForm() {
                   onClick={showModalWithTaxStatusProof}
                 />
               </div>
-              <input disabled={isValidForm && personalData.showShippingForm}
+              <input 
                 type="file"
                 accept={'image/*'}
                 className={'hidden'}
