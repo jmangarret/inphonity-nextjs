@@ -137,6 +137,8 @@ export type PreRegistration = {
   tax_zip_code: string | null;
   updated_at: string;
   zip_code: string | null;
+  occupation: string | null;
+  nationality: string | null;
 };
 
 export type Invitation = {
