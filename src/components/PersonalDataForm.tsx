@@ -21,7 +21,9 @@ import {
   setIdAddressPicture,
   setIdTaxPicture,
   setNationality,
-  setOccupation
+  setOccupation,
+  setLastName,
+  setSecondLastName
 } from "@/lib/features/personal-data/personalDataSlice";
 import { ModalContext } from "@/contexts/ModalContext";
 
@@ -103,6 +105,12 @@ export default function PersonalDataForm() {
     switch (name) {
       case 'name':
         dispatch(setName(value.replace(/[^A-Za-z\s]+/g, '')));
+        break;
+      case 'lastName':
+        dispatch(setLastName(value.replace(/[^A-Za-z\s]+/g, '')));
+        break;
+      case 'secondLastName':
+        dispatch(setSecondLastName(value.replace(/[^A-Za-z\s]+/g, '')));
         break;
       case 'phone':
         dispatch(setPhone(value.replace(/\D/g, '')));
