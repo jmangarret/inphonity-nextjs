@@ -149,17 +149,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
 
   const handleTestModal = (method: string, onlySaveRegister = false) => {
     openModal(
-      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+      <div className="flex flex-col items-center justify-center h-full text-white">
         <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-          Da
-          <span className="text-highlight cursor-pointer" onClick={handleInfo}>
-            &nbsp;clic aquí&nbsp;
-          </span>
-          para conocer las tiendas en las que puedes realizar tu pago.
-
-        </p>
-        <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white`}>
-          Tu proceso se ha guardado, pronto recibirás un correo con un enlace para continuar con la firma del contrato.
+          El Número de Cuenta no coincide.
         </p>
       </div>,
     );
@@ -228,7 +220,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
       if (onlySaveRegister) {
         openModal(
           <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white`}>
               Da
               <span className="text-highlight cursor-pointer" onClick={handleInfo}>
                 &nbsp;clic aquí&nbsp;
@@ -325,7 +317,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
           if (response.data.error) {
             openModal(
               <div
-                className={`flex flex-col items-center justify-center h-full`}
+                className={`flex flex-col items-center justify-center h-[600px]`}
               >
                 <div className={`grid grid-cols-12`}>
                   <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -370,9 +362,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                         o utiliza otro método de pago.</span>
                     </h1>
 
-                    <div className="button-container w-4/5 lg:w-72 mx-auto">
+                    <div className="button-container w-full mx-auto">
                       <button
-                        className="btn-xl multi-border font-medium block w-full text-white font-medium"
+                        className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
                         onClick={closeModal}
                       >
                         REINTENTAR
@@ -564,7 +556,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         });
         openModal(
           <div
-            className={`flex flex-col items-center justify-center h-full bg-black bg-modal-verde`}
+            className={`flex flex-col items-center justify-center h-[600px]`}
           >
             <div className={`grid grid-cols-12`}>
               <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -600,7 +592,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   </div>
                 </div>
 
-                <h1 className={`text-2xl font-medium mb-12`}>
+                <h1 className={`text-2xl lg:text-xl p-4 md:p-5 text-white`}>
                   Parece que hubo un pequeño problema al procesar tu pago.
                   <br />
                   <br />
@@ -610,7 +602,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
 
                 <div className="button-container w-4/5 lg:w-72 mx-auto">
                   <button
-                    className="btn-xl mulit-border font-medium disabled:opacity-50"
+                    className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
                     onClick={closeModal}
                   >
                     Reintentar

@@ -184,7 +184,7 @@ export default function PersonalDataForm() {
   const showModalWithAddressProof = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+      <div className="flex flex-col items-center justify-center h-[600px] bg-black bg-modal-verde">
         <p
           className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
@@ -206,7 +206,7 @@ export default function PersonalDataForm() {
   const showModalWithTaxStatusProof = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+      <div className="flex flex-col items-center justify-center h-[500px] bg-black bg-modal-verde">
         <p
           className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
