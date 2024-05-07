@@ -966,6 +966,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   <div className="flex justify-between mx-auto gap-x-8">
                     <div className="flex flex-col justify-start font-light">
                       <span className="font-medium">Plan:</span>
+                      <span className="font-medium">Costo de SIM:</span>
                       <span className="font-medium">Envío:</span>
                     </div>
                     <div className="flex flex-col justify-start font-light">
