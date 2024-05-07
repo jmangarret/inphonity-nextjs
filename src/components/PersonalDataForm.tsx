@@ -19,7 +19,9 @@ import {
   setPhone, setPhoneError,
   setShowShippingForm,
   setIdAddressPicture,
-  setIdTaxPicture
+  setIdTaxPicture,
+  setNationality,
+  setOccupation
 } from "@/lib/features/personal-data/personalDataSlice";
 import { ModalContext } from "@/contexts/ModalContext";
 
@@ -47,18 +49,32 @@ export default function PersonalDataForm() {
   const personalData = useAppSelector((state) => state.personalData);
   const fieldsOrder: (keyof typeof personalData)[] = useMemo(() => [
     'name',
+    'lastName',
+    'secondLastName',
+    'nationality',
     'phone',
     'email',
     'curp',
     'gender',
     'docType',
-    'dayDateOfBirth',
-    'monthDateOfBirth',
-    'yearDateOfBirth',
+    'occupation',
+    'dateOfBirth',
+    'idAddressPicture',
+    'idTaxPicture'
   ], []);
   const inputRefs = useRef<{ [key in keyof typeof personalData]: HTMLInputElement | HTMLSelectElement | null }>({} as { [key in keyof typeof personalData]: HTMLInputElement | null });
   const isValidForm = useMemo(() => {
     return !fieldsOrder.some(field => {
+      //valid docType
+      if (field == "docType"){
+        if (personalData["docType"]=="INE"){
+          return !personalData["idFrontPicture"] || !personalData["idBackPicture"];
+        }
+        if (personalData["docType"]=="Passport"){
+          return !personalData["idPassportPicture"];
+        }
+      }
+
       if (!field.endsWith('Error')) {
         return !personalData[field as keyof typeof personalData];
       }
@@ -91,6 +107,12 @@ export default function PersonalDataForm() {
       case 'phone':
         dispatch(setPhone(value.replace(/\D/g, '')));
         break;
+      case 'nationality':
+        dispatch(setNationality(value));
+        break;
+      case 'occupation':
+        dispatch(setOccupation(value));
+        break;      
       case 'email':
         dispatch(setEmail(value));
         break;
@@ -103,14 +125,14 @@ export default function PersonalDataForm() {
       case 'gender':
         dispatch(setGender(value));
         break;
-      case 'dayDateOfBirth':
-        dispatch(setDayDateOfBirth(value));
-        break;
-      case 'monthDateOfBirth':
-        dispatch(setMonthDateOfBirth(value));
-        break;
-      case 'yearDateOfBirth':
-        dispatch(setYearDateOfBirth(value));
+      case 'dateOfBirth':
+        const age = differenceInYears(new Date(), new Date(value));
+        dispatch(setDateOfBirth(value));
+        if (age < 18) {
+          dispatch(setDateOfBirthError('Debes tener al menos 18 años'));
+        } else {
+          dispatch(setDateOfBirthError(''));
+        }
         break;
       default:
         break;
@@ -243,11 +265,32 @@ export default function PersonalDataForm() {
       {/* form */}
       <div className={'lg:container mx-auto w-full'}>
         <div className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 text-white w-full mx-auto p-6 md:p-8 lg:p-10 xl:p-12'}>
-          <div className={'col-span-12'}>
+          {/* <div className={'col-span-12'}>
             <input disabled={isValidForm && personalData.showShippingForm}
               type="text"
               className={`input input-border-black ${personalData.nameError ? 'input-error' : ''}`}
               placeholder="Nombre completo*"
+              value={personalData.name}
+              name={'name'}
+              onChange={handleInputChange}
+              ref={el => inputRefs.current.name = el}
+            />
+            {personalData.nameError && (
+              <p
+                className={'text-red-500 text-xs mt-1 mx-3'}
+              >
+                {personalData.nameError}
+              </p>
+            )}
+          </div> */}
+           {/* name */}
+           <div
+            className={'col-span-12 lg:col-span-4'}
+          >
+            <input
+              type="text"
+              className={`input input-border-black ${personalData.nameError ? 'input-error' : ''}`}
+              placeholder="Nombre*"
               value={personalData.name}
               name={'name'}
               onChange={handleInputChange}
@@ -262,11 +305,59 @@ export default function PersonalDataForm() {
               </p>
             )}
           </div>
+          {/* last name */}
+          <div
+            className={'col-span-12 lg:col-span-4'}
+          >
+            <input
+              type="text"
+              className={`input input-border-black ${personalData.lastNameError ? 'input-error' : ''}`}
+              placeholder="Apellido paterno*"
+              value={personalData.lastName}
+              name={'lastName'}
+              onChange={handleInputChange}
+              ref={el => inputRefs.current.lastName = el}
+            />
+            {/* error */}
+            {personalData.lastNameError && (
+              <p
+                className={'text-red-500 text-xs mt-1 mx-3'}
+              >
+                {personalData.lastNameError}
+              </p>
+            )}
+          </div>
+          {/* second last name */}
+          <div
+            className={'col-span-12 lg:col-span-4'}
+          >
+            <input
+              type="text"
+              className={`input input-border-black ${personalData.secondLastNameError ? 'input-error' : ''}`}
+              placeholder="Apellido materno*"
+              value={personalData.secondLastName}
+              name={'secondLastName'}
+              onChange={handleInputChange}
+              ref={el => inputRefs.current.secondLastName = el}
+            />
+            {/* error */}
+            {personalData.secondLastNameError && (
+              <p
+                className={'text-red-500 text-xs mt-1 mx-3'}
+              >
+                {personalData.secondLastNameError}
+              </p>
+            )}
+          </div>
           {/* nationality */}
           <div className={'col-span-12'}>
             <select disabled={isValidForm && personalData.showShippingForm} 
               defaultValue="" 
-              className={`input input-border-black`}>
+              className={`input input-border-black`}
+              name="nationality"
+              value={personalData.nationality}
+              onChange={handleInputChange}
+              >
               <option disabled value="" aria-readonly>Nacionalidad*</option>
               <option
                 value={'mexican'}
@@ -283,18 +374,28 @@ export default function PersonalDataForm() {
           {/* name */}
 
           {/* date of birth */}
-          <div className={'col-span-12 sm:col-span-4'}>
+          <div className="col-span-4 lg:col-span-3 text-black place-content-center text-xl">
+            <label htmlFor="dateOfBirth">Fecha de nacimiento*</label>
+          </div>
+          <div className={'col-span-8 lg:col-span-9'}>
             <input
               id={'dateOfBirth'}
-              type="text"
+              type="date"
               className={`input input-border-black ${personalData.dateOfBirthError ? 'input-error' : ''}`}
               placeholder="Fecha de nacimiento*"
+              value={personalData.dateOfBirth}
               name={'dateOfBirth'}
-              readOnly
+              onChange={handleInputChange}
+              ref={el => inputRefs.current.dateOfBirth = el}
             />
-            
+            {/* error */}
+            {personalData.dateOfBirthError && (
+              <p className={'text-red-500 text-xs mt-1 mx-3'}>
+                {personalData.dateOfBirthError}
+              </p>
+            )}
           </div>
-          <div className="col-span-12 sm:col-span-2">
+          {/* <div className="col-span-12 sm:col-span-2">
             <select disabled={isValidForm && personalData.showShippingForm} 
               defaultValue=""
               className="input"
@@ -341,15 +442,15 @@ export default function PersonalDataForm() {
                 })
               }
             </select>
-          </div>
-          {/* error */}
+          </div> */}
+          {/* error 
           {personalData.dateOfBirthError && (
             <span className="col-span-12 text-center">
               <p className={'text-red-500 text-xs mt-1 mx-3'}>
                 {personalData.dateOfBirthError}
               </p>
             </span>
-          )}
+          )}*/}
           {/* curp */}
           <div className={'col-span-12'}>
             <input disabled={isValidForm && personalData.showShippingForm}
@@ -450,6 +551,8 @@ export default function PersonalDataForm() {
               defaultValue=""
               className={`input input-border-black`}
               name={'occupation'}
+              value={personalData.occupation}
+              onChange={handleInputChange}
             >
               <option disabled value="">Ocupación*</option>
               <option
@@ -698,6 +801,14 @@ export default function PersonalDataForm() {
                   ref={el => inputRefs.current.idAddressPicture = el}
                 />
             </label>
+            {/* error */}
+            {personalData.idAddressPictureError && (
+                  <p
+                    className={'text-red-500 text-xs mt-1 mx-3'}
+                  >
+                    {personalData.idAddressPictureError}
+                  </p>
+                )}
             {/* preview */}
             <div
                 className={'flex justify-center mt-2 md:mt-3'}
@@ -744,6 +855,14 @@ export default function PersonalDataForm() {
                 ref={el => inputRefs.current.idTaxPicture = el}
               />
             </label>
+            {/* error */}
+            {personalData.idTaxPictureError && (
+                  <p
+                    className={'text-red-500 text-xs mt-1 mx-3'}
+                  >
+                    {personalData.idTaxPictureError}
+                  </p>
+                )}
             {/* preview */}
             <div
                 className={'flex justify-center mt-2 md:mt-3'}
