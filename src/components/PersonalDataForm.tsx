@@ -381,7 +381,7 @@ export default function PersonalDataForm() {
             <input
               id={'dateOfBirth'}
               type="date"
-              className={`input input_fecha input-border-black ${personalData.dateOfBirthError ? 'input-error' : ''}`}
+              className={`input input-border-black ${personalData.dateOfBirthError ? 'input-error' : ''}`}
               placeholder="Fecha de nacimiento*"
               value={personalData.dateOfBirth}
               name={'dateOfBirth'}
