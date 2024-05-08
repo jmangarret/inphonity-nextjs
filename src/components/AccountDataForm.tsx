@@ -7,6 +7,7 @@ import {
   setBankAccountNumberConfirmation,
   setInterbankClabe,
   setInterbankClabeConfirmation, setShowPaymentForm,
+  setInterbankClabeError,
 } from "@/lib/features/account-data/accountDataSlice";
 import { ModalContext } from "@/contexts/ModalContext";
 
@@ -58,6 +59,9 @@ export default function AccountDataForm() {
         break;
       case "interbankClabe":
         dispatch(setInterbankClabe(value));
+        if(value.length == 18){
+          handleErrorClave(e);
+        }
         break;
       case "interbankClabeConfirmation":
         dispatch(setInterbankClabeConfirmation(value));
@@ -84,6 +88,15 @@ export default function AccountDataForm() {
       return false;
     }
     return true;
+  }
+
+  const handleErrorClave = (e: { target: { value: any; }; }) => {
+    const value = e.target.value;
+    if(value.length < 18 || value.length > 18){
+      dispatch(setInterbankClabeError('El campo CLABE interbancaria debe contener 18 caracteres.'));
+    }else{
+      dispatch(setInterbankClabeError(''));
+    }
   }
 
   const handleClave = () => {
@@ -189,8 +202,10 @@ export default function AccountDataForm() {
               value={accountData.interbankClabe}
               name={`interbankClabe`}
               onChange={handleInputChange}
-              onBlur={handleClave}
+              onBlur={handleErrorClave}
               ref={el => inputRefs.current.interbankClabe = el}
+              minLength={18}
+              maxLength={18}
             />
             {/* error */}
             {accountData.interbankClabeError && (
@@ -211,6 +226,8 @@ export default function AccountDataForm() {
               onChange={handleInputChange}
               onBlur={handleClave}
               ref={el => inputRefs.current.interbankClabeConfirmation = el}
+              minLength={18}
+              maxLength={18}
             />
           </div>
 

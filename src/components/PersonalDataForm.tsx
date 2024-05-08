@@ -108,13 +108,13 @@ export default function PersonalDataForm() {
     const { name, value } = e.target;
     switch (name) {
       case 'name':
-        dispatch(setName(value.replace(/[^A-Za-z\s]+/g, '')));
+        dispatch(setName(value.replace(/[^a-zA-Z\u00C0-\u017F]+/g, '')));
         break;
       case 'lastName':
-        dispatch(setLastName(value.replace(/[^A-Za-z\s]+/g, '')));
+        dispatch(setLastName(value.replace(/[^a-zA-Z\u00C0-\u017F]+/g, '')));
         break;
       case 'secondLastName':
-        dispatch(setSecondLastName(value.replace(/[^A-Za-z\s]+/g, '')));
+        dispatch(setSecondLastName(value.replace(/[^a-zA-Z\u00C0-\u017F]+/g, '')));
         break;
       case 'phone':
         dispatch(setPhone(value.replace(/\D/g, '')));
@@ -129,7 +129,10 @@ export default function PersonalDataForm() {
         dispatch(setEmail(value));
         break;
       case 'curp':
-        dispatch(setCurp(value));
+        dispatch(setCurp(value.replace(/[^A-Za-z0-9_]+/g,'')));
+        if(value.length == 18){
+          handleCurp(e);
+        }
         break;
       case 'docType':
         dispatch(setDocType(value));
@@ -148,6 +151,15 @@ export default function PersonalDataForm() {
         break;
       default:
         break;
+    }
+  }
+
+  const handleCurp = (e: { target: { value: any; }; }) => {
+    const value = e.target.value;
+    if(value.length < 18 || value.length > 18){
+      dispatch(setCurpError('El campo curp debe contener 18 caracteres.'));
+    }else{
+      dispatch(setCurpError(''));
     }
   }
 
@@ -218,7 +230,7 @@ export default function PersonalDataForm() {
   const showModalWithAddressProof = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+      <div className="flex flex-col items-center justify-center h-[600px] bg-black bg-modal-verde">
         <p
           className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
@@ -240,7 +252,7 @@ export default function PersonalDataForm() {
   const showModalWithTaxStatusProof = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+      <div className="flex flex-col items-center justify-center h-[500px] bg-black bg-modal-verde">
         <p
           className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
         >
@@ -473,7 +485,10 @@ export default function PersonalDataForm() {
               value={personalData.curp}
               name={'curp'}
               onChange={handleInputChange}
+              onBlur={handleCurp}
               ref={el => inputRefs.current.curp = el}
+              minLength={18}
+              maxLength={18}
             />
             {/* error */}
             {personalData.curpError && (

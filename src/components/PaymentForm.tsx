@@ -12,7 +12,9 @@ import {
   setDateOfBirthError,
   setIdFrontPictureError,
   setIdBackPictureError,
-  resetErrors as personalDataResetErrors
+  resetErrors as personalDataResetErrors,
+  setLastNameError,
+  setSecondLastNameError
 } from "@/lib/features/personal-data/personalDataSlice";
 import {
   setCityError,
@@ -149,17 +151,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
 
   const handleTestModal = (method: string,onlySaveRegister=false) =>{
     openModal(
-      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+      <div className="flex flex-col items-center justify-center h-full text-white">
         <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-          Da
-          <span className="text-highlight cursor-pointer" onClick={handleInfo}> 
-          &nbsp;clic aquí&nbsp;
-          </span>  
-          para conocer las tiendas en las que puedes realizar tu pago. 
-
-        </p>
-        <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white`}>
-          Tu proceso se ha guardado, pronto recibirás un correo con un enlace para continuar con la firma del contrato. 
+          El Número de Cuenta no coincide.
         </p>
       </div>,
     );
@@ -188,8 +182,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
       await register({
         invitation_id: invitationId,
         first_name: personalData.name,
-        last_name: "",
-        mother_last_name: "",
+        last_name: personalData.lastName,
+        mother_last_name: personalData.secondLastName,
         contact_phone_number: personalData.phone,
         curp: personalData.curp,
         gender: personalData.gender,
@@ -200,8 +194,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         interbank_clabe_confirmation: accountData.interbankClabe,
         email: personalData.email,
         date_of_birth: personalData.dateOfBirth,
-        id_front_picture: personalData.idFrontPicture,
+
+        //const id_front_picture = personalData.idFrontPicture !== '' ? personalData.idFrontPicture : 'Otro Valor';
+
+        id_front_picture: (personalData.idFrontPicture !== '' ? personalData.idFrontPicture : personalData.idPassportPicture),
         id_back_picture: personalData.idBackPicture,
+
         address_zip_code: shippingData.zipCode,
         address_state: shippingData.state,
         address_city: shippingData.city,
@@ -228,7 +226,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
       if (onlySaveRegister){
         openModal(
           <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white`}>
               Da
               <span className="text-highlight cursor-pointer" onClick={handleInfo}> 
               &nbsp;clic aquí&nbsp;
@@ -325,7 +323,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
           if (response.data.error) {
             openModal(
               <div
-                className={`flex flex-col items-center justify-center h-full`}
+                className={`flex flex-col items-center justify-center h-[600px]`}
               >
                 <div className={`grid grid-cols-12`}>
                   <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -370,9 +368,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                         o utiliza otro método de pago.</span>
                     </h1>
 
-                    <div className="button-container w-4/5 lg:w-72 mx-auto">
+                    <div className="button-container w-full mx-auto">
                       <button
-                        className="btn-xl multi-border font-medium block w-full text-white font-medium"
+                        className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
                         onClick={closeModal}
                       >
                         REINTENTAR
@@ -564,7 +562,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         });
         openModal(
           <div
-            className={`flex flex-col items-center justify-center h-full bg-black bg-modal-verde`}
+            className={`flex flex-col items-center justify-center h-[600px]`}
           >
             <div className={`grid grid-cols-12`}>
               <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -600,7 +598,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   </div>
                 </div>
 
-                <h1 className={`text-2xl font-medium mb-12`}>
+                <h1 className={`text-2xl lg:text-xl p-4 md:p-5 text-white`}>
                   Parece que hubo un pequeño problema al procesar tu pago.
                   <br />
                   <br />
@@ -610,7 +608,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
 
                 <div className="button-container w-4/5 lg:w-72 mx-auto">
                   <button
-                    className="btn-xl mulit-border font-medium disabled:opacity-50"
+                    className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
                     onClick={closeModal}
                   >
                     Reintentar
@@ -683,12 +681,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         if (key === "first_name") {
           dispatch(setNameError(value[0]));
         }
-        // if (key === "last_name") {
-        //   dispatch(setLastNameError(value[0]));
-        // }
-        // if (key === "mother_last_name") {
-        //   dispatch(setSecondLastNameError(value[0]));
-        // }
+        if (key === "last_name") {
+         dispatch(setLastNameError(value[0]));
+        }
+        if (key === "mother_last_name") {
+         dispatch(setSecondLastNameError(value[0]));
+        }
         if (key === "contact_phone_number") {
           dispatch(setPhoneError(value[0]));
         }
