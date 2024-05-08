@@ -43,7 +43,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
           <div className="absolute rounded-[1.25rem]-full text-center font-medium flex items-center justify-center promo">
             <p className="flex flex-col px-5 py-12">
               <span className="text-black text-xs font-medium absolute top-1 right-px pt-2 px-6">TRAE TU NÚMERO Y OBTEN</span>
-              <span className="text-[3.125rem] font-medium absolute top-10 right-1 mt-2 mx-3" dangerouslySetInnerHTML={{__html: planData.portability_promo}}></span>
+              <span className="text-[3.125rem] font-medium absolute top-10 right-1 mt-2 mx-3 w-24" dangerouslySetInnerHTML={{__html: planData.portability_promo}}></span>
             </p>
           </div>
           )}

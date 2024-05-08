@@ -73,7 +73,7 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
         dispatch(setSupportEsim(false));
         openModal(
           <div
-            className={`flex flex-col items-center justify-center h-full bg-black bg-modal-verde text-white`}
+            className={`flex flex-col items-center justify-center h-[500px] bg-black bg-modal-verde text-white`}
           >
             <div className={`grid grid-cols-12`}>
               <div className="hidden md:flex md:col-span-2 justify-center">
@@ -123,7 +123,7 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
         dispatch(setSupportEsim(true));
         openModal(
           <div
-            className={`flex flex-col items-center justify-center h-full bg-black bg-modal-verde text-white`}
+            className={`flex flex-col items-center justify-center h-[600px] bg-black bg-modal-verde text-white`}
           >
             <div className={`grid grid-cols-12`}>
               <div className="hidden md:flex md:col-span-2 justify-center">
@@ -186,7 +186,7 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
         dispatch(setSupportEsim(false));
         openModal(
           <div
-            className={`flex flex-col items-center justify-center h-full`}
+            className={`flex flex-col items-center justify-center h-[500px]`}
           >
             <div className={`grid grid-cols-12`}>
               <div className="hidden md:flex md:col-span-2 justify-center">
