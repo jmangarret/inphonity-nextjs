@@ -12,7 +12,9 @@ import {
   setDateOfBirthError,
   setIdFrontPictureError,
   setIdBackPictureError,
-  resetErrors as personalDataResetErrors
+  resetErrors as personalDataResetErrors,
+  setLastNameError,
+  setSecondLastNameError
 } from "@/lib/features/personal-data/personalDataSlice";
 import {
   setCityError,
@@ -188,9 +190,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
       await register({
         invitation_id: invitationId,
         first_name: personalData.name,
-        last_name: "",
-        mother_last_name: "",
-        contact_phone_number: personalData.phone,
+        last_name: personalData.secondLastName,
+        mother_last_name: personalData.secondLastName,
+        contact_phone_number: personalData.secondLastName,
         curp: personalData.curp,
         gender: personalData.gender,
         bank_name: accountData.bankName,
@@ -688,10 +690,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
           dispatch(setNameError(value[0]));
         }
         if (key === "last_name") {
-          dispatch(setLastNameError(value[0]));
+         dispatch(setLastNameError(value[0]));
         }
         if (key === "mother_last_name") {
-          dispatch(setSecondLastNameError(value[0]));
+         dispatch(setSecondLastNameError(value[0]));
         }
         if (key === "contact_phone_number") {
           dispatch(setPhoneError(value[0]));
