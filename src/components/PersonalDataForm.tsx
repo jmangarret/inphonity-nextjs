@@ -65,6 +65,7 @@ export default function PersonalDataForm() {
     'docType',
     'occupation',
     'dateOfBirth',
+    'idPassportPicture',
     'idAddressPicture',
     'idTaxPicture'
   ], []);
@@ -105,7 +106,6 @@ export default function PersonalDataForm() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-
     switch (name) {
       case 'name':
         dispatch(setName(value.replace(/[^A-Za-z\s]+/g, '')));
@@ -138,8 +138,8 @@ export default function PersonalDataForm() {
         dispatch(setGender(value));
         break;
       case 'dateOfBirth':
-        const age = differenceInYears(new Date(), new Date(value));
         dispatch(setDateOfBirth(value));
+        const age = differenceInYears(new Date(), new Date(value));
         if (age < 18) {
           dispatch(setDateOfBirthError('Debes tener al menos 18 años'));
         } else {
@@ -363,9 +363,13 @@ export default function PersonalDataForm() {
           </div>
           {/* nationality */}
           <div className={'col-span-12'}>
-            <select disabled={isValidForm && personalData.showShippingForm} 
-              defaultValue="" 
-              className={`input input-border-black`}>
+            <select
+              defaultValue={personalData.nationality}
+              className={`input input-border-black`}
+              name="nationality"
+              onChange={handleInputChange}
+              ref={el => inputRefs.current.nationality = el}
+              >
               <option disabled value="" aria-readonly>Nacionalidad*</option>
               <option
                 value={'mexican'}
@@ -557,10 +561,9 @@ export default function PersonalDataForm() {
           {/* occupation */}
           <div className={'col-span-12'}>
             <select  
-              defaultValue=""
+              defaultValue={personalData.occupation}
               className={`input input-border-black`}
               name={'occupation'}
-              value={personalData.occupation}
               onChange={handleInputChange}
             >
               <option disabled value="">Ocupación*</option>

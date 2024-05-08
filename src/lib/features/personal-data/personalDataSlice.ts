@@ -88,15 +88,11 @@ const personalDataSlice = createSlice({
   reducers: {
     resetPersonalData: (state) => {
       state.name = "";
-      state.nameError = "";
       state.lastName = "";
       state.secondLastName = "";
       state.phone = "";
-      state.phoneError = "";
       state.email = "";
-      state.emailError = "";
       state.curp = "";
-      state.curpError = "";
       state.gender = "";
       state.docType = "";
       state.idPassportPicture = "";
