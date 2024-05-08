@@ -238,6 +238,10 @@
     background-position: 0px 600px;
     background-size: auto;
   }
+
+  .bg-section-8 {
+    background-image: url("/img/secc8_mobile.jpg");
+  }
 }
 
 @media (max-width: 992px) {
