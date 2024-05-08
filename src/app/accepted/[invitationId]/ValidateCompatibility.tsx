@@ -85,12 +85,11 @@ export default function ValidateCompatibility() {
               <header className="text-center md:text-left relative">
                 <div className="md:ml-10 lg:ml-14 xl:ml-20 relative">
                   <h2 className="text-black font-medium text-4xl lg:text-[3.125rem] leading-tight mb-5">
-                    ¡Gracias por unirte<br />
-                    <span>al</span>
-                    <span className="text-custom-blue"> Círculo inphonity!</span>
+                    ¡Ya eres parte de<br />
+                    <span className="text-highlight"> inphonity!</span>
                   </h2>
                   <p className="text-2xl lg:text-3xl text-black mt-10 px-1 xl:pr-[17rem] font-[15.625rem]">
-                    A continuación, valida la compatibilidad con tu celular siguiendo estos paso
+                  ¿Qué sigue? Valida la compatibilidad de tu celular siguiendo estos pasos
                   </p>
                   <PlusDecoration
                     className="w-7 md:w-8 lg:w-12 xl:w-17 absolute"
