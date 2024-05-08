@@ -627,6 +627,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
           </div>,
         );
       });
+
+      // reset errors
+      dispatch(taxDateResetErrors());
+      dispatch(accountDataResetErrors());
+      dispatch(shippingResetErrors());
+      dispatch(personalDataResetErrors());
     }
 
     if (method === 'cash' || method === 'spei') {

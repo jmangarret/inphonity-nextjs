@@ -61,6 +61,7 @@ export default function PersonalDataForm() {
     'phone',
     'email',
     'curp',
+    'curpError',
     'gender',
     'docType',
     'occupation',
@@ -73,13 +74,17 @@ export default function PersonalDataForm() {
   const isValidForm = useMemo(() => {
     return !fieldsOrder.some(field => {
       //valid docType
-      if (field == "docType"){
+      if (field == "idFrontPicture" || field == "idBackPicture"){
         if (personalData["docType"]=="INE"){
-          return !personalData["idFrontPicture"] || !personalData["idBackPicture"];
+          return !personalData["idFrontPicture"] && !personalData["idBackPicture"];
         }
-        if (personalData["docType"]=="Passport"){
-          return !personalData["idPassportPicture"];
-        }
+      }
+      if (field == 'idPassportPicture' &&  personalData["docType"]=="Passport"){
+        return !personalData["idPassportPicture"];
+      }
+
+      if (field.endsWith('Error')) {
+        return personalData[field as keyof typeof personalData];
       }
 
       if (!field.endsWith('Error')) {

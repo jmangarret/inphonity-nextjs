@@ -142,7 +142,7 @@ export default function AccountDataForm() {
         <div className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 w-full mx-auto p-6 md:p-8 lg:p-10 xl:p-12'}>
           {/* bank name */}
           <div className={'col-span-12'}>
-            <input disabled={isValidForm && accountData.showPaymentForm}
+            <input 
               type="text"
               className={`input input-border-black ${accountData.bankNameError ? 'input-error' : ''}`}
               placeholder={`Banco*`}
@@ -161,7 +161,7 @@ export default function AccountDataForm() {
 
           {/* bank account number */}
           <div className={'col-span-12'}>
-            <input disabled={isValidForm && accountData.showPaymentForm}
+            <input 
               type="text"
               className={`input input-border-black ${accountData.bankAccountNumberError ? 'input-error' : ''}`}
               placeholder={`Número de cuenta*`}
@@ -181,7 +181,7 @@ export default function AccountDataForm() {
 
           {/* confirmation */}
           <div className={'col-span-12'}>
-            <input disabled={isValidForm && accountData.showPaymentForm}
+            <input 
               type="text"
               className={`input input-border-black`}
               placeholder={`Confirma tu número de cuenta*`}
@@ -195,7 +195,7 @@ export default function AccountDataForm() {
 
           {/* interbank clabe */}
           <div className={'col-span-12'}>
-            <input disabled={isValidForm && accountData.showPaymentForm}
+            <input 
               type="text"
               className={`input input-border-black ${accountData.interbankClabeError ? 'input-error' : ''}`}
               placeholder={`CLABE interbancaria*`}
@@ -217,7 +217,7 @@ export default function AccountDataForm() {
 
           {/* confirmation */}
           <div className={'col-span-12'}>
-            <input disabled={isValidForm && accountData.showPaymentForm}
+            <input 
               type="text"
               className={`input input-border-black`}
               placeholder={`Confirma tu CLABE interbancaria*`}

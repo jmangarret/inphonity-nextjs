@@ -172,7 +172,7 @@ export default function ShippingForm() {
             <div className={'col-span-12'}>
               <div className="mb-5">
                 <label>
-                  <input disabled={isValidForm && shipping.showTaxDataForm}
+                  <input 
                     className={`${shipping.isEsimError ? 'input-error' : ''}`}
                     style={{accentColor: '#EF7911'}}
                     type="radio"
@@ -188,7 +188,7 @@ export default function ShippingForm() {
               </div>
               <div>
                 <label>
-                  <input disabled={isValidForm && shipping.showTaxDataForm}
+                  <input 
                     className={`${shipping.isEsimError ? 'input-error' : ''}`}
                     style={{accentColor: '#EF7911'}}
                     type="radio"
@@ -221,7 +221,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12'}
             >
-              <input disabled={isValidForm && shipping.showTaxDataForm}
+              <input 
                 type="text"
                 className={`input input-border-black ${shipping.streetError ? 'input-error' : ''}`}
                 placeholder="Calle*"
@@ -244,7 +244,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input disabled={isValidForm && shipping.showTaxDataForm}
+              <input 
                 type="text"
                 className={`input input-border-black ${shipping.numberError ? 'input-error' : ''}`}
                 placeholder="Número exterior*"
@@ -267,7 +267,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input disabled={isValidForm && shipping.showTaxDataForm}
+              <input 
                 type="text"
                 className={`input input-border-black ${shipping.interiorNumberError ? 'input-error' : ''}`}
                 placeholder="Número interior"
@@ -291,7 +291,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input disabled={isValidForm && shipping.showTaxDataForm}
+              <input 
                 type="text"
                 className={`input input-border-black ${shipping.zipCodeError ? 'input-error' : ''}`}
                 placeholder="Código postal*"
@@ -314,7 +314,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input disabled={isValidForm && shipping.showTaxDataForm}
+              <input 
                 type="text"
                 className={`input input-border-black ${shipping.neighborhoodError ? 'input-error' : ''}`}
                 placeholder="Colonia*"
@@ -337,7 +337,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input disabled={isValidForm && shipping.showTaxDataForm}
+              <input 
                 type="text"
                 className={`input input-border-black ${shipping.stateError ? 'input-error' : ''}`}
                 placeholder="Estado*"
@@ -359,7 +359,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input disabled={isValidForm && shipping.showTaxDataForm}
+              <input 
                 type="text"
                 className={`input input-border-black ${shipping.cityError ? 'input-error' : ''}`}
                 placeholder="Municipio/Alcaldía*"
@@ -382,7 +382,7 @@ export default function ShippingForm() {
             <div
               className={'col-span-12'}
             >
-              <input disabled={isValidForm && shipping.showTaxDataForm}
+              <input 
                 type="text"
                 className={`input input-border-black ${shipping.complementError ? 'input-error' : ''}`}
                 placeholder={`Referencia*`}
@@ -404,7 +404,7 @@ export default function ShippingForm() {
 
             <div className={'col-span-12 flex justify-between'}>
               <div className="flex items-center text-white mb-2 ml-2">
-                <input disabled={isValidForm && shipping.showTaxDataForm}
+                <input 
                   type="checkbox"
                   id={'myAddressAreEqual'}
                   className="form-checkbox green-check h-5 w-5 text-green-500"
