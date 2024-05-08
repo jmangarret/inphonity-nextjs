@@ -12,7 +12,9 @@ import {
   setDateOfBirthError,
   setIdFrontPictureError,
   setIdBackPictureError,
-  resetErrors as personalDataResetErrors
+  resetErrors as personalDataResetErrors,
+  setLastNameError,
+  setSecondLastNameError
 } from "@/lib/features/personal-data/personalDataSlice";
 import {
   setCityError,
@@ -192,8 +194,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         interbank_clabe_confirmation: accountData.interbankClabe,
         email: personalData.email,
         date_of_birth: personalData.dateOfBirth,
-        id_front_picture: personalData.idFrontPicture,
+
+        //const id_front_picture = personalData.idFrontPicture !== '' ? personalData.idFrontPicture : 'Otro Valor';
+
+        id_front_picture: (personalData.idFrontPicture !== '' ? personalData.idFrontPicture : personalData.idPassportPicture),
         id_back_picture: personalData.idBackPicture,
+
         address_zip_code: shippingData.zipCode,
         address_state: shippingData.state,
         address_city: shippingData.city,
@@ -675,12 +681,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         if (key === "first_name") {
           dispatch(setNameError(value[0]));
         }
-        // if (key === "last_name") {
-        //   dispatch(setLastNameError(value[0]));
-        // }
-        // if (key === "mother_last_name") {
-        //   dispatch(setSecondLastNameError(value[0]));
-        // }
+        if (key === "last_name") {
+         dispatch(setLastNameError(value[0]));
+        }
+        if (key === "mother_last_name") {
+         dispatch(setSecondLastNameError(value[0]));
+        }
         if (key === "contact_phone_number") {
           dispatch(setPhoneError(value[0]));
         }
