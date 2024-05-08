@@ -687,12 +687,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         if (key === "first_name") {
           dispatch(setNameError(value[0]));
         }
-        // if (key === "last_name") {
-        //   dispatch(setLastNameError(value[0]));
-        // }
-        // if (key === "mother_last_name") {
-        //   dispatch(setSecondLastNameError(value[0]));
-        // }
+        if (key === "last_name") {
+          dispatch(setLastNameError(value[0]));
+        }
+        if (key === "mother_last_name") {
+          dispatch(setSecondLastNameError(value[0]));
+        }
         if (key === "contact_phone_number") {
           dispatch(setPhoneError(value[0]));
         }
