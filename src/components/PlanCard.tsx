@@ -4,15 +4,6 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { setPlan, setPrice, setName } from "@/lib/features/plan/planSlice";
 import { Plan } from "@/types/plans";
 
-export enum SlideBackground {
-  TRANSPARENT = 'bg-promo-transparent',
-  BLUE = 'bg-promo-blue',
-  GREEN = 'bg-promo-green',
-  ORANGE = 'bg-promo-orange',
-  YELLOW = 'bg-promo-yellow',
-  CUSTOM = 'bg-plan1'
-}
-
 const formatNumber = (number: number, decimals=0) => {
   let val = 0;
   if (decimals==0){
@@ -69,7 +60,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
               </p>
           </div>
           <div className="flex flex-col gap-x-1 mx-3 p-3">
-            <div className="col-span-10 flex justify-between">
+            <div className="flex justify-between">
               <div className="card-plan text-center border border-white rounded-[1.25rem] bg-black px-3 py-6 m-1">
                 <p className="text-xs mx-auto mb-2.5">
                   <Image
@@ -104,11 +95,11 @@ const PlanCard: React.FC<Plan> = (planData) => {
               </div>
             </div>
 
-            <div className="col-span-10 h-[7.5rem] px-3 py-3 text-center bg-black border-2 rounded-[1.25rem] m-1">
+            <div className="h-[7.5rem] px-3 py-3 text-center bg-black border-2 rounded-[1.25rem] m-1">
               <p className="font-medium text-xs text-center mt-5 mb-3">
                 REDES SOCIALES ILIMITADAS
               </p>
-              <div className="flex flex-gap gap-x-4 justify-center items-center mb-5">
+              <div className="flex justify-between mb-5 mx-2 lg:mx-5">
                 {Boolean(planData.has_fb) && (
                   <Image
                     src="/img/facebook-icon.svg"
@@ -184,7 +175,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
               </div>
             </div>
 
-            <div className="col-span-10 flex justify-between">
+            <div className="flex justify-between">
               <div className="card-plan-promo text-center border-2 border-black rounded-[1.25rem] bg-white p-3 m-1 flex flex-col">
                 <div className="">
                   <p className="text-xs mx-auto mb-0.5 text-black font-medium">
@@ -225,7 +216,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
               </div>
             </div>
 
-            <div className="col-span-10 h-[7.5rem] text-center border-2 border-black rounded-[1.25rem] bg-white p-3 mx-1 mt-1 mb-6">
+            <div className="h-[7.5rem] text-center border-2 border-black rounded-[1.25rem] bg-white p-3 mx-1 mt-1 mb-6">
               <p className="font-medium text-6xl text-black">
                 ${formatNumber(planData.price)}
               </p>

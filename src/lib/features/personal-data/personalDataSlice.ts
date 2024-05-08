@@ -5,6 +5,14 @@ import { differenceInYears } from 'date-fns';
 export interface PersonalData {
   name: string;
   nameError: string;
+  lastName: string;
+  lastNameError: string;
+  secondLastName: string;
+  secondLastNameError: string;
+  occupation: string;
+  occupationError: string;
+  nationality: string;
+  nationalityError: string;
   phone: string;
   phoneError: string;
   email: string;
@@ -29,7 +37,9 @@ export interface PersonalData {
   yearDateOfBirthError: string;
   showShippingForm: boolean;
   idAddressPicture: string;
+  idAddressPictureError: string;
   idTaxPicture: string;
+  idTaxPictureError: string;
 }
 
 const initialState: PersonalData = {
@@ -59,7 +69,17 @@ const initialState: PersonalData = {
   yearDateOfBirthError: "",
   showShippingForm: false,
   idAddressPicture: "",
-  idTaxPicture: ""
+  idTaxPicture: "",
+  idAddressPictureError: "",
+  idTaxPictureError: "",
+  occupation: "",
+  nationality: "",
+  occupationError: "",
+  nationalityError: "",
+  lastName: "",
+  lastNameError: "",
+  secondLastName: "",
+  secondLastNameError: ""
 }
 
 const personalDataSlice = createSlice({
@@ -68,35 +88,30 @@ const personalDataSlice = createSlice({
   reducers: {
     resetPersonalData: (state) => {
       state.name = "";
-      state.nameError = "";
+      state.lastName = "";
+      state.secondLastName = "";
       state.phone = "";
-      state.phoneError = "";
       state.email = "";
-      state.emailError = "";
       state.curp = "";
-      state.curpError = "";
       state.gender = "";
-      state.genderError = "";
       state.docType = "";
       state.idPassportPicture = "";
       state.idFrontPicture = "";
-      state.idFrontPictureError = "";
       state.idBackPicture = "";
-      state.idBackPictureError = "";
       state.dateOfBirth = "";
-      state.dateOfBirthError = "";
       state.dayDateOfBirth = "";
-      state.dayDateOfBirthError = "";
       state.monthDateOfBirth = "";
-      state.monthDateOfBirthError = "";
       state.yearDateOfBirth = "";
-      state.yearDateOfBirthError = "";
       state.showShippingForm = false;
       state.idAddressPicture = "";
       state.idTaxPicture = "";
+      state.occupation = "";
+      state.nationality = "";
     },
     resetErrors: (state) => {
       state.nameError = "";
+      state.lastNameError = "";
+      state.secondLastNameError = "";
       state.phoneError = "";
       state.emailError = "";
       state.curpError = "";
@@ -107,12 +122,28 @@ const personalDataSlice = createSlice({
       state.dayDateOfBirthError = "";
       state.monthDateOfBirthError = "";
       state.yearDateOfBirthError = "";
+      state.idAddressPictureError = "";
+      state.idTaxPictureError = "";
+      state.occupationError = "";
+      state.nationalityError = "";
     },
     setName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
     setNameError: (state, action: PayloadAction<string>) => {
       state.nameError = action.payload;
+    },
+    setLastName: (state, action: PayloadAction<string>) => {
+      state.lastName = action.payload;
+    },
+    setLastNameError: (state, action: PayloadAction<string>) => {
+      state.lastNameError = action.payload;
+    },
+    setSecondLastName: (state, action: PayloadAction<string>) => {
+      state.secondLastName = action.payload;
+    },
+    setSecondLastNameError: (state, action: PayloadAction<string>) => {
+      state.secondLastNameError = action.payload;
     },
     setPhone: (state, action: PayloadAction<string>) => {
       state.phone = action.payload;
@@ -186,8 +217,26 @@ const personalDataSlice = createSlice({
     setIdAddressPicture: (state, action: PayloadAction<string>) => {
       state.idAddressPicture = action.payload;
     },
+    setIdAddressPictureError: (state, action: PayloadAction<string>) => {
+      state.idAddressPictureError = action.payload;
+    },
     setIdTaxPicture: (state, action: PayloadAction<string>) => {
       state.idTaxPicture = action.payload;
+    },
+    setIdTaxPictureError: (state, action: PayloadAction<string>) => {
+      state.idTaxPictureError = action.payload;
+    },
+    setOccupation: (state, action: PayloadAction<string>) => {
+      state.occupation = action.payload;
+    },
+    setOccupationError: (state, action: PayloadAction<string>) => {
+      state.occupationError = action.payload;
+    },
+    setNationality: (state, action: PayloadAction<string>) => {
+      state.nationality = action.payload;
+    },
+    setNationalityError: (state, action: PayloadAction<string>) => {
+      state.nationalityError = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -195,10 +244,14 @@ const personalDataSlice = createSlice({
       const invitation = action.payload;
 
       state.name = invitation.pre_registration?.first_name || "";
+      state.lastName = invitation.pre_registration?.last_name || "";
+      state.secondLastName = invitation.pre_registration?.mother_last_name || "";
       state.phone = invitation.pre_registration?.contact_phone_number || "";
       state.email = invitation.pre_registration?.email || "";
       state.curp = invitation.pre_registration?.curp || "";
       state.gender = invitation.pre_registration?.gender || "";
+      state.nationality = invitation.pre_registration?.nationality || "";
+      state.occupation = invitation.pre_registration?.occupation || "";
       state.idFrontPicture = invitation.pre_registration?.id_front_picture || "";
       state.idBackPicture = invitation.pre_registration?.id_back_picture || "";
 
@@ -228,6 +281,10 @@ export const {
   resetErrors,
   setName,
   setNameError,
+  setLastName,
+  setLastNameError,
+  setSecondLastName,
+  setSecondLastNameError,
   setPhone,
   setPhoneError,
   setEmail,
@@ -252,7 +309,13 @@ export const {
   setYearDateOfBirthError,
   setShowShippingForm,
   setIdAddressPicture,
-  setIdTaxPicture
+  setIdAddressPictureError,
+  setIdTaxPicture,
+  setIdTaxPictureError,
+  setOccupation,
+  setOccupationError,
+  setNationality,
+  setNationalityError
 } = personalDataSlice.actions;
 
 export default personalDataSlice.reducer;
