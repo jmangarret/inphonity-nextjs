@@ -86,10 +86,10 @@ export default function ShippingForm() {
         dispatch(setStreet(value));
         break;
       case 'number':
-        dispatch(setNumber(value.replace(/\D/g, '')));
+        dispatch(setNumber(value.replace(/[^A-Za-z0-9_\u00C0-\u017F]/g, '')));
         break;
       case 'interiorNumber':
-        dispatch(setInteriorNumber(value.replace(/\D/g, '')));
+        dispatch(setInteriorNumber(value.replace(/[^A-Za-z0-9_\u00C0-\u017F]/g, '')));
         break;
       case 'complement':
         dispatch(setComplement(value));

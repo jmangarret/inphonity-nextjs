@@ -188,8 +188,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
       await register({
         invitation_id: invitationId,
         first_name: personalData.name,
-        last_name: "",
-        mother_last_name: "",
+        last_name: personalData.lastName,
+        mother_last_name: personalData.secondLastName,
         contact_phone_number: personalData.phone,
         curp: personalData.curp,
         gender: personalData.gender,
