@@ -66,6 +66,8 @@ export default function PersonalDataForm() {
     'docType',
     'occupation',
     'dateOfBirth',
+    'idFrontPicture',
+    'idBackPicture',
     'idPassportPicture',
     'idAddressPicture',
     'idTaxPicture'
@@ -74,12 +76,10 @@ export default function PersonalDataForm() {
   const isValidForm = useMemo(() => {
     return !fieldsOrder.some(field => {
       //valid docType
-      if (field == "idFrontPicture" || field == "idBackPicture"){
-        if (personalData["docType"]=="INE"){
+      if (personalData["docType"]=="INE" && (field == "idFrontPicture" || field == "idBackPicture")){
           return !personalData["idFrontPicture"] && !personalData["idBackPicture"];
-        }
       }
-      if (field == 'idPassportPicture' &&  personalData["docType"]=="Passport"){
+      if (personalData["docType"]=="Passport" && field == 'idPassportPicture'){
         return !personalData["idPassportPicture"];
       }
 
@@ -94,20 +94,20 @@ export default function PersonalDataForm() {
     });
   }, [fieldsOrder, personalData]);
 
-  useEffect(() => {
-    const { dayDateOfBirth, monthDateOfBirth, yearDateOfBirth } = personalData
-    if (dayDateOfBirth && monthDateOfBirth && yearDateOfBirth) {
-      let value = new Date(Number(yearDateOfBirth), Number(monthDateOfBirth), Number(dayDateOfBirth));
-      const age = differenceInYears(new Date(), new Date(value));
-      dispatch(setDateOfBirth(value.toString()));
+  // useEffect(() => {
+  //   const { dayDateOfBirth, monthDateOfBirth, yearDateOfBirth } = personalData
+  //   if (dayDateOfBirth && monthDateOfBirth && yearDateOfBirth) {
+  //     let value = new Date(Number(yearDateOfBirth), Number(monthDateOfBirth), Number(dayDateOfBirth));
+  //     const age = differenceInYears(new Date(), new Date(value));
+  //     dispatch(setDateOfBirth(value.toString()));
 
-      if (age < 18) {
-        dispatch(setDateOfBirthError('Debes tener al menos 18 años'));
-      } else {
-        dispatch(setDateOfBirthError(''));
-      }
-    }
-  }, [personalData])
+  //     if (age < 18) {
+  //       dispatch(setDateOfBirthError('Debes tener al menos 18 años'));
+  //     } else {
+  //       dispatch(setDateOfBirthError(''));
+  //     }
+  //   }
+  // }, [personalData])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -199,7 +199,7 @@ export default function PersonalDataForm() {
   }
 
   const handleNextForm = () => {
-    dispatch(setShowShippingForm(true));
+      dispatch(setShowShippingForm(true));
   }
 
   const showModalWithIdentificationInfo = (e: React.MouseEvent) => {

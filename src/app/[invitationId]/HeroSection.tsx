@@ -20,7 +20,7 @@ export default function HeroSection() {
         </h2>
 
         <div className="text-lg sm:text-3xl lg:text-4xl xl:text-5xl mb-5 sm:mb-10 lg:mb-20">
-          ¿Cuánto te paga tu línea telefónica por usarla?
+          ¿Cuánto te paga tu línea telefónica por recomendarla?
         </div>
 
         <HeroVideo newVideoUrl={newVideoUrl} />
