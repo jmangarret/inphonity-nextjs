@@ -86,10 +86,10 @@ export default function ValidateCompatibility() {
                 <div className="md:ml-10 lg:ml-14 xl:ml-20 relative">
                   <h2 className="text-black font-medium text-4xl lg:text-[3.125rem] leading-tight mb-5">
                     ¡Ya eres parte de<br />
-                    <span className="text-highlight"> inphonity!</span>
+                    <span className="text-custom-blue"> inphonity!</span>
                   </h2>
                   <p className="text-2xl lg:text-3xl text-black mt-10 px-1 xl:pr-[17rem] font-[15.625rem]">
-                  ¿Qué sigue? Valida la compatibilidad de tu celular siguiendo estos pasos
+                  ¿Qué sigue? Valida la compatibilidad <br/>de tu celular siguiendo estos pasos
                   </p>
                   <PlusDecoration
                     className="w-7 md:w-8 lg:w-12 xl:w-17 absolute"
@@ -100,12 +100,12 @@ export default function ValidateCompatibility() {
                   />
                 </div>
                 <picture>
-                  <source width="600" media="(max-width: 600px)" srcSet="/img/validate-compatibility-600x575.png" />
+                  <source width="600" media="(max-width: 600px)" srcSet="/img/validate-compatibility.png" />
                   <source width="1200" media="(min-width: 600px) and (max-width: 1200px)"
-                    srcSet="/img/validate-compatibility-600x575.png" />
+                    srcSet="/img/validate-compatibility.png" />
                   <source width="1800" media="(min-width: 1200px)"
-                    srcSet="/img/validate-compatibility-600x575.png" />
-                  <img width="1200" src="/img/validate-compatibility-600x575.png" alt="Valida compatibilidad" />
+                    srcSet="/img/validate-compatibility.png" />
+                  <img width="1200" src="/img/validate-compatibility.png" alt="Valida compatibilidad" />
                 </picture>
               </header>
             </div>

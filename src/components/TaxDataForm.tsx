@@ -12,6 +12,7 @@ import {
   setState,
   setMunicipality,
   setShowAccountDataForm,
+  setRfcError,
 } from "@/lib/features/tax-data/taxDataSlice";
 import Image from "next/image";
 
@@ -31,10 +32,14 @@ export default function TaxDataForm() {
     "zipCode",
     "state",
     "municipality",
+    "rfcError"
   ], []);
   const inputRefs = useRef<{[key in keyof typeof taxData]: HTMLInputElement | null}>({} as {[key in keyof typeof taxData]: HTMLInputElement | null});
   const isValidForm = useMemo(() => {
     return !fieldsOrder.some(field => {
+      if (field.endsWith('Error')) {
+        return taxData[field as keyof typeof taxData];
+      }
       if (!field.endsWith('Error')) {
         return !taxData[field as keyof typeof taxData];
       }
@@ -65,6 +70,9 @@ export default function TaxDataForm() {
     switch (name) {
       case "rfc":
         dispatch(setRfc(value));
+        if (value.length == 13){
+          handleRfc(e);
+        }
         break;
       case "name":
         dispatch(setName(value.replace(/[^A-Za-z\s]+/g, '')));
@@ -73,11 +81,10 @@ export default function TaxDataForm() {
         dispatch(setStreet(value));
         break;
       case "exteriorNumber":
-
-        dispatch(setExteriorNumber(value.replace(/\D/g, '')));
+        dispatch(setExteriorNumber(value.replace(/[^A-Za-z0-9_\u00C0-\u017F]/g, '')));
         break;
       case "interiorNumber":
-        dispatch(setInteriorNumber(value.replace(/\D/g, '')));
+        dispatch(setInteriorNumber(value.replace(/[^A-Za-z0-9_\u00C0-\u017F]/g, '')));
         break;
       case "neighborhood":
         dispatch(setNeighborhood(value));
@@ -93,6 +100,16 @@ export default function TaxDataForm() {
         break;
     }
   }
+
+  const handleRfc = (e: { target: { value: any; }; }) => {
+    const value = e.target.value;
+    if(value.length < 13 || value.length > 13){
+      dispatch(setRfcError('El campo RFC debe contener 13 caracteres.'));
+    }else{
+      dispatch(setRfcError(''));
+    }
+  }
+
   const handleMyAddressAreEqualChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMyAddressAreEqual(e.target.checked);
 
@@ -129,7 +146,7 @@ export default function TaxDataForm() {
   }
 
   const handleNextForm = () => {
-    dispatch(setShowAccountDataForm(true));
+      dispatch(setShowAccountDataForm(true));
   }
 
   return (
@@ -191,7 +208,10 @@ export default function TaxDataForm() {
               value={taxData.rfc}
               name={'rfc'}
               onChange={handleInputChange}
+              onBlur={handleRfc}
               ref={el => inputRefs.current.rfc = el}
+              maxLength={13}
+              minLength={13}
             />
             {/* error */}
             {taxData.rfcError && (
