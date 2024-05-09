@@ -124,9 +124,9 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
           >
             <div className="flex justify-start md:justify-end">
               <picture>
-                <source width="300" media="(max-width: 600px)" srcSet="/img/img_header_600px.webp" />
-                <source width="600" media="(min-width: 600px) and (max-width: 1200px)" srcSet="/img/img_header_1200px.webp" />
-                <source width="800" media="(min-width: 1200px)" srcSet="/img/img_header_1800px.webp" />
+                <source width="300" media="(max-width: 600px)" srcSet="/img/img_header2_600px.webp" />
+                <source width="600" media="(min-width: 600px) and (max-width: 1200px)" srcSet="/img/img_header2_1200px.webp" />
+                <source width="800" media="(min-width: 1200px)" srcSet="/img/img_header2_1800px.webp" />
                 <img src="/img/bienvenido600px.png" alt="Bienvenido a Inphonity" />
               </picture>
             </div>
