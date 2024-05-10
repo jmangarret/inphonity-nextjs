@@ -8,9 +8,9 @@ import {
   setIdPassportPicture,
   setCurp, setCurpError,
   setDateOfBirth, setDateOfBirthError,
-  setDayDateOfBirth, setDayDateOfBirthError,
-  setMonthDateOfBirth, setMonthDateOfBirthError,
-  setYearDateOfBirth, setYearDateOfBirthError,
+  // setDayDateOfBirth, setDayDateOfBirthError,
+  // setMonthDateOfBirth, setMonthDateOfBirthError,
+  // setYearDateOfBirth, setYearDateOfBirthError,
   setEmail,
   setGender, setGenderError,
   setIdBackPicture,
@@ -47,11 +47,13 @@ const currentMonth = new Date().getMonth();
 const currentYear = new Date().getFullYear();
 const years = Array.from({ length: 101 }, (_, i) => currentYear - i);
 
-const maxDate = currentYear - 18 + "-" + 0 + (currentMonth + 1) + "-" + 0 + currentDay;
+const maxDate = (currentYear - 18)+ "-" + 0 + (currentMonth + 1) + "-" + 0 + currentDay;
 
 export default function PersonalDataForm() {
   const { openModal } = React.useContext(ModalContext);
   const dispatch = useAppDispatch();
+  const [hasErrorDoc, SetHasErrorDoc] = React.useState<boolean>(true); 
+  const [errorForm, SetErrorForm] = React.useState<boolean>(true); 
   const personalData = useAppSelector((state) => state.personalData);
   const fieldsOrder: (keyof typeof personalData)[] = useMemo(() => [
     'name',
@@ -66,48 +68,49 @@ export default function PersonalDataForm() {
     'docType',
     'occupation',
     'dateOfBirth',
-    'idFrontPicture',
-    'idBackPicture',
-    'idPassportPicture',
+    'dateOfBirthError',
     'idAddressPicture',
     'idTaxPicture'
   ], []);
   const inputRefs = useRef<{ [key in keyof typeof personalData]: HTMLInputElement | HTMLSelectElement | null }>({} as { [key in keyof typeof personalData]: HTMLInputElement | null });
-  const isValidForm = useMemo(() => {
-    return !fieldsOrder.some(field => {
-      //valid docType
-      if (personalData["docType"]=="INE" && (field == "idFrontPicture" || field == "idBackPicture")){
-          return !personalData["idFrontPicture"] && !personalData["idBackPicture"];
-      }
-      if (personalData["docType"]=="Passport" && field == 'idPassportPicture'){
-        return !personalData["idPassportPicture"];
-      }
-
-      if (field.endsWith('Error')) {
-        return personalData[field as keyof typeof personalData];
-      }
-
-      if (!field.endsWith('Error')) {
-        return !personalData[field as keyof typeof personalData];
-      }
-      return false;
-    });
-  }, [fieldsOrder, personalData]);
-
-  // useEffect(() => {
-  //   const { dayDateOfBirth, monthDateOfBirth, yearDateOfBirth } = personalData
-  //   if (dayDateOfBirth && monthDateOfBirth && yearDateOfBirth) {
-  //     let value = new Date(Number(yearDateOfBirth), Number(monthDateOfBirth), Number(dayDateOfBirth));
-  //     const age = differenceInYears(new Date(), new Date(value));
-  //     dispatch(setDateOfBirth(value.toString()));
-
-  //     if (age < 18) {
-  //       dispatch(setDateOfBirthError('Debes tener al menos 18 años'));
-  //     } else {
-  //       dispatch(setDateOfBirthError(''));
+  // const isValidForm = useMemo(() => {
+  //   return !fieldsOrder.some(field => {
+      
+  //     if (field.endsWith('Error')) {
+  //       return personalData[field as keyof typeof personalData];
   //     }
-  //   }
-  // }, [personalData])
+
+  //     if (!field.endsWith('Error')) {
+  //       return !personalData[field as keyof typeof personalData];
+  //     }
+  //     return false;
+  //   });
+  // }, [fieldsOrder, personalData]);
+
+  useEffect(() => {
+    const { docType, idFrontPicture, idBackPicture, idPassportPicture, curpError } = personalData
+    //valid docType
+    if (docType=="INE" && (!idFrontPicture || !idBackPicture)){
+      SetErrorForm(true)
+      return;
+    }
+
+    if (docType=="Passport" && !idPassportPicture){
+      SetErrorForm(true)
+      return;
+    }
+    //check emmptys
+    fieldsOrder.forEach(field => {
+      if (!field.endsWith('Error')) {
+        SetErrorForm(personalData[field as keyof typeof personalData] ? false : true);
+      }
+    })
+    //checks errors
+    if (personalData.curpError || personalData.dateOfBirthError){
+      SetErrorForm(true)
+    }
+
+  }, [personalData])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -924,7 +927,7 @@ export default function PersonalDataForm() {
                   <button
                     className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
                     onClick={()=>handleNextForm()}
-                    disabled={!isValidForm}
+                    disabled={errorForm}
                   >
                     SIGUIENTE
                   </button>

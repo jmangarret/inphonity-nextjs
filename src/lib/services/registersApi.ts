@@ -43,10 +43,12 @@ type RegisterRequest = {
 type RegisterResponse = {
   message: string;
 }
-
+ 
+export type PaymentMethod =  'card' | 'cash' | 'spei' | 'card-legacy'
+ 
 type InitialPaymentRequest = {
   invitation_id: number;
-  payment_method: 'card' | 'cash' | 'spei' | 'card-legacy';
+  payment_method: PaymentMethod;
   token_id?: string;
   deviceIdHiddenFieldName?: string;
 }
