@@ -42,7 +42,7 @@ export default function Welcome({ params }: { params: { invitationId: string } }
           />
         </div>
         <div className={`p-4 md:p-4 lg:w-3/4 mx-auto mt-10`}>
-          {data && !data.pre_registration?.is_esim && (
+          {(data && !Number(data.pre_registration?.is_esim)) ? (
             <>
               <h1
                 className={`text-4xl md:text-6xl font-bold mb-8 md:mb-12`}
@@ -75,9 +75,9 @@ export default function Welcome({ params }: { params: { invitationId: string } }
                 </div>
               </div>
             </>
-          )}
+          ) : <></> }
 
-          {data && data.pre_registration?.is_esim && (
+          {(data && Number(data.pre_registration?.is_esim)) ? (
             <>
               <h1 className={`text-4xl md:text-6xl font-bold`}>
                 Bienvenido a <span className="text-highlight">inphonity</span>
@@ -104,7 +104,7 @@ export default function Welcome({ params }: { params: { invitationId: string } }
                 No olvides revisar tanto tu bandeja de entrada como la de <span className="font-medium">correos no deseados.</span>
               </p>
             </>
-          )}
+          ) : <></>}
         </div>
       </main>
       <Footer />
