@@ -333,11 +333,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
       registerCashSpeiPay(method)
     }
 
-    // reset errors
-    dispatch(taxDateResetErrors());
-    dispatch(accountDataResetErrors());
-    dispatch(shippingResetErrors());
-    dispatch(personalDataResetErrors());
   }
 
   const registerCashSpeiPay = (method: PaymentMethod)=>{
@@ -377,6 +372,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
           </p>
         </div>,
       );
+      
+      // reset errors
+      dispatch(taxDateResetErrors());
+      dispatch(accountDataResetErrors());
+      dispatch(shippingResetErrors());
+      dispatch(personalDataResetErrors());
     });
   }
 
@@ -666,6 +667,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
             </div>
           </div>,
         );
+            
+        // reset errors
+        dispatch(taxDateResetErrors());
+        dispatch(accountDataResetErrors());
+        dispatch(shippingResetErrors());
+        dispatch(personalDataResetErrors());
       });
     }, (response: any) => {
       setForm({
@@ -723,7 +730,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
                   onClick={closeModal}
                 >
-                  Reintentar
+                  REINTENTAR
                 </button>
               </div>
             </div>
