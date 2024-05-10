@@ -29,12 +29,12 @@ export interface PersonalData {
   idBackPictureError: string;
   dateOfBirth: string;
   dateOfBirthError: string;
-  dayDateOfBirth: string;
-  dayDateOfBirthError: string;
-  monthDateOfBirth: string;
-  monthDateOfBirthError: string;
-  yearDateOfBirth: string;
-  yearDateOfBirthError: string;
+  // dayDateOfBirth: string;
+  // dayDateOfBirthError: string;
+  // monthDateOfBirth: string;
+  // monthDateOfBirthError: string;
+  // yearDateOfBirth: string;
+  // yearDateOfBirthError: string;
   showShippingForm: boolean;
   idAddressPicture: string;
   idAddressPictureError: string;
@@ -61,12 +61,12 @@ const initialState: PersonalData = {
   idBackPictureError: "",
   dateOfBirth: "",
   dateOfBirthError: "",
-  dayDateOfBirth: "",
-  dayDateOfBirthError: "",
-  monthDateOfBirth: "",
-  monthDateOfBirthError: "",
-  yearDateOfBirth: "",
-  yearDateOfBirthError: "",
+  // dayDateOfBirth: "",
+  // dayDateOfBirthError: "",
+  // monthDateOfBirth: "",
+  // monthDateOfBirthError: "",
+  // yearDateOfBirth: "",
+  // yearDateOfBirthError: "",
   showShippingForm: false,
   idAddressPicture: "",
   idTaxPicture: "",
@@ -99,9 +99,9 @@ const personalDataSlice = createSlice({
       state.idFrontPicture = "";
       state.idBackPicture = "";
       state.dateOfBirth = "";
-      state.dayDateOfBirth = "";
-      state.monthDateOfBirth = "";
-      state.yearDateOfBirth = "";
+      // state.dayDateOfBirth = "";
+      // state.monthDateOfBirth = "";
+      // state.yearDateOfBirth = "";
       state.showShippingForm = false;
       state.idAddressPicture = "";
       state.idTaxPicture = "";
@@ -119,9 +119,9 @@ const personalDataSlice = createSlice({
       state.idFrontPictureError = "";
       state.idBackPictureError = "";
       state.dateOfBirthError = "";
-      state.dayDateOfBirthError = "";
-      state.monthDateOfBirthError = "";
-      state.yearDateOfBirthError = "";
+      // state.dayDateOfBirthError = "";
+      // state.monthDateOfBirthError = "";
+      // state.yearDateOfBirthError = "";
       state.idAddressPictureError = "";
       state.idTaxPictureError = "";
       state.occupationError = "";
@@ -193,24 +193,24 @@ const personalDataSlice = createSlice({
     setDateOfBirthError: (state, action: PayloadAction<string>) => {
       state.dateOfBirthError = action.payload;
     },
-    setDayDateOfBirth: (state, action: PayloadAction<string>) => {
-      state.dayDateOfBirth = action.payload;
-    },
-    setDayDateOfBirthError: (state, action: PayloadAction<string>) => {
-      state.dayDateOfBirthError = action.payload;
-    },
-    setMonthDateOfBirth: (state, action: PayloadAction<string>) => {
-      state.monthDateOfBirth = action.payload;
-    },
-    setMonthDateOfBirthError: (state, action: PayloadAction<string>) => {
-      state.monthDateOfBirthError = action.payload;
-    },
-    setYearDateOfBirth: (state, action: PayloadAction<string>) => {
-      state.yearDateOfBirth = action.payload;
-    },
-    setYearDateOfBirthError: (state, action: PayloadAction<string>) => {
-      state.yearDateOfBirthError = action.payload;
-    },
+    // setDayDateOfBirth: (state, action: PayloadAction<string>) => {
+    //   state.dayDateOfBirth = action.payload;
+    // },
+    // setDayDateOfBirthError: (state, action: PayloadAction<string>) => {
+    //   state.dayDateOfBirthError = action.payload;
+    // },
+    // setMonthDateOfBirth: (state, action: PayloadAction<string>) => {
+    //   state.monthDateOfBirth = action.payload;
+    // },
+    // setMonthDateOfBirthError: (state, action: PayloadAction<string>) => {
+    //   state.monthDateOfBirthError = action.payload;
+    // },
+    // setYearDateOfBirth: (state, action: PayloadAction<string>) => {
+    //   state.yearDateOfBirth = action.payload;
+    // },
+    // setYearDateOfBirthError: (state, action: PayloadAction<string>) => {
+    //   state.yearDateOfBirthError = action.payload;
+    // },
     setShowShippingForm: (state, action: PayloadAction<boolean>) => {
       state.showShippingForm = action.payload;
     },
@@ -301,12 +301,12 @@ export const {
   setIdBackPictureError,
   setDateOfBirth,
   setDateOfBirthError,
-  setDayDateOfBirth,
-  setDayDateOfBirthError,
-  setMonthDateOfBirth,
-  setMonthDateOfBirthError,
-  setYearDateOfBirth,
-  setYearDateOfBirthError,
+  // setDayDateOfBirth,
+  // setDayDateOfBirthError,
+  // setMonthDateOfBirth,
+  // setMonthDateOfBirthError,
+  // setYearDateOfBirth,
+  // setYearDateOfBirthError,
   setShowShippingForm,
   setIdAddressPicture,
   setIdAddressPictureError,
