@@ -626,13 +626,13 @@ export default function PersonalDataForm() {
           <div className="col-span-12 text-black">
             <div className="mb-5 ml-6">
               <label>
-                <input  name="docType" type="radio" className="radio" value={'INE'} onChange={handleInputChange} />
+                <input  name="docType" type="radio" className="radio" value={'INE'} onChange={handleInputChange} checked={personalData.docType === "INE"} />
                 <span> INE</span>
               </label>
             </div>
             <div className="ml-6">
               <label>
-                <input  name="docType" type="radio" className="radio" value={'Passport'} onChange={handleInputChange} />
+                <input  name="docType" type="radio" className="radio" value={'Passport'} onChange={handleInputChange} checked={personalData.docType === "Passport"}/>
                 <span> Pasaporte</span>
               </label>
             </div>
