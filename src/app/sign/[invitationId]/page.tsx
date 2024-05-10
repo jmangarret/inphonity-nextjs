@@ -211,7 +211,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
 
               <div className={`w-full md:w-3/4 mx-auto mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14`}>
                 <div className="flex justify-center text-black mb-8 md:mb-12 lg:mb-14">
-                  <input disabled={isSigned}
+                  <input
                     type="checkbox"
                     id="terms"
                     className="form-checkbox green-check h-5 w-5 text-green-500 black"
@@ -255,7 +255,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
 
               <div className={`w-full md:w-3/4 mx-auto mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14`}>
                 <div className="flex items-center text-black mb-6 md:mb-8 lg:mb-10">
-                  <input disabled={isSigned}
+                  <input
                     type="email"
                     className={`input input-border-gray form-input h-12 w-full`}
                     placeholder="Correo electrónico"
@@ -264,7 +264,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
                   />
                 </div>
                 <div className="flex items-center text-black mb-6 md:mb-8 lg:mb-10">
-                  <input disabled={isSigned}
+                  <input
                     type="password"
                     id="password"
                     className="input input-border-gray form-input h-12 w-full"
@@ -275,7 +275,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
                   />
                 </div>
                 <div className="flex items-center text-black mb-6 md:mb-8 lg:mb-10">
-                  <input disabled={isSigned}
+                  <input
                     type="password"
                     id="passwordConfirmation"
                     className="input input-border-gray h-12 w-full"
