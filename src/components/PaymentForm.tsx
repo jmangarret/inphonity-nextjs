@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { useInitialPaymentMutation, useRegisterMutation, ApiValidationError } from "@/lib/services/registersApi";
+import { useInitialPaymentMutation, useRegisterMutation, ApiValidationError, PaymentMethod } from "@/lib/services/registersApi";
 import {
   setNameError,
   setPhoneError,
@@ -320,158 +320,123 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
     }
 
     //stop process if only register
-    if (onlySaveRegister) {
+    // if (onlySaveRegister) {
+    //   return;
+    // }
+
+    // validate card
+    if (method === 'card') {
+      registerCardPay();
+    }
+
+    if (method === 'cash' || method === 'spei') {
+      registerCashSpeiPay(method)
+    }
+
+    // reset errors
+    dispatch(taxDateResetErrors());
+    dispatch(accountDataResetErrors());
+    dispatch(shippingResetErrors());
+    dispatch(personalDataResetErrors());
+  }
+
+  const registerCashSpeiPay = (method: PaymentMethod)=>{
+    initialPayment({
+      invitation_id: parseInt(invitationId),
+      payment_method: method,
+    }).unwrap().then((data: any) => {
+
+      setForm({
+        ...form,
+        isSubmitting: false
+      });
+
+      invitationRefetch();
+
+      openModal(
+        <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+            Se ha generado tu referencia de pago.
+          </p>
+        </div>,
+      ).then(() => {
+        window.open(data.payment_url!, '_blank');
+      });
+    }).catch((error) => {
+      setForm({
+        ...form,
+        isSubmitting: false
+      });
+
+      openModal(
+        <div className="flex flex-col items-center justify-center h-full">
+          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+            Hubo un error al generar tu referencia de pago.
+            <br />
+            Intenta nuevamente.
+          </p>
+        </div>,
+      );
+    });
+  }
+
+  const registerCardPay = () =>{
+    let errors = {};
+    if (!form.cardHolderName) {
+      errors = {
+        ...errors,
+        cadHolderNameError: 'Ingresa el nombre del titular de la tarjeta.'
+      }
+
+    }
+    if (!form.cardNumber) {
+      errors = {
+        ...errors,
+        cardNumberError: 'Ingresa el número de la tarjeta.'
+      }
+    }
+    if (!form.expirationDateMonth || !form.expirationDateYear) {
+      errors = {
+        ...errors,
+        expirationDateMonthError: 'Ingresa el mes de expiración de la tarjeta.',
+        expirationDateYearError: 'Ingresa el año de expiración de la tarjeta.'
+      }
+    }
+    if (!form.cvv) {
+      errors = {
+        ...errors,
+        cvvError: 'Ingresa el código de seguridad de la tarjeta.'
+      }
+    }
+    if (Object.keys(errors).length > 0) {
+      setForm({
+        ...form,
+        ...errors
+      });
       return;
     }
 
     OpenPay.setId(process.env.NEXT_PUBLIC_OPENPAY_ID);
     OpenPay.setApiKey(process.env.NEXT_PUBLIC_OPENPAY_PK);
     OpenPay.setSandboxMode(process.env.NEXT_PUBLIC_OPENPAY_PRODUCTION === 'false');
-
-    // validate card
-    if (method === 'card') {
-      let errors = {};
-      if (!form.cardHolderName) {
-        errors = {
-          ...errors,
-          cadHolderNameError: 'Ingresa el nombre del titular de la tarjeta.'
-        }
-
-      }
-      if (!form.cardNumber) {
-        errors = {
-          ...errors,
-          cardNumberError: 'Ingresa el número de la tarjeta.'
-        }
-      }
-      if (!form.expirationDateMonth || !form.expirationDateYear) {
-        errors = {
-          ...errors,
-          expirationDateMonthError: 'Ingresa el mes de expiración de la tarjeta.',
-          expirationDateYearError: 'Ingresa el año de expiración de la tarjeta.'
-        }
-      }
-      if (!form.cvv) {
-        errors = {
-          ...errors,
-          cvvError: 'Ingresa el código de seguridad de la tarjeta.'
-        }
-      }
-      if (Object.keys(errors).length > 0) {
-        setForm({
-          ...form,
-          ...errors
-        });
-        return;
-      }
-
-      OpenPay.token.create({
-        "card_number": form.cardNumber.replace(/\s/g, ''),
-        "holder_name": form.cardHolderName,
-        "expiration_year": form.expirationDateYear.slice(-2),
-        "expiration_month": form.expirationDateMonth,
-        "cvv2": form.cvv,
-      }, (response: any) => {
-        initialPayment({
-          invitation_id: parseInt(invitationId),
-          token_id: response.data.id,
-          payment_method: 'card',
-          deviceIdHiddenFieldName: 'deviceIdHiddenFieldName'
-        }).then((response: any) => {
-          // check if response contains error
-          if (response.data.error) {
-            openModal(
-              <div
-                className={`flex flex-col items-center justify-center h-[600px]`}
-              >
-                <div className={`grid grid-cols-12`}>
-                  <div className="hidden md:flex md:col-span-2 justify-center relative">
-                    {/* PlusDecoration */}
-                    <PlusDecoration
-                      className="w-4 md:w-8 relative mx-auto"
-                    />
-                    {/* PlusDecoration */}
-                    <PlusDecoration
-                      className="w-9 md:w-12 lg:w-16 xl:w-20 absolute"
-                      style={{ bottom: '0' }}
-                    />
-                  </div>
-
-                  <div
-                    className="col-span-12 md:col-span-8"
-                  >
-                    <h1 className={`text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro`}>
-                      ¡Ups!
-                    </h1>
-
-                    <div
-                      className={`flex mt-10 mb-10 justify-center`}
-                    >
-                      <div>
-                        <Image
-                          src={`/img/emoji-sorry.svg`}
-                          alt={`SIM física`}
-                          width={150}
-                          height={150}
-                          className={`ml-auto`}
-                        />
-                      </div>
-                    </div>
-
-                    <h1 className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white`}>
-                      Parece que hubo un pequeño
-                      problema al procesar tu pago.
-                      <br />
-                      <br />
-                      No te preocupes, <span className="text-highlight">intenta nuevamente
-                        o utiliza otro método de pago.</span>
-                    </h1>
-
-                    <div className="button-container w-full mx-auto">
-                      <button
-                        className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
-                        onClick={closeModal}
-                      >
-                        REINTENTAR
-                      </button>
-                    </div>
-                  </div>
-                  <div
-                    className={`hidden md:flex md:col-span-2 justify-center items-center`}
-                  >
-                    {/* PlusDecoration */}
-                    <PlusDecoration
-                      className="w-9 md:w-12 lg:w-16 xl:w-20"
-                    />
-                  </div>
-                </div>
-              </div>,
-            );
-
-            setForm({
-              ...form,
-              isSubmitting: false
-            });
-
-            return;
-          }
-
-
-          const { data }: { data: PreRegistration } = response;
-
-          setForm({
-            ...form,
-            isSubmitting: false
-          });
-
-          invitationRefetch();
-          dispatch(setIsPaid(true));
-
+    OpenPay.token.create({
+      "card_number": form.cardNumber.replace(/\s/g, ''),
+      "holder_name": form.cardHolderName,
+      "expiration_year": form.expirationDateYear.slice(-2),
+      "expiration_month": form.expirationDateMonth,
+      "cvv2": form.cvv,
+    }, (response: any) => {
+      initialPayment({
+        invitation_id: parseInt(invitationId),
+        token_id: response.data.id,
+        payment_method: 'card',
+        deviceIdHiddenFieldName: 'deviceIdHiddenFieldName'
+      }).then((response: any) => {
+        // check if response contains error
+        if (response.data.error) {
           openModal(
             <div
-              className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-black bg-vertical-gradient-black`}
-              id={`payment-ticket`}
-              style={{ width: 'auto', height: 'auto' }}
+              className={`flex flex-col items-center justify-center h-[600px]`}
             >
               <div className={`grid grid-cols-12`}>
                 <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -485,120 +450,43 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     style={{ bottom: '0' }}
                   />
                 </div>
+
                 <div
                   className="col-span-12 md:col-span-8"
                 >
-                  <Image
-                    src={`/img/payment-success-icon.svg`}
-                    alt={`SIM física`}
-                    width={150}
-                    height={150}
-                    className={`mx-auto block`}
-                  />
-                  <h1 className={`text-2xl font-medium mb-12`}>
-                    Bienvenido a inphonity
-                    <br />
-                    <span style={{ color: '#00BF63' }}>Tu pago fue exitoso</span>
-                    <br />
-                    {formatNumberToMoney(data.product.price)}
+                  <h1 className={`text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro`}>
+                    ¡Ups!
                   </h1>
 
                   <div
-                    className={`flex mb-6 border-segmented-top pt-3`}
+                    className={`flex mt-10 mb-10 justify-center`}
                   >
-                    <div
-                      className={`w-1/2 border-segmented-right`}
-                    >
-                      <p
-                        className={`text-sm font-light p-4 text-left`}
-                      >
-                        Pagado con
-                        <br />
-                        <br />
-                        Fecha de pago
-                        <br />
-                        <br />
-                        Descripción
-                        <br />
-                        <br />
-                        Referencia
-                      </p>
-                    </div>
-                    <div
-                      className={`w-1/2`}
-                    >
-                      <p
-                        className={`text-sm font-medium p-4 text-right`}
-                      >
-                        {form.cardNumber.slice(0, 4) + '**** **** ' + form.cardNumber.slice(-4)}
-                        <br />
-                        <br />
-                        {new Date().toLocaleDateString()}
-                        <br />
-                        <br />
-                        {data.product.name}
-                        <br />
-                        <br />
-                        {data.payment_reference}
-                      </p>
+                    <div>
+                      <Image
+                        src={`/img/emoji-sorry.svg`}
+                        alt={`SIM física`}
+                        width={150}
+                        height={150}
+                        className={`ml-auto`}
+                      />
                     </div>
                   </div>
 
-                  <div
-                    className={`text-sm font-light mb-12`}
-                  >
-                    <p>
-                      Tu comprobante de pago ha sido enviado a
-                      <br />
-                      <span className={`font-medium`}>{personalData.email}</span>
-                    </p>
-                  </div>
+                  <h1 className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white`}>
+                    Parece que hubo un pequeño
+                    problema al procesar tu pago.
+                    <br />
+                    <br />
+                    No te preocupes, <span className="text-highlight">intenta nuevamente
+                      o utiliza otro método de pago.</span>
+                  </h1>
 
-                  <div className="flex w-3/5 mx-auto mb-6 justify-center">
+                  <div className="button-container w-full mx-auto">
                     <button
-                      className={`text-white text-sm`}
-                      onClick={() => printDiv('payment-ticket')}
-                    >
-                      <Image
-                        src={`/img/download-icon.svg`}
-                        alt={`Descargar comprobante`}
-                        width={34}
-                        height={34}
-                        className={`block mx-auto`}
-                      />
-                      Descargar
-                    </button>
-                    <button
-                      className={`ml-4 text-white text-sm`}
-                      onClick={() => {
-                        copyToClipboard('payment-ticket').then(() => {
-                          openModal(
-                            <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
-                              <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-                                Comprobante de pago copiado al portapapeles.
-                              </p>
-                            </div>,
-                          );
-                        });
-                      }}
-                    >
-                      <Image
-                        src={`/img/sharing-icon.svg`}
-                        alt={`Compartir comprobante`}
-                        width={24}
-                        height={24}
-                        className={`block mx-auto`}
-                      />
-                      Compartir
-                    </button>
-                  </div>
-
-                  <div className="button-container w-3/5 mx-auto">
-                    <button
-                      className="multi-border font-medium block w-full"
+                      className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
                       onClick={closeModal}
                     >
-                      Aceptar
+                      REINTENTAR
                     </button>
                   </div>
                 </div>
@@ -613,15 +501,30 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
               </div>
             </div>,
           );
-        });
-      }, (response: any) => {
+
+          setForm({
+            ...form,
+            isSubmitting: false
+          });
+
+          return;
+        }
+
+        const { data }: { data: PreRegistration } = response;
+
         setForm({
           ...form,
           isSubmitting: false
         });
+
+        invitationRefetch();
+        dispatch(setIsPaid(true));
+
         openModal(
           <div
-            className={`flex flex-col items-center justify-center h-[600px]`}
+            className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-black bg-vertical-gradient-black`}
+            id={`payment-ticket`}
+            style={{ width: 'auto', height: 'auto' }}
           >
             <div className={`grid grid-cols-12`}>
               <div className="hidden md:flex md:col-span-2 justify-center relative">
@@ -635,42 +538,120 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   style={{ bottom: '0' }}
                 />
               </div>
-
               <div
                 className="col-span-12 md:col-span-8"
               >
-                <h1 className={`text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro`}>
-                  ¡Ups!
+                <Image
+                  src={`/img/payment-success-icon.svg`}
+                  alt={`SIM física`}
+                  width={150}
+                  height={150}
+                  className={`mx-auto block`}
+                />
+                <h1 className={`text-2xl font-medium mb-12`}>
+                  Bienvenido a inphonity
+                  <br />
+                  <span style={{ color: '#00BF63' }}>Tu pago fue exitoso</span>
+                  <br />
+                  {formatNumberToMoney(data.product.price)}
                 </h1>
 
                 <div
-                  className={`flex mb-12 justify-center`}
+                  className={`flex mb-6 border-segmented-top pt-3`}
                 >
-                  <div>
-                    <Image
-                      src={`/img/emoji-sorry.svg`}
-                      alt={`SIM física`}
-                      width={150}
-                      height={150}
-                      className={`ml-auto`}
-                    />
+                  <div
+                    className={`w-1/2 border-segmented-right`}
+                  >
+                    <p
+                      className={`text-sm font-light p-4 text-left`}
+                    >
+                      Pagado con
+                      <br />
+                      <br />
+                      Fecha de pago
+                      <br />
+                      <br />
+                      Descripción
+                      <br />
+                      <br />
+                      Referencia
+                    </p>
+                  </div>
+                  <div
+                    className={`w-1/2`}
+                  >
+                    <p
+                      className={`text-sm font-medium p-4 text-right`}
+                    >
+                      {form.cardNumber.slice(0, 4) + '**** **** ' + form.cardNumber.slice(-4)}
+                      <br />
+                      <br />
+                      {new Date().toLocaleDateString()}
+                      <br />
+                      <br />
+                      {data.product.name}
+                      <br />
+                      <br />
+                      {data.payment_reference}
+                    </p>
                   </div>
                 </div>
 
-                <h1 className={`text-2xl lg:text-xl p-4 md:p-5 text-white`}>
-                  Parece que hubo un pequeño problema al procesar tu pago.
-                  <br />
-                  <br />
-                  No te preocupes,
-                  <span className="text-highlight"> intenta nuevamente o utiliza otro método de pago.</span>
-                </h1>
+                <div
+                  className={`text-sm font-light mb-12`}
+                >
+                  <p>
+                    Tu comprobante de pago ha sido enviado a
+                    <br />
+                    <span className={`font-medium`}>{personalData.email}</span>
+                  </p>
+                </div>
 
-                <div className="button-container w-4/5 lg:w-72 mx-auto">
+                <div className="flex w-3/5 mx-auto mb-6 justify-center">
                   <button
-                    className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
+                    className={`text-white text-sm`}
+                    onClick={() => printDiv('payment-ticket')}
+                  >
+                    <Image
+                      src={`/img/download-icon.svg`}
+                      alt={`Descargar comprobante`}
+                      width={34}
+                      height={34}
+                      className={`block mx-auto`}
+                    />
+                    Descargar
+                  </button>
+                  <button
+                    className={`ml-4 text-white text-sm`}
+                    onClick={() => {
+                      copyToClipboard('payment-ticket').then(() => {
+                        openModal(
+                          <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
+                            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
+                              Comprobante de pago copiado al portapapeles.
+                            </p>
+                          </div>,
+                        );
+                      });
+                    }}
+                  >
+                    <Image
+                      src={`/img/sharing-icon.svg`}
+                      alt={`Compartir comprobante`}
+                      width={24}
+                      height={24}
+                      className={`block mx-auto`}
+                    />
+                    Compartir
+                  </button>
+                </div>
+
+                <div className="button-container w-3/5 mx-auto">
+                  <button
+                    className="multi-border font-medium block w-full"
                     onClick={closeModal}
                   >
-                    Reintentar
+                    Aceptar
                   </button>
                 </div>
               </div>
@@ -686,54 +667,78 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
           </div>,
         );
       });
-
-      // reset errors
-      dispatch(taxDateResetErrors());
-      dispatch(accountDataResetErrors());
-      dispatch(shippingResetErrors());
-      dispatch(personalDataResetErrors());
-    }
-
-    if (method === 'cash' || method === 'spei') {
-
-      initialPayment({
-        invitation_id: parseInt(invitationId),
-        payment_method: method,
-      }).unwrap().then((data: any) => {
-
-        setForm({
-          ...form,
-          isSubmitting: false
-        });
-
-        invitationRefetch();
-
-        openModal(
-          <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-              Se ha generado tu referencia de pago.
-            </p>
-          </div>,
-        ).then(() => {
-          window.open(data.payment_url!, '_blank');
-        });
-      }).catch((error) => {
-        setForm({
-          ...form,
-          isSubmitting: false
-        });
-
-        openModal(
-          <div className="flex flex-col items-center justify-center h-full">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-              Hubo un error al generar tu referencia de pago.
-              <br />
-              Intenta nuevamente.
-            </p>
-          </div>,
-        );
+    }, (response: any) => {
+      setForm({
+        ...form,
+        isSubmitting: false
       });
-    }
+      openModal(
+        <div
+          className={`flex flex-col items-center justify-center h-[600px]`}
+        >
+          <div className={`grid grid-cols-12`}>
+            <div className="hidden md:flex md:col-span-2 justify-center relative">
+              {/* PlusDecoration */}
+              <PlusDecoration
+                className="w-4 md:w-8 relative mx-auto"
+              />
+              {/* PlusDecoration */}
+              <PlusDecoration
+                className="w-9 md:w-12 lg:w-16 xl:w-20 absolute"
+                style={{ bottom: '0' }}
+              />
+            </div>
+
+            <div
+              className="col-span-12 md:col-span-8"
+            >
+              <h1 className={`text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro`}>
+                ¡Ups!
+              </h1>
+
+              <div
+                className={`flex mb-12 justify-center`}
+              >
+                <div>
+                  <Image
+                    src={`/img/emoji-sorry.svg`}
+                    alt={`SIM física`}
+                    width={150}
+                    height={150}
+                    className={`ml-auto`}
+                  />
+                </div>
+              </div>
+
+              <h1 className={`text-2xl lg:text-xl p-4 md:p-5 text-white`}>
+                Parece que hubo un pequeño problema al procesar tu pago.
+                <br />
+                <br />
+                No te preocupes,
+                <span className="text-highlight"> intenta nuevamente o utiliza otro método de pago.</span>
+              </h1>
+
+              <div className="button-container w-4/5 lg:w-72 mx-auto">
+                <button
+                  className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
+                  onClick={closeModal}
+                >
+                  Reintentar
+                </button>
+              </div>
+            </div>
+            <div
+              className={`hidden md:flex md:col-span-2 justify-center items-center`}
+            >
+              {/* PlusDecoration */}
+              <PlusDecoration
+                className="w-9 md:w-12 lg:w-16 xl:w-20"
+              />
+            </div>
+          </div>
+        </div>,
+      );
+    });
   }
 
   useEffect(() => {
