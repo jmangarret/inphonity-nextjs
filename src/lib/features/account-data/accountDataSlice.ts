@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {Invitation, invitationsApi} from "@/lib/services/invitationsApi";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Invitation, invitationsApi } from "@/lib/services/invitationsApi";
 
 export interface AccountData {
   bankName: string;
