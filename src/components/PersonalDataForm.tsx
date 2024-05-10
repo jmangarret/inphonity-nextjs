@@ -26,7 +26,6 @@ import {
   setSecondLastName
 } from "@/lib/features/personal-data/personalDataSlice";
 import { ModalContext } from "@/contexts/ModalContext";
-import { error } from "console";
 
 const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, '0'));
 const months = [
