@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {Invitation, invitationsApi} from "@/lib/services/invitationsApi";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Invitation, invitationsApi } from "@/lib/services/invitationsApi";
 import { differenceInYears } from 'date-fns';
 
 export interface PersonalData {
@@ -253,7 +253,14 @@ const personalDataSlice = createSlice({
       state.nationality = invitation.pre_registration?.nationality || "";
       state.occupation = invitation.pre_registration?.occupation || "";
       state.idFrontPicture = invitation.pre_registration?.id_front_picture || "";
+      state.idPassportPicture = invitation.pre_registration?.id_front_picture || "";
       state.idBackPicture = invitation.pre_registration?.id_back_picture || "";
+
+      if (state.idFrontPicture && state.idBackPicture) {
+        state.docType = "INE";
+      } else if (state.idFrontPicture && !state.idBackPicture) {
+        state.docType = "Passport";
+      }
 
       if (invitation.pre_registration?.date_of_birth) {
         // format date of birth for input type date

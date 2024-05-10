@@ -111,20 +111,20 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
   const shippingCost = 150;
   console.log(plan);
 
-  // const {
-  //   isLoading: invitationIsLoading,
-  //   isFetching: invitationIsFetching,
-  //   data: invitationData,
-  //   error: invitationError,
-  //   refetch: invitationRefetch
-  // } = useGetInvitationByIdQuery(invitationId);
   const {
     isLoading: invitationIsLoading,
     isFetching: invitationIsFetching,
     data: invitationData,
     error: invitationError,
     refetch: invitationRefetch
-  } = request;
+  } = useGetInvitationByIdQuery(invitationId);
+  // const {
+  //   isLoading: invitationIsLoading,
+  //   isFetching: invitationIsFetching,
+  //   data: invitationData,
+  //   error: invitationError,
+  //   refetch: invitationRefetch
+  // } = request;
   const [register, { isLoading: registerIsLoading, error: registerError }] = useRegisterMutation();
   const [initialPayment, {
     isLoading: initialPaymentIsLoading,
