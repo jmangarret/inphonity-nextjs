@@ -86,13 +86,13 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
             />
           </div> */}
           {/* countdown */}
-          <div className="flex flex-col col-span-12 bg-white px-10 py-14 rounded-3xl border-4 border-white shadow-lg gap-4 mx-auto w-min md:w-max lg:w-[64.875rem] lg:h-[29.438rem] justify-between">
+          <div className="flex flex-col col-span-12 bg-white px-2 lg:px-10 py-14 rounded-3xl border-4 border-white shadow-lg gap-4 mx-auto w-min md:w-max lg:w-[64.875rem] lg:h-[29.438rem] justify-between">
               <h2
                 className="text-black font-medium text-3xl sm:text-4xl lg:text-5xl text-center mx-auto"
               >
                 Tiempo restante
               </h2>
-            <div className={`col-span-12 md:col-span-12`}>
+            <div>
               {/* TODO: descomentar  */}
               {isLoadingInvitation || isFetchingInvitation ? (
                 <div
@@ -110,7 +110,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
             {/* accept invitation */}
             {/* <div className="col-span-12 sm:col-span-0 md:col-span-0 lg:col-span-2 mt-10"></div> */}
             <div className="flex justify-center gap-4 flex-wrap">
-              <div className="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4">
+              <div>
                 <div className="button-container w-4/5 lg:w-72 mx-auto flex justify-center">
                   <button className="btn-xl multi-border font-medium text-black block w-full"
                     onClick={handleReject}
@@ -121,7 +121,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
                 </div>
               </div>
 
-              <div className="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4">
+              <div>
                 <div className="button-container w-4/5 lg:w-72 mx-auto flex justify-center">
                   <button className="btn-xl multi-border font-medium bg-black text-white block w-full"
                     onClick={handleAccept}
