@@ -823,7 +823,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
   }, [registerError, initialPaymentError]);
 
   return (
-    <div className="m-5 md:p-6 lg:p-9 xl:p-12 bg-white">
+    <div className="m-3 p-6 lg:p-9 xl:p-12 bg-white">
       {/* header */}
       <header className="mb-10 sm:mb-12">
         <h3 className={'font-medium text-black text-center text-3xl sm:text-5xl mb-3'}>
@@ -1059,10 +1059,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     </div>
                   </div>
                   <div className="flex justify-center">
-                    <span className="font-medium text-[3.125rem] my-[1.75rem] text-custom-blue">Total a Pagar</span>
+                    <span className="font-medium text-4xl md:text-[3.125rem] my-[1.75rem] text-custom-blue">Total a Pagar</span>
                   </div>
-                  <div className="flex justify-center pt-4">
-                    <span className="text-[3.125rem]">${formatNumber(Number(plan.price) + shippingCost)}</span>
+                  <div className="flex justify-center pt-0 md:pt-4">
+                    <span className="text-4xl md:text-[3.125rem]">${formatNumber(Number(plan.price) + shippingCost)}</span>
                   </div>
                 </div>
 
