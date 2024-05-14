@@ -47,7 +47,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
             </p>
           </div>
           )}
-          <div className={`w-full md:flex-shrink-0 rounded-t-lg px-8 py-4 rounded-[1.25rem]-full text-center bg-promo-${Number(planData.background)<5 ? planData.background : '0'}`}>
+          <div className={`w-full md:flex-shrink-0 rounded-t-lg px-8 py-4 rounded-[1.25rem]-full text-center bg-promo-${Number(planData.background)<=5 ? planData.background : '0'}`}>
                 <h3 className="text-[3.125rem] font-medium font-yellow capitalize">
                   {planData.name}
                 </h3>
