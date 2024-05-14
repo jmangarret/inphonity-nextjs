@@ -47,12 +47,13 @@ const currentMonth = new Date().getMonth();
 const currentYear = new Date().getFullYear();
 const years = Array.from({ length: 101 }, (_, i) => currentYear - i);
 
-const maxDate = (currentYear - 18)+ "-" + 0 + (currentMonth + 1) + "-" + 0 + currentDay;
+const fixCurrentDay = currentDay<=9 ? "0" + currentDay : currentDay.toString();
+const fixCurrentMonth = currentMonth <=9 ? "0" + (currentMonth+1) : currentMonth+1;
+const maxDate = (currentYear - 18)+ "-" + fixCurrentMonth + "-" + fixCurrentDay;
 
 export default function PersonalDataForm() {
   const { openModal } = React.useContext(ModalContext);
   const dispatch = useAppDispatch();
-  const [hasErrorDoc, SetHasErrorDoc] = React.useState<boolean>(true); 
   const [errorForm, SetErrorForm] = React.useState<boolean>(true); 
   const personalData = useAppSelector((state) => state.personalData);
   const fieldsOrder: (keyof typeof personalData)[] = useMemo(() => [
@@ -282,7 +283,7 @@ export default function PersonalDataForm() {
   }
 
   return (
-    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 bg-white'}>
+    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 bg-white'} id="PersonalFormSection">
       {/* header */}
       <header className={'mb-2'}>
         <h3 className={'font-medium text-3xl sm:text-5xl mb-1 sm:mb-3 text-black text-center'}>

@@ -906,14 +906,14 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   )}
                 </div>
 
-                <div className={'col-span-12 flex gap-3 items-center my-3'}>
-                  <div>
+                <div className={'col-span-12 grid grid-cols-12 gap-3 items-center my-3'}>
+                  <div className="col-span-12 lg:col-span-3">
                     <label className="font-light" htmlFor="">
                       Fecha de vencimiento
                     </label>
                   </div>
                   {/* expiration date month */}
-                  <div className={'flex-1'}>
+                  <div className={'col-span-12 lg:col-span-3'}>
                     <select
                       defaultValue={form.expirationDateMonth}
                       className={`input input-border-black`}
@@ -944,10 +944,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                   </div>
 
                   {/* expiration date year */}
-                  <div className={'flex-1'}>
+                  <div className={'col-span-12 lg:col-span-3'}>
                     <select
                       className={`input input-border-black`}
-                      value={form.expirationDateYear}
+                      defaultValue={form.expirationDateYear}
                       onChange={(e) => setForm({ ...form, expirationDateYear: e.target.value })}
                     >
                       <option disabled selected value={""}>Año</option>
@@ -970,7 +970,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     )}
                   </div>
                   {/* cvv */}
-                  <div className={'flex-1'}>
+                  <div className={'col-span-12 lg:col-span-3'}>
                     <input
                       type="text"
                       className={`input input-border-black ${form.cvvError ? 'input-error' : ''}`}

@@ -23,12 +23,16 @@ const PlanCard: React.FC<Plan> = (planData) => {
   const referralIncome = commision?.referral ?? 0;
 
   const handleButtonClick = () => {
-    if (!location.pathname.includes('accepted')) {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      });
+    let scrollSection = 0;
+    if (location.pathname.includes('accepted')) {
+      scrollSection = document.getElementById("PersonalFormSection")?.getBoundingClientRect().top || 0
+    }else{
+      scrollSection = document.getElementById("invitationSection")?.getBoundingClientRect().top || 0
     }
+    window.scrollTo({
+      top: window.scrollY + scrollSection,
+      behavior: 'smooth'
+    });
 
     dispatch(setPlan(planData.id));
     dispatch(setPrice(planData.price));
