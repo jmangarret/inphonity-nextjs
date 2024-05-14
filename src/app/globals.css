@@ -756,7 +756,7 @@ swiper-container::part(bullet) {
 
 .bg-promo-4 {
   /* background: linear-gradient(100deg, #007F8E 15.02%, #F7D690 87.4%); */
-  background: url('/img/bg-promo-5.png') transparent 50% / cover no-repeat;
+  background: url('/img/bg-promo-4.png') transparent 50% / cover no-repeat;
   width: auto;
   height: auto;
 }
