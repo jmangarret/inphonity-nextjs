@@ -43,7 +43,6 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ expiresAt }) => {
       }
     }, 1000);
 
-    console.log(timeLeft.hours, timeLeft.minutes, timeLeft.seconds)
     return () => clearInterval(interval);
 
   }, [expiresAt]);

@@ -160,7 +160,7 @@ export default function TaxDataForm() {
         </h3>
       </header>
 
-      <div className="col-span-12 md:col-span-10 mb-20">
+      <div className="col-span-12 md:col-span-10">
         {/* notice */}
         <div className="text-white m-3 pb-2.5 text-center font-medium">
           <h3 className={`text-highlight-red text-3xl`}>

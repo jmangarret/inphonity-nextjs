@@ -109,7 +109,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
   const plan = useAppSelector((state) => state.plan);
   const shippingData = useAppSelector((state) => state.shipping);
   const shippingCost = 150;
-  console.log(plan);
 
   const {
     isLoading: invitationIsLoading,
@@ -151,69 +150,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
 
   const handleTestModal = (method: string, onlySaveRegister = false) => {
     openModal(
-      <div
-        className={`flex flex-col items-center justify-center h-[600px]`}
-      >
-        <div className={`grid grid-cols-12`}>
-          <div className="hidden md:flex md:col-span-2 justify-center relative">
-            {/* PlusDecoration */}
-            <PlusDecoration
-              className="w-4 md:w-8 relative mx-auto"
-            />
-            {/* PlusDecoration */}
-            <PlusDecoration
-              className="w-9 md:w-12 lg:w-16 xl:w-20 absolute"
-              style={{ bottom: '0' }}
-            />
-          </div>
-
-          <div
-            className="col-span-12 md:col-span-8"
-          >
-            <h1 className={`text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro`}>
-              ¡Ups!
-            </h1>
-
-            <div
-              className={`flex mb-12 justify-center`}
-            >
-              <div>
-                <Image
-                  src={`/img/emoji-sorry.svg`}
-                  alt={`SIM física`}
-                  width={150}
-                  height={150}
-                  className={`ml-auto`}
-                />
-              </div>
-            </div>
-
-            <h1 className={`text-2xl lg:text-xl p-4 md:p-5 text-white`}>
-              Parece que hubo un pequeño problema al procesar tu pago.
-              <br />
-              <br />
-              No te preocupes,
-              <span className="text-highlight"> intenta nuevamente o utiliza otro método de pago.</span>
-            </h1>
-
-            <div className="button-container w-4/5 lg:w-72 mx-auto">
-              <button
-                className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
-                onClick={closeModal}
-              >
-                Reintentar
-              </button>
-            </div>
-          </div>
-          <div
-            className={`hidden md:flex md:col-span-2 justify-center items-center`}
-          >
-            {/* PlusDecoration */}
-            <PlusDecoration
-              className="w-9 md:w-12 lg:w-16 xl:w-20"
-            />
-          </div>
-        </div>
+      <div>
+       Test
       </div>,
     );
   }
@@ -822,6 +760,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
     }
   }, [registerError, initialPaymentError]);
 
+  const validTdc = (e:any) => {
+    let card = e.target.value.replace(/\D/g, '').replace(/(\d{4})(?=\d)/g, '$1-');
+    setForm({ ...form, cardNumber:  card})
+  }
   return (
     <div className="m-3 p-6 lg:p-9 xl:p-12 bg-white">
       {/* header */}
@@ -950,10 +892,11 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 <div className={'col-span-12 my-3'}>
                   <input
                     value={form.cardNumber}
-                    onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cardNumber: e.target.value.replace(/\D/g, '') })}
+                    onChange={validTdc}
                     type="text"
                     className={`input input-border-black ${form.cardNumberError ? 'input-error' : ''}`}
                     placeholder="Número de tarjeta"
+                    maxLength={19}
                   />
                   {/* error */}
                   {form.cardNumberError && (
