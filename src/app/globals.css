@@ -1137,7 +1137,7 @@ select.input {
   background-size: cover;
 } */
 
-.bg-plan1 {
+.bg-plan1, .bg-promo-5{
   background: url('/img/bg-plan.png') transparent 50% / cover no-repeat;
   width: auto;
   height: auto;
