@@ -823,7 +823,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
   }, [registerError, initialPaymentError]);
 
   return (
-    <div className="m-3 md:p-6 lg:p-9 xl:p-12 bg-white">
+    <div className="m-5 md:p-6 lg:p-9 xl:p-12 bg-white">
       {/* header */}
       <header className="mb-10 sm:mb-12">
         <h3 className={'font-medium text-black text-center text-3xl sm:text-5xl mb-3'}>
