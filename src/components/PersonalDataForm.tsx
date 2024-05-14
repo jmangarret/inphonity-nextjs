@@ -283,7 +283,7 @@ export default function PersonalDataForm() {
   }
 
   return (
-    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 bg-white'}>
+    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 bg-white'} id="PersonalFormSection">
       {/* header */}
       <header className={'mb-2'}>
         <h3 className={'font-medium text-3xl sm:text-5xl mb-1 sm:mb-3 text-black text-center'}>
