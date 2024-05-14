@@ -182,6 +182,7 @@
   background-image: url("/img/bg_modal_rechazo.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  max-width: 500px;
 }
 
 .bg_gracias_por_unirte {
