@@ -734,19 +734,37 @@ swiper-container::part(bullet) {
 }
 
 .bg-promo-1 {
-  background: linear-gradient(206deg, #000 26.38%, #01808E 92.03%);
+  /* background: linear-gradient(206deg, #000 26.38%, #01808E 92.03%); */
+  background: url('/img/bg-promo-1.png') transparent 50% / cover no-repeat;
+  width: auto;
+  height: auto;
 }
 
 .bg-promo-2 {
-  background: linear-gradient(270deg, #00DDBA -70%, rgba(0, 0, 0, 0) 100%);
+  /* background: linear-gradient(270deg, #00DDBA -70%, rgba(0, 0, 0, 0) 100%); */
+  background: url('/img/bg-promo-2.png') transparent 50% / cover no-repeat;
+  width: auto;
+  height: auto;
 }
 
 .bg-promo-3 {
-  background: linear-gradient(116deg, #FA8F22 4.64%, #E04C37 79.15%);
+  /* background: linear-gradient(116deg, #FA8F22 4.64%, #E04C37 79.15%); */
+  background: url('/img/bg-promo-3.png') transparent 50% / cover no-repeat;
+  width: auto;
+  height: auto;
 }
 
 .bg-promo-4 {
-  background: linear-gradient(100deg, #007F8E 15.02%, #F7D690 87.4%);
+  /* background: linear-gradient(100deg, #007F8E 15.02%, #F7D690 87.4%); */
+  background: url('/img/bg-promo-4.png') transparent 50% / cover no-repeat;
+  width: auto;
+  height: auto;
+}
+
+.bg-promo-5{
+  background: url('/img/bg-promo-5.png') transparent 50% / cover no-repeat;
+  width: auto;
+  height: auto;
 }
 
 @keyframes doodle-animation-left {
@@ -1137,11 +1155,6 @@ select.input {
   background-size: cover;
 } */
 
-.bg-plan1, .bg-promo-5{
-  background: url('/img/bg-plan.png') transparent 50% / cover no-repeat;
-  width: auto;
-  height: auto;
-}
 
 .bg-luces {
   background: url('/img/bg-luces.png') #000 50% / cover no-repeat;
