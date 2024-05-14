@@ -1045,7 +1045,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                     )}
                   </div>
                 </div>
-                <div className="col-span-12 text-3xl flex flex-col mt-10 mx-auto justify-between px-5 w-[23.125rem] py-[3rem] h-[21.25rem] rounded-2xl border-2 border-black">
+                <div className="col-span-12 text-3xl flex flex-col mt-10 mx-auto justify-between px-5 w-auto sm:w-[23.125rem] py-[3rem] h-[21.25rem] rounded-2xl border-2 border-black">
                   <div className="flex justify-between mx-auto gap-x-8">
                     <div className="flex flex-col justify-start font-light">
                       <span className="font-medium">Plan:</span>
