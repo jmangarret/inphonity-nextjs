@@ -88,6 +88,16 @@ export default function PersonalDataForm() {
   //   });
   // }, [fieldsOrder, personalData]);
 
+  useEffect(()=>{
+    if (personalData.showShippingForm){
+      let scrollSection = document.getElementById("ShippingFormSection")?.getBoundingClientRect().top || 0
+      window.scrollTo({
+        top: window.scrollY + scrollSection,
+        behavior: 'smooth'
+      });
+    }
+  },[personalData.showShippingForm])
+
   useEffect(() => {
     const { docType, idFrontPicture, idBackPicture, idPassportPicture, curpError } = personalData
     //valid docType

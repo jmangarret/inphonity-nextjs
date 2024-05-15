@@ -765,9 +765,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
     setForm({ ...form, cardNumber:  card})
   }
   return (
-    <div className="m-3 p-6 lg:p-9 xl:p-12 bg-white">
+    <div className="p-3 md:p-6 lg:p-9 xl:p-12 bg-white" id="PaymentFormSection">
       {/* header */}
-      <header className="mb-10 sm:mb-12">
+      <header className="mb-10">
         <h3 className={'font-medium text-black text-center text-3xl sm:text-5xl mb-3'}>
           Realizar <span className="text-custom-blue">pago</span>
         </h3>
@@ -799,7 +799,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         </div>
       ) : (
         <>
-          <div className="text-black text-base">
+          <div className="lg:container text-black text-base px-6 md:px-8 lg:px-10 xl:px-12">
             <div className="mb-5">
               <span className="mr-10">
                 <Image
@@ -853,7 +853,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
             </div>
           </div>
 
-          <div className="text-black font-medium">
+          <div className="lg:container text-black font-medium px-6 md:px-8 lg:px-10 xl:px-12">
             {activeTab === "Pago con tarjeta" && (
               <div className={'grid grid-cols-12'} id={'payment-card'}>
                 <p className={`col-span-12 text-2xl mb-5`}>

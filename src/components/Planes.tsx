@@ -56,7 +56,7 @@ const Planes = () => {
         // modules={[Pagination, Navigation]}
         effect=""
         grab-cursor="true"
-        centered-slides="true"
+        centered-slides="false"
         speed="600"
       >
         {planes && planes.map((plan) => (

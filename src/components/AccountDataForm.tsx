@@ -33,6 +33,16 @@ export default function AccountDataForm() {
     });
   }, [fieldsOrder, accountData]);
 
+  useEffect(()=>{
+    if (accountData.showPaymentForm){
+      let scrollSection = document.getElementById("PaymentFormSection")?.getBoundingClientRect().top || 0
+      window.scrollTo({
+        top: window.scrollY + scrollSection,
+        behavior: 'smooth'
+      });
+    }
+  },[accountData.showPaymentForm])
+
   useEffect(() => {
     const firstErrorField = fieldsOrder.find(field => accountData[`${field}Error` as keyof typeof accountData]);
     if (firstErrorField && inputRefs.current[firstErrorField]) {
@@ -125,7 +135,7 @@ export default function AccountDataForm() {
   }
 
   return (
-    <div className={'p-3 md:p-6 lg:p-9 xl:p-12'}>
+    <div className={'p-3 md:p-6 lg:p-9 xl:p-12'} id="AccountFormSection">
       {/* header */}
       <header>
         <h3 className={'font-medium text-custom-blue text-center text-3xl sm:text-5xl mb-3 sm:mb-6'}>
