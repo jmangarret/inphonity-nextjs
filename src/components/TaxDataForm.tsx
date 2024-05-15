@@ -47,6 +47,16 @@ export default function TaxDataForm() {
     });
   }, [fieldsOrder, taxData]);
 
+  useEffect(()=>{
+    if (taxData.showAccountDataForm){
+      let scrollSection = document.getElementById("AccountFormSection")?.getBoundingClientRect().top || 0
+      window.scrollTo({
+        top: window.scrollY + scrollSection,
+        behavior: 'smooth'
+      });
+    }
+  },[taxData.showAccountDataForm])
+
   useEffect(() => {
     const firstErrorField = fieldsOrder.find(field => taxData[`${field}Error` as keyof typeof taxData]);
     if (firstErrorField && inputRefs.current[firstErrorField]) {
@@ -150,9 +160,7 @@ export default function TaxDataForm() {
   }
 
   return (
-    <div
-      className={'p-3 md:p-6 lg:p-9 xl:p-12'}
-    >
+    <div className={'p-3 md:p-6 lg:p-9 xl:p-12'} id="TaxFormSection" >
       {/* header */}
       <header>
         <h3 className={'font-medium text-black text-center text-3xl sm:text-5xl mb-3 sm:mb-6 lg:ml-12'}>

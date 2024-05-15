@@ -52,6 +52,16 @@ export default function ShippingForm() {
     });
   }, [fieldsOrder, shipping]);
 
+  useEffect(()=>{
+    if (shipping.showTaxDataForm){
+      let scrollSection = document.getElementById("TaxFormSection")?.getBoundingClientRect().top || 0
+      window.scrollTo({
+        top: window.scrollY + scrollSection,
+        behavior: 'smooth'
+      });
+    }
+  },[shipping.showTaxDataForm])
+
   useEffect(() => {
     const firstErrorField = fieldsOrder.find(field => shipping[`${field}Error` as keyof typeof shipping]);
     if (firstErrorField && inputRefs.current[firstErrorField]) {
@@ -149,7 +159,7 @@ export default function ShippingForm() {
   }
 
   return (
-    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-6 bg-white'}>
+    <div className={'p-3 md:p-6 lg:p-9 xl:p-12 mb-6 bg-white'} id="ShippingFormSection">
       {/* header */}
       <header>
         <h3 className={'font-medium text-black text-center text-3xl sm:text-5xl mb-1 sm:mb-3'}>
