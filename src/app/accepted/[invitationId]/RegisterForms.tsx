@@ -21,11 +21,6 @@ export default function RegisterForms({invitationId}: { invitationId: string }) 
         {/* personal data */}
         <div className="hidden md:flex md:col-span-1 justify-center items-center">
           {/* PlusDecoration */}
-          <PlusDecoration
-            isGreen
-            className="w-9 md:w-12 lg:w-16 xl:w-20 relative"
-            style={{top: '-10%'}}
-          />
         </div>
         <div className="col-span-12 md:col-span-10 text-black">
           {/* forms */}
@@ -45,11 +40,6 @@ export default function RegisterForms({invitationId}: { invitationId: string }) 
           <>
             <div className="hidden md:flex md:col-span-1 justify-center items-center">
               {/* PlusDecoration */}
-              <PlusDecoration
-                isGreen
-                className={'w-6 md:w-8 lg:w-12 xl:w-17 relative'}
-                style={{top: '15%'}}
-              />
             </div>
             <div className="col-span-12 md:col-span-10 text-black">
               {/* forms */}
@@ -71,30 +61,12 @@ export default function RegisterForms({invitationId}: { invitationId: string }) 
           <>
             <div className="hidden md:flex md:col-span-1 justify-center items-center">
               {/* PlusDecoration */}
-              <PlusDecoration
-                isGreen
-                className={'w-6 md:w-8 lg:w-12 xl:w-17 relative'}
-                style={{top: '36%'}}
-              />
-            </div>
-            
-            <div className="hidden md:flex md:col-span-1 justify-center items-center">
-              {/* PlusDecoration */}
-            </div>
-            {/* tax data */}
-            <div className="hidden md:flex md:col-span-1 justify-center items-center">
-              {/* PlusDecoration */}
-              <PlusDecoration
-                isGreen
-                className={'w-6 md:w-8 lg:w-12 xl:w-17 relative'}
-                style={{top: '15%'}}
-              />
             </div>
             <div className="col-span-12 md:col-span-10 text-black">
               {/* forms */}
               <TaxDataForm/>
             </div>
-            <div className="hidden md:flex md:col-span-1 justify-center items-center">
+            <div className="hidden md:flex md:col-span-1 justify-center items-center taxdata">
               {/* PlusDecoration */}
               <PlusDecoration
                 isGreen
@@ -110,17 +82,12 @@ export default function RegisterForms({invitationId}: { invitationId: string }) 
             {/* account data */}
             <div className="hidden md:flex md:col-span-1 justify-center items-center">
               {/* PlusDecoration */}
-              <PlusDecoration
-                isGreen
-                className="w-7 md:w-9 lg:w-11 xl:w-13 relative"
-                style={{top: '-10%'}}
-              />
             </div>
             <div className="col-span-12 md:col-span-10 text-black">
               {/* forms */}
               <AccountDataForm/>
             </div>
-            <div className="hidden md:flex md:col-span-1 justify-center items-center">
+            <div className="hidden md:flex md:col-span-1 justify-center items-center accoundata">
               {/* PlusDecoration */}
               <PlusDecoration
                 isGreen
@@ -136,11 +103,6 @@ export default function RegisterForms({invitationId}: { invitationId: string }) 
             {/* payment */}
             <div className="hidden md:flex md:col-span-1 justify-center items-center">
               {/* PlusDecoration */}
-              <PlusDecoration
-                isGreen
-                className="w-9 md:w-12 lg:w-16 xl:w-20 relative"
-                style={{top: '-10%'}}
-              />
             </div>
             <div className="col-span-12 md:col-span-10 text-black">
               {/* forms */}
