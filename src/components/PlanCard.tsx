@@ -40,9 +40,9 @@ const PlanCard: React.FC<Plan> = (planData) => {
 
   // @ts-ignore
   return (
-    <div className="click-listen">
-      <div className="bg-white rounded-[1.25rem] border-2 border-white shadow-2xl overflow-hidden m-2">
-        <div className="md:flex flex-col">
+    <div className="flex justify-center">
+      <div className="bg-white rounded-[1.25rem] border-2 border-white shadow-2xl m-2 min-w-[350px]">
+        <div className="md:flex flex-col relative">
           {planData.portability_promo && (
           <div className="absolute rounded-[1.25rem]-full text-center font-medium flex items-center justify-center promo">
             <p className="flex flex-col px-5 py-12">
@@ -51,11 +51,11 @@ const PlanCard: React.FC<Plan> = (planData) => {
             </p>
           </div>
           )}
-          <div className={`w-full md:flex-shrink-0 rounded-t-lg px-8 py-4 rounded-[1.25rem]-full text-center bg-promo-${Number(planData.background)<=5 ? planData.background : '0'}`}>
-                <h3 className="text-4xl lg:text-[3.125rem] font-medium font-yellow capitalize">
+          <div className={`w-full md:flex-shrink-0 rounded-t-[1.25rem] px-8 py-4 text-center bg-promo-${Number(planData.background)<=5 ? planData.background : '0'}`}>
+                <h3 className="text-[3.125rem] font-medium font-yellow capitalize">
                   {planData.name}
                 </h3>
-                <h3 className="text-5xl lg:text-7xl font-medium leading-[0.5]">
+                <h3 className="text-7xl font-medium">
                   {planData.internet}
                 </h3>
                 <p className="font-medium text-[0.938rem] mt-[1.75rem]">
