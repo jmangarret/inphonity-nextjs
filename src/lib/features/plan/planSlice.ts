@@ -23,8 +23,8 @@ const initialState: Plan = {
   has_fm: 0,
   has_tt: 0,
   has_x: 0,
-  has_tl: 0,
-  has_sc: 0,
+  has_telegram: 0,
+  has_snapchat: 0,
   portability_promo: "",
   code: "",
   status: Status.Active,
@@ -76,8 +76,8 @@ const planSlice = createSlice({
         state.has_fm= currentPlan?.has_fm
         state.has_tt= currentPlan?.has_tt
         state.has_x= currentPlan?.has_x
-        state.has_tl= currentPlan?.has_tl
-        state.has_sc= currentPlan?.has_sc
+        state.has_telegram= currentPlan?.has_telegram
+        state.has_snapchat= currentPlan?.has_snapchat
         state.portability_promo= currentPlan?.portability_promo
         state.code= currentPlan?.code
         state.status= currentPlan?.status

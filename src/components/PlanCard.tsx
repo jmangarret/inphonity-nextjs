@@ -17,10 +17,9 @@ const formatNumber = (number: number, decimals=0) => {
 const PlanCard: React.FC<Plan> = (planData) => {
   const dispatch = useAppDispatch();
   const plan = useAppSelector((state) => state.plan);
-  
   const cashback = 0;//TODO
-  const commision = planData.commissions?.find(com => com.target_id == plan.id)
-  const referralIncome = commision?.referral ?? 0;
+  const commission = planData.commissions?.find(com => com.target_id == planData.id)
+  const referralIncome = commission?.referral ?? 0;
 
   const handleButtonClick = () => {
     let scrollSection = 0;
@@ -39,10 +38,11 @@ const PlanCard: React.FC<Plan> = (planData) => {
     dispatch(setName(planData.name));
   };
 
+  // @ts-ignore
   return (
-    <div className="click-listen">
-      <div className="bg-white rounded-[1.25rem] border-2 border-white shadow-2xl overflow-hidden m-2">
-        <div className="md:flex flex-col">
+    <div className="flex justify-center">
+      <div className="bg-white rounded-[1.25rem] border-2 border-white shadow-2xl m-2 min-w-[350px]">
+        <div className="md:flex flex-col relative">
           {planData.portability_promo && (
           <div className="absolute rounded-[1.25rem]-full text-center font-medium flex items-center justify-center promo">
             <p className="flex flex-col px-5 py-12">
@@ -51,11 +51,11 @@ const PlanCard: React.FC<Plan> = (planData) => {
             </p>
           </div>
           )}
-          <div className={`w-full md:flex-shrink-0 rounded-t-lg px-8 py-4 rounded-[1.25rem]-full text-center bg-promo-${Number(planData.background)<=5 ? planData.background : '0'}`}>
-                <h3 className="text-4xl lg:text-[3.125rem] font-medium font-yellow capitalize">
+          <div className={`w-full md:flex-shrink-0 rounded-t-[1.25rem] px-8 py-4 text-center bg-promo-${Number(planData.background)<=5 ? planData.background : '0'}`}>
+                <h3 className="text-[3.125rem] font-medium font-yellow capitalize">
                   {planData.name}
                 </h3>
-                <h3 className="text-5xl lg:text-7xl font-medium leading-[0.5]">
+                <h3 className="text-7xl font-medium">
                   {planData.internet}
                 </h3>
                 <p className="font-medium text-[0.938rem] mt-[1.75rem]">
@@ -78,7 +78,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                   MINUTOS
                 </p>
                 <p className="font-medium text-[2rem]">
-                  {planData.minutes}
+                  {planData.minutes === -1 ? <span className={'text-sm'}>ILIMITADOS</span> : planData.minutes}
                 </p>
               </div>
               <div className="card-plan text-center border border-white rounded-[1.25rem] bg-black px-3 py-6 m-1">
@@ -94,7 +94,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                   SMS
                 </p>
                 <p className="font-medium text-[2rem]">
-                  {planData.sms}
+                  {planData.sms === -1 ? <span className={'text-sm'}>ILIMITADOS</span> : planData.sms}
                 </p>
               </div>
             </div>
@@ -149,7 +149,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                     className="inline-block w-5"
                   />
                 )}
-              {Boolean(planData.has_sc) && (
+              {Boolean(planData.has_snapchat) && (
                   <Image
                     src="/img/snapchat-icon.svg"
                     alt="Snapchat"
@@ -158,7 +158,7 @@ const PlanCard: React.FC<Plan> = (planData) => {
                     className="inline-block w-5"
                   />
                 )}
-                {Boolean(planData.has_tl) && (
+                {Boolean(planData.has_telegram) && (
                   <Image
                     src="/img/telegram-icon.svg"
                     alt="Telegram"
@@ -204,13 +204,13 @@ const PlanCard: React.FC<Plan> = (planData) => {
                   </p>
 
                   <p className="text-xs mx-auto mb-2.5 text-black font-medium">
-                    Antes <span className="line-through">1%</span>, ahora:
+                    Antes <span className="line-through">{commission!.year_1_residual}%</span>, ahora:
                   </p>
                 </div>
 
                 <div className="">
                   <p className="font-medium text-xl md:text-4xl text-black">
-                    {formatNumber(cashback)}%
+                    {commission!.year_1_residual * 2}%
                   </p>
 
                   <p className="text-10px mx-auto mb-2.5 text-black font-medium">

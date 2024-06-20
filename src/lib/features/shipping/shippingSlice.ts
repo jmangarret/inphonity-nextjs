@@ -21,6 +21,7 @@ export interface Shipping {
   city: string;
   cityError: string;
   showTaxDataForm: boolean;
+  isValidated: boolean;
 }
 
 const initialState: Shipping = {
@@ -43,6 +44,7 @@ const initialState: Shipping = {
   city: "",
   cityError: "",
   showTaxDataForm: false,
+  isValidated: false,
 }
 
 const shippingSlice = createSlice({
@@ -69,6 +71,7 @@ const shippingSlice = createSlice({
       state.city = "";
       state.cityError = "";
       state.showTaxDataForm = false;
+      state.isValidated = false;
     },
     resetErrors: (state) => {
       state.isEsimError = "";
@@ -83,6 +86,9 @@ const shippingSlice = createSlice({
     },
     setIsEsim: (state, action: PayloadAction<boolean>) => {
       state.isEsim = action.payload;
+    },
+    setIsValidation: (state, action: PayloadAction<boolean>) => {
+      state.isValidated = action.payload;
     },
     setEsimError: (state, action: PayloadAction<string>) => {
       state.isEsimError = action.payload;
@@ -165,6 +171,7 @@ export const {
   resetShipping,
   setIsEsim,
   setEsimError,
+  setIsValidation,
   setZipCode,
   setZipCodeError,
   setNeighborhood,

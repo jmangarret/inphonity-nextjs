@@ -255,6 +255,8 @@ const personalDataSlice = createSlice({
       state.idFrontPicture = invitation.pre_registration?.id_front_picture || "";
       state.idPassportPicture = invitation.pre_registration?.id_front_picture || "";
       state.idBackPicture = invitation.pre_registration?.id_back_picture || "";
+      state.idAddressPicture = invitation.pre_registration?.id_address_picture || "";
+      state.idTaxPicture = invitation.pre_registration?.id_tax_picture || "";
 
       if (state.idFrontPicture && state.idBackPicture) {
         state.docType = "INE";

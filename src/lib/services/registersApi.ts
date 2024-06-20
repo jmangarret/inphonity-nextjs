@@ -8,6 +8,8 @@ type RegisterRequest = {
   contact_phone_number: string;
   curp?: string;
   gender?: string;
+  id_address_picture?: string;
+  id_tax_picture?: string;
   bank_name?: string;
   bank_account_number: string;
   bank_account_number_confirmation: string;
@@ -25,8 +27,9 @@ type RegisterRequest = {
   address_number: string;
   address_interior_number?: string;
   address: string;
-  rfc?: string;
   name?: string;
+  rfc?: string;
+  fiscal_regime?: string;
   tax_zip_code?: string;
   street?: string;
   exterior_number?: string;
@@ -43,9 +46,9 @@ type RegisterRequest = {
 type RegisterResponse = {
   message: string;
 }
- 
+
 export type PaymentMethod =  'card' | 'cash' | 'spei' | 'card-legacy'
- 
+
 type InitialPaymentRequest = {
   invitation_id: number;
   payment_method: PaymentMethod;
@@ -62,6 +65,8 @@ type InitialPaymentResponse = {
   contact_phone_number: string;
   curp?: string;
   gender?: string;
+  id_address_picture?: string;
+  id_tax_picture?: string;
   bank_name?: string;
   bank_account_number?: string;
   interbank_clabe?: string;
@@ -77,9 +82,9 @@ type InitialPaymentResponse = {
   address_number: string;
   address_interior_number?: string;
   address: string;
+  name?: string;
   rfc?: string;
   cfdi_use?: string;
-  name?: string;
   fiscal_regime?: string;
   tax_zip_code?: string;
   street?: string;

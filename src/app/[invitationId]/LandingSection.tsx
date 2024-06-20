@@ -56,7 +56,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
       </header>
       <div className="mx-10 sm:ml-24 mt-7">
 
-        {/* <PlusDecoration 
+        {/* <PlusDecoration
         isGreen={true}
         style={{left: "90%"}}
         // className="relative my-5 left w-5 sm:w-8 md:w-11 lg:w-14 xl:w-17"

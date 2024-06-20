@@ -1,3 +1,4 @@
+"use client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LandingSection from "@/app/[invitationId]/LandingSection";
@@ -9,27 +10,25 @@ import CoverageSection from "@/app/[invitationId]/CoverageSection";
 import InvitationSection from "@/app/[invitationId]/InvitationSection";
 import PaymentsSection from "@/app/[invitationId]/PaymentsMethod";
 import ContactSection from "./ContactSection";
-
-export default function Home({ params }: { params: { invitationId: string } }) {
+const Home = ({ params }: { params: { invitationId: string } }) => {
+  const invitationIdDecoded = atob(params.invitationId.replace("%3D", "="));
   return (
     <>
       {/* <Header /> */}
       <main>
-        <LandingSection
-          invitationId={params.invitationId}
-        />
+        <LandingSection invitationId={invitationIdDecoded!} />
         <HeroSection />
         <BenefitsSection />
         <PortabilitySection />
         <CoverageSection />
         <OfferSection />
         <PaymentsSection />
-        <InvitationSection
-          invitationId={params.invitationId}
-        />
+        <InvitationSection invitationId={invitationIdDecoded!} invitationHash={params.invitationId.replace("%3D", "=")} />
         <ContactSection />
       </main>
       <Footer />
     </>
-  );
-}
+  )
+};
+
+export default Home;

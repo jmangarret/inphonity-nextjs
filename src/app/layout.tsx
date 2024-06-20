@@ -7,6 +7,7 @@ import ModalProvider from "@/contexts/ModalProvider";
 import "./globals.css";
 import "./leaftlet.css";
 import Head from "next/head";
+import ChatInitializer from "@/components/ChatInitializer";
 
 const aeonik = localFont({
   src: [
@@ -48,11 +49,13 @@ export default function RootLayout({
         {children}
       </ModalProvider>
     </StoreProvider>
+    <ChatInitializer />
     </body>
     <Script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></Script>
     <Script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></Script>
     <Script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></Script>
     <Script type="text/javascript" src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></Script>
+    <Script type="text/javascript" src="https://chat-assets.frontapp.com/v1/chat.bundle.js"></Script>
     </html>
   );
 }

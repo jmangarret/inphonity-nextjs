@@ -8,10 +8,11 @@ import { request } from "@/mocks/request-data";
 
 type SignContractProps = {
   invitationId: string;
+  invitationIdDecoded: string;
 };
-const SignContract: React.FC<SignContractProps> = ({ invitationId }) => {
+const SignContract: React.FC<SignContractProps> = ({ invitationId, invitationIdDecoded }) => {
   const router = useRouter();
-  const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = useGetInvitationByIdQuery(invitationId);
+  const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = useGetInvitationByIdQuery(invitationIdDecoded);
   // const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = request;
   const [isTermsAccepted, setIsTermsAccepted] = React.useState(false);
   const [isConfirmationAccepted, setIsConfirmationAccepted] = React.useState(false);
@@ -60,7 +61,6 @@ const SignContract: React.FC<SignContractProps> = ({ invitationId }) => {
       return;
     }
 
-    // redirect to sign contract sign/{invitationId}
     router.push(`/sign/${invitationId}`);
   }
 
@@ -69,7 +69,7 @@ const SignContract: React.FC<SignContractProps> = ({ invitationId }) => {
       <header className="px-24">
         <h3 className={'font-medium text-white text-center text-3xl sm:text-5xl mb-3'}>
           Estas a un paso de descubrir más <span className="text-highlight">conectividad </span>
-          y más <span className="text-highlight">comunicación</span>
+          y más <span className="text-highlight">conexión</span>
         </h3>
         
         <p className={'text-base text-white text-center px-16 my-10'}>
@@ -82,6 +82,18 @@ const SignContract: React.FC<SignContractProps> = ({ invitationId }) => {
             />
             <label htmlFor={'confirmation'}>
               &nbsp; Confirmo que toda la información proporcionada es correcta
+            </label>
+        </p>
+        <p className={'text-base text-white text-center px-16 my-10'}>
+          <input
+              type="checkbox"
+              id={'public'}
+              className="form-checkbox green-check h-5 w-5 text-green-500"
+              name={'public'}
+              onChange={handleCheckboxChange}
+            />
+            <label htmlFor={'public'}>
+            &nbsp; Acepto recibir notificaciones, promociones y actualizaciones sobre los beneficios de inphonity
             </label>
         </p>
       </header>

@@ -114,6 +114,8 @@ export type PreRegistration = {
   id: number;
   id_back_picture: string;
   id_front_picture: string;
+  id_address_picture: string;
+  id_tax_picture: string;
   interbank_clabe: string;
   interior_number: string | null;
   invitation_id: number;
@@ -121,7 +123,6 @@ export type PreRegistration = {
   last_name: string;
   mother_last_name: string;
   municipality: string | null;
-  name: string | null;
   neighborhood: string | null;
   payment_method: string | null;
   payment_reference: string | null;

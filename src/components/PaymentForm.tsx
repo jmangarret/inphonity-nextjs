@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, {memo, useEffect, useState} from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
@@ -36,6 +36,7 @@ import { resetErrors as taxDateResetErrors } from "@/lib/features/tax-data/taxDa
 import { PreRegistration, useGetInvitationByIdQuery } from "@/lib/services/invitationsApi";
 import { setIsPaid } from "@/lib/features/plan/planSlice";
 import PlusDecoration from "@/components/PlusDecoration";
+import initializeEcho from '@/initializeEcho.js';
 
 type PaymentFormProps = {
   invitationId: string;
@@ -50,7 +51,6 @@ const formatNumberToMoney = (number: number) => {
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ContenTiendasAfiliadas, HeaderTiendasAfiliadas } from "./ModalPayments";
-import { request } from "@/mocks/request-data";
 
 async function printDiv(divId: string) {
   const input = document.getElementById(divId);
@@ -99,7 +99,8 @@ const formatNumber = (number: number, decimals = 0) => {
 
   return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
+
+const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) => {
   const { openModal, closeModal } = React.useContext(ModalContext);
   const dispatch = useAppDispatch();
   const accountData = useAppSelector((state) => state.accountData);
@@ -108,8 +109,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
   const taxData = useAppSelector((state) => state.taxData);
   const plan = useAppSelector((state) => state.plan);
   const shippingData = useAppSelector((state) => state.shipping);
-  const shippingCost = 150;
-
+  const [shippingCost, setShippingCost] = useState(0);
   const {
     isLoading: invitationIsLoading,
     isFetching: invitationIsFetching,
@@ -117,14 +117,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
     error: invitationError,
     refetch: invitationRefetch
   } = useGetInvitationByIdQuery(invitationId);
-  // const {
-  //   isLoading: invitationIsLoading,
-  //   isFetching: invitationIsFetching,
-  //   data: invitationData,
-  //   error: invitationError,
-  //   refetch: invitationRefetch
-  // } = request;
-  const [register, { isLoading: registerIsLoading, error: registerError }] = useRegisterMutation();
+  const [register, { isLoading: registerIsLoading, error: registerError, isSuccess }] = useRegisterMutation();
   const [initialPayment, {
     isLoading: initialPaymentIsLoading,
     error: initialPaymentError
@@ -143,9 +136,33 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
     cvvError: "",
     isSubmitting: false,
   });
+  const [mitIframe, setMitIframe] = useState('');
+  const [tokuIframeCard, setTokuIframeCard] = useState('');
+  const [tokuIframeSpei, setTokuIframeSpei] = useState('');
+  const [tokuIframeCash, setTokuIframeCash] = useState('');
+  const [tokuIframeCodi, setTokuIframeCodi] = useState('');
+  const [echoInstance, setEchoInstance] = useState<any>(null);
+  const [mitAttempts, setMitAttempts] = useState(0);
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
+    switch (tab) {
+      case "1":
+        fetchMitIframe();
+        break;
+      case "2":
+        fetchTokuIframe("card");
+        break;
+      case "3":
+        fetchTokuIframe("transfer");
+        break;
+      case "4":
+        fetchTokuIframe("paycash");
+        break;
+      case "5":
+        fetchTokuIframe("codi");
+        break;
+    }
   };
 
   const handleTestModal = (method: string, onlySaveRegister = false) => {
@@ -166,7 +183,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
       isSubmitting: true
     });
 
-    const invitationId = window.location.pathname.split("/")[2];
+    
+    const invitationId = atob(window.location.pathname.split("/")[2].replace("%3D", "="));
 
     // reset errors
     dispatch(taxDateResetErrors());
@@ -184,18 +202,20 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         contact_phone_number: personalData.phone,
         curp: personalData.curp,
         gender: personalData.gender,
+        date_of_birth: personalData.dateOfBirth,
+        id_front_picture: (personalData.idFrontPicture !== '' ? personalData.idFrontPicture : personalData.idPassportPicture),
+        id_back_picture: personalData.idBackPicture,
+        id_address_picture: personalData.idAddressPicture,
+        id_tax_picture: personalData.idTaxPicture,
+
         bank_name: accountData.bankName,
         bank_account_number: accountData.bankAccountNumber,
         bank_account_number_confirmation: accountData.bankAccountNumber,
         interbank_clabe: accountData.interbankClabe,
         interbank_clabe_confirmation: accountData.interbankClabe,
         email: personalData.email,
-        date_of_birth: personalData.dateOfBirth,
 
         //const id_front_picture = personalData.idFrontPicture !== '' ? personalData.idFrontPicture : 'Otro Valor';
-
-        id_front_picture: (personalData.idFrontPicture !== '' ? personalData.idFrontPicture : personalData.idPassportPicture),
-        id_back_picture: personalData.idBackPicture,
 
         address_zip_code: shippingData.zipCode,
         address_state: shippingData.state,
@@ -205,8 +225,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         address_number: shippingData.number,
         address_interior_number: shippingData.interiorNumber,
         address: shippingData.street,
-        rfc: taxData.rfc,
         name: taxData.name,
+        rfc: taxData.rfc,
+        fiscal_regime: taxData.fiscalRegime,
         tax_zip_code: taxData.zipCode,
         street: taxData.street,
         exterior_number: taxData.exteriorNumber,
@@ -219,6 +240,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         product_id: plan.id!,
         is_esim: shippingData.isEsim,
       }).unwrap();
+
+      invitationRefetch();
 
       if (onlySaveRegister) {
         openModal(
@@ -271,6 +294,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
       registerCashSpeiPay(method)
     }
 
+    setForm({
+      ...form,
+      isSubmitting: false
+    });
   }
 
   const registerCashSpeiPay = (method: PaymentMethod)=>{
@@ -310,7 +337,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
           </p>
         </div>,
       );
-      
+
       // reset errors
       dispatch(taxDateResetErrors());
       dispatch(accountDataResetErrors());
@@ -605,7 +632,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
             </div>
           </div>,
         );
-            
+
         // reset errors
         dispatch(taxDateResetErrors());
         dispatch(accountDataResetErrors());
@@ -686,6 +713,66 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
     });
   }
 
+  /**
+   * Fetches the iframe to pay with MIT.
+   */
+  const fetchMitIframe = async () => {
+    try {
+      if (mitIframe) {
+        return;
+      }
+      const api = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+      const response = await fetch(`${api}/api/pre-register/${invitationId}/pay-with-mit`);
+      const data = await response.json();
+
+      setMitIframe(data.iframe);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  /**
+   * Fetches the iframe to pay with Toku.
+   */
+  const fetchTokuIframe = async (gateway: 'card' | 'transfer' | 'paycash' | 'codi') => {
+    try {
+      const gatewayStateMap: { [key: string]: string | null } = {
+        card: tokuIframeCard,
+        transfer: tokuIframeSpei,
+        paycash: tokuIframeCash,
+        codi: tokuIframeCodi
+      };
+  
+      const setGatewayStateMap: { [key: string]: (url: string) => void } = {
+        card: setTokuIframeCard,
+        transfer: setTokuIframeSpei,
+        paycash: setTokuIframeCash,
+        codi: setTokuIframeCodi
+      };
+  
+      if (gatewayStateMap[gateway]) {
+        return;
+      }
+  
+      const api = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+      const response = await fetch(`${api}/api/pre-register/${invitationId}/pay-with-toku?gateway=${gateway}`);
+      const data = await response.json();
+  
+      if (gateway === "card" || gateway === "codi") {
+        setGatewayStateMap[gateway](data.iframe);
+      }
+      if (gateway === "transfer") {
+        setGatewayStateMap[gateway](data.clabe);
+      }
+      if (gateway === "paycash") {
+        setGatewayStateMap[gateway](data.paycash.barcode_url);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
+
   useEffect(() => {
     if (registerError && 'data' in registerError) {
       const { data } = registerError as ApiValidationError;
@@ -760,34 +847,81 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
     }
   }, [registerError, initialPaymentError]);
 
+  useEffect(() => {
+    if ((isSuccess || accountData.interbankClabe) && !mitIframe) {
+      fetchMitIframe();
+    }
+  }, [isSuccess, accountData]);
+
+  useEffect(() => {
+    if (invitationData?.pre_registration) {
+      handlePayment('card', false)
+        .then(() => {
+          fetchMitIframe();
+        });
+    }
+  }, [plan]);
+
+  useEffect(() => {
+    if (activeTab === "toku") {
+      fetchTokuIframe('card');
+    }
+  }, [activeTab]);
+
+  useEffect(() => {
+    if (invitationData && invitationData.pre_registration && !echoInstance) {
+      const { id } = invitationData!.pre_registration!;
+      const echo = initializeEcho(id);
+
+      setEchoInstance(echo);
+    }
+  }, [invitationData]);
+
+  useEffect(() => {
+    console.log(invitationId);
+  }, []);
+
+  useEffect(() => {
+    if (echoInstance !== null) {
+      const { id } = invitationData!.pre_registration!;
+      const channelName = `pre-registration.${id}`;
+      const channel = echoInstance.channel(channelName);
+
+      channel.listen('PreRegistrationPaymentError', (event: any) => {
+        if (event.paymentMethod === 'MIT_SANTANDER') {
+          setMitAttempts(prev => prev + 1);
+          fetchMitIframe();
+        }
+      });
+
+      return () => {
+        channel.stopListening('PreRegistrationPaymentError');
+        echoInstance.leave(`pre-registration.${id}`);
+      };
+    }
+  }, [echoInstance]);
+
   const validTdc = (e:any) => {
     let card = e.target.value.replace(/\D/g, '').replace(/(\d{4})(?=\d)/g, '$1-');
     setForm({ ...form, cardNumber:  card})
   }
+
+  useEffect(() => {
+    if (!shipping.isEsim) {
+      setShippingCost(99)
+    } else {
+      setShippingCost(0)
+    }
+  }, [shipping.isEsim]);
+
+  useEffect(() => {
+    if (mitAttempts === 2) {
+      setActiveTab('2');
+    }
+  }, [mitAttempts]);
+
   return (
     <div className="p-3 md:p-6 lg:p-9 xl:p-12 bg-white" id="PaymentFormSection">
-      {/* header */}
-      <header className="mb-10">
-        <h3 className={'font-medium text-black text-center text-3xl sm:text-5xl mb-3'}>
-          Realizar <span className="text-custom-blue">pago</span>
-        </h3>
-        <p className={'text-xl text-black text-center px-16'}>
-          ¿Cómo quieres realizar tu pago?
-        </p>
-      </header>
-
-      {/* <div className={'col-span-12 my-10'}>
-        <div className="button-container flex justify-center">
-          <button
-            className="btn-md multi-border font-medium text-white disabled:opacity-50"
-            onClick={() => handleTestModal('card')}
-            disabled={initialPaymentIsLoading || form.isSubmitting}
-          >
-            Probar
-          </button>
-        </div>
-      </div> */}
-
       {invitationData && invitationData.pre_registration?.payment_status === 'paid' ? (
         <div className="bg-black text-white rounded-3xl p-5 m-3 text-center mb-10 font-medium">
           <h3 className={`text-highlight text-3xl md:text-6xl mb-6`}>
@@ -799,6 +933,15 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
         </div>
       ) : (
         <>
+          {/* header */}
+          <header className="mb-10">
+            <h3 className={'font-medium text-black text-center text-3xl sm:text-5xl mb-3'}>
+              Realizar <span className="text-custom-blue">pago</span>
+            </h3>
+            <p className={'text-xl text-black text-center px-16'}>
+              ¿Cómo quieres realizar tu pago?
+            </p>
+          </header>
           <div className="lg:container text-black text-base px-6 md:px-8 lg:px-10 xl:px-12">
             <div className="mb-5">
               <span className="mr-10">
@@ -811,16 +954,16 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 />
               </span>
               <span className="mr-10 inline-block align-sub">
-                <input name="activeTab" type="radio" className="radio" checked={activeTab == "Pago con tarjeta"} onChange={() => handleTabClick("Pago con tarjeta")} />
+                <input name="activeTab" type="radio" className="radio" checked={activeTab == "1"} onChange={() => handleTabClick("1")} />
               </span>
               <label>
-                <span> Pago con tarjeta</span>
+                <span>Pago con tarjeta visa / mastercard.</span>
               </label>
             </div>
             <div className="mb-5">
               <span className="mr-10">
                 <Image
-                  src={'/img/pago-cash.svg'}
+                  src={'/img/pago-card.svg'}
                   alt={'Pago con efectivo'}
                   width={39.33}
                   height={27.42}
@@ -828,7 +971,41 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 />
               </span>
               <span className="mr-10 inline-block align-sub">
-                <input name="activeTab" type="radio" className="radio" checked={activeTab == "Pago en efectivo"} onChange={() => handleTabClick("Pago en efectivo")} />
+                <input name="activeTab" type="radio" className="radio" checked={activeTab == "2"} onChange={() => handleTabClick("2")} />
+              </span>
+              <label>
+                <span>Pago con tarjeta AMEX</span>
+              </label>
+            </div>
+            <div className="mb-5">
+              <span className="mr-10">
+                <Image
+                  src={'/img/pago-transfer.svg'}
+                  alt={'Pago con efectivo'}
+                  width={39.33}
+                  height={27.42}
+                  className={'inline-block w-5 font-medium'}
+                />
+              </span>
+              <span className="mr-10 inline-block align-sub">
+                <input name="activeTab" type="radio" className="radio" checked={activeTab == "3"} onChange={() => handleTabClick("3")} />
+              </span>
+              <label>
+                <span>Pago via SPEI</span>
+              </label>
+            </div>
+            <div className="mb-5">
+              <span className="mr-10">
+                <Image
+                  src={'/img/pago-cash.svg'}
+                  alt={'Pago con transferencia'}
+                  width={39.33}
+                  height={27.42}
+                  className={'inline-block w-5 font-medium'}
+                />
+              </span>
+              <span className="mr-10 inline-block align-sub">
+                <input name="activeTab" type="radio" className="radio" checked={activeTab == "4"} onChange={() => handleTabClick("4")} />
               </span>
               <label>
                 <span> Pago en efectivo</span>
@@ -845,248 +1022,139 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ invitationId }) => {
                 />
               </span>
               <span className="mr-10 inline-block align-sub">
-                <input name="activeTab" type="radio" className="radio" checked={activeTab == "Pago con transferencia interbancaria (SPEI)"} onChange={() => handleTabClick("Pago con transferencia interbancaria (SPEI)")} />
+                <input name="activeTab" type="radio" className="radio" checked={activeTab == "5"} onChange={() => handleTabClick("5")} />
               </span>
               <label>
-                <span> Pago con transferencia interbancaria SPEI</span>
+                <span> Pago via CoDi</span>
               </label>
             </div>
           </div>
-
           <div className="lg:container text-black font-medium px-6 md:px-8 lg:px-10 xl:px-12">
-            {activeTab === "Pago con tarjeta" && (
-              <div className={'grid grid-cols-12'} id={'payment-card'}>
+            {activeTab === "1" && (
+              <div
+                className={'grid grid-cols-12'}
+                id={'payment-card'}
+              >
                 <p className={`col-span-12 text-2xl mb-5`}>
-                  Pago con Tarjeta de crédito y débito
+                  Pago con tarjeta visa / mastercard.
                 </p>
-                <div className={'col-span-12 my-3'}>
-                  <Image
-                    src={`/img/card-brands.svg`}
-                    alt={`cards`}
-                    width={150}
-                    height={30}
-                    className={`w-40 sm:w-52 md:w-60 lg:w-72 xl:w-80`}
-                  />
-                </div>
-                {/* cardholder name */}
-                <div className={'col-span-12 my-3'}>
-                  <p className="text-base font-light mb-6">
-                    <span className="text-highlight-red">Importante: </span>
-                    Si el pago es rechazado al usar el número que viene en tu tarjeta física, por favor realiza tu compra con el número de tu tarjeta digital.
-                  </p>
-                  <input
-                    type="text"
-                    className={`input input-border-black ${form.cadHolderNameError ? 'input-error' : ''}`}
-                    placeholder={'Nombre del titular'}
-                    value={form.cardHolderName}
-                    onChange={(e) => setForm({ ...form, cardHolderName: e.target.value.replace(/[^A-Za-z\s]+/g, '') })}
-                  />
-                  {form.cadHolderNameError && (
-                    <p className={'text-red-500 text-xs mt-1 mx-3'}>
-                      {form.cadHolderNameError}
-                    </p>
-                  )}
-                </div>
 
-                {/* card number */}
-                <div className={'col-span-12 my-3'}>
-                  <input
-                    value={form.cardNumber}
-                    onChange={validTdc}
-                    type="text"
-                    className={`input input-border-black ${form.cardNumberError ? 'input-error' : ''}`}
-                    placeholder="Número de tarjeta"
-                    maxLength={19}
-                  />
-                  {/* error */}
-                  {form.cardNumberError && (
-                    <p className={'text-red-500 text-xs mt-1 mx-3'}>
-                      {form.cardNumberError}
-                    </p>
-                  )}
-                </div>
-
-                <div className={'col-span-12 grid grid-cols-12 gap-3 items-center my-3'}>
-                  <div className="col-span-12 lg:col-span-3">
-                    <label className="font-light" htmlFor="">
-                      Fecha de vencimiento
-                    </label>
-                  </div>
-                  {/* expiration date month */}
-                  <div className={'col-span-12 lg:col-span-3'}>
-                    <select
-                      defaultValue={form.expirationDateMonth}
-                      className={`input input-border-black`}
-                      onChange={(e) => setForm({ ...form, expirationDateMonth: e.target.value })}
-                    >
-                      <option disabled value={""}>Mes</option>
-                      {Array.from(Array(12).keys()).map((month) => {
-                        const paddedMonth = (month + 1).toString().padStart(2, '0');
-                        return (
-                          <option
-                            key={month}
-                            value={paddedMonth}
-                          >
-                            {paddedMonth}
-                          </option>
-                        );
-                      })}
-                    </select>
-
-                    {/* error */}
-                    {form.expirationDateMonthError && (
-                      <p
-                        className={'text-red-500 text-xs mt-1 mx-3'}
-                      >
-                        {form.expirationDateMonthError}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* expiration date year */}
-                  <div className={'col-span-12 lg:col-span-3'}>
-                    <select
-                      className={`input input-border-black`}
-                      defaultValue={form.expirationDateYear}
-                      onChange={(e) => setForm({ ...form, expirationDateYear: e.target.value })}
-                    >
-                      <option disabled selected value={""}>Año</option>
-                      {Array.from(Array(10).keys()).map((year) => (
-                        <option
-                          key={year}
-                          value={new Date().getFullYear() + year}
-                        >
-                          {new Date().getFullYear() + year}
-                        </option>
-                      ))}
-                    </select>
-                    {/* error */}
-                    {form.expirationDateYearError && (
-                      <p
-                        className={'text-red-500 text-xs mt-1 mx-3'}
-                      >
-                        {form.expirationDateYearError}
-                      </p>
-                    )}
-                  </div>
-                  {/* cvv */}
-                  <div className={'col-span-12 lg:col-span-3'}>
-                    <input
-                      type="text"
-                      className={`input input-border-black ${form.cvvError ? 'input-error' : ''}`}
-                      placeholder="CVV*"
-                      value={form.cvv}
-                      onChange={(e: { target: { value: any; }; }) => setForm({ ...form, cvv: e.target.value.replace(/\D/g, '') })}
-                    />
-                    {/* error */}
-                    {form.cvvError && (
-                      <p
-                        className={'text-red-500 text-xs mt-1 mx-3'}
-                      >
-                        {form.cvvError}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <div className="col-span-12 text-3xl flex flex-col mt-10 mx-auto justify-between px-5 w-auto sm:w-[23.125rem] py-[3rem] h-[21.25rem] rounded-2xl border-2 border-black">
-                  <div className="flex justify-between mx-auto gap-x-8">
-                    <div className="flex flex-col justify-start font-light">
-                      <span className="font-medium">Plan:</span>
-                      <span className="font-medium">Costo de SIM:</span>
-                      <span className="font-medium">Envío:</span>
-                    </div>
-                    <div className="flex flex-col justify-start font-light">
-                      <span>${formatNumber(plan.price)}</span>
-                      <span>${formatNumber(0)}</span>
-                      <span>${shippingCost}</span>
-                    </div>
-                  </div>
-                  <div className="flex justify-center">
-                    <span className="font-medium text-4xl md:text-[3.125rem] my-[1.75rem] text-custom-blue">Total a Pagar</span>
-                  </div>
-                  <div className="flex justify-center pt-0 md:pt-4">
-                    <span className="text-4xl md:text-[3.125rem]">${formatNumber(Number(plan.price) + shippingCost)}</span>
-                  </div>
-                </div>
-
-                <div className={'col-span-12 my-10'}>
-                  <div className="flex justify-center">
-                    <div className="button-container">
-                      <button
-                        className="btn-md multi-border bg-black font-medium text-white disabled:opacity-50"
-                        onClick={() => handlePayment('card', false)}
-                        disabled={initialPaymentIsLoading || form.isSubmitting}
-                      >
-                        PAGAR
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                {mitIframe && (
+                  <iframe src={mitIframe} className="col-span-12 h-[800px] border-0 w-full"/>
+                )}
               </div>
             )}
 
+            {activeTab === "2" && (
+              <div
+                className={'grid grid-cols-12'}
+                id={'payment-card'}
+              >
+                <p className={`col-span-12 text-2xl mb-5`}>
+                  Pago con tarjeta AMEX
+                </p>
 
-            {activeTab === "Pago en efectivo" && (
-              <div>
-                <p>Pago con efectivo</p>
-                <div className="flex flex-col">
-                  <div className="flex justify-center my-5">
-                    <div className="button-container ">
-                      <button
-                        className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
-                        onClick={() => handlePayment('cash', true)}
-                      >
-                        GUARDAR SOLICITUD
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex justify-center">
-                    <div className="button-container ">
-                      <button
-                        className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
-                        onClick={() => handlePayment('cash', false)}
-                      >
-                        GENERAR REFERENCIA
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                {tokuIframeCard && (
+                  <iframe src={tokuIframeCard} className="col-span-12 h-[800px] border-0 w-full"/>
+                )}
               </div>
             )}
 
+            {activeTab === "3" && (
+              <div
+                className={'grid grid-cols-12'}
+                id={'payment-card'}
+              >
+                <p className={`col-span-12 text-2xl mb-5`}>
+                  Pago via SPEI
+                </p>
 
-            {activeTab === "Pago con transferencia interbancaria (SPEI)" && (
-              <div>
-                <p>Pago con transferencia bancaria SPEI</p>
-                <div className="flex flex-col">
-                  <div className="flex justify-center my-5">
-                    <div className="button-container ">
-                      <button
-                        className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
-                        onClick={() => handlePayment('spei', true)}
-                      >
-                        GUARDAR SOLICITUD
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex justify-center">
-                    <div className="button-container ">
-                      <button
-                        className="btn-xl multi-border bg-black font-medium text-white disabled:opacity-50"
-                        onClick={() => handlePayment('spei', false)}
-                      >
-                        GENERAR REFERENCIA
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <p className={`col-span-12 text-2xl mb-5`}>
+                  Puedes realizar tu pago via SPEI a la siguiente clabe.
+                </p>
+                <p className={`col-span-12 text-center text-2xl mb-5`}>
+                  {tokuIframeSpei}
+                </p>
               </div>
             )}
+
+            {activeTab === "4" && (
+              <div
+                className={'grid grid-cols-12'}
+                id={'payment-card'}
+              >
+                <p className={`col-span-12 text-2xl mb-5`}>
+                  Pago en efectivo
+                </p>
+
+                <p className={`col-span-12 text-xl mb-5`}>
+                  Puedes realizar tu pago en efectivo en las siguientes tiendas escaneando el código de barras.
+                </p>
+
+                {tokuIframeCash && (
+                  <iframe src={tokuIframeCash} className="col-span-12 h-[800px] border-0 w-full"/>
+                )}
+              </div>
+            )}
+            {activeTab === "5" && (
+              <div
+                className={'grid grid-cols-12'}
+                id={'payment-card'}
+              >
+                <p className={`col-span-12 text-2xl mb-5`}>
+                Pago via CoDi
+                </p>
+
+                {tokuIframeCodi && (
+                  <iframe src={tokuIframeCodi} className="col-span-12 h-[800px] border-0 w-full"/>
+                )}
+              </div>
+            )}
+
+            {/*
+            <div
+              className="col-span-12 text-3xl flex flex-col mt-10 mx-auto justify-between px-5 w-auto sm:w-[23.125rem] py-[3rem] h-[21.25rem] rounded-2xl border-2 border-black">
+              <div className="flex justify-between mx-auto gap-x-8">
+                <div className="flex flex-col justify-start font-light">
+                  <span className="font-medium">Plan:</span>
+                  <span className="font-medium">Costo de SIM:</span>
+                  <span className="font-medium">Envío:</span>
+                </div>
+                <div className="flex flex-col justify-start font-light">
+                  <span>${formatNumber(plan.price)}</span>
+                  <span>${formatNumber(0)}</span>
+                  <span>${shippingCost}</span>
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <span
+                  className="font-medium text-4xl md:text-[3.125rem] my-[1.75rem] text-custom-blue">Total a Pagar</span>
+              </div>
+              <div className="flex justify-center pt-0 md:pt-4">
+                <span className="text-4xl md:text-[3.125rem]">${formatNumber(Number(plan.price) + shippingCost)}</span>
+              </div>
+            </div> */}
+
+            <div className={'col-span-12 my-10'}>
+              <div className="flex justify-center">
+                <div className="button-container">
+                  <button
+                    className="btn-md multi-border bg-black font-medium text-white disabled:opacity-50"
+                    onClick={() => handlePayment('card', false)}
+                    disabled={initialPaymentIsLoading || form.isSubmitting}
+                  >
+                    SIGUIENTE
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </>
       )}
     </div>
   );
-};
+});
+
+PaymentForm.displayName = 'PaymentForm';
 
 export default PaymentForm;

@@ -56,9 +56,9 @@
   }
 }
 
-/* main{
-  background: #fff;
-} */
+main{
+  overflow: hidden;
+}
 
 .mb-20 {
   margin-bottom: 5rem;
@@ -469,11 +469,12 @@ canvas {
   overflow-x: clip;
 }
 
+.swiper{
+  overflow: inherit !important;
+}
 .swiper,
 swiper-container::part(container) {
   width: 100%;
-  padding: 16px 0 20px;
-  margin-bottom: 50px;
 }
 
 .swiper-slide,
@@ -507,7 +508,7 @@ swiper-container::part(bullet) {
 }
 
 .swiper-pagination {
-  --swiper-pagination-bottom: -4px;
+  --swiper-pagination-bottom: -60px;
 }
 
 .swiper-pagination-bullet {
@@ -716,8 +717,8 @@ swiper-container::part(bullet) {
   width: 8.313rem;
   height: 8.313rem;
   font-size: 0.6rem;
-  top: -3.125rem;
-  right: 0.438rem;
+  top: -4.125rem;
+  right: 0rem;
   z-index: 1992;
 }
 
@@ -1241,23 +1242,12 @@ select.input {
 .planes-content {
   width: 64.375rem;
   height: 26.25rem;
-  margin-bottom: -220px;
+  margin-bottom: -240px;
   padding-top: 4.375rem;
   border-radius: 1.875rem;
   background: linear-gradient(180deg, #00DDBA 0%, #007764 100%);
   max-width: 100%;
 }
-
-@media screen and (max-width: 768px) {
-  .planes-content {
-    height: 22rem;
-  }
-}
-
-/* .planes-container{
-  position: relative;
-  top: -220px;
-} */
 
 sup {
   font-size: 1.125rem;

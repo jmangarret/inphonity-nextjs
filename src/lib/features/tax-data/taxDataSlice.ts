@@ -2,10 +2,10 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Invitation, invitationsApi} from "@/lib/services/invitationsApi";
 
 export interface TaxData {
-  rfc: string;
-  rfcError: string;
   name: string;
-  nameError: string;
+  rfc: string;
+  fiscalRegime: string;
+  rfcError: string;
   street: string;
   streetError: string;
   exteriorNumber: string;
@@ -28,10 +28,10 @@ export interface TaxData {
 }
 
 const initialState: TaxData = {
-  rfc: "",
-  rfcError: "",
   name: "",
-  nameError: "",
+  rfc: "",
+  fiscalRegime: '',
+  rfcError: "",
   street: "",
   streetError: "",
   exteriorNumber: "",
@@ -58,10 +58,10 @@ name: "taxData",
   initialState,
   reducers: {
     resetTaxData: (state) => {
-      state.rfc = "";
-      state.rfcError = "";
       state.name = "";
-      state.nameError = "";
+      state.rfc = "";
+      state.fiscalRegime = '';
+      state.rfcError = "";
       state.street = "";
       state.streetError = "";
       state.exteriorNumber = "";
@@ -84,7 +84,7 @@ name: "taxData",
     },
     resetErrors: (state) => {
       state.rfcError = "";
-      state.nameError = "";
+      state.fiscalRegime = '';
       state.streetError = "";
       state.exteriorNumberError = "";
       state.interiorNumberError = "";
@@ -95,17 +95,20 @@ name: "taxData",
       state.stateError = "";
       state.municipalityError = "";
     },
+    setName: (state, action: PayloadAction<string>) => {
+      state.name = action.payload;
+    },
     setRfc: (state, action: PayloadAction<string>) => {
       state.rfc = action.payload;
     },
     setRfcError: (state, action: PayloadAction<string>) => {
       state.rfcError = action.payload;
     },
-    setName: (state, action: PayloadAction<string>) => {
-      state.name = action.payload;
+    setFiscalRegime: (state, action: PayloadAction<string>) => {
+      state.fiscalRegime = action.payload;
     },
-    setNameError: (state, action: PayloadAction<string>) => {
-      state.nameError = action.payload;
+    setFiscalRegimeError: (state, action: PayloadAction<string>) => {
+      state.fiscalRegime = action.payload;
     },
     setStreet: (state, action: PayloadAction<string>) => {
       state.street = action.payload;
@@ -170,7 +173,7 @@ name: "taxData",
       const invitation = action.payload;
 
       state.rfc = invitation.pre_registration?.rfc || "";
-      state.name = invitation.pre_registration?.name || "";
+      state.fiscalRegime = invitation.pre_registration?.fiscal_regime || '';
       state.street = invitation.pre_registration?.street || "";
       state.exteriorNumber = invitation.pre_registration?.exterior_number || "";
       state.interiorNumber = invitation.pre_registration?.interior_number || "";
@@ -191,10 +194,11 @@ name: "taxData",
 export const {
   resetErrors,
   resetTaxData,
+  setName,
   setRfc,
   setRfcError,
-  setName,
-  setNameError,
+  setFiscalRegime,
+  setFiscalRegimeError,
   setStreet,
   setStreetError,
   setExteriorNumber,
