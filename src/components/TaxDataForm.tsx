@@ -1,9 +1,10 @@
 "use client";
-import React, {useEffect, useMemo, useRef} from "react";
+import React, {use, useEffect, useMemo, useRef} from "react";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks";
 import {
-  setRfc,
   setName,
+  setRfc,
+  setFiscalRegime,
   setStreet,
   setExteriorNumber,
   setInteriorNumber,
@@ -24,8 +25,9 @@ export default function TaxDataForm() {
   const shipping = useAppSelector((state) => state.shipping);
   const personalData = useAppSelector((state) => state.personalData);
   const fieldsOrder: (keyof typeof taxData)[] = useMemo(() => [
-    "rfc",
     "name",
+    "rfc",
+    'fiscalRegime',
     "street",
     "exteriorNumber",
     "neighborhood",
@@ -46,6 +48,22 @@ export default function TaxDataForm() {
       return false;
     });
   }, [fieldsOrder, taxData]);
+  const [fiscalRegimes, setFiscalRegimes] = React.useState<Array<{value: string; label: string}>>([]);
+
+  /**
+   * Fetch fiscal regimes from API
+   */
+  const fetchFiscalRegimes = async () => {
+    try {
+      const api = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+      const response = await fetch(`${api}/api/tax-data/fiscal-regimes`);
+      const data = await response.json();
+
+      setFiscalRegimes(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(()=>{
     if (taxData.showAccountDataForm){
@@ -64,7 +82,7 @@ export default function TaxDataForm() {
     }
   }, [
     taxData.rfcError,
-    taxData.nameError,
+    taxData.fiscalRegime,
     taxData.streetError,
     taxData.exteriorNumberError,
     taxData.interiorNumberError,
@@ -73,6 +91,10 @@ export default function TaxDataForm() {
     taxData.stateError,
     taxData.municipalityError,
   ]);
+
+  useEffect(() => {
+    fetchFiscalRegimes();
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const {name, value} = e.target;
@@ -84,8 +106,8 @@ export default function TaxDataForm() {
           handleRfc(e);
         }
         break;
-      case "name":
-        dispatch(setName(value.replace(/[^A-Za-z\s]+/g, '')));
+      case 'fiscalRegime':
+        dispatch(setFiscalRegime(value));
         break;
       case "street":
         dispatch(setStreet(value));
@@ -141,7 +163,6 @@ export default function TaxDataForm() {
     dispatch(setZipCode(shipping.zipCode));
     dispatch(setState(shipping.state));
     dispatch(setMunicipality(shipping.city));
-    dispatch(setName(`${personalData.name}`));
   }
 
   const emptyTaxAddressData = () => {
@@ -152,12 +173,16 @@ export default function TaxDataForm() {
     dispatch(setZipCode(''));
     dispatch(setZipCode(''));
     dispatch(setMunicipality(''));
-    dispatch(setName(''));
   }
 
   const handleNextForm = () => {
       dispatch(setShowAccountDataForm(true));
   }
+
+  useEffect(() => {
+    const fullName = `${personalData.name} ${personalData.lastName} ${personalData.secondLastName}`;
+    dispatch(setName(fullName));
+  },);
 
   return (
     <div className={'p-3 md:p-6 lg:p-9 xl:p-12'} id="TaxFormSection" >
@@ -177,13 +202,9 @@ export default function TaxDataForm() {
         </div>
         <div className="lg:container bg-white p-8 text-black rounded-md mx-auto w-[90%] lg:w-[80%] border-2 border-[#EB522D]">
           <p className={`text-base leading-none`}>
-            <span className="font-medium">Importante: </span>
-            Es necesario que tengas RFC con homoclave para que podamos realizar los pagos de tu cashback. Si aún
-            no lo tienes, cuentas con 90 días naturales para tramitarlo, de lo contrario no podrás recibir el beneficio del cashback.
-          </p>
-          <p className={`text-base leading-none`}>
-            También es necesario que cuentes con tu Constancia de Situación Fiscal actualizada y que se encuentre
-            dentro del régimen de Asimilados al Salario.
+          Es importante tener RFC con homoclave para recibir los pagos de tu cashback.
+          Tienes 90 días para tramitarlo y no perder este beneficio. También necesitarás tu Constancia de Situación Fiscal actualizada y estar en el régimen de Asimilados al Salario. El Régimen Fiscal se otorga según la actividad económica; una persona
+          puede tener más de uno asignado.
           </p>
         </div>
       </div>
@@ -192,7 +213,7 @@ export default function TaxDataForm() {
       <div className={'lg:container mx-auto w-full'}>
         <div className={'grid grid-cols-12 form-card gap-3 sm:gap-4 md:gap-5 lg:gap-6 w-full mx-auto p-6 md:p-8 lg:p-10 xl:p-12'}>
           <div className="col-span-12 flex items-center text-white mb-2">
-            <input 
+            <input
               type="checkbox"
               id={'dontHaveTaxData'}
               className="form-checkbox green-check h-5 w-5 text-green-500"
@@ -203,33 +224,23 @@ export default function TaxDataForm() {
               <span className={`ml-2 inline-block text-black`}>No tengo mi información fiscal a la mano o actualizada</span>
             </label>
           </div>
-         
-          {/* name */}
-          <div
-            className={'col-span-12'}
-          >
-            <input 
-              type="text"
-              className={`input input-border-black ${taxData.nameError ? 'input-error' : ''}`}
-              placeholder={`Nombre completo*`}
-              value={taxData.name}
-              name={`name`}
-              onChange={handleInputChange}
-              ref={el => inputRefs.current.name = el}
-            />
-            {/* error */}
-            {taxData.nameError && (
-              <p
-                className={'text-red-500 text-xs mt-1 mx-3'}
-              >
-                {taxData.nameError}
-              </p>
-            )}
-          </div>
 
+          <div className={'col-span-12'}>
+            <input
+              type="text"
+              className={`input input-border-black`}
+              placeholder={`Nombre Completo*`}
+              value={taxData.name}
+              name={'name'}
+              disabled
+              onChange={handleInputChange}
+              onBlur={handleRfc}
+              ref={el => {inputRefs.current.name = el}}
+            />
+          </div>
            {/* rfc */}
            <div className={'col-span-12'}>
-            <input 
+            <input
               type="text"
               className={`input input-border-black ${taxData.rfcError ? 'input-error' : ''}`}
               placeholder={`RFC*`}
@@ -237,7 +248,7 @@ export default function TaxDataForm() {
               name={'rfc'}
               onChange={handleInputChange}
               onBlur={handleRfc}
-              ref={el => inputRefs.current.rfc = el}
+              ref={el => {inputRefs.current.rfc = el}}
               maxLength={13}
               minLength={13}
             />
@@ -251,19 +262,38 @@ export default function TaxDataForm() {
             )}
           </div>
 
+          {/* fiscal regime */}
+          <div className={'col-span-12'}>
+            <select
+              className={`input input-border-black`}
+              value={taxData.fiscalRegime}
+              name={'fiscalRegime'}
+              onChange={handleInputChange}
+            >
+              <option value={''}>Régimen Fiscal*</option>
+              {fiscalRegimes.map((regime, index) => (
+                <option
+                  key={index}
+                  value={regime['value']}
+                >
+                  {regime['label']}
+                </option>
+              ))}
+            </select>
+          </div>
 
           {/* street */}
           <div
             className={'col-span-12'}
           >
-            <input 
+            <input
               type="text"
               className={`input input-border-black ${taxData.streetError ? 'input-error' : ''}`}
               placeholder={`Dirección fiscal - calle*`}
               value={taxData.street}
               name={`street`}
               onChange={handleInputChange}
-              ref={el => inputRefs.current.street = el}
+              ref={el => {inputRefs.current.street = el}}
             />
             {/* error */}
             {taxData.streetError && (
@@ -279,14 +309,14 @@ export default function TaxDataForm() {
           <div
             className={'col-span-6'}
           >
-            <input 
+            <input
               type="text"
               className={`input input-border-black ${taxData.exteriorNumberError ? 'input-error' : ''}`}
               placeholder={`Número exterior*`}
               value={taxData.exteriorNumber}
               name={`exteriorNumber`}
               onChange={handleInputChange}
-              ref={el => inputRefs.current.exteriorNumber = el}
+              ref={el => {inputRefs.current.exteriorNumber = el}}
             />
             {/* error */}
             {taxData.exteriorNumberError && (
@@ -302,14 +332,14 @@ export default function TaxDataForm() {
           <div
             className={'col-span-6'}
           >
-            <input 
+            <input
               type="text"
               className={`input input-border-black ${taxData.interiorNumberError ? 'input-error' : ''}`}
               placeholder={`Número interior`}
               value={taxData.interiorNumber}
               name={`interiorNumber`}
               onChange={handleInputChange}
-              ref={el => inputRefs.current.interiorNumber = el}
+              ref={el => {inputRefs.current.interiorNumber = el}}
             />
             {/* error */}
             {taxData.interiorNumberError && (
@@ -325,14 +355,14 @@ export default function TaxDataForm() {
            <div
             className={'col-span-6'}
           >
-            <input 
+            <input
               type="text"
               className={`input input-border-black ${taxData.zipCodeError ? 'input-error' : ''}`}
               placeholder={`Código postal*`}
               value={taxData.zipCode}
               name={`zipCode`}
               onChange={handleInputChange}
-              ref={el => inputRefs.current.zipCode = el}
+              ref={el => {inputRefs.current.zipCode = el}}
               maxLength={5}
             />
             {/* error */}
@@ -347,14 +377,14 @@ export default function TaxDataForm() {
 
           {/* neighborhood */}
           <div className={'col-span-6'}>
-            <input 
+            <input
               type="text"
               className={`input input-border-black ${taxData.neighborhoodError ? 'input-error' : ''}`}
               placeholder={`Colonia*`}
               value={taxData.neighborhood}
               name={`neighborhood`}
               onChange={handleInputChange}
-              ref={el => inputRefs.current.neighborhood = el}
+              ref={el => {inputRefs.current.neighborhood = el}}
             />
             {/* error */}
             {taxData.neighborhoodError && (
@@ -368,14 +398,14 @@ export default function TaxDataForm() {
 
           {/* state */}
           <div className={'col-span-6'}>
-            <input 
+            <input
               type="text"
               className={`input input-border-black ${taxData.stateError ? 'input-error' : ''}`}
               placeholder={`Estado*`}
               value={taxData.state}
               name={`state`}
               onChange={handleInputChange}
-              ref={el => inputRefs.current.state = el}
+              ref={el => {inputRefs.current.state = el}}
             />
             {/* error */}
             {taxData.stateError && (
@@ -391,14 +421,14 @@ export default function TaxDataForm() {
           <div
             className={'col-span-6'}
           >
-            <input 
+            <input
               type="text"
               className={`input input-border-black ${taxData.municipalityError ? 'input-error' : ''}`}
               placeholder={`Municipio/Alcaldía*`}
               value={taxData.municipality}
               name={`municipality`}
               onChange={handleInputChange}
-              ref={el => inputRefs.current.municipality = el}
+              ref={el => {inputRefs.current.municipality = el}}
             />
             {/* error */}
             {taxData.municipalityError && (
@@ -411,18 +441,6 @@ export default function TaxDataForm() {
           </div>
 
           <div className={'col-span-12 flex justify-between'}>
-              {/* <div className="flex items-center text-white mb-2 ml-2">
-                <input 
-                  type="checkbox"
-                  id={'myAddressAreEqual'}
-                  className="form-checkbox green-check h-5 w-5 text-green-500"
-                  name={'myAddressAreEqual'}
-                  onChange={handleMyAddressAreEqualChange}
-                />
-                <label htmlFor={'myAddressAreEqual'}>
-                  <span className={`ml-2 inline-block text-white`}>Mi dirección de envío y facturación son iguales</span>
-                </label>
-              </div> */}
               <div>
                 <span className={`text-base text-black font-medium`}>
                   Campos Obligatorios*

@@ -4,6 +4,7 @@ import { useLazyValidateImeiQuery, useValidateImeiQuery } from "@/lib/services/v
 import PlusDecoration from "@/components/PlusDecoration";
 import Image from "next/image";
 import { setSupportEsim } from "@/lib/features/plan/planSlice";
+import { setIsValidation } from "@/lib/features/shipping/shippingSlice";
 import { useAppDispatch } from "@/lib/hooks";
 
 
@@ -67,7 +68,7 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
 
     const ONLY_SIM = 'El equipo de no es compatible con ESIM, pero si con una SIM FISICA';
     const COMPATIBLE = 'El equipo es compatible';
-
+    dispatch(setIsValidation(true));
     switch (result.message) {
       case ONLY_SIM:
         dispatch(setSupportEsim(false));

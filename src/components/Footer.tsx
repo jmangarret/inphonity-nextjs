@@ -39,7 +39,7 @@ export default function Footer() {
                 className="inline-block mr-2"
                 style={{ verticalAlign: "middle" }}
               />
-              55 9240 0295
+              55 4161 1416
             </a>
           </div>
           <div className="col-span-12 sm:col-span-6 lg:col-span-2 md:col-span-6 text-center flex flex-col items-center">

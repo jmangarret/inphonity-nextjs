@@ -11,6 +11,8 @@ import { request } from "@/mocks/request-data";
 
 export default function Sign({ params }: { params: { invitationId: string } }) {
   const router = useRouter();
+
+  const invitationIdDecoded = atob(params.invitationId.replace("%3D", "="));
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
   const [isTermsAccepted, setIsTermsAccepted] = React.useState(false);
   const [signature, { isLoading, error }] = useSignatureMutation();
@@ -24,7 +26,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
     data: invitationData,
     error: invitationError,
     refetch: invitationRefetch
-  } = useGetInvitationByIdQuery(params.invitationId);
+  } = useGetInvitationByIdQuery(invitationIdDecoded);
   // const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = request;
 
   const { openModal } = React.useContext(ModalContext);
@@ -149,18 +151,18 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
     handlePassword();
 
     signature({
-      invitation_id: parseInt(params.invitationId),
+      invitation_id: parseInt(invitationIdDecoded),
       new_password: password,
       new_password_confirmation: passwordConfirmation,
     })
       .unwrap()
       .then(() => {
         // Redirect to inphonity.com
-        router.push(`/welcome/${params.invitationId}`);
+        router.push(`/welcome/${invitationIdDecoded}`);
       })
       .catch((response) => {
         if (response.data && response.data.message && response.data.message === 'Ya has firmado el contrato.') {
-          router.push(`/welcome/${params.invitationId}`);
+          router.push(`/welcome/${invitationIdDecoded}`);
 
           return;
 
@@ -220,7 +222,13 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
                   />
                   <label htmlFor="terms">
                     <span className={`ml-2 inline-block font-medium text-white`}>
-                      Acepto los Términos y Condiciones
+                      <a
+                        href={'https://drive.google.com/file/d/12omj25jSFrsjbn6hMiPUdXzGFLCOYJ_L/view'}
+                        target={'_blank'}
+                        className={'underline'}
+                      >
+                        Acepto los Términos y Condiciones
+                      </a>
                     </span>
                   </label>
                 </div>
@@ -261,6 +269,8 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
                     placeholder="Correo electrónico"
                     name={'email'}
                     autoComplete="off"
+                    value={invitationData?.pre_registration?.email || ''}
+                    disabled={true}
                   />
                 </div>
                 <div className="flex items-center text-black mb-6 md:mb-8 lg:mb-10">

@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect, useMemo, useRef} from "react";
+import React, {useState, useEffect, useMemo, useRef} from "react";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks";
 import {
   setIsEsim,
@@ -23,7 +23,6 @@ import {
   setState as setTaxState,
   setMunicipality as setTaxMunicipality,
   setEmail as setTaxEmail,
-  setName as setTaxName,
 } from "@/lib/features/tax-data/taxDataSlice";
 import Image from "next/image";
 
@@ -34,6 +33,7 @@ export default function ShippingForm() {
   const personalData = useAppSelector((state) => state.personalData);
   const plan = useAppSelector((state) => state.plan);
   const shipping = useAppSelector((state) => state.shipping);
+  const [colonies, setColonies] = useState<Array<any>>([]);
   const fieldsOrder: (keyof typeof shipping)[] = useMemo(() => [
     'zipCode',
     'neighborhood',
@@ -115,6 +115,48 @@ export default function ShippingForm() {
     }
   }
 
+  useEffect(() => { 
+    if (shipping.zipCode.length === 5) {
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:${shipping.zipCode}|country:MX&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.status !== 'OK') {
+            dispatch(setState(''));
+            dispatch(setCity(''));
+            setColonies([]);
+            return;
+          }
+    
+          let state = '';
+          let city = '';
+          let colonies: any[] | ((prevState: never[]) => never[]) = [];
+    
+          data.results[0].address_components.forEach((component: { types: string | string[]; long_name: string; }) => {
+            if (component.types.includes('administrative_area_level_1')) {
+              state = component.long_name;
+            }
+            if (component.types.includes('locality') || component.types.includes('political')) {
+              city = component.long_name;
+            }
+          });
+
+          data.results[0].postcode_localities.forEach((colony: any) => {
+            colonies.push(colony);
+          });
+    
+          dispatch(setState(state));
+          dispatch(setCity(city));
+          setColonies(colonies);
+        })
+        .catch(error => {
+          console.error('Error fetching geocode data:', error);
+          dispatch(setState(''));
+          dispatch(setCity(''));
+          setColonies([]);
+        });
+    } 
+  }, [shipping.zipCode]);
+
   const handleNextForm = () => {
     dispatch(setShowTaxDataForm(true));
   }
@@ -142,7 +184,6 @@ export default function ShippingForm() {
     dispatch(setTaxState(shipping.state));
     dispatch(setTaxMunicipality(shipping.city));
     dispatch(setTaxEmail(personalData.email));
-    dispatch(setTaxName(`${personalData.name}`));
   }
 
   const emptyTaxAddressData = () => {
@@ -155,7 +196,6 @@ export default function ShippingForm() {
     dispatch(setTaxState(''));
     dispatch(setTaxMunicipality(''));
     dispatch(setTaxEmail(''));
-    dispatch(setTaxName(''));
   }
 
   return (
@@ -168,9 +208,13 @@ export default function ShippingForm() {
         <p className={`font-medium text-black text-center font-base mb-4`}>
           Si tu dispositivo es compatible con tarjeta SIM y eSIM, elige la que prefieras
         </p>
-        {shipping.isEsim && !plan.supportEsim && (
+        {shipping.isValidated && (
           <p className={'text-highlight-red text-base text-center mt-1'}>
             * El dispositivo validado no es compatible con eSIM. ¿Estás seguro que deseas continuar con esta opción?
+          </p>
+         ) || shipping.isEsim && !plan.supportEsim && (
+          <p className={'text-highlight-red text-base text-center mt-1'}>
+            * No has validado tu dispositivo. ¿Estás seguro que deseas continuar con esta opción?
           </p>
          )}
       </header>
@@ -182,7 +226,7 @@ export default function ShippingForm() {
             <div className={'col-span-12'}>
               <div className="mb-5">
                 <label>
-                  <input 
+                  <input
                     className={`${shipping.isEsimError ? 'input-error' : ''}`}
                     style={{accentColor: '#EF7911'}}
                     type="radio"
@@ -198,7 +242,7 @@ export default function ShippingForm() {
               </div>
               <div>
                 <label>
-                  <input 
+                  <input
                     className={`${shipping.isEsimError ? 'input-error' : ''}`}
                     style={{accentColor: '#EF7911'}}
                     type="radio"
@@ -231,14 +275,14 @@ export default function ShippingForm() {
             <div
               className={'col-span-12'}
             >
-              <input 
+              <input
                 type="text"
                 className={`input input-border-black ${shipping.streetError ? 'input-error' : ''}`}
                 placeholder="Calle*"
                 value={shipping.street}
                 name={'street'}
                 onChange={handleInputChange}
-                ref={el => inputRefs.current.street = el}
+                ref={el => {inputRefs.current.street = el}}
               />
               {/* error */}
               {shipping.streetError && (
@@ -254,14 +298,14 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input 
+              <input
                 type="text"
                 className={`input input-border-black ${shipping.numberError ? 'input-error' : ''}`}
                 placeholder="Número exterior*"
                 value={shipping.number}
                 name={'number'}
                 onChange={handleInputChange}
-                ref={el => inputRefs.current.number = el}
+                ref={el => {inputRefs.current.number = el}}
               />
               {/* error */}
               {shipping.numberError && (
@@ -277,14 +321,14 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input 
+              <input
                 type="text"
                 className={`input input-border-black ${shipping.interiorNumberError ? 'input-error' : ''}`}
                 placeholder="Número interior"
                 value={shipping.interiorNumber}
                 name={'interiorNumber'}
                 onChange={handleInputChange}
-                ref={el => inputRefs.current.interiorNumber = el}
+                ref={el => {inputRefs.current.interiorNumber = el}}
               />
               {/* error */}
               {shipping.interiorNumberError && (
@@ -301,14 +345,13 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input 
-                type="text"
+              <input
                 className={`input input-border-black ${shipping.zipCodeError ? 'input-error' : ''}`}
                 placeholder="Código postal*"
                 value={shipping.zipCode}
                 name={'zipCode'}
                 onChange={handleInputChange}
-                ref={el => inputRefs.current.zipCode = el}
+                ref={el => { inputRefs.current.zipCode = el; }}
                 maxLength={5}
               />
               {/* error */}
@@ -324,15 +367,18 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input 
-                type="text"
-                className={`input input-border-black ${shipping.neighborhoodError ? 'input-error' : ''}`}
-                placeholder="Colonia*"
-                value={shipping.neighborhood}
-                name={'neighborhood'}
-                onChange={handleInputChange}
-                ref={el => inputRefs.current.neighborhood = el}
-              />
+              <select
+              value={shipping.neighborhood}
+              className={`input input-border-black`}
+              name={'neighborhood'}
+              onChange={handleInputChange}
+            >
+              <option value={''}>Selecciona una colonia*</option>
+              {colonies.map((colony: string, index: number) => (
+                <option key={index} value={colony}>{colony}</option>
+              ))}
+              
+            </select>
               {/* error */}
               {shipping.neighborhoodError && (
                 <p
@@ -347,14 +393,14 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input 
+              <input
                 type="text"
                 className={`input input-border-black ${shipping.stateError ? 'input-error' : ''}`}
                 placeholder="Estado*"
                 value={shipping.state}
                 name={'state'}
                 onChange={handleInputChange}
-                ref={el => inputRefs.current.state = el}
+                ref={el => {inputRefs.current.state = el}}
               />
               {/* error */}
               {shipping.stateError && (
@@ -369,14 +415,14 @@ export default function ShippingForm() {
             <div
               className={'col-span-12 sm:col-span-6'}
             >
-              <input 
+              <input
                 type="text"
                 className={`input input-border-black ${shipping.cityError ? 'input-error' : ''}`}
                 placeholder="Municipio/Alcaldía*"
                 value={shipping.city}
                 name={'city'}
                 onChange={handleInputChange}
-                ref={el => inputRefs.current.city = el}
+                ref={el => {inputRefs.current.city = el}}
               />
               {/* error */}
               {shipping.cityError && (
@@ -387,19 +433,19 @@ export default function ShippingForm() {
                 </p>
               )}
             </div>
-            
+
             {/* complement */}
             <div
               className={'col-span-12'}
             >
-              <input 
+              <input
                 type="text"
                 className={`input input-border-black ${shipping.complementError ? 'input-error' : ''}`}
                 placeholder={`Referencia*`}
                 value={shipping.complement}
                 name={'complement'}
                 onChange={handleInputChange}
-                ref={el => inputRefs.current.complement = el}
+                ref={el => {inputRefs.current.complement = el}}
               />
               {/* error */}
               {shipping.complementError && (
@@ -410,11 +456,11 @@ export default function ShippingForm() {
                 </p>
               )}
             </div>
-            
+
 
             <div className={'col-span-12 flex justify-between'}>
               <div className="flex items-center text-white mb-2 ml-2">
-                <input 
+                <input
                   type="checkbox"
                   id={'myAddressAreEqual'}
                   className="form-checkbox green-check h-5 w-5 text-green-500"

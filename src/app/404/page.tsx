@@ -1,5 +1,5 @@
 'use client'
- 
+
 export default function Page() {
   return (
     <div className="flex place-items-center place-content-center my-20 mx-10 text-center">

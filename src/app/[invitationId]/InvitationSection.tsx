@@ -9,9 +9,10 @@ import { request } from "@/mocks/request-data";
 
 type InvitationSectionProps = {
   invitationId: string;
+  invitationHash: string;
 };
 
-const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) => {
+const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId, invitationHash }) => {
   const router = useRouter();
   const { openModal } = React.useContext(ModalContext);
   // TODO: descomentar
@@ -51,7 +52,7 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId }) =
   };
 
   const handleAccept = () => {
-    router.push(`/accepted/${invitationId}`);
+    router.push(`/accepted/${invitationHash}`);
   };
 
   return (

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ValidateCompatibility from "@/app/accepted/[invitationId]/ValidateCompatibility";
 import Header from "@/components/Header";
@@ -14,14 +14,16 @@ import { request } from "@/mocks/request-data";
 
 export default function Accepted({ params }: { params: { invitationId: string } }) {
   const plan = useAppSelector((state) => state.plan);
+  const invitationIdDecoded = atob(params.invitationId.replace("%3D", "="));
   const {
     isLoading: isLoadingInvitation,
     isFetching: isFetchingInvitation,
     data: invitationData,
     error: invitationError
-  } = useGetInvitationByIdQuery(params.invitationId);
+  } = useGetInvitationByIdQuery(invitationIdDecoded);
   // const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = request;
 
+  
   const router = useRouter();
   //TODO: descomentar
   React.useEffect(() => {
@@ -36,11 +38,12 @@ export default function Accepted({ params }: { params: { invitationId: string } 
         <ValidateCompatibility />
         <SelectOfferSection />
         <RegisterForms
-          invitationId={params.invitationId}
+          invitationId={invitationIdDecoded!}
         />
-        {plan.isPaid && (
+        {invitationData && invitationData.status === 'accepted' && (
           <SignContract
-            invitationId={params.invitationId}
+            invitationId={params.invitationId!}
+            invitationIdDecoded={invitationIdDecoded!}
           />
         )}
       </main>

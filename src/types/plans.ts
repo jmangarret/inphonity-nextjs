@@ -2,7 +2,7 @@ export interface Commission {
     id:                          number;
     product_id:                  number;
     target_id:                   number;
-    year_1_residual:             string;
+    year_1_residual:             number;
     year_1_residual_sales_force: string;
     year_2_residual:             string;
     year_2_residual_sales_force: string;
@@ -45,8 +45,8 @@ export interface Plan {
     has_fm:            number;
     has_tt:            number;
     has_x:             number;
-    has_tl:             number;
-    has_sc:             number;
+    has_telegram:      number;
+    has_snapchat:      number;
     portability_promo: TrustedHTML | string | HTMLSpanElement;
     price:             number;
     code:              string;
