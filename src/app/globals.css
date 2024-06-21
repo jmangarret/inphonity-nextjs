@@ -445,6 +445,13 @@ canvas {
   }
 }
 
+@media screen and (min-width: 320px) and (max-width: 425px) {
+
+  .bg-section-1 {
+    background-image: none;
+  }
+}
+
 @media screen and (min-width: 450px) {
   .flipper {
     height: 350px;

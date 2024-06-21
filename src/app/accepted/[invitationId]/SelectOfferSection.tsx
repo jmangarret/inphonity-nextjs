@@ -6,7 +6,7 @@ const Sliders = dynamic(() => import("@/components/Sliders"), { ssr: false });
 
 export default function SelectOfferSection() {
   return (
-    <section className="mx-auto bg-white">
+    <section className="mx-auto bg-white pt-20">
       <div className="grid grid-cols-10 items-center">
         <div className="col-span-2 flex justify-end"></div>
         <div className="col-span-12 lg:col-span-6 flex justify-center">

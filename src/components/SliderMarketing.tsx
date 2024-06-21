@@ -1,38 +1,91 @@
+"use client";
 import React from 'react';
-import ImageGallery from "react-image-gallery";
-import "react-image-gallery/styles/css/image-gallery.css";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import 'swiper/css/autoplay';
 
 const SliderMarketing: React.FC = () => {
-  const images = [
+  const imagesWeb = [
     {
-      original: "/img/Cashback-1.png",
+      original: "/img/nosotros_desktop.png",
     },
     {
-      original: "/img/crecen.png",
+      original: "/img/bg-header-portability.png",
     },
     {
-      original: "/img/cambiar-linea.png",
+      original: "/img/circulo_desktop.png",
     },
+    {
+      original: "/img/bg-header-plans.png",
+    }
   ];
-  
+
+  const imagesMobil = [
+    {
+      original: "/img/nosotros_mobile.png",
+    },
+    {
+      original: "/img/bg-header-portability-sm.png",
+    },
+    {
+      original: "/img/circulo_mobile.png",
+    },
+    {
+      original: "/img/bg-header-plans-sm.png",
+    }
+  ];
 
   return (
-    <>
-    <ImageGallery 
-      items={images} 
-      showPlayButton={false}
-      showFullscreenButton={false}
-      showBullets={true}
-      autoPlay={false}    
-      lazyLoad={true}
-    />
-    <div className='bg-white'>
-        <br />
-        <br />
-        <br />
-      </div>
-    </>
-    
+    <div>
+      <Swiper
+        modules={[Navigation, Autoplay, Pagination]}
+        slidesPerView={1}
+        loop={true}
+        autoplay
+        grabCursor
+        navigation
+        pagination={{ clickable: true }}
+      >
+        <SwiperSlide>
+          <picture>
+            <source srcSet={imagesWeb[0].original} media="(min-width: 1024px)"></source>
+            <source srcSet={imagesWeb[0].original} media="(min-width: 768px)"></source>
+            <source srcSet={imagesMobil[0].original} media="(min-width: 377px)"></source>
+            <img className="bg-white thumbnail" src={imagesMobil[0].original} alt='Imagen' width={1920} height={400} />
+          </picture>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <picture>
+            <source srcSet={imagesWeb[1].original} media="(min-width: 1024px)"></source>
+            <source srcSet={imagesWeb[1].original} media="(min-width: 768px)"></source>
+            <source srcSet={imagesMobil[1].original} media="(min-width: 377px)"></source>
+            <img className="bg-white thumbnail" src={imagesMobil[1].original} alt='Imagen' width={1920} height={400} />
+          </picture>
+        </SwiperSlide>
+        <SwiperSlide>
+          <picture>
+            <source srcSet={imagesWeb[2].original} media="(min-width: 1024px)"></source>
+            <source srcSet={imagesWeb[2].original} media="(min-width: 768px)"></source>
+            <source srcSet={imagesMobil[2].original} media="(min-width: 377px)"></source>
+            <img className="bg-white thumbnail" src={imagesMobil[2].original} alt='Imagen' width={1920} height={400} />
+          </picture>
+        </SwiperSlide>
+        <SwiperSlide>
+          <picture>
+            <source srcSet={imagesWeb[3].original} media="(min-width: 1024px)"></source>
+            <source srcSet={imagesWeb[3].original} media="(min-width: 768px)"></source>
+            <source srcSet={imagesMobil[3].original} media="(min-width: 377px)"></source>
+            <img className="bg-white thumbnail" src={imagesMobil[3].original} alt='Imagen' width={1920} height={400} />
+          </picture>
+        </SwiperSlide>
+      </Swiper>
+    </div>
   );
 };
 

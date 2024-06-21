@@ -110,13 +110,6 @@ export default function ValidateCompatibility() {
               </header>
             </div>
             <div className="col-span-10 md:col-span-5 lg:col-span-4">
-              <PlusDecoration
-                className="w-7 md:w-8 lg:w-12 xl:w-17 absolute"
-                style={{
-                  top: '0',
-                  right: '10%'
-                }}
-              />
               <div className={'lg:px-6 xl:px-9'}>
                 <ValidateStep
                   step={1}
