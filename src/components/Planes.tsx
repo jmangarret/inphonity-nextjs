@@ -14,7 +14,7 @@ const Planes = () => {
   const planes = data?.filter(d => d.type == 'plan')
 
   return (
-    <div className="w-full px-2 2xl:px-24 bg-transparent mb-20">
+    <div className="w-full px-2 2xl:px-20 bg-transparent mb-20">
     <Swiper
       modules={[Navigation, Pagination, Autoplay]}
       spaceBetween={1}
