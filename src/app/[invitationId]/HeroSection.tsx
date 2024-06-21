@@ -9,7 +9,7 @@ export default function HeroSection() {
   const [newVideoUrl, setNewVideoUrl] = useState<string | null>(null);
 
   const handleNewVideoClick = () => {
-    setNewVideoUrl("https://www.youtube.com/embed/5IvQ3fYKnfM");
+    setNewVideoUrl("/movies/gato-largo-final.mp4");
   };
 
   return (
