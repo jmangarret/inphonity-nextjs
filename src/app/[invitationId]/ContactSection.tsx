@@ -14,9 +14,11 @@ export default function ContactSection() {
                         <button className="btn-xl multi-border font-medium">
                             CHATEA EN LÍNEA
                         </button>
-                        <button className="btn-xl multi-border font-medium my-5">
-                            LLAMA A UN ASESOR
-                        </button>
+                        <a href="tel:5541611416">
+                            <button className="btn-xl multi-border font-medium my-5">
+                                LLAMA A UN ASESOR
+                            </button>
+                        </a>
                     </div>
                     <div className="col-span-12 md:col-span-2"></div>
                 </div>
