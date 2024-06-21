@@ -12,16 +12,16 @@ import 'swiper/css/autoplay';
 const SliderMarketing: React.FC = () => {
   const imagesWeb = [
     {
-      original: "/img/nosotros_desktop.png",
+      original: "/img/nosotros_desktop.jpg",
     },
     {
-      original: "/img/bg-header-portability.png",
+      original: "/img/bg-header-portability.jpg",
     },
     {
-      original: "/img/circulo_desktop.png",
+      original: "/img/circulo_desktop.jpg",
     },
     {
-      original: "/img/bg-header-plans.png",
+      original: "/img/bg-header-plans.jpg",
     }
   ];
 

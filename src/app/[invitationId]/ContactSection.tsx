@@ -1,4 +1,28 @@
+import { useEffect } from "react";
+
 export default function ContactSection() {
+
+    useEffect(() => {
+        if (window.FrontChat) {
+            window.FrontChat("init", {
+                chatId: "d6353afc25546e5590163b5dfff6bd55",
+            });
+        } else {
+            const interval = setInterval(() => {
+                if (window.FrontChat) {
+                    clearInterval(interval);
+                    window.FrontChat("init", {
+                        chatId: "d6353afc25546e5590163b5dfff6bd55",
+                    });
+                }
+            }, 500);
+        }
+    }, []);
+
+    const openChat = () => {
+        window.FrontChat("show");
+    }
+
     return (
         <section className="bg-section-8">
             <div className="container mx-auto p-3 sm:p-6 md:p-8 lg:p-10 xl:p-12">
@@ -11,12 +35,14 @@ export default function ContactSection() {
                         <span className="text-highlight text-2xl">¡Contáctanos!</span>
                     </div>
                     <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-4 text-center-mobile">
-                        <button className="btn-xl multi-border font-medium">
+                        <button className="btn-xl multi-border font-medium" onClick={openChat}>
                             CHATEA EN LÍNEA
                         </button>
-                        <button className="btn-xl multi-border font-medium my-5">
-                            LLAMA A UN ASESOR
-                        </button>
+                        <a href="tel:5541611416">
+                            <button className="btn-xl multi-border font-medium my-5">
+                                LLAMA A UN ASESOR
+                            </button>
+                        </a>
                     </div>
                     <div className="col-span-12 md:col-span-2"></div>
                 </div>
