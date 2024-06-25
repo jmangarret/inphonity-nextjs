@@ -139,7 +139,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
             <p className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl text-justify">
               Al hacerte cliente de inphonity no solo te conectas con el mundo, <span className="font-medium ">¡también te recompensamos por ello!</span> ¿Cómo lo hacemos?
               Te damos un bono único por cada amigo que se une a tu Círculo inphonity y eso no es todo, recibes del <span className="font-medium text-highlight"> 1 al 5% de cashback mensual</span>,
-              cada vez que los miembros de tu Círculo pagan su plan. Esto no termina aqui…
+              cada vez que los miembros de tu Círculo pagan su plan. Esto no termina aquí…
             </p>
           </div>
         </div>
