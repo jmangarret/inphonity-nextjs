@@ -1,6 +1,6 @@
 "use client";
-import React, {useEffect, useMemo, useRef} from "react";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks";
+import React, { useEffect, useMemo, useRef } from "react";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import {
   setBankName,
   setBankAccountNumber,
@@ -10,6 +10,8 @@ import {
   setInterbankClabeError,
 } from "@/lib/features/account-data/accountDataSlice";
 import { ModalContext } from "@/contexts/ModalContext";
+import FloatingDecoration from "./FloatingDecoration";
+import PlusDecoration from "./PlusDecoration";
 
 const firstGroup = [
   'BBVA',
@@ -176,7 +178,7 @@ export default function AccountDataForm() {
   ]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
 
     switch (name) {
       case "bankName":
@@ -190,7 +192,7 @@ export default function AccountDataForm() {
         break;
       case "interbankClabe":
         dispatch(setInterbankClabe(value));
-        if(value.length == 18){
+        if (value.length == 18) {
           handleErrorClave(e);
         }
         break;
@@ -204,15 +206,38 @@ export default function AccountDataForm() {
 
   const handleAccountNumber = () => {
     if (accountData.bankAccountNumber !== accountData.bankAccountNumberConfirmation) {
-      if (!accountData.bankAccountNumber || !accountData.bankAccountNumberConfirmation){
+      if (!accountData.bankAccountNumber || !accountData.bankAccountNumberConfirmation) {
         return true;
       }
       setShowPaymentForm(false);
       openModal(
-        <div className="flex flex-col items-center justify-center h-full text-white">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            El Número de Cuenta no coincide.
-          </p>
+        <div className="bg-white">
+          <FloatingDecoration
+            className={`w-48 md:w-64 absolute top-[0%] left-[20%] md:left-[25%]`}
+            img="/img/modal-eclipse-orange-1.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+            img="/img/red-plus.svg"
+          />
+
+          <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+            <p
+              className={`text-center text-xl p-4 text-black ajuste_centro`}
+            >
+              El Número de Cuenta no coincide.
+            </p>
+          </div>
+          <FloatingDecoration
+            className={`w-8 md:w-12 absolute bottom-[15%] right-[10%]`}
+            img="/img/red-plus.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
+            img="/img/modal-eclipse-orange-2.svg"
+          />
         </div>,
       );
 
@@ -223,24 +248,47 @@ export default function AccountDataForm() {
 
   const handleErrorClave = (e: { target: { value: any; }; }) => {
     const value = e.target.value;
-    if(value.length < 18 || value.length > 18){
+    if (value.length < 18 || value.length > 18) {
       dispatch(setInterbankClabeError('El campo CLABE interbancaria debe contener 18 caracteres.'));
-    }else{
+    } else {
       dispatch(setInterbankClabeError(''));
     }
   }
 
   const handleClave = () => {
     if (accountData.interbankClabe !== accountData.interbankClabeConfirmation) {
-      if (!accountData.interbankClabe || !accountData.interbankClabeConfirmation){
+      if (!accountData.interbankClabe || !accountData.interbankClabeConfirmation) {
         return true;
       }
       setShowPaymentForm(false);
       openModal(
-        <div className="flex flex-col items-center justify-center h-full text-white">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            La CLABE interbancaria no coincide.
-          </p>
+        <div className="bg-white">
+          <FloatingDecoration
+            className={`w-48 md:w-64 absolute top-[0%] left-[20%] md:left-[25%]`}
+            img="/img/modal-eclipse-orange-1.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+            img="/img/red-plus.svg"
+          />
+
+          <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+            <p
+              className={`text-center text-xl p-4 text-black ajuste_centro`}
+            >
+              La CLABE interbancaria no coincide.
+            </p>
+          </div>
+          <FloatingDecoration
+            className={`w-8 md:w-12 absolute bottom-[15%] right-[10%]`}
+            img="/img/red-plus.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
+            img="/img/modal-eclipse-orange-2.svg"
+          />
         </div>,
       );
 
@@ -250,7 +298,7 @@ export default function AccountDataForm() {
   }
 
   const handleNextForm = () => {
-    if (handleAccountNumber() && handleClave()){
+    if (handleAccountNumber() && handleClave()) {
       dispatch(setShowPaymentForm(true));
     }
   }
