@@ -6,6 +6,7 @@ import { ModalContext } from "@/contexts/ModalContext";
 import { Loader } from "@googlemaps/js-api-loader";
 import PlusDecoration from "@/components/PlusDecoration";
 import Image from "next/image";
+import FloatingDecoration from "./FloatingDecoration";
 
 type ValidateCoverageFormProps = {
   style?: React.CSSProperties;
@@ -38,10 +39,32 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({ className, 
     // validate postal code
     if (!postalCode) {
       openModal(
-        <div className="flex flex-col items-center justify-center h-full text-white">
-          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            Debes ingresar un código postal.
-          </p>
+        <div className="bg-white">
+          <FloatingDecoration
+            className={`w-48 md:w-64 absolute top-[0%] left-[20%] md:left-[25%]`}
+            img="/img/modal-eclipse-orange-1.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+            img="/img/red-plus.svg"
+          />
+          <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+            <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
+              Debes ingresar un código postal.
+            </p>
+          </div>
+
+          <FloatingDecoration
+            className={`w-8 md:w-12 absolute bottom-[15%] right-[10%]`}
+            img="/img/red-plus.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
+            img="/img/modal-eclipse-orange-2.svg"
+            customClass="rounded-bl-2xl"
+          />
         </div>,
       );
 
@@ -49,10 +72,32 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({ className, 
     }
     if (isNaN(Number(postalCode))) {
       openModal(
-        <div className="flex flex-col items-center justify-center h-full text-white">
-          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            El código postal ingresado no es válido.
-          </p>
+        <div className="bg-white">
+          <FloatingDecoration
+            className={`w-48 md:w-64 absolute top-[0%] left-[20%] md:left-[25%]`}
+            img="/img/modal-eclipse-orange-1.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+            img="/img/red-plus.svg"
+          />
+          <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+            <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
+              El código postal ingresado no es válido.
+            </p>
+          </div>
+
+          <FloatingDecoration
+            className={`w-8 md:w-12 absolute bottom-[15%] right-[10%]`}
+            img="/img/red-plus.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
+            img="/img/modal-eclipse-orange-2.svg"
+            customClass="rounded-bl-2xl"
+          />
         </div>,
       );
 
@@ -60,10 +105,32 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({ className, 
     }
     if (postalCode.length !== 5) {
       openModal(
-        <div className="flex flex-col items-center justify-center h-full text-white">
-          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            El código postal ingresado no es válido.
-          </p>
+        <div className="bg-white">
+          <FloatingDecoration
+            className={`w-48 md:w-64 absolute top-[0%] left-[20%] md:left-[25%]`}
+            img="/img/modal-eclipse-orange-1.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+            img="/img/red-plus.svg"
+          />
+          <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+            <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
+              El código postal ingresado no es válido.
+            </p>
+          </div>
+
+          <FloatingDecoration
+            className={`w-8 md:w-12 absolute bottom-[15%] right-[10%]`}
+            img="/img/red-plus.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
+            img="/img/modal-eclipse-orange-2.svg"
+            customClass="rounded-bl-2xl"
+          />
         </div>,
       );
 
@@ -81,45 +148,67 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({ className, 
         lng = location.lng();
       } else {
         openModal(
-          <div className="flex flex-col items-center justify-center h-full text-white">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-              No se encontró el código postal ingresado.
-            </p>
+          <div className="bg-white">
+            <FloatingDecoration
+              className={`w-48 md:w-64 absolute top-[0%] left-[20%] md:left-[25%]`}
+              img="/img/modal-eclipse-orange-1.svg"
+            />
+
+            <FloatingDecoration
+              className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+              img="/img/red-plus.svg"
+            />
+
+            <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+              <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
+                No se encontró el código postal ingresado.
+              </p>
+            </div>
+
+            <FloatingDecoration
+              className={`w-8 md:w-12 absolute bottom-[15%] right-[10%]`}
+              img="/img/red-plus.svg"
+            />
+
+            <FloatingDecoration
+              className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
+              img="/img/modal-eclipse-orange-2.svg"
+              customClass="rounded-bl-2xl"
+            />
           </div>,
         );
       }
     });
 
     openModal(
-      <div className={`text-center text-white w-full`}>
-        <div className={`grid grid-cols-12`}>
-          <div className="hidden md:flex md:col-span-2 justify-center">
-            {/* PlusDecoration */}
-            <PlusDecoration
-              className="w-4 md:w-8 relative mx-auto"
-            />
-          </div>
+      <div className={`text-center text-black w-full`}>
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
+          img="/img/modal-eclipse-green-1.svg"
+          customClass="rounded-tl-2xl"
+        />
 
+        <PlusDecoration
+          className="w-4 md:w-8 absolute top-[41%] md:top-[28%] left-[2%]"
+          isGreen={true}
+        />
+
+        <div className={`grid grid-cols-12`}>
           <div className="col-span-12">
             <div>
               <Image
                 src={`/img/marker-icon.svg`}
                 alt={`Ubicación`}
-                width={80}
-                height={80}
-                className={`mx-auto block mb-4`}
+                width={50}
+                height={50}
+                className={`mx-auto block`}
               />
 
-              <h1 className={`text-2xl mb-8 relative p-8`}>
+              <h1 className={`text-xl mb-2 relative p-8`}>
                 Si tu zona está
-                <span className="text-highlight"> marcada en verde </span>
+                <span className="font-medium"> marcada en verde </span>
                 la velocidad de tu servicio será mayor.
                 <br />
-                {/* PlusDecoration */}
-                <PlusDecoration
-                  className="w-4 md:w-8 absolute"
-                  style={{ right: '-30px', bottom: '-10px' }}
-                />
               </h1>
             </div>
 
@@ -127,23 +216,17 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({ className, 
               <div className={`relative w-4/5`}>
                 <div
                   id={`map`}
-                  style={{ width: '100%', height: '400px' }}
+                  className="w-full h-[200px] md:h-[400px]"
                 ></div>
               </div>
             </div>
           </div>
-          <div className={`hidden md:flex md:col-span-2 justify-center items-end`}>
-            {/* PlusDecoration */}
-            <PlusDecoration
-              className="w-9 md:w-12 lg:w-16 xl:w-20"
-            />
-          </div>
 
-          <div className="col-span-12 my-10">
+          <div className="col-span-12 mt-10 mb-20 md:mb-10">
             <div className="flex justify-center">
               <div className="button-container">
                 <button
-                  className="btn-xl multi-border font-medium text-white disabled:opacity-50"
+                  className="bg-black btn-xl multi-border font-medium text-white disabled:opacity-50"
                   onClick={closeModal}
                 >
                   ACEPTAR
@@ -152,10 +235,20 @@ const ValidateCoverageForm: React.FC<ValidateCoverageFormProps> = ({ className, 
             </div>
           </div>
         </div>
+
+        <FloatingDecoration
+          className={`w-6 md:w-12 absolute bottom-[30%] right-[2%] md:bottom-[20%]`}
+          img="/img/orange-plus.svg"
+        />
+
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
+          img="/img/modal-eclipse-green-2.svg"
+          customClass="rounded-br-2xl"
+        />
       </div>,
       <div></div>,
       false,
-      'bg-modal-coverage'
     );
 
     setTimeout(() => {
