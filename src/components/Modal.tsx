@@ -42,7 +42,7 @@ const Modal: React.FC<ModalProps> = ({ header, children, className, style, fullS
         className={`relative ${bgFull ? bgFull : 'bg-modal-default'} border-20`}
       >
         <div
-          className={`w-full border-20 modal-header flex justify-between items-center ${bgFull ? '' : 'bg-black'} text-white p-2 md:p-3 ${!fullScreen ? 'rounded-t-md' : ''}`}
+          className={`w-full border-20 modal-header flex justify-between items-center ${bgFull ? '' : 'bg-white'} text-white p-2 md:p-3 ${!fullScreen ? 'rounded-t-md' : ''}`}
         >
           <h2 className='w-full'>{header}</h2>
           <button onClick={onClose} className="focus:outline-none">
