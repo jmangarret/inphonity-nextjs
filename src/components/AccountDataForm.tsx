@@ -237,6 +237,7 @@ export default function AccountDataForm() {
           <FloatingDecoration
             className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
             img="/img/modal-eclipse-orange-2.svg"
+            customClass="rounded-bl-2xl"
           />
         </div>,
       );
@@ -288,6 +289,7 @@ export default function AccountDataForm() {
           <FloatingDecoration
             className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
             img="/img/modal-eclipse-orange-2.svg"
+            customClass="rounded-bl-2xl"
           />
         </div>,
       );
