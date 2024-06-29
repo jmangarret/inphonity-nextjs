@@ -230,6 +230,7 @@ export default function PersonalDataForm() {
         <FloatingDecoration
           className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
           img="/img/modal-eclipse-green-1.svg"
+          customClass="rounded-tl-2xl"
         />
 
         <PlusDecoration
@@ -254,6 +255,7 @@ export default function PersonalDataForm() {
         <FloatingDecoration
           className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
           img="/img/modal-eclipse-green-2.svg"
+          customClass="rounded-br-2xl"
         />
       </div>,
     );
@@ -266,6 +268,7 @@ export default function PersonalDataForm() {
         <FloatingDecoration
           className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
           img="/img/modal-eclipse-green-1.svg"
+          customClass="rounded-tl-2xl"
         />
 
         <PlusDecoration
@@ -289,6 +292,7 @@ export default function PersonalDataForm() {
         <FloatingDecoration
           className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
           img="/img/modal-eclipse-green-2.svg"
+          customClass="rounded-br-2xl"
         />
       </div>,
     );
@@ -301,6 +305,7 @@ export default function PersonalDataForm() {
         <FloatingDecoration
           className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
           img="/img/modal-eclipse-green-1.svg"
+          customClass="rounded-tl-2xl"
         />
 
         <PlusDecoration
@@ -333,6 +338,7 @@ export default function PersonalDataForm() {
         <FloatingDecoration
           className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
           img="/img/modal-eclipse-green-2.svg"
+          customClass="rounded-br-2xl"
         />
       </div>,
     );
@@ -345,6 +351,7 @@ export default function PersonalDataForm() {
         <FloatingDecoration
           className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
           img="/img/modal-eclipse-green-1.svg"
+          customClass="rounded-tl-2xl"
         />
 
         <PlusDecoration
@@ -377,6 +384,7 @@ export default function PersonalDataForm() {
         <FloatingDecoration
           className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
           img="/img/modal-eclipse-green-2.svg"
+          customClass="rounded-br-2xl"
         />
       </div>,
     );
