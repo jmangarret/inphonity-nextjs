@@ -6,6 +6,8 @@ import Image from "next/image";
 import { setSupportEsim } from "@/lib/features/plan/planSlice";
 import { setIsValidation } from "@/lib/features/shipping/shippingSlice";
 import { useAppDispatch } from "@/lib/hooks";
+import FloatingDecoration from "./FloatingDecoration";
+import { borderBottomLeftRadius } from "html2canvas/dist/types/css/property-descriptors/border-radius";
 
 
 type ValidateIMEIFormProps = {
@@ -49,15 +51,37 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
   const [trigger, { data, isLoading, error, isFetching }] = useLazyValidateImeiQuery();
 
   const handleSubmit = async () => {
-    // Validate IMEI
+      // Validate IMEI
     if (!isValidIMEI(imei)) {
       openModal(
-        <div className="flex flex-col items-center justify-center h-full">
-          <h2
-            className={`text-center text-2xl lg:text-4xl p-4 md:p-5 text-white ajuste_centro`}
-          >
-            El IMEI ingresado no es válido.
-          </h2>
+        <div className="bg-white">
+          <FloatingDecoration
+            className={`w-48 md:w-64 absolute top-[0%] left-[20%] md:left-[25%]`}
+            img="/img/modal-eclipse-orange-1.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+            img="/img/red-plus.svg"
+          />
+          <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+            <h2
+              className={`text-center text-xl p-4 text-black ajuste_centro`}
+            >
+              El IMEI ingresado no es válido.
+            </h2>
+          </div>
+
+          <FloatingDecoration
+            className={`w-8 md:w-12 absolute bottom-[15%] right-[10%]`}
+            img="/img/red-plus.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
+            img="/img/modal-eclipse-orange-2.svg"
+            customClass="rounded-bl-2xl"
+          />
         </div>,
       );
 
@@ -74,28 +98,32 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
         dispatch(setSupportEsim(false));
         openModal(
           <div
-            className={`flex flex-col items-center justify-center h-[500px] bg-black bg-modal-verde text-white`}
+            className={`flex flex-col items-center justify-center h-[500px] bg-white text-black`}
           >
-            <div className={`grid grid-cols-12`}>
-              <div className="hidden md:flex md:col-span-2 justify-center">
-                {/* PlusDecoration */}
-                <PlusDecoration
-                  className="w-4 md:w-8 relative mx-auto"
-                />
-              </div>
+            <FloatingDecoration
+              className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
+              img="/img/modal-eclipse-green-1.svg"
+              customClass="rounded-tl-2xl"
+            />
 
+            <PlusDecoration
+              className="w-4 md:w-6 absolute top-[13%] right-[50%]"
+              isGreen={true}
+            />
+
+            <div className={`flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]`}>
               <div
                 className="col-span-12 md:col-span-8"
               >
-                <h1 className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white ajuste_centro mb-20`}>
-                  Tu dispositivo <span className="text-highlight">solo es compatible</span> con nuestra
+                <h1 className={`text-center text-xl p-4 text-black mb-5`}>
+                  Tu dispositivo <span className="font-medium">solo es compatible</span> con nuestra
                   <br />
                   <br />
-                  <span className={`text-6xl text-center font-medium`}>SIM física</span>
+                  <span className={`text-5xl text-center font-medium`}>SIM física</span>
                 </h1>
 
                 <div
-                  className={`flex mb-12 justify-center mt-10`}
+                  className={`flex justify-center my-5`}
                 >
                   <div>
                     <Image
@@ -108,15 +136,18 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
                   </div>
                 </div>
               </div>
-              <div
-                className={`hidden md:flex md:col-span-2 justify-center items-end`}
-              >
-                {/* PlusDecoration */}
-                <PlusDecoration
-                  className="w-9 md:w-12 lg:w-16 xl:w-20"
-                />
-              </div>
             </div>
+
+            <FloatingDecoration
+              className={`w-8 md:w-12 absolute bottom-[15%] left-[10%]`}
+              img="/img/orange-plus.svg"
+            />
+
+            <FloatingDecoration
+              className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
+              img="/img/modal-eclipse-green-2.svg"
+              customClass="rounded-br-2xl"
+            />
           </div>,
         );
         break;
@@ -124,24 +155,28 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
         dispatch(setSupportEsim(true));
         openModal(
           <div
-            className={`flex flex-col items-center justify-center h-[600px] bg-black bg-modal-verde text-white`}
+            className={`flex flex-col items-center justify-center bg-white text-white`}
           >
-            <div className={`grid grid-cols-12`}>
-              <div className="hidden md:flex md:col-span-2 justify-center">
-                {/* PlusDecoration */}
-                <PlusDecoration
-                  className="w-4 md:w-8 relative mx-auto"
-                />
-              </div>
+            <FloatingDecoration
+              className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
+              img="/img/modal-eclipse-green-1.svg"
+              customClass="rounded-tl-2xl"
+            />
 
+            <PlusDecoration
+              className="w-4 md:w-6 absolute top-[13%] right-[50%]"
+              isGreen={true}
+            />
+
+            <div className={`flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]`}>
               <div
                 className="col-span-12 md:col-span-8"
               >
-                <h1 className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white ajuste_centro mb-20`}>
-                  Tu dispositivo <span className="text-highlight">si es compatible</span> con nuestra
+                <h1 className={`text-center text-xl p-4 text-black mb-5`}>
+                  Tu dispositivo <span className="font-medium">si es compatible</span> con nuestra
                   <br />
                   <br />
-                  <span className={`text-6xl text-center font-medium`}>SIM física y eSIM</span>
+                  <span className={`text-5xl text-center font-medium`}>SIM física y eSIM</span>
                 </h1>
 
                 <div
@@ -155,7 +190,7 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
                       alt={`SIM física`}
                       width={100}
                       height={100}
-                      className={`ml-auto`}
+                      className={`ml-auto mr-3`}
                     />
                   </div>
                   <div
@@ -164,22 +199,25 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
                     <Image
                       src={`/img/qr-code-scan-icon.svg`}
                       alt={`eSIM`}
-                      width={150}
-                      height={150}
-                      className={`mr-auto`}
+                      width={132}
+                      height={100}
+                      className={`mr-auto ml-3`}
                     />
                   </div>
                 </div>
               </div>
-              <div
-                className={`hidden md:flex md:col-span-2 justify-center items-end`}
-              >
-                {/* PlusDecoration */}
-                <PlusDecoration
-                  className="w-9 md:w-12 lg:w-16 xl:w-20"
-                />
-              </div>
             </div>
+
+            <FloatingDecoration
+              className={`w-8 md:w-12 absolute bottom-[10%] left-[5%]  md:bottom-[15%] md:left-[10%]`}
+              img="/img/orange-plus.svg"
+            />
+
+            <FloatingDecoration
+              className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
+              img="/img/modal-eclipse-green-2.svg"
+              customClass="rounded-br-2xl"
+            />
           </div>,
         );
         break;
@@ -189,51 +227,58 @@ const ValidateIMEIForm: React.FC<ValidateIMEIFormProps> = ({ className, style })
           <div
             className={`flex flex-col items-center justify-center h-[500px]`}
           >
-            <div className={`grid grid-cols-12`}>
-              <div className="hidden md:flex md:col-span-2 justify-center">
-                {/* PlusDecoration */}
-                <PlusDecoration
-                  className="w-4 md:w-8 relative mx-auto"
-                />
-              </div>
-
+    
+            <FloatingDecoration
+              className={`w-48 md:w-64 absolute top-[0%] left-[20%] md:left-[25%]`}
+              img="/img/modal-eclipse-orange-1.svg"
+            />
+    
+            <FloatingDecoration
+              className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+              img="/img/red-plus.svg"
+            />
+    
+            <div className={`flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]`}>
               <div
                 className="col-span-12 md:col-span-8"
               >
-                <h1 className={`text-center text-2xl lg:text-2xl p-4 md:p-5 text-white ajuste_centro`}>
-                  Tu equipo <span className="text-highlight-red text-white">no es compatible</span> con la <br />
+                <h1 className={`text-center text-xl p-4 text-black ajuste_centro`}>
+                  Tu equipo <span className="font-medium">no es compatible</span> con la <br />
                   red de inphonity, para tener la mejor <br />
                   experiencia te recomendamos probar <br />
                   con otro e intentar nuevamente.
                 </h1>
-
+    
                 <div
-                  className={`flex mt-10 mb-10 justify-center`}
+                  className={`flex justify-center`}
                 >
                   <div>
                     <Image
                       src={`/img/emoji-wink-icon.svg`}
                       alt={`SIM física`}
-                      width={150}
-                      height={150}
+                      width={82}
+                      height={82}
                       className={`ml-auto`}
                     />
                   </div>
                 </div>
-
-                <h1 className={`text-center text-2xl lg:text-2xl p-4 md:p-5 text-white`}>
+    
+                <h1 className={`text-center text-xl p-4 text-black`}>
                   ¡Aquí te esperamos!
                 </h1>
               </div>
-              <div
-                className={`hidden md:flex md:col-span-2 justify-center items-end`}
-              >
-                {/* PlusDecoration */}
-                <PlusDecoration
-                  className="w-9 md:w-12 lg:w-16 xl:w-20"
-                />
-              </div>
             </div>
+    
+            <FloatingDecoration
+                className={`w-8 md:w-12 absolute bottom-[15%] right-[10%]`}
+                img="/img/red-plus.svg"
+              />
+    
+              <FloatingDecoration
+                className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
+                img="/img/modal-eclipse-orange-2.svg"
+                customClass="rounded-bl-2xl"
+              />
           </div>,
         );
     }

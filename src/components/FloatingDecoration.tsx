@@ -5,9 +5,10 @@ type FloatingDecorationProps = {
     style?: React.CSSProperties;
     className?: string;
     img: string
+    customClass?: string;
 };
 
-export default function FloatingDecoration ({ className, style, img } : FloatingDecorationProps) {
+export default function FloatingDecoration ({ className, style, img, customClass } : FloatingDecorationProps) {
 
     return (
         <div
@@ -20,9 +21,8 @@ export default function FloatingDecoration ({ className, style, img } : Floating
                 alt="Floating Decoration"
                 width={300}
                 height={300}
-                className="w-full"
+                className={`w-full ${customClass}`}
             />
-
 
         </div>
     );
