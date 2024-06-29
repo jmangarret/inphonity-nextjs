@@ -6,6 +6,7 @@ import { useGetInvitationByIdQuery, useRejectInvitationMutation } from "@/lib/se
 import { ModalContext } from "@/contexts/ModalContext";
 import PlusDecoration from "@/components/PlusDecoration";
 import { request } from "@/mocks/request-data";
+import FloatingDecoration from "@/components/FloatingDecoration";
 
 type InvitationSectionProps = {
   invitationId: string;
@@ -34,15 +35,37 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId, inv
       await rejectInvitation(invitationId);
 
       openModal(
-        <div>
+        <div className="bg-white">
+        <FloatingDecoration
+          className={`w-48 md:w-64 absolute top-[0%] left-[20%] md:left-[25%]`}
+          img="/img/modal-eclipse-orange-1.svg"
+        />
+
+        <FloatingDecoration
+          className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+          img="/img/red-plus.svg"
+        />
+
+        <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
           <p
-            className={`text-center text-xl lg:text-3xl p-4 md:p-5 text-white`}
+            className={`text-center text-xl p-4 text-black ajuste_centro`}
           >
             Entendemos que en este momento <br /> <b>no estés listo para unirte a inphonity.</b>
             <br />
             <br />
             ¡Hasta pronto!
           </p>
+          </div>
+          <FloatingDecoration
+            className={`w-8 md:w-12 absolute bottom-[15%] right-[10%]`}
+            img="/img/red-plus.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
+            img="/img/modal-eclipse-orange-2.svg"
+            customClass="rounded-bl-2xl"
+          />
         </div>,
       ).then(() => {
         window.location.href = 'https://inphonity.com/';
