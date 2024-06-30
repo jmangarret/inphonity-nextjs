@@ -14,14 +14,14 @@ import { request } from "@/mocks/request-data";
 
 export default function Accepted({ params }: { params: { invitationId: string } }) {
   const plan = useAppSelector((state) => state.plan);
-  const invitationIdDecoded = atob(params.invitationId.replace("%3D", "="));
-  // const {
-  //   isLoading: isLoadingInvitation,
-  //   isFetching: isFetchingInvitation,
-  //   data: invitationData,
-  //   error: invitationError
-  // } = useGetInvitationByIdQuery(params.invitationId);
-  const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = request;
+  const invitationIdDecoded = atob(params.invitationId.replace("%3D", "="));
+  const {
+    isLoading: isLoadingInvitation,
+    isFetching: isFetchingInvitation,
+    data: invitationData,
+    error: invitationError
+  } = useGetInvitationByIdQuery(invitationIdDecoded);
+  // const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = request;
 
   
   const router = useRouter();

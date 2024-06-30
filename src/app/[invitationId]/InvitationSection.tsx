@@ -17,13 +17,13 @@ const InvitationSection: React.FC<InvitationSectionProps> = ({ invitationId, inv
   const router = useRouter();
   const { openModal } = React.useContext(ModalContext);
   // TODO: descomentar
-  // const {
-  //   isLoading: isLoadingInvitation,
-  //   isFetching: isFetchingInvitation,
-  //   data: invitationData,
-  //   error: invitationError
-  // } = useGetInvitationByIdQuery(invitationId);
-  const { isLoading: isLoadingInvitation, isFetching: isFetchingInvitation, data: invitationData, error: invitationError, refetch: invitationRefetch } = request;
+  const {
+    isLoading: isLoadingInvitation,
+    isFetching: isFetchingInvitation,
+    data: invitationData,
+    error: invitationError
+  } = useGetInvitationByIdQuery(invitationId);
+  // const { isLoading: isLoadingInvitation, isFetching: isFetchingInvitation, data: invitationData, error: invitationError, refetch: invitationRefetch } = request;
 
   const [rejectInvitation, {
     isLoading: isRejectingInvitation,
