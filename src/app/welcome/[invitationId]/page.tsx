@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import { useGetInvitationByIdQuery } from "@/lib/services/invitationsApi";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import FloatingDecoration from "@/components/FloatingDecoration";
+import PlusDecoration from "@/components/PlusDecoration";
 
 export default function Welcome({ params }: { params: { invitationId: string } }) {
   const router = useRouter();
@@ -30,10 +32,14 @@ export default function Welcome({ params }: { params: { invitationId: string } }
   return (
     <div>
       {/* <Header centerLogo={true} /> */}
-      <main className={`text-center ${isLoading ? 'bg-black' : 'bg_bienvenida'}`} style={{ height: '100vh' }}>
+      <main className={`text-center bg-white text-black`} style={{ height: '100vh' }}>
+        <FloatingDecoration
+          className={`w-24 md:w-40 lg:w-48 absolute top-[0%] right-[0%]`}
+          img="/img/sign-eclipse-green-1.svg"
+        />
         <div className={`p-9 lg:w-3/4 mx-auto`}>
           <Image
-            src="/logo.svg"
+            src="/Logo3.svg"
             alt="Logotipo de Inphonity"
             width={203}
             height={29.4}
@@ -69,13 +75,13 @@ export default function Welcome({ params }: { params: { invitationId: string } }
               </p>
               <div className="col-span-12 md:col-span-4 mb-20">
                 <div className="button-container text-center lg:w-72 mx-auto flex justify-center">
-                  <a className={`btn-width multi-border font-medium block pointer`} href="https://inphonity.com/">
+                  <a className={`btn-width multi-border text-white bg-black font-medium block pointer`} href="https://inphonity.com/">
                     REGRESAR AL SITIO
                   </a>
                 </div>
               </div>
             </>
-          ) : <></> }
+          ) : <></>}
 
           {(data && Number(data.pre_registration?.is_esim)) ? (
             <>
@@ -103,9 +109,35 @@ export default function Welcome({ params }: { params: { invitationId: string } }
               >
                 No olvides revisar tanto tu bandeja de entrada como la de <span className="font-medium">correos no deseados.</span>
               </p>
+              <div className="col-span-12 md:col-span-4 mb-20">
+                <div className="button-container text-center lg:w-72 mx-auto flex justify-center">
+                  <a className={`btn-width multi-border text-white bg-black font-medium block pointer`} href="https://inphonity.com/">
+                    REGRESAR AL SITIO
+                  </a>
+                </div>
+              </div>
             </>
           ) : <></>}
         </div>
+        <FloatingDecoration
+          className={`w-12 md:w-24 lg:w-32 absolute bottom-[20%] md:bottom-[35%] lg:bottom-[15%] left-[0%]`}
+          img="/img/sign-eclipse-green-2.svg"
+        />
+
+        <FloatingDecoration
+          className={`w-12 md:w-32 lg:w-48 absolute bottom-[20%] md:bottom-[35%] lg:bottom-[15%] right-[5%] md:right-[3%]`}
+          img="/img/sign-eclipse-green-3.svg"
+        />
+
+        <PlusDecoration
+          className="hidden md:block w-8 absolute bottom-[75%] left-[10%]"
+          isGreen={true}
+        />
+
+        <FloatingDecoration
+          className={`w-4 md:w-6 lg:w-8 absolute bottom-[5%] md:bottom-[20%] lg:bottom-[5%] right-[5%] md:right-[22%] lg:right-[25%]`}
+          img="/img/blue-plus.svg"
+        />
       </main>
       <Footer />
     </div>
