@@ -13,8 +13,8 @@ type LandingSectionProps = {
 
 const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
   //TODO descomentar request
-  const { isLoading, isFetching, data, error } = useGetInvitationByIdQuery(invitationId);
-  // const { isLoading, isFetching, data, error } = request;
+  // const { isLoading, isFetching, data, error } = useGetInvitationByIdQuery(invitationId);
+  const { isLoading, isFetching, data, error } = request;
   const router = useRouter();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({ invitationId }) => {
     }
   }, [error, router]);
 
-  // handle redirect if invitation status is not pending
+  //handle redirect if invitation status is not pending
   useEffect(() => {
     if (!isLoading && !isFetching && data && data.status === 'accepted') {
       router.push('/complete');

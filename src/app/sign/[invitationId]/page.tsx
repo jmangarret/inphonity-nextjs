@@ -18,15 +18,19 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
   const [isTermsAccepted, setIsTermsAccepted] = React.useState(false);
   const [isSigned, setIsSigned] = React.useState(false);
 
-  const {
-    isLoading: invitationIsLoading,
-    isFetching: invitationIsFetching,
-    data: invitationData,
-    error: invitationError,
-    refetch: invitationRefetch
-  } = useGetInvitationByIdQuery(invitationIdDecoded);
-  // const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = request;
+  // const {
+  //   isLoading: invitationIsLoading,
+  //   isFetching: invitationIsFetching,
+  //   data: invitationData,
+  //   error: invitationError,
+  //   refetch: invitationRefetch
+  // } = useGetInvitationByIdQuery(invitationIdDecoded);
 
+  const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = request;
+  const [password, setPassword] = React.useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = React.useState('');
+  const [passwordStrength, setPasswordStrength] = React.useState('débil');
+  
   const { openModal } = React.useContext(ModalContext);
 
   useEffect(() => {

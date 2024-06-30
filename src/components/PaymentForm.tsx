@@ -51,6 +51,7 @@ const formatNumberToMoney = (number: number) => {
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ContenTiendasAfiliadas, HeaderTiendasAfiliadas } from "./ModalPayments";
+import { request } from "@/mocks/request-data";
 
 async function printDiv(divId: string) {
   const input = document.getElementById(divId);
@@ -110,13 +111,16 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
   const plan = useAppSelector((state) => state.plan);
   const shippingData = useAppSelector((state) => state.shipping);
   const [shippingCost, setShippingCost] = useState(0);
-  const {
-    isLoading: invitationIsLoading,
-    isFetching: invitationIsFetching,
-    data: invitationData,
-    error: invitationError,
-    refetch: invitationRefetch
-  } = useGetInvitationByIdQuery(invitationId);
+  
+  // const {
+  //   isLoading: invitationIsLoading,
+  //   isFetching: invitationIsFetching,
+  //   data: invitationData,
+  //   error: invitationError,
+  //   refetch: invitationRefetch
+  // } = useGetInvitationByIdQuery(invitationId);
+  const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = request;
+
   const [register, { isLoading: registerIsLoading, error: registerError, isSuccess }] = useRegisterMutation();
   const [initialPayment, {
     isLoading: initialPaymentIsLoading,

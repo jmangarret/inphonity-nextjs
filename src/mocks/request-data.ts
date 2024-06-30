@@ -45,6 +45,7 @@ export const request = {
       }
     },
     pre_registration: {
+      id: 0,
       payment_status: null
     }
   },
