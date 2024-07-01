@@ -113,13 +113,15 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
   const shippingData = useAppSelector((state) => state.shipping);
   const [shippingCost, setShippingCost] = useState(0);
 
+  const invitationIdDecoded = atob(invitationId.replace("%3D", "="));
+
   const {
     isLoading: invitationIsLoading,
     isFetching: invitationIsFetching,
     data: invitationData,
     error: invitationError,
     refetch: invitationRefetch
-  } = useGetInvitationByIdQuery(invitationId);
+  } = useGetInvitationByIdQuery(invitationIdDecoded);
   // const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = request;
 
   const [register, { isLoading: registerIsLoading, error: registerError, isSuccess }] = useRegisterMutation();
