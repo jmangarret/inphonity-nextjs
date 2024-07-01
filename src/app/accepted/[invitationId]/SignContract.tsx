@@ -38,11 +38,12 @@ const SignContract: React.FC<SignContractProps> = ({ invitationId, invitationIdD
           />
 
           <PlusDecoration
-            className="w-4 md:w-6 absolute top-[42%] right-[5%]"
+            className="w-4 md:w-6 absolute top-[30%] md:top-[42%] right-[5%]"
             isGreen={true}
           />
+
           <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
-            <p className={`text-center text-xl-3xl p-4 text-black ajuste_centro`}>
+            <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
               Para poder continuar,
               <br />
               <span className="font-medium">no olvides aceptar </span>
@@ -71,14 +72,38 @@ const SignContract: React.FC<SignContractProps> = ({ invitationId, invitationIdD
 
     if (invitationData && invitationData.pre_registration?.payment_status !== 'paid') {
       openModal(
-        <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde text-white">
-          <p
-            className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
-          >
-            Para poder continuar, no
-            <br />
-            olvides realizar tu pago.
-          </p>
+        <div className="bg-white">
+          <FloatingDecoration
+            className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
+            img="/img/modal-eclipse-green-1.svg"
+            customClass="rounded-tl-2xl"
+          />
+
+          <PlusDecoration
+            className="w-4 md:w-6 absolute top-[30%] md:top-[42%] right-[5%]"
+            isGreen={true}
+          />
+
+          <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+            <p
+              className={`text-center text-xl p-4 text-black ajuste_centro`}
+            >
+              Para poder continuar, no
+              <br />
+              olvides realizar tu pago.
+            </p>
+          </div>
+
+          <FloatingDecoration
+            className={`w-8 md:w-12 absolute bottom-[15%] left-[10%]`}
+            img="/img/orange-plus.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
+            img="/img/modal-eclipse-green-2.svg"
+            customClass="rounded-br-2xl"
+          />
         </div>,
       );
 
@@ -110,15 +135,15 @@ const SignContract: React.FC<SignContractProps> = ({ invitationId, invitationIdD
         </p>
         <p className={'text-base text-white text-center px-16 my-10'}>
           <input
-              type="checkbox"
-              id={'public'}
-              className="form-checkbox green-check h-5 w-5 text-green-500"
-              name={'public'}
-              onChange={handleCheckboxChange}
-            />
-            <label htmlFor={'public'}>
+            type="checkbox"
+            id={'public'}
+            className="form-checkbox green-check h-5 w-5 text-green-500"
+            name={'public'}
+            onChange={handleCheckboxChange}
+          />
+          <label htmlFor={'public'}>
             &nbsp; Acepto recibir notificaciones, promociones y actualizaciones sobre los beneficios de inphonity
-            </label>
+          </label>
         </p>
       </header>
 
