@@ -10,7 +10,9 @@ import PlusDecoration from "@/components/PlusDecoration";
 
 export default function Welcome({ params }: { params: { invitationId: string } }) {
   const router = useRouter();
-  const { data, error, isLoading } = useGetInvitationByIdQuery(params.invitationId);
+  const invitationIdDecoded = atob(params.invitationId.replace("%3D", "="));
+
+  const { data, error, isLoading } = useGetInvitationByIdQuery(invitationIdDecoded);
 
   // DATA DUMMY
   // const error = {
