@@ -1,5 +1,5 @@
 "use client";
-import React, {memo, useEffect, useState} from "react";
+import React, { memo, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
@@ -51,6 +51,8 @@ const formatNumberToMoney = (number: number) => {
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ContenTiendasAfiliadas, HeaderTiendasAfiliadas } from "./ModalPayments";
+import { request } from "@/mocks/request-data";
+import FloatingDecoration from "./FloatingDecoration";
 
 async function printDiv(divId: string) {
   const input = document.getElementById(divId);
@@ -110,6 +112,7 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
   const plan = useAppSelector((state) => state.plan);
   const shippingData = useAppSelector((state) => state.shipping);
   const [shippingCost, setShippingCost] = useState(0);
+
   const {
     isLoading: invitationIsLoading,
     isFetching: invitationIsFetching,
@@ -117,6 +120,8 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
     error: invitationError,
     refetch: invitationRefetch
   } = useGetInvitationByIdQuery(invitationId);
+  // const { isLoading: invitationIsLoading, isFetching: invitationIsFetching, data: invitationData, error: invitationError, refetch: invitationRefetch } = request;
+
   const [register, { isLoading: registerIsLoading, error: registerError, isSuccess }] = useRegisterMutation();
   const [initialPayment, {
     isLoading: initialPaymentIsLoading,
@@ -168,7 +173,7 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
   const handleTestModal = (method: string, onlySaveRegister = false) => {
     openModal(
       <div>
-       Test
+        Test
       </div>,
     );
   }
@@ -183,7 +188,7 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
       isSubmitting: true
     });
 
-    
+
     const invitationId = atob(window.location.pathname.split("/")[2].replace("%3D", "="));
 
     // reset errors
@@ -245,17 +250,42 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
 
       if (onlySaveRegister) {
         openModal(
-          <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white`}>
-              Da
-              <span className="text-highlight cursor-pointer" onClick={handleInfo}>
-                &nbsp;clic aquí&nbsp;
-              </span>
-              para conocer las tiendas en las que puedes realizar tu pago.
-            </p>
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white`}>
-              Tu proceso se ha guardado, pronto recibirás un correo con un enlace para continuar con la firma del contrato.
-            </p>
+          <div className="bg-white">
+            <FloatingDecoration
+              className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
+              img="/img/modal-eclipse-green-1.svg"
+              customClass="rounded-tl-2xl"
+            />
+
+            <PlusDecoration
+              className="w-4 md:w-6 absolute top-[40%] md:top-[42%] right-[5%]"
+              isGreen={true}
+            />
+
+            <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+              <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
+                Da <span className="font-medium underline cursor-pointer" onClick={handleInfo}>clic aquí</span>  para conocer las tiendas <br />
+                en las que puedes realizar tu pago.
+              </p>
+
+              <p className={`text-center text-xl p-4 text-black`}>
+                Tu proceso se ha guardado, <br />
+                pronto recibirás un correo con <br />
+                un enlace para continuar <br />
+                con la firma del contrato.
+              </p>
+            </div>
+
+            <FloatingDecoration
+              className={`w-8 md:w-12 absolute bottom-[15%] left-[10%]`}
+              img="/img/orange-plus.svg"
+            />
+
+            <FloatingDecoration
+              className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
+              img="/img/modal-eclipse-green-2.svg"
+              customClass="rounded-br-2xl"
+            />
           </div>,
         )
       }
@@ -264,10 +294,32 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
 
       if (data.message) {
         openModal(
-          <div className="flex flex-col items-center justify-center h-full">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-              {data.message}
-            </p>
+          <div className="bg-white">
+            <FloatingDecoration
+              className={`w-48 md:w-64 absolute top-[0%] left-[20%] md:left-[25%]`}
+              img="/img/modal-eclipse-orange-1.svg"
+            />
+
+            <FloatingDecoration
+              className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+              img="/img/red-plus.svg"
+            />
+
+            <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+              <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
+                {data.message}
+              </p>
+            </div>
+            <FloatingDecoration
+              className={`w-8 md:w-12 absolute bottom-[15%] right-[10%]`}
+              img="/img/red-plus.svg"
+            />
+
+            <FloatingDecoration
+              className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
+              img="/img/modal-eclipse-orange-2.svg"
+              customClass="rounded-bl-2xl"
+            />
           </div>,
         );
       }
@@ -300,7 +352,7 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
     });
   }
 
-  const registerCashSpeiPay = (method: PaymentMethod)=>{
+  const registerCashSpeiPay = (method: PaymentMethod) => {
     initialPayment({
       invitation_id: parseInt(invitationId),
       payment_method: method,
@@ -314,10 +366,34 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
       invitationRefetch();
 
       openModal(
-        <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
-          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            Se ha generado tu referencia de pago.
-          </p>
+        <div className="bg-white">
+          <FloatingDecoration
+            className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
+            img="/img/modal-eclipse-green-1.svg"
+            customClass="rounded-tl-2xl"
+          />
+
+          <PlusDecoration
+            className="w-4 md:w-6 absolute top-[30%] md:top-[42%] right-[5%]"
+            isGreen={true}
+          />
+
+          <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+            <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
+              Se ha generado tu referencia de pago.
+            </p>
+          </div>
+
+          <FloatingDecoration
+            className={`w-8 md:w-12 absolute bottom-[15%] left-[10%]`}
+            img="/img/orange-plus.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
+            img="/img/modal-eclipse-green-2.svg"
+            customClass="rounded-br-2xl"
+          />
         </div>,
       ).then(() => {
         window.open(data.payment_url!, '_blank');
@@ -329,12 +405,37 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
       });
 
       openModal(
-        <div className="flex flex-col items-center justify-center h-full">
-          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            Hubo un error al generar tu referencia de pago.
-            <br />
-            Intenta nuevamente.
-          </p>
+        <div className="bg-white">
+          <FloatingDecoration
+            className={`w-48 md:w-64 absolute top-[0%] left-[20%] md:left-[25%]`}
+            img="/img/modal-eclipse-orange-1.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+            img="/img/red-plus.svg"
+          />
+
+          <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+            <p
+              className={`text-center text-xl p-4 text-black ajuste_centro`}
+            >
+              Hubo un error al generar tu referencia de pago.
+              <br />
+              Intenta nuevamente.
+            </p>
+          </div>
+
+          <FloatingDecoration
+            className={`w-8 md:w-12 absolute bottom-[15%] right-[10%]`}
+            img="/img/red-plus.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
+            img="/img/modal-eclipse-orange-2.svg"
+            customClass="rounded-bl-2xl"
+          />
         </div>,
       );
 
@@ -346,7 +447,7 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
     });
   }
 
-  const registerCardPay = () =>{
+  const registerCardPay = () => {
     let errors = {};
     if (!form.cardHolderName) {
       errors = {
@@ -401,70 +502,61 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
         // check if response contains error
         if (response.data.error) {
           openModal(
-            <div
-              className={`flex flex-col items-center justify-center h-[600px]`}
-            >
-              <div className={`grid grid-cols-12`}>
-                <div className="hidden md:flex md:col-span-2 justify-center relative">
-                  {/* PlusDecoration */}
-                  <PlusDecoration
-                    className="w-4 md:w-8 relative mx-auto"
-                  />
-                  {/* PlusDecoration */}
-                  <PlusDecoration
-                    className="w-9 md:w-12 lg:w-16 xl:w-20 absolute"
-                    style={{ bottom: '0' }}
+            <div className="bg-white">
+              <FloatingDecoration
+                className={`w-48 md:w-64 absolute top-[0%] left-[28%] sm:left-[30%] md:left-[33%]`}
+                img="/img/modal-eclipse-orange-1.svg"
+              />
+
+              <FloatingDecoration
+                className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+                img="/img/red-plus.svg"
+              />
+              <div
+                className={`flex flex-col items-center justify-center h-[550px] md:h-[700px] w-auto md:w-[800px] p-12`}
+              >
+                <h1 className={`text-center text-5xl p-4 text-black font-medium mt-[-130px] md:mt-[-150px]`}>
+                  ¡Ups!
+                </h1>
+
+                <div className={`flex my-6 justify-center`}>
+                  <Image
+                    src={`/img/emoji-sorry.svg`}
+                    alt={`SIM física`}
+                    width={128}
+                    height={120}
+                    className={`ml-auto`}
                   />
                 </div>
 
-                <div
-                  className="col-span-12 md:col-span-8"
-                >
-                  <h1 className={`text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro`}>
-                    ¡Ups!
-                  </h1>
+                <h1 className={`text-center text-xl p-4 text-black`}>
+                  Parece que hubo un pequeño
+                  problema al procesar tu pago.
+                  <br />
+                  <br />
+                  No te preocupes, <span className="font-medium">intenta nuevamente
+                    o utiliza otro método de pago.</span>
+                </h1>
 
-                  <div
-                    className={`flex mt-10 mb-10 justify-center`}
+                <div className="button-container mx-auto my-6">
+                  <button
+                    className="btn-xl bg-black multi-border font-medium block w-full text-white mx-auto"
+                    onClick={closeModal}
                   >
-                    <div>
-                      <Image
-                        src={`/img/emoji-sorry.svg`}
-                        alt={`SIM física`}
-                        width={150}
-                        height={150}
-                        className={`ml-auto`}
-                      />
-                    </div>
-                  </div>
-
-                  <h1 className={`text-center text-2xl lg:text-xl p-4 md:p-5 text-white`}>
-                    Parece que hubo un pequeño
-                    problema al procesar tu pago.
-                    <br />
-                    <br />
-                    No te preocupes, <span className="text-highlight">intenta nuevamente
-                      o utiliza otro método de pago.</span>
-                  </h1>
-
-                  <div className="button-container w-full mx-auto">
-                    <button
-                      className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
-                      onClick={closeModal}
-                    >
-                      REINTENTAR
-                    </button>
-                  </div>
-                </div>
-                <div
-                  className={`hidden md:flex md:col-span-2 justify-center items-center`}
-                >
-                  {/* PlusDecoration */}
-                  <PlusDecoration
-                    className="w-9 md:w-12 lg:w-16 xl:w-20"
-                  />
+                    REINTENTAR
+                  </button>
                 </div>
               </div>
+              <FloatingDecoration
+                className={`w-6 md:w-12 absolute bottom-[8%] md:bottom-[15%] right-[10%]`}
+                img="/img/red-plus.svg"
+              />
+
+              <FloatingDecoration
+                className={`w-28 md:w-44 absolute bottom-[0%] left-[0%]`}
+                img="/img/modal-eclipse-orange-2.svg"
+                customClass="rounded-bl-2xl"
+              />
             </div>,
           );
 
@@ -487,149 +579,186 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
         dispatch(setIsPaid(true));
 
         openModal(
-          <div
-            className={`text-center bg-black text-white p-4 md:p-5 py-6 md:py-7 bg-black bg-vertical-gradient-black`}
-            id={`payment-ticket`}
-            style={{ width: 'auto', height: 'auto' }}
-          >
-            <div className={`grid grid-cols-12`}>
-              <div className="hidden md:flex md:col-span-2 justify-center relative">
-                {/* PlusDecoration */}
-                <PlusDecoration
-                  className="w-4 md:w-8 relative mx-auto"
-                />
-                {/* PlusDecoration */}
-                <PlusDecoration
-                  className="w-9 md:w-12 lg:w-16 xl:w-20 absolute"
-                  style={{ bottom: '0' }}
-                />
-              </div>
-              <div
-                className="col-span-12 md:col-span-8"
-              >
-                <Image
-                  src={`/img/payment-success-icon.svg`}
-                  alt={`SIM física`}
-                  width={150}
-                  height={150}
-                  className={`mx-auto block`}
-                />
-                <h1 className={`text-2xl font-medium mb-12`}>
-                  Bienvenido a inphonity
-                  <br />
-                  <span style={{ color: '#00BF63' }}>Tu pago fue exitoso</span>
-                  <br />
-                  {formatNumberToMoney(data.product.price)}
-                </h1>
+          <div className="bg-white">
+
+            <FloatingDecoration
+              className={`w-16 absolute top-[0%] left-[0%]`}
+              img="/img/modal-eclipse-green-1.svg"
+              customClass="rounded-tl-2xl"
+            />
+
+            <PlusDecoration
+              className="w-4 md:w-6 absolute top-[33%] md:top-[35%] right-[5%]"
+              isGreen={true}
+            />
+
+            <div
+              className={`w-[340px] h-[470px] text-center text-black px-4 bg-white`}
+              id={`payment-ticket`}
+            >
+              <div className={`grid grid-cols-12`}>
+                <div className="hidden md:flex md:col-span-2"></div>
 
                 <div
-                  className={`flex mb-6 border-segmented-top pt-3`}
+                  className="col-span-12"
                 >
-                  <div
-                    className={`w-1/2 border-segmented-right`}
-                  >
-                    <p
-                      className={`text-sm font-light p-4 text-left`}
-                    >
-                      Pagado con
-                      <br />
-                      <br />
-                      Fecha de pago
-                      <br />
-                      <br />
-                      Descripción
-                      <br />
-                      <br />
-                      Referencia
-                    </p>
-                  </div>
-                  <div
-                    className={`w-1/2`}
-                  >
-                    <p
-                      className={`text-sm font-medium p-4 text-right`}
-                    >
-                      {form.cardNumber.slice(0, 4) + '**** **** ' + form.cardNumber.slice(-4)}
-                      <br />
-                      <br />
-                      {new Date().toLocaleDateString()}
-                      <br />
-                      <br />
-                      {data.product.name}
-                      <br />
-                      <br />
-                      {data.payment_reference}
-                    </p>
-                  </div>
-                </div>
-
-                <div
-                  className={`text-sm font-light mb-12`}
-                >
-                  <p>
-                    Tu comprobante de pago ha sido enviado a
+                  <Image
+                    src={`/img/payment-success-icon.svg`}
+                    alt={`SIM física`}
+                    width={80}
+                    height={80}
+                    className={`mx-auto block`}
+                  />
+                  <h1 className={`text-2xl font-medium mb-6`}>
+                    Bienvenido a inphonity
                     <br />
-                    <span className={`font-medium`}>{personalData.email}</span>
-                  </p>
+                    <span className="text-highlight">Tu pago fue exitoso</span>
+                    <br />
+                    {formatNumberToMoney(data.product.price)}
+                  </h1>
+
+                  <div
+                    className={`flex mb-6 border-segmented-top pt-3`}
+                  >
+                    <div
+                      className={`w-1/2 border-segmented-right`}
+                    >
+                      <p
+                        className={`text-sm font-light p-4 text-left`}
+                      >
+                        Pagado con
+                        <br />
+                        <br />
+                        Fecha de pago
+                        <br />
+                        <br />
+                        Descripción
+                        <br />
+                        <br />
+                        Referencia
+                      </p>
+                    </div>
+                    <div
+                      className={`w-1/2`}
+                    >
+                      <p
+                        className={`text-sm font-medium p-4 text-right`}
+                      >
+                        {form.cardNumber.slice(0, 4) + '**** **** ' + form.cardNumber.slice(-4)}
+                        <br />
+                        <br />
+                        {new Date().toLocaleDateString()}
+                        <br />
+                        <br />
+                        {data.product.name}
+                        <br />
+                        <br />
+                        {data.payment_reference}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`text-sm font-light mb-6`}
+                  >
+                    <p>
+                      Tu comprobante de pago ha sido enviado a
+                      <br />
+                      <span className={`font-medium`}>{personalData.email}</span>
+                    </p>
+                  </div>
+
+
                 </div>
 
-                <div className="flex w-3/5 mx-auto mb-6 justify-center">
-                  <button
-                    className={`text-white text-sm`}
-                    onClick={() => printDiv('payment-ticket')}
-                  >
-                    <Image
-                      src={`/img/download-icon.svg`}
-                      alt={`Descargar comprobante`}
-                      width={34}
-                      height={34}
-                      className={`block mx-auto`}
-                    />
-                    Descargar
-                  </button>
-                  <button
-                    className={`ml-4 text-white text-sm`}
-                    onClick={() => {
-                      copyToClipboard('payment-ticket').then(() => {
-                        openModal(
-                          <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
-                            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-                              Comprobante de pago copiado al portapapeles.
-                            </p>
-                          </div>,
-                        );
-                      });
-                    }}
-                  >
-                    <Image
-                      src={`/img/sharing-icon.svg`}
-                      alt={`Compartir comprobante`}
-                      width={24}
-                      height={24}
-                      className={`block mx-auto`}
-                    />
-                    Compartir
-                  </button>
-                </div>
-
-                <div className="button-container w-3/5 mx-auto">
-                  <button
-                    className="multi-border font-medium block w-full"
-                    onClick={closeModal}
-                  >
-                    Aceptar
-                  </button>
-                </div>
-              </div>
-              <div
-                className={`hidden md:flex md:col-span-2 justify-center items-center`}
-              >
-                {/* PlusDecoration */}
-                <PlusDecoration
-                  className="w-9 md:w-12 lg:w-16 xl:w-20"
-                />
+                <div className={`hidden md:flex md:col-span-2`}></div>
               </div>
             </div>
+
+            <div className="flex w-3/5 mx-auto mb-6 justify-center">
+              <button
+                className={`text-black text-sm`}
+                onClick={() => printDiv('payment-ticket')}
+              >
+                <Image
+                  src={`/img/download-icon.svg`}
+                  alt={`Descargar comprobante`}
+                  width={34}
+                  height={34}
+                  className={`block mx-auto`}
+                />
+                Descargar
+              </button>
+              
+              <button
+                className={`ml-4 text-black text-sm`}
+                onClick={() => {
+                  copyToClipboard('payment-ticket').then(() => {
+                    openModal(
+                      <div className="bg-white">
+
+                        <FloatingDecoration
+                          className={`w-24 absolute top-[0%] left-[0%]`}
+                          img="/img/modal-eclipse-green-1.svg"
+                          customClass="rounded-tl-2xl"
+                        />
+
+                        <PlusDecoration
+                          className="w-4 md:w-6 absolute top-[33%] md:top-[35%] right-[5%]"
+                          isGreen={true}
+                        />
+
+                        <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+                          <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
+                            Comprobante de pago copiado al portapapeles.
+                          </p>
+                        </div>
+                        <FloatingDecoration
+                          className={`w-4 md:w-8 absolute bottom-[15%] left-[5%]`}
+                          img="/img/orange-plus.svg"
+                        />
+
+                        <FloatingDecoration
+                          className={`w-24 absolute bottom-[0%] right-[0%]`}
+                          img="/img/modal-eclipse-green-2.svg"
+                          customClass="rounded-br-2xl"
+                        />
+                      </div>,
+                    );
+                  });
+                }}
+              >
+                <Image
+                  src={`/img/sharing-icon.svg`}
+                  alt={`Compartir comprobante`}
+                  width={24}
+                  height={24}
+                  className={`block mx-auto`}
+                />
+                Compartir
+              </button>
+            </div>
+
+            <div className="button-container w-3/5 mx-auto mb-6">
+              <button
+                className="multi-border font-medium block w-full bg-black text-white"
+                onClick={closeModal}
+              >
+                Aceptar
+              </button>
+            </div>
+
+
+            <FloatingDecoration
+              className={`w-4 md:w-8 absolute bottom-[15%] left-[5%]`}
+              img="/img/orange-plus.svg"
+            />
+
+            <FloatingDecoration
+              className={`w-16 absolute bottom-[0%] right-[0%]`}
+              img="/img/modal-eclipse-green-2.svg"
+              customClass="rounded-br-2xl"
+            />
           </div>,
         );
 
@@ -645,69 +774,64 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
         isSubmitting: false
       });
       openModal(
-        <div
-          className={`flex flex-col items-center justify-center h-[600px]`}
-        >
-          <div className={`grid grid-cols-12`}>
-            <div className="hidden md:flex md:col-span-2 justify-center relative">
-              {/* PlusDecoration */}
-              <PlusDecoration
-                className="w-4 md:w-8 relative mx-auto"
-              />
-              {/* PlusDecoration */}
-              <PlusDecoration
-                className="w-9 md:w-12 lg:w-16 xl:w-20 absolute"
-                style={{ bottom: '0' }}
-              />
-            </div>
+        <div className="bg-white">
+          <FloatingDecoration
+            className={`w-48 md:w-64 absolute top-[0%] left-[28%] sm:left-[30%] md:left-[33%]`}
+            img="/img/modal-eclipse-orange-1.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+            img="/img/red-plus.svg"
+          />
+          <div
+            className={`flex flex-col items-center justify-center h-[700px] w-auto md:w-[800px] p-12`}
+          >
+            <h1 className={`text-center text-5xl p-4 text-black font-medium mt-[-130px] md:mt-[-150px]`}>
+              ¡Ups!
+            </h1>
 
             <div
-              className="col-span-12 md:col-span-8"
+              className={`flex my-6 justify-center`}
             >
-              <h1 className={`text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro`}>
-                ¡Ups!
-              </h1>
+              <div>
+                <Image
+                  src={`/img/emoji-sorry.svg`}
+                  alt={`SIM física`}
+                  width={128}
+                  height={120}
+                  className={`ml-auto`}
+                />
+              </div>
+            </div>
 
-              <div
-                className={`flex mb-12 justify-center`}
+            <h1 className={`text-center text-xl p-4 text-black`}>
+              Parece que hubo un pequeño problema al procesar tu pago.
+              <br />
+              <br />
+              No te preocupes,
+              <span className="font-medium"> intenta nuevamente o utiliza otro método de pago.</span>
+            </h1>
+
+            <div className="button-container mx-auto my-6">
+              <button
+                className="btn-xl bg-black multi-border font-medium block w-full text-white mx-auto"
+                onClick={closeModal}
               >
-                <div>
-                  <Image
-                    src={`/img/emoji-sorry.svg`}
-                    alt={`SIM física`}
-                    width={150}
-                    height={150}
-                    className={`ml-auto`}
-                  />
-                </div>
-              </div>
-
-              <h1 className={`text-2xl lg:text-xl p-4 md:p-5 text-white`}>
-                Parece que hubo un pequeño problema al procesar tu pago.
-                <br />
-                <br />
-                No te preocupes,
-                <span className="text-highlight"> intenta nuevamente o utiliza otro método de pago.</span>
-              </h1>
-
-              <div className="button-container w-4/5 lg:w-72 mx-auto">
-                <button
-                  className="btn-xl multi-border font-medium block w-full text-white font-medium mx-auto"
-                  onClick={closeModal}
-                >
-                  REINTENTAR
-                </button>
-              </div>
-            </div>
-            <div
-              className={`hidden md:flex md:col-span-2 justify-center items-center`}
-            >
-              {/* PlusDecoration */}
-              <PlusDecoration
-                className="w-9 md:w-12 lg:w-16 xl:w-20"
-              />
+                REINTENTAR
+              </button>
             </div>
           </div>
+          <FloatingDecoration
+            className={`w-6 md:w-12 absolute bottom-[8%] md:bottom-[15%] right-[10%]`}
+            img="/img/red-plus.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-28 md:w-44 absolute bottom-[0%] left-[0%]`}
+            img="/img/modal-eclipse-orange-2.svg"
+            customClass="rounded-bl-2xl"
+          />
         </div>,
       );
     });
@@ -742,22 +866,22 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
         paycash: tokuIframeCash,
         codi: tokuIframeCodi
       };
-  
+
       const setGatewayStateMap: { [key: string]: (url: string) => void } = {
         card: setTokuIframeCard,
         transfer: setTokuIframeSpei,
         paycash: setTokuIframeCash,
         codi: setTokuIframeCodi
       };
-  
+
       if (gatewayStateMap[gateway]) {
         return;
       }
-  
+
       const api = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
       const response = await fetch(`${api}/api/pre-register/${invitationId}/pay-with-toku?gateway=${gateway}`);
       const data = await response.json();
-  
+
       if (gateway === "card" || gateway === "codi") {
         setGatewayStateMap[gateway](data.iframe);
       }
@@ -771,7 +895,7 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
       console.error(error);
     }
   }
-  
+
 
   useEffect(() => {
     if (registerError && 'data' in registerError) {
@@ -836,10 +960,34 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
         }
         if (key === "product_id") {
           openModal(
-            <div className="flex flex-col items-center justify-center h-full">
-              <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-                Por favor, selecciona un plan.
-              </p>
+            <div className="bg-white">
+              <FloatingDecoration
+                className={`w-48 md:w-64 absolute top-[0%] left-[20%] md:left-[25%]`}
+                img="/img/modal-eclipse-orange-1.svg"
+              />
+
+              <FloatingDecoration
+                className={`w-4 md:w-8 absolute top-[10%] left-[10%]`}
+                img="/img/red-plus.svg"
+              />
+
+              <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+                <p
+                  className={`text-center text-xl p-4 text-black ajuste_centro`}
+                >
+                  Por favor, selecciona un plan.
+                </p>
+              </div>
+              <FloatingDecoration
+                className={`w-8 md:w-12 absolute bottom-[15%] right-[10%]`}
+                img="/img/red-plus.svg"
+              />
+
+              <FloatingDecoration
+                className={`w-36 md:w-44 absolute bottom-[0%] left-[0%]`}
+                img="/img/modal-eclipse-orange-2.svg"
+                customClass="rounded-bl-2xl"
+              />
             </div>,
           );
         }
@@ -901,9 +1049,9 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
     }
   }, [echoInstance]);
 
-  const validTdc = (e:any) => {
+  const validTdc = (e: any) => {
     let card = e.target.value.replace(/\D/g, '').replace(/(\d{4})(?=\d)/g, '$1-');
-    setForm({ ...form, cardNumber:  card})
+    setForm({ ...form, cardNumber: card })
   }
 
   useEffect(() => {
@@ -1040,7 +1188,7 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
                 </p>
 
                 {mitIframe && (
-                  <iframe src={mitIframe} className="col-span-12 h-[800px] border-0 w-full"/>
+                  <iframe src={mitIframe} className="col-span-12 h-[800px] border-0 w-full" />
                 )}
               </div>
             )}
@@ -1055,7 +1203,7 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
                 </p>
 
                 {tokuIframeCard && (
-                  <iframe src={tokuIframeCard} className="col-span-12 h-[800px] border-0 w-full"/>
+                  <iframe src={tokuIframeCard} className="col-span-12 h-[800px] border-0 w-full" />
                 )}
               </div>
             )}
@@ -1092,7 +1240,7 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
                 </p>
 
                 {tokuIframeCash && (
-                  <iframe src={tokuIframeCash} className="col-span-12 h-[800px] border-0 w-full"/>
+                  <iframe src={tokuIframeCash} className="col-span-12 h-[800px] border-0 w-full" />
                 )}
               </div>
             )}
@@ -1102,11 +1250,11 @@ const PaymentForm: React.FC<PaymentFormProps> = React.memo(({ invitationId }) =>
                 id={'payment-card'}
               >
                 <p className={`col-span-12 text-2xl mb-5`}>
-                Pago via CoDi
+                  Pago via CoDi
                 </p>
 
                 {tokuIframeCodi && (
-                  <iframe src={tokuIframeCodi} className="col-span-12 h-[800px] border-0 w-full"/>
+                  <iframe src={tokuIframeCodi} className="col-span-12 h-[800px] border-0 w-full" />
                 )}
               </div>
             )}

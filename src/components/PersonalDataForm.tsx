@@ -25,7 +25,9 @@ import {
   setLastName,
   setSecondLastName
 } from "@/lib/features/personal-data/personalDataSlice";
-import {ModalContext} from "@/contexts/ModalContext";
+import { ModalContext } from "@/contexts/ModalContext";
+import FloatingDecoration from "./FloatingDecoration";
+import PlusDecoration from "./PlusDecoration";
 
 const days = Array.from({length: 31}, (_, i) => (i + 1).toString().padStart(2, '0'));
 const months = [
@@ -224,14 +226,37 @@ export default function PersonalDataForm() {
   const showModalWithIdentificationInfo = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
-        <p
-          className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
-        >
-          <span className="font-medium">Sube una <span className="text-highlight">foto por ambos lados</span> <br/>
-            de tu <span className="text-highlight">identificación oficial (INE o Pasaporte)</span>.
-          </span>
-        </p>
+      <div className="bg-white">
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
+          img="/img/modal-eclipse-green-1.svg"
+          customClass="rounded-tl-2xl"
+        />
+
+        <PlusDecoration
+          className="w-4 md:w-6 absolute top-[42%] right-[5%]"
+          isGreen={true}
+        />
+
+        <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+          <p
+            className={`text-center text-xl p-4 text-black ajuste_centro`}
+          >
+            <span className="font-medium">Sube una foto por ambos lados <br />
+              de tu identificación oficial</span> (INE o Pasaporte).
+          </p>
+        </div>
+
+        <FloatingDecoration
+          className={`w-8 md:w-12 absolute bottom-[15%] left-[10%]`}
+          img="/img/orange-plus.svg"
+        />
+
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
+          img="/img/modal-eclipse-green-2.svg"
+          customClass="rounded-br-2xl"
+        />
       </div>,
     );
   }
@@ -239,14 +264,36 @@ export default function PersonalDataForm() {
   const showModalWithPassportInfo = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
-        <p
-          className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
-        >
-          <span className="font-medium">Sube una <span className="text-highlight">foto de frente </span>
-            de tu <span className="text-highlight">Pasaporte</span>.
-          </span>
-        </p>
+      <div className="bg-white">
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
+          img="/img/modal-eclipse-green-1.svg"
+          customClass="rounded-tl-2xl"
+        />
+
+        <PlusDecoration
+          className="w-4 md:w-6 absolute top-[38%] right-[5%]"
+          isGreen={true}
+        />
+
+        <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+          <p
+            className={`text-center text-xl p-4 text-black ajuste_centro`}
+          >
+            <span className="font-medium">Sube una foto de frente de tu Pasaporte.</span>
+          </p>
+        </div>
+
+        <FloatingDecoration
+          className={`w-8 md:w-12 absolute bottom-[15%] left-[10%]`}
+          img="/img/orange-plus.svg"
+        />
+
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
+          img="/img/modal-eclipse-green-2.svg"
+          customClass="rounded-br-2xl"
+        />
       </div>,
     );
   }
@@ -254,22 +301,45 @@ export default function PersonalDataForm() {
   const showModalWithAddressProof = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div className="flex flex-col items-center justify-center h-[600px] bg-black bg-modal-verde">
-        <p
-          className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
-        >
-          <span className="font-medium">Sube una <span className="text-highlight">foto</span> clara o el <span
-            className="text-highlight">PDF</span><br/>
-            de tu comprobante de domicilio</span><br/>
-          (de la dirección donde quieres recibir<br/>
-          tu Kit de Bienvenida).
-          <br/><br/>
-          Este debe ser menor a 3 meses.<br/>
-          Los comprobantes oficiales<br/>
-          son los siguientes:<br/>
-          gas, luz, teléfono, internet,<br/>
-          agua o predial.
-        </p>
+      <div className="bg-white">
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
+          img="/img/modal-eclipse-green-1.svg"
+          customClass="rounded-tl-2xl"
+        />
+
+        <PlusDecoration
+          className="w-4 md:w-6 absolute top-[42%] right-[5%]"
+          isGreen={true}
+        />
+
+        <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+          <p
+            className={`text-center text-xl p-4 text-black ajuste_centro`}
+          >
+            <span className="font-medium">Sube una foto clara o el PDF<br />
+              de tu comprobante de domicilio</span><br />
+            (de la dirección donde quieres recibir<br />
+            tu Kit de Bienvenida).
+            <br /><br />
+            Este debe ser menor a 3 meses.<br />
+            Los comprobantes oficiales<br />
+            son los siguientes:<br />
+            gas, luz, teléfono, internet,<br />
+            agua o predial.
+          </p>
+        </div>
+
+        <FloatingDecoration
+          className={`w-8 md:w-12 absolute bottom-[15%] left-[10%]`}
+          img="/img/orange-plus.svg"
+        />
+
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
+          img="/img/modal-eclipse-green-2.svg"
+          customClass="rounded-br-2xl"
+        />
       </div>,
     );
   }
@@ -277,24 +347,45 @@ export default function PersonalDataForm() {
   const showModalWithTaxStatusProof = (e: React.MouseEvent) => {
     e.preventDefault();
     openModal(
-      <div className="flex flex-col items-center justify-center h-[500px] bg-black bg-modal-verde">
-        <p
-          className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
-        >
-          <span className="font-medium">Sube una <span className="text-highlight">foto clara</span> o el <span
-            className="text-highlight">PDF</span> de
-            <br/>
-            tu Constancia de Situación
-            <br/>
-            Fiscal</span> (CSF) actualizada.
-          <br/>
-          <br/>
-          Esta debe ser menor a 3 meses,
-          <br/>
-          y puedes descargarla desde el
-          <br/>
-          portal del SAT
-        </p>
+      <div className="bg-white">
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
+          img="/img/modal-eclipse-green-1.svg"
+          customClass="rounded-tl-2xl"
+        />
+
+        <PlusDecoration
+          className="w-4 md:w-6 absolute top-[42%] right-[5%]"
+          isGreen={true}
+        />
+        <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+          <p
+            className={`text-center text-xl p-4 text-black ajuste_centro`}
+          >
+            <span className="font-medium">Sube una foto clara o el PDF
+              <br />
+              de tu Constancia de Situación
+              <br />
+              Fiscal</span> (CSF) actualizada.
+            <br />
+            <br />
+            Esta debe ser menor a 3 meses,
+            <br />
+            y puedes descargarla desde el
+            <br />
+            portal del SAT
+          </p>
+        </div>
+        <FloatingDecoration
+          className={`w-8 md:w-12 absolute bottom-[15%] left-[10%]`}
+          img="/img/orange-plus.svg"
+        />
+
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
+          img="/img/modal-eclipse-green-2.svg"
+          customClass="rounded-br-2xl"
+        />
       </div>,
     );
   }
@@ -645,15 +736,13 @@ export default function PersonalDataForm() {
           <div className="col-span-12 text-black">
             <div className="mb-5 ml-6">
               <label>
-                <input name="docType" type="radio" className="radio" value={'INE'} onChange={handleInputChange}
-                       checked={personalData.docType === "INE"}/>
+                <input name="docType" type="radio" className="radio" value={'INE'} onChange={handleInputChange} checked={personalData.docType === "INE"} />
                 <span> INE</span>
               </label>
             </div>
             <div className="ml-6">
               <label>
-                <input name="docType" type="radio" className="radio" value={'Passport'} onChange={handleInputChange}
-                       checked={personalData.docType === "Passport"}/>
+                <input name="docType" type="radio" className="radio" value={'Passport'} onChange={handleInputChange} checked={personalData.docType === "Passport"} />
                 <span> Pasaporte</span>
               </label>
             </div>

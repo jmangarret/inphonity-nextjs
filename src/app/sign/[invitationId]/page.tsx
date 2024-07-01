@@ -4,10 +4,11 @@ import Footer from "@/components/Footer";
 import { useGetInvitationByIdQuery } from "@/lib/services/invitationsApi";
 import React, { useEffect } from "react";
 import { ModalContext } from "@/contexts/ModalContext";
-import { useSignatureMutation } from "@/lib/services/registersApi";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { request } from "@/mocks/request-data";
+import PlusDecoration from "@/components/PlusDecoration";
+import FloatingDecoration from "@/components/FloatingDecoration";
+import { useRouter } from "next/navigation";
 
 export default function Sign({ params }: { params: { invitationId: string } }) {
   const router = useRouter();
@@ -15,11 +16,8 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
   const invitationIdDecoded = atob(params.invitationId.replace("%3D", "="));
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
   const [isTermsAccepted, setIsTermsAccepted] = React.useState(false);
-  const [signature, { isLoading, error }] = useSignatureMutation();
   const [isSigned, setIsSigned] = React.useState(false);
-  const [password, setPassword] = React.useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = React.useState('');
-  const [passwordStrength, setPasswordStrength] = React.useState('débil');
+
   const {
     isLoading: invitationIsLoading,
     isFetching: invitationIsFetching,
@@ -43,148 +41,64 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
     }
   }
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newPassword = e.target.value;
-    setPassword(newPassword);
-
-    if (newPassword.length < 8) {
-      setPasswordStrength('débil');
-    } else if (!newPassword.match(/[A-Z]/)) {
-      setPasswordStrength('débil');
-    } else if (!newPassword.match(/[0-9]/)) {
-      setPasswordStrength('regular');
-    } else if (!newPassword.match(/[^A-Za-z0-9]/)) {
-      setPasswordStrength('regular');
-    } else {
-      setPasswordStrength('fuerte');
-    }
-  };
-
   const handleSign = () => {
     if (!isTermsAccepted) {
       openModal(
-        <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde text-white">
-          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            Para poder continuar,
-            <br />
-            <span className="font-medium">no olvides aceptar </span>
-            <br />
-            los Términos y Condiciones
-            <br />
-            y confirmar tu información.
-          </p>
-        </div>,
-      );
+        <div className="bg-white">
+          <FloatingDecoration
+            className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
+            img="/img/modal-eclipse-green-1.svg"
+            customClass="rounded-tl-2xl"
+          />
 
-      return;
-    }
+          <PlusDecoration
+            className="w-4 md:w-6 absolute top-[30%] md:top-[42%] right-[5%]"
+            isGreen={true}
+          />
 
-    setIsSigned(true);
-  }
-
-  const handlePassword = () => {
-    if (password !== passwordConfirmation) {
-      if (!password || !passwordConfirmation) {
-        return;
-      }
-
-      openModal(
-        <div className="flex flex-col items-center justify-center h-full text-white">
-          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            Las contraseñas no coinciden.
-          </p>
-        </div>,
-      );
-
-      return;
-    }
-
-    if (password.length < 8) {
-      openModal(
-        <div className="flex flex-col items-center justify-center h-full text-white">
-          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            La contraseña debe tener al menos 8 caracteres.
-          </p>
-        </div>,
-      );
-
-      return;
-    }
-
-    if (!password.match(/[A-Z]/)) {
-      openModal(
-        <div className="flex flex-col items-center justify-center h-full text-white">
-          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            La contraseña debe tener al menos una mayúscula.
-          </p>
-        </div>,
-      );
-
-      return;
-    }
-
-    if (!password.match(/[0-9]/)) {
-      openModal(
-        <div className="flex flex-col items-center justify-center h-full text-white">
-          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            La contraseña debe tener al menos un número.
-          </p>
-        </div>,
-      );
-
-      return;
-    }
-
-    if (!password.match(/[^A-Za-z0-9]/)) {
-      openModal(
-        <div className="flex flex-col items-center justify-center h-full text-white">
-          <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-            La contraseña debe tener al menos un carácter especial.
-          </p>
-        </div>,
-      );
-
-      return;
-    }
-  }
-  const handleSubmit = () => {
-    handlePassword();
-
-    signature({
-      invitation_id: parseInt(invitationIdDecoded),
-      new_password: password,
-      new_password_confirmation: passwordConfirmation,
-    })
-      .unwrap()
-      .then(() => {
-        // Redirect to inphonity.com
-        router.push(`/welcome/${invitationIdDecoded}`);
-      })
-      .catch((response) => {
-        if (response.data && response.data.message && response.data.message === 'Ya has firmado el contrato.') {
-          router.push(`/welcome/${invitationIdDecoded}`);
-
-          return;
-
-        }
-
-        openModal(
-          <div className="flex flex-col items-center justify-center h-full text-white">
-            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}>
-              Ocurrió un error al firmar el contrato.
+          <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+            <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
+              Para poder continuar,
+              <br />
+              <span className="font-medium">no olvides aceptar </span>
+              <br />
+              los Términos y Condiciones
+              <br />
+              y confirmar tu información.
             </p>
-          </div>,
-        );
-      });
+          </div>
+
+          <FloatingDecoration
+            className={`w-8 md:w-12 absolute bottom-[15%] left-[10%]`}
+            img="/img/orange-plus.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
+            img="/img/modal-eclipse-green-2.svg"
+            customClass="rounded-br-2xl"
+          />
+        </div>,
+      );
+
+      return;
+    }
+
+    router.push(`/sign/${params.invitationId}/form`);
+
   }
 
   return (
     <div>
       {/* <Header centerLogo={true}  /> */}
-      <main className={`text-center ${isLoading ? 'bg-black' : 'bg_bienvenida'}`} style={{ height: 'auto' }}>
+      <main className={`text-center bg-white text-black`} style={{ height: 'auto' }}>
+        <FloatingDecoration
+          className={`w-24 md:w-40 lg:w-48 absolute top-[0%] right-[0%]`}
+          img="/img/sign-eclipse-green-1.svg"
+        />
         <div className={`p-9 lg:w-3/4 mx-auto`}>
           <Image
-            src="/logo.svg"
+            src="/Logo3.svg"
             alt="Logotipo de Inphonity"
             width={203}
             height={29.4}
@@ -192,7 +106,7 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
             className={`mx-auto`}
           />
         </div>
-        <div className={`container p-3 md:p-6 lg:p-12 py-10 mx-auto md:w-3/4 lg:w-4/5`}>
+        <div className={`container p-3 md:p-6 lg:p-12 py-3 mx-auto md:w-3/4 lg:w-4/5`}>
           {!isSigned && (
             <>
               <h1 className={`text-3xl md:text-5xl font-bold font-medium mb-3 md:mb-5 lg:mb-7 text-center`}>
@@ -221,152 +135,47 @@ export default function Sign({ params }: { params: { invitationId: string } }) {
                     onChange={handleCheckboxChange}
                   />
                   <label htmlFor="terms">
-                    <span className={`ml-2 inline-block font-medium text-white`}>
-                      <a
-                        href={'https://drive.google.com/file/d/12omj25jSFrsjbn6hMiPUdXzGFLCOYJ_L/view'}
-                        target={'_blank'}
-                        className={'underline'}
-                      >
-                        Acepto los Términos y Condiciones
-                      </a>
+                    <span className={`ml-2 inline-block font-medium`}>
+                      Acepto los Términos y Condiciones
                     </span>
                   </label>
                 </div>
 
-                <div className="flex items-center text-black mb-2 justify-center">
+                <div className="flex items-center text-black pb-14 justify-center">
                   <button
-                    className="btn-xl multi-border text-white disabled:opacity-50"
+                    className="btn-xl multi-border bg-black text-white font-medium disabled:opacity-50"
                     onClick={handleSign}
                   >
                     FIRMAR CONTRATO
                   </button>
                 </div>
               </div>
+
             </>
           )}
-          {isSigned && (
-            <>
-              <h1 className={`text-3xl md:text-5xl font-bold font-medium mb-2 md:mb-3 lg:mb-4 text-center`}>
-                Crea una <span className="text-highlight">contraseña</span>
-              </h1>
-              <p className={`text-light text-lg md:text-xl mb-6 md:mb-10 lg:mb-14 text-center`}>
-                La necesitarás para ingresar a la App de inphonity
-              </p>
-              <p className={`text-light text-base md:text-lg mb-6 md:mb-10 lg:mb-14 text-center`}>
-                <strong className={`text-medium text-highlight`}>Importante:</strong>
-                <br />
-                Tu contraseña debe tener al menos 8 caracteres,
-                <br />
-                ser alfanumérica, incluir una mayúscula y un carácter
-                especial
-              </p>
 
-              <div className={`w-full md:w-3/4 mx-auto mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14`}>
-                <div className="flex items-center text-black mb-6 md:mb-8 lg:mb-10">
-                  <input
-                    type="email"
-                    className={`input input-border-gray form-input h-12 w-full`}
-                    placeholder="Correo electrónico"
-                    name={'email'}
-                    autoComplete="off"
-                    value={invitationData?.pre_registration?.email || ''}
-                    disabled={true}
-                  />
-                </div>
-                <div className="flex items-center text-black mb-6 md:mb-8 lg:mb-10">
-                  <input
-                    type="password"
-                    id="password"
-                    className="input input-border-gray form-input h-12 w-full"
-                    name={'password'}
-                    placeholder={'Contraseña'}
-                    onChange={handlePasswordChange}
-                    onBlur={handlePassword}
-                  />
-                </div>
-                <div className="flex items-center text-black mb-6 md:mb-8 lg:mb-10">
-                  <input
-                    type="password"
-                    id="passwordConfirmation"
-                    className="input input-border-gray h-12 w-full"
-                    name={'passwordConfirmation'}
-                    placeholder={'Confirmar contraseña'}
-                    onChange={(e) => setPasswordConfirmation(e.target.value)}
-                    onBlur={handlePassword}
-                  />
-                </div>
+          <FloatingDecoration
+            className={`w-12 md:w-24 lg:w-32 absolute bottom-[-20%] md:bottom-[-15%] lg:bottom-[-25%] left-[0%]`}
+            img="/img/sign-eclipse-green-2.svg"
+          />
 
-                <div className="flex items-center justify-center text-black mb-20">
-                  <div className="w-1/2">
-                    <PasswordStrengthBar strength={passwordStrength} />
-                  </div>
-                </div>
-                <div className="flex items-center my-10 mb-2 justify-center">
-                  <button
-                    className="btn-xl multi-border font-medium text-white disabled:opacity-50"
-                    onClick={handleSubmit}
-                    disabled={isLoading}
-                  >
-                    ENVIAR
-                  </button>
-                </div>
-              </div>
-            </>
-          )}
+          <FloatingDecoration
+            className={`w-12 md:w-32 lg:w-48 absolute bottom-[-20%] md:bottom-[-16%] lg:bottom-[-30%] right-[5%] md:right-[3%]`}
+            img="/img/sign-eclipse-green-3.svg"
+          />
+
+          <PlusDecoration
+            className="hidden md:block w-8 absolute bottom-[30%] left-[5%]"
+            isGreen={true}
+          />
+
+          <FloatingDecoration
+            className={`w-4 md:w-6 lg:w-8 absolute bottom-[-19%] md:bottom-[-15%] lg:bottom-[-30%] right-[23%] md:right-[22%] lg:right-[25%]`}
+            img="/img/blue-plus.svg"
+          />
         </div>
       </main>
       <Footer />
     </div>
   );
 }
-
-
-type PasswordStrengthBarProps = {
-  strength: string;
-};
-
-const PasswordStrengthBar: React.FC<PasswordStrengthBarProps> = ({ strength }) => {
-  let color;
-  let colorIcon;
-  let position;
-
-  switch (strength) {
-    case 'débil':
-      color = '#F50D0D';
-      position = '0%';
-      colorIcon = 'red';
-      break;
-    case 'regular':
-      color = '#FFE174';
-      position = 'calc(50% - 20px)';
-      colorIcon = 'yellow';
-      break;
-    case 'fuerte':
-      color = '#00BF63';
-      position = 'calc(100% - 40px)';
-      colorIcon = 'green';
-      break;
-  }
-
-  return (
-    <div
-      style={{ height: '20px', width: '100%', backgroundColor: '#ddd' }}
-      className={`relative rounded-full`}
-    >
-      <div
-        className={`relative rounded-full`}
-        style={{ height: '100%', width: '100%', backgroundColor: color }}
-      />
-      <Image
-        src={`/img/password-strength-${colorIcon}.svg`}
-        alt="Password Strength"
-        width={40}
-        height={40}
-        style={{ position: 'absolute', left: position, top: '-10px' }}
-      />
-      <p className="text-base text-white text-center w-full my-3">
-        Nivel de Seguridad - <span className="uppercase">{strength}</span>
-      </p>
-    </div>
-  );
-};

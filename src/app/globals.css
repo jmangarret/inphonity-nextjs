@@ -179,10 +179,10 @@ main{
 }
 
 .bg-modal-default {
-  background-image: url("/img/bg_modal_rechazo.png");
+  /* background-image: url("/img/bg_modal_rechazo.png");
   background-repeat: no-repeat;
-  background-size: 100% 100%;
-  max-width: 500px;
+  background-size: 100% 100%; */
+  background-color: #FFF;
 }
 
 .bg_gracias_por_unirte {

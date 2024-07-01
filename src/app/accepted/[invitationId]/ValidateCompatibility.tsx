@@ -6,6 +6,7 @@ import ValidateCoverageForm from "@/components/ValidateCoverageForm";
 import { ModalContext } from "@/contexts/ModalContext";
 import React from "react";
 import SliderMarketing from "@/components/SliderMarketing";
+import FloatingDecoration from "@/components/FloatingDecoration";
 
 export default function ValidateCompatibility() {
   const { openModal } = React.useContext(ModalContext);
@@ -35,11 +36,33 @@ export default function ValidateCompatibility() {
   }
   const CuerpoMensaje = () => {
     return (
-      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
-        <h2 className="text-center text-6xl lg:text-6xl p-4 md:p-5 text-white font-medium ajuste_centro">IMEI</h2>
-        <p className="text-center text-2xl lg:text-xl p-4 md:p-5 text-white">
-          Es un código de 15 dígitos que identifica a tu dispositivo y <br />lo  diferencia de cualquier otro
-        </p>
+      <div className="bg-white">
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
+          img="/img/modal-eclipse-green-1.svg"
+          customClass="rounded-tl-2xl"
+        />
+
+        <PlusDecoration
+          className="w-4 md:w-6 absolute top-[42%] right-[5%]"
+          isGreen={true}
+        />
+        <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+          <h2 className="text-center text-5xl p-4 text-black font-medium ajuste_centro">IMEI</h2>
+          <p className="text-center text-xl p-4 text-black">
+            Es un código de <span className="font-medium">15 dígitos</span> <br /> que identifica a tu dispositivo y <br /> lo  diferencia de cualquier otro.
+          </p>
+        </div>
+        <FloatingDecoration
+          className={`w-8 md:w-12 absolute bottom-[15%] left-[10%]`}
+          img="/img/orange-plus.svg"
+        />
+
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
+          img="/img/modal-eclipse-green-2.svg"
+          customClass="rounded-br-2xl"
+        />
       </div>
     )
   }
@@ -50,14 +73,38 @@ export default function ValidateCompatibility() {
 
   const showModalWithLiberateInfo = () => {
     openModal(
-      <div className="flex flex-col items-center justify-center h-full bg-black bg-modal-verde">
-        <p
-          className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-white ajuste_centro`}
-        >
-          Haz <a href="https://www.inphonity.com/Faqs" className="text-highlight">clic aquí</a> para consultar <br />
-          más información sobre los equipos <br />
-          compatibles con nuestra red.
-        </p>
+      <div className="bg-white">
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute top-[0%] left-[0%]`}
+          img="/img/modal-eclipse-green-1.svg"
+          customClass="rounded-tl-2xl"
+        />
+
+        <PlusDecoration
+          className="w-4 md:w-6 absolute top-[37%]  md:top-[42%] right-[5%]"
+          isGreen={true}
+        />
+
+        <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+          <p
+            className={`text-center text-xl p-4 text-black ajuste_centro`}
+          >
+            Haz <a href="https://www.inphonity.com/Faqs" className="font-medium underline">clic aquí</a> para consultar <br />
+            más información sobre los equipos <br />
+            compatibles con nuestra red.
+          </p>
+        </div>
+
+        <FloatingDecoration
+          className={`w-8 md:w-12 absolute bottom-[15%] left-[10%]`}
+          img="/img/orange-plus.svg"
+        />
+
+        <FloatingDecoration
+          className={`w-24 md:w-32 absolute bottom-[0%] right-[0%]`}
+          img="/img/modal-eclipse-green-2.svg"
+          customClass="rounded-br-2xl"
+        />
       </div>,
     )
   }
@@ -85,11 +132,11 @@ export default function ValidateCompatibility() {
               <header className="text-center md:text-left relative">
                 <div className="md:ml-10 lg:ml-14 xl:ml-20 relative">
                   <span className="text-black font-medium text-4xl lg:text-[3.125rem] leading-tight mb-5">
-                    Para ser parte de<br/>
+                    Para ser parte de<br />
                     <span className="text-custom-blue"> inphonity,</span>
                   </span>
                   <span className="leading-tight text-3xl lg:text-[2.5rem] text-black mt-10 px-1 xl:pr-[17rem]">
-                  valida la <br/>compatibilidad de tu celular<br/> siguiendo estos pasos
+                    valida la <br />compatibilidad de tu celular<br /> siguiendo estos pasos
                   </span>
                   <PlusDecoration
                     className="w-7 md:w-8 lg:w-12 xl:w-17 absolute"
