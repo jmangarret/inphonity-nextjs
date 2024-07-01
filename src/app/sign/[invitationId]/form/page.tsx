@@ -56,8 +56,8 @@ function SignForm({ params }: { params: { invitationId: string } }) {
                     />
 
 
-                    <div className="flex flex-col items-center justify-center h-full text-black">
-                        <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-black ajuste_centro`}>
+                    <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+                        <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
                             Las contraseñas no coinciden.
                         </p>
                     </div>
@@ -91,8 +91,8 @@ function SignForm({ params }: { params: { invitationId: string } }) {
                     />
 
 
-                    <div className="flex flex-col items-center justify-center h-full text-black">
-                        <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-black ajuste_centro`}>
+                    <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+                        <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
                             La contraseña debe tener al menos 8 caracteres.
                         </p>
                     </div>
@@ -126,8 +126,8 @@ function SignForm({ params }: { params: { invitationId: string } }) {
                     />
 
 
-                    <div className="flex flex-col items-center justify-center h-full text-black">
-                        <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-black ajuste_centro`}>
+                    <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+                        <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
                             La contraseña debe tener al menos una mayúscula.
                         </p>
                     </div>
@@ -161,8 +161,8 @@ function SignForm({ params }: { params: { invitationId: string } }) {
                     />
 
 
-                    <div className="flex flex-col items-center justify-center h-full text-black">
-                        <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-black ajuste_centro`}>
+                    <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+                        <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
                             La contraseña debe tener al menos un número.
                         </p>
                     </div>
@@ -196,8 +196,8 @@ function SignForm({ params }: { params: { invitationId: string } }) {
                     />
 
 
-                    <div className="flex flex-col items-center justify-center h-full text-black">
-                        <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-black ajuste_centro`}>
+                    <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+                        <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
                             La contraseña debe tener al menos un carácter especial.
                         </p>
                     </div>
@@ -250,8 +250,8 @@ function SignForm({ params }: { params: { invitationId: string } }) {
                             img="/img/red-plus.svg"
                         />
 
-                        <div className="flex flex-col items-center justify-center h-full text-black">
-                            <p className={`text-center text-3xl lg:text-3xl p-4 md:p-5 text-black ajuste_centro`}>
+                        <div className="flex flex-col items-center justify-center h-[470px] w-auto md:w-[500px]">
+                            <p className={`text-center text-xl p-4 text-black ajuste_centro`}>
                                 Ocurrió un error al firmar el contrato.
                             </p>
                         </div>
