@@ -2,14 +2,21 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import React from "react";
+import FloatingDecoration from "@/components/FloatingDecoration";
+import PlusDecoration from "@/components/PlusDecoration";
 
 export default function Complete() {
   return (
-    <div style={{ height: '100vh' }}>
-      <main className={`text-center bg-black bg_mensaje_aceptada`}>
-        <div className={`p-9 lg:w-3/4 mx-auto`}>
+    <section className="bg-white text-black text-center h-screen">
+      <main>
+        <FloatingDecoration
+          className={`w-24 md:w-40 lg:w-48 absolute top-[0%] right-[0%]`}
+          img="/img/sign-eclipse-green-1.svg"
+        />
+
+        <div className={`px-9 pt-16 md:pt-9 pb-9 lg:w-3/4 mx-auto`}>
           <Image
-            src="/logo.svg"
+            src="/Logo3.svg"
             alt="Logotipo de Inphonity"
             width={203}
             height={29.4}
@@ -17,6 +24,8 @@ export default function Complete() {
             className={`mx-auto`}
           />
         </div>
+
+
         <div
           className={`p-9 md:p-24 lg:w-3/4 mx-auto`}
         >
@@ -40,16 +49,42 @@ export default function Complete() {
             Si quieres <span className={`font-medium text-highlight`}>una línea adicional</span>, puedes
             contratarla entrando a la <span className={`font-medium`}>App.</span>
           </p>
+
           <div className="col-span-12 md:col-span-4">
             <div className="button-container text-center lg:w-72 mx-auto flex justify-center">
-              <a className={`btn-width multi-border font-medium block pointer`}>
+              <a className={`btn-width multi-border text-white bg-black font-medium block pointer`}>
                 DA CLICK AQUÍ
               </a>
             </div>
           </div>
+
+          <FloatingDecoration
+            className={`w-12 md:w-24 lg:w-32 absolute bottom-[40%] md:bottom-[40%] lg:bottom-[30%] xl:bottom-[35%] left-[0%]`}
+            img="/img/sign-eclipse-green-2.svg"
+          />
+
+          <FloatingDecoration
+            className={`w-12 md:w-16 lg:w-48 absolute hidden lg:block bottom-[33%] md:bottom-[30%] lg:bottom-[25%] right-[1%] md:right-[3%] lg:right-[5%]`}
+            img="/img/sign-eclipse-green-3.svg"
+          />
+
+          <PlusDecoration
+            className="hidden md:block w-8 absolute top-[10%] left-[10%]"
+            isGreen={true}
+          />
+
+          <FloatingDecoration
+            className={`w-4 md:w-6 lg:w-8 absolute hidden lg:block bottom-[25%] md:bottom-[35%] lg:bottom-[25%] right-[5%] md:right-[22%] lg:right-[25%]`}
+            img="/img/blue-plus.svg"
+          />
+
         </div>
       </main>
-      <Footer />
-    </div>
+
+      <div className="lg:absolute lg:w-full lg:bottom-0">
+        <Footer />
+      </div>
+
+    </section>
   );
 };
